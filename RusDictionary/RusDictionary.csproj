@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Search.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,15 +96,10 @@
       <DependentUpon>WordSearchModule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,19 +118,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\noimage.png" />
-    <None Include="Resources\spinner.gif" />
-    <None Include="Resources\PhilippovichYN.jpg" />
-    <None Include="Resources\PHIL1.GIF" />
-    <None Include="Resources\Mt64cKwqwq4.jpg" />
-    <None Include="Resources\g.GIF" />
-    <None Include="Resources\img1.jpg" />
-    <None Include="Resources\m4ztZPfO_e8.jpg" />
-    <None Include="Resources\2763540.png" />
+    <None Include="Resources\CardIndexModule\noimage.png" />
+    <None Include="Resources\MainForm\spinner.gif" />
+    <None Include="Resources\MainForm\PhilippovichYN.jpg" />
+    <None Include="Resources\MainForm\PHIL1.GIF" />
+    <None Include="Resources\MainForm\Mt64cKwqwq4.jpg" />
+    <None Include="Resources\MainForm\g.GIF" />
+    <None Include="Resources\MainForm\img1.jpg" />
+    <None Include="Resources\MainForm\m4ztZPfO_e8.jpg" />
     <Content Include="Resources\MainForm\Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\149-1497934_searching-with-discover-psychology-clipart.png" />
     <Content Include="Resources\MainForm\StatusFalse.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -139,7 +137,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\CardIndexModule\" />
     <Folder Include="Resources\IndexModule\" />
     <Folder Include="Resources\WordSearchModule\" />
   </ItemGroup>

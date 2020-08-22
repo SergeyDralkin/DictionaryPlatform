@@ -76,7 +76,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.pbPictCard = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.laCardsNumberCard = new System.Windows.Forms.Label();
             this.tbTextCard = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.laCardsLastSeparator = new System.Windows.Forms.Label();
@@ -720,7 +720,7 @@
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.laCardsNumberCard, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.tbTextCard, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 391);
@@ -731,16 +731,16 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(701, 95);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
-            // label1
+            // laCardsNumberCard
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(695, 14);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Текст карточки:";
+            this.laCardsNumberCard.AutoSize = true;
+            this.laCardsNumberCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.laCardsNumberCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laCardsNumberCard.Location = new System.Drawing.Point(3, 0);
+            this.laCardsNumberCard.Name = "laCardsNumberCard";
+            this.laCardsNumberCard.Size = new System.Drawing.Size(695, 14);
+            this.laCardsNumberCard.TabIndex = 0;
+            this.laCardsNumberCard.Text = "Текст карточки №00000000:";
             // 
             // tbTextCard
             // 
@@ -886,7 +886,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.PictureBox pbPictCard;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label laCardsNumberCard;
         private System.Windows.Forms.TextBox tbTextCard;
         private System.Windows.Forms.TabPage tpList;
         private System.Windows.Forms.TabPage tpCardsMenu;

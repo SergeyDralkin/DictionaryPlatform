@@ -45,6 +45,15 @@ namespace RusDictionary.Modules
         /// Отслеживание нажатия на кнопку "Буква"
         /// </summary>
         public static bool CardIndexMenuLetter = false;
+
+        Image CardImage;
+        string CardLetter;
+        string CardBox;
+        string CardFirstSeparator;
+        string CardLastSeparator;
+
+
+
         public CardIndexModule()
         {
             InitializeComponent();
@@ -218,7 +227,6 @@ namespace RusDictionary.Modules
                             {
                                 FirstListItems.Add(reader["NumberBox"].ToString());
                             }
-                            lbCardIndexList.Update();
                             conn.Close();
                         }
                         catch
@@ -242,7 +250,6 @@ namespace RusDictionary.Modules
                             {
                                 FirstListItems.Add(reader["Symbol"].ToString());
                             }
-                            lbCardIndexList.Update();
                             conn.Close();
                         }
                         catch
@@ -282,10 +289,8 @@ namespace RusDictionary.Modules
                 else
                 {
                     tcCards.SelectedTab = tpCardsMenu;
-                }
-                
-            }
-            
+                }                
+            }            
         }
 
         private void lbCardIndexList_DoubleClick(object sender, EventArgs e)
@@ -303,6 +308,12 @@ namespace RusDictionary.Modules
                     Thread.Sleep(1);
                     Application.DoEvents();
                 }
+                pbPictCard.BackgroundImage = CardImage;
+                laCardsNumberCard.Text = "Текст карточки №" + SplitItem.Last() + ":";
+                laCardsLetter.Text = CardLetter;
+                laCardsNumberBox.Text = CardBox;
+                laCardsFirstSeparator.Text = CardFirstSeparator;
+                laCardsLastSeparator.Text = CardLastSeparator;
                 tcCards.SelectedTab = tpCards;
                 Program.f1.PictAndLableWait(false);
             }
@@ -339,7 +350,7 @@ namespace RusDictionary.Modules
                 MySqlCommand command = new MySqlCommand(NewSql, conn);
                 MySqlDataReader reader = command.ExecuteReader();
                 reader.Read();
-                pbPictCard.BackgroundImage = DecodeImageFromDB(reader["img"].ToString());
+                CardImage = DecodeImageFromDB(reader["img"].ToString());
                 string ReadSymbol = reader["Letter"].ToString();
                 string ReadBox = reader["Box"].ToString();
                 reader.Close();
@@ -349,7 +360,7 @@ namespace RusDictionary.Modules
                 MySqlDataReader reader1 = command1.ExecuteReader();
                 while (reader1.Read())
                 {
-                    laCardsLetter.Text = "Буква: " + reader1["Symbol"].ToString();
+                    CardLetter = "Буква: " + reader1["Symbol"].ToString();
                 }
                 reader1.Close();
                 ////////////////////////
@@ -358,32 +369,32 @@ namespace RusDictionary.Modules
                 reader1 = command1.ExecuteReader();
                 while (reader1.Read())
                 {
-                    laCardsNumberBox.Text = "Ящик: " + reader1["NumberBox"].ToString();
+                    CardBox = "Ящик: " + reader1["NumberBox"].ToString();
                 }
                 reader1.Close();
                 ////////////////////////
                 Sql = "SELECT CardSeparator FROM cardseparator WHERE BoxNumber = " + ReadBox;
                 command1 = new MySqlCommand(Sql, conn);
                 reader1 = command1.ExecuteReader();
-                int tmp = 0;
+                bool tmp = false;
                 while (reader1.Read())
                 {
-                    if (tmp == 0)
+                    if (tmp == false)
                     {
-                        laCardsFirstSeparator.Text = "Первый разделитель: " + reader1["CardSeparator"].ToString();
-                        tmp = 1;
+                        CardFirstSeparator = "Первый разделитель: " + reader1["CardSeparator"].ToString();
+                        tmp = !tmp;
                     }
                     else
                     {
-                        laCardsLastSeparator.Text = "Последний разделитель: " + reader1["CardSeparator"].ToString();
+                        CardLastSeparator = "Последний разделитель: " + reader1["CardSeparator"].ToString();
                     }
                 }
                 reader1.Close();
                 conn.Close();                    
             }
-            catch //(Exception error)
+            catch (Exception error)
             {
-                //MessageBox.Show(error.ToString());
+                MessageBox.Show(error.ToString());
             }                     
         }
         /// <summary>
