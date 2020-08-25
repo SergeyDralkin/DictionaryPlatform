@@ -60,3 +60,5 @@ D:\DD\DeadDed\RusDictionary\bin\Debug\MySql.Data.xml
 D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.Properties.Resources.resources
 D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.csproj.CoreCompileInputs.cache
 D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.csproj.CopyComplete
+D:\DD\DeadDed\RusDictionary\bin\Debug\Resources\IZHITSA.TTF
+D:\DD\DeadDed\RusDictionary\bin\Debug\Manifest.manifest

@@ -63,6 +63,26 @@ namespace RusDictionary.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap EyeClose {
+            get {
+                object obj = ResourceManager.GetObject("EyeClose", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap EyeOpen {
+            get {
+                object obj = ResourceManager.GetObject("EyeOpen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap g {
             get {
                 object obj = ResourceManager.GetObject("g", resourceCulture);
@@ -97,6 +117,16 @@ namespace RusDictionary.Properties {
             get {
                 object obj = ResourceManager.GetObject("img1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        public static byte[] IZHITSA {
+            get {
+                object obj = ResourceManager.GetObject("IZHITSA", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

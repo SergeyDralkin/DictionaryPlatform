@@ -9,6 +9,11 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Microsoft.Win32;
+using System.Net;
+using System.Text.RegularExpressions;
+using System.Windows.Input;
+using System.Windows.Media.TextFormatting;
 
 namespace RusDictionary
 {
@@ -17,23 +22,23 @@ namespace RusDictionary
         /// <summary>
         /// IP сервера
         /// </summary>
-        string IP = "127.0.0.1";
+        string IP;
         /// <summary>
         /// Порт MySQL
         /// </summary>
-        string Port = "3306";
+        string Port;
         /// <summary>
         /// Логин пользователя DB
         /// </summary>
-        string User = "mysql";
+        string User;
         /// <summary>
         /// Имя базы данных
         /// </summary>
-        string DataBase = "db";
+        string DataBase;
         /// <summary>
         /// Пароль пользователя DB
         /// </summary>
-        string Password = "mysql";
+        string Password;
         /// <summary>
         /// Путь к БД
         /// </summary>
@@ -46,17 +51,50 @@ namespace RusDictionary
         /// Статус подключения к БД
         /// </summary>
         bool StatusConnect = false;
+        /// <summary>
+        /// Вспомогательная переменная
+        /// </summary>
+        int TMP = 0;
+        /// <summary>
+        /// Вспомогательная переменная для точки
+        /// </summary>
+        int TMPDot = 0;
+        /// <summary>
+        /// Вспомогательная переменная количества точек
+        /// </summary>
+        int TMPMaxCountDot = 3;
+        /// <summary>
+        /// Видимость пароля на форме
+        /// </summary>
+        bool SeePass = false;
         public MainForm()
         {
             Program.f1 = this;
             InitializeComponent(); 
             pbWait.Visible = false;
             laWait.Visible = false;
+            FillSetting();
             Connnect = "server=" + IP + ";user=" + User + ";database=" + DataBase + ";port=" + Port + ";password=" + Password;
             ToolTip t = new ToolTip();
             t.SetToolTip(pbStatusConnect, "Принудительное подключение к базе данных");
-            ChangeStatus();
+            StatusConnectionMethod();
+            ChangeStatus();            
             TimerStatusConnect.Start();
+        }       
+        void FillSetting()
+        {
+            IP = Properties.Settings.Default.IP;
+            Port = Properties.Settings.Default.Port;
+            User = Properties.Settings.Default.User;
+            DataBase = Properties.Settings.Default.NameDB;
+            Password = Properties.Settings.Default.Password;
+
+            tbIP.Text = IP;
+            tbPort.Text = Port;
+            tbUser.Text = User;
+            tbPassword.Text = Password;
+            tbNameDB.Text = DataBase;
+
         }
         /// <summary>
         /// Фоновый запрос в БД 
@@ -212,6 +250,167 @@ namespace RusDictionary
         private void MainForm_Load(object sender, EventArgs e)
         {
             Location = new Point(130, 10);
+        }
+
+        private void buMainFormSetting_Click(object sender, EventArgs e)
+        {
+            MainTC.SelectedTab = tpSettings;
+            //DialogResult result = MessageBox.Show("Настройки были изменены.\n\n Сохранить изменения?", "Настройки", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            //switch (result)
+            //{
+            //    case DialogResult.Yes:
+            //        break;
+            //    case DialogResult.No:
+            //        break;
+            //}              
+        }
+
+        private void tbIP_Leave(object sender, EventArgs e)
+        {
+            string pattern = @"\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b";
+            string OldIP = tbIP.Text;
+            string NewIP = null;
+            for (int i = 0; i < OldIP.Length; i++)
+            {                
+                if (OldIP[i].ToString() != " ")
+                {
+                    if (OldIP[i].ToString() == ",")
+                    {
+                        NewIP += ".";
+                    }
+                    else
+                    {
+                        NewIP += OldIP[i];
+                    }
+                }
+            }
+            tbIP.Text = NewIP;
+            if (Regex.IsMatch(NewIP, pattern) != true)
+            {
+                MessageBox.Show("IP-адрес введен не корректно!", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void tbIP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                if (tbIP.Text.Length < 15)
+                {
+                    if (tbIP.Text.Length == 0 && e.KeyChar == 46)
+                    {
+                        e.Handled = true;
+                    }
+                    else
+                    {
+                        if (tbIP.Text.Length == 0 && e.KeyChar == 8)
+                        {
+                            e.Handled = true;
+                        }
+                        else
+                        {
+                            if (e.KeyChar != 8)
+                            {
+                                TMPMaxCountDot = 3;
+                                for (int i = 0; i < tbIP.Text.Length; i++)
+                                {
+                                    if (tbIP.Text[i] == '.')
+                                    {
+                                        TMPMaxCountDot--;
+                                    }
+                                }    
+                                TMPDot = 0;
+                                for (int i = tbIP.Text.Length - 1; i >= 0; i--)
+                                {
+                                    if (tbIP.Text[i] != '.')
+                                    {
+                                        TMPDot++;
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (TMPDot > 2 && TMPMaxCountDot != 0)
+                                {
+                                    TMPDot = 0;
+                                    tbIP.Text += '.';
+                                    tbIP.SelectionStart = tbIP.Text.Length;
+                                    TMPMaxCountDot--;
+                                }
+                                if (e.KeyChar == 46 && TMPMaxCountDot <= 0)
+                                {
+                                    e.Handled = true;
+                                }
+                                else
+                                {
+                                    if (TMPDot > 2)
+                                    {
+                                        e.Handled = true;
+                                    }
+                                    TMPDot++;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
+        private void tbPort_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void buSeePass_Click(object sender, EventArgs e)
+        {
+            switch (SeePass)
+            {
+                case true:                    
+                    SeePass = false;
+                    buSeePass.Image = Properties.Resources.EyeClose;
+                    tbPassword.PasswordChar = '*';
+                    break;
+                case false:
+                    SeePass = true;
+                    buSeePass.Image = Properties.Resources.EyeOpen;
+                    tbPassword.PasswordChar = '\0';
+                    break;
+            }
+        }
+
+        private void buSeePass_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            switch (SeePass)
+            {
+                case false:
+                    buSeePass.Image = Properties.Resources.EyeOpen;
+                    break;
+                case true:
+                    buSeePass.Image = Properties.Resources.EyeClose;
+                    break;
+            }
+        }
+
+        private void buSeePass_MouseLeave(object sender, EventArgs e)
+        {
+            switch (SeePass)
+            {
+                case true:
+                    buSeePass.Image = Properties.Resources.EyeOpen;
+                    break;
+                case false:
+                    buSeePass.Image = Properties.Resources.EyeClose;
+                    break;
+            }
         }
     }
 }
