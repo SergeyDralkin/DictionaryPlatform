@@ -124,6 +124,9 @@
     <value>Электронный словарь представляет собой общедоступное справочное пособие для чтения древнерусских текстов разных жанров (летописей, грамот, частной переписки, сводов законов, житийной литературы и т.д.).
 </value>
   </data>
+  <metadata name="cdChangeColor.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>178, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>42</value>
   </metadata>

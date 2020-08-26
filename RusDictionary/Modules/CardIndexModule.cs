@@ -320,7 +320,6 @@ namespace RusDictionary.Modules
             else
             {
                 Program.f1.PictAndLableWait(true);
-                lbCardIndexList.Visible = false;
                 Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                 myThread.Start(NameClickButton); // Запускаем поток
                 while (myThread.IsAlive)

@@ -17,5 +17,14 @@
     <Setting Name="NameDB" Type="System.String" Scope="User">
       <Value Profile="(Default)">db</Value>
     </Setting>
+    <Setting Name="ColorText" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="ColorBackground" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">SandyBrown</Value>
+    </Setting>
+    <Setting Name="ColorTextBox" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

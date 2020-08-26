@@ -82,5 +82,41 @@ namespace RusDictionary.Properties {
                 this["NameDB"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color ColorText {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorText"]));
+            }
+            set {
+                this["ColorText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SandyBrown")]
+        public global::System.Drawing.Color ColorBackground {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorBackground"]));
+            }
+            set {
+                this["ColorBackground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ColorTextBox {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorTextBox"]));
+            }
+            set {
+                this["ColorTextBox"] = value;
+            }
+        }
     }
 }
