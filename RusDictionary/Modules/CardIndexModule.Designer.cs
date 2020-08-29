@@ -162,7 +162,7 @@
             // buCardIndexMenuMarker
             // 
             this.buCardIndexMenuMarker.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexMenuMarker.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexMenuMarker.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexMenuMarker.Location = new System.Drawing.Point(409, 159);
             this.buCardIndexMenuMarker.Name = "buCardIndexMenuMarker";
             this.buCardIndexMenuMarker.Size = new System.Drawing.Size(197, 46);
@@ -174,7 +174,7 @@
             // buCardIndexMenuSeparator
             // 
             this.buCardIndexMenuSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexMenuSeparator.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexMenuSeparator.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexMenuSeparator.Location = new System.Drawing.Point(409, 211);
             this.buCardIndexMenuSeparator.Name = "buCardIndexMenuSeparator";
             this.buCardIndexMenuSeparator.Size = new System.Drawing.Size(197, 46);
@@ -186,7 +186,7 @@
             // buCardIndexMenuBox
             // 
             this.buCardIndexMenuBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexMenuBox.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexMenuBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexMenuBox.Location = new System.Drawing.Point(409, 263);
             this.buCardIndexMenuBox.Name = "buCardIndexMenuBox";
             this.buCardIndexMenuBox.Size = new System.Drawing.Size(197, 46);
@@ -198,7 +198,7 @@
             // buCardIndexMenuLetter
             // 
             this.buCardIndexMenuLetter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexMenuLetter.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexMenuLetter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexMenuLetter.Location = new System.Drawing.Point(409, 315);
             this.buCardIndexMenuLetter.Name = "buCardIndexMenuLetter";
             this.buCardIndexMenuLetter.Size = new System.Drawing.Size(197, 46);
@@ -210,7 +210,7 @@
             // buCardIndexMenuPrev
             // 
             this.buCardIndexMenuPrev.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexMenuPrev.Font = new System.Drawing.Font("Izhitsa", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexMenuPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexMenuPrev.Location = new System.Drawing.Point(815, 471);
             this.buCardIndexMenuPrev.Name = "buCardIndexMenuPrev";
             this.buCardIndexMenuPrev.Size = new System.Drawing.Size(198, 54);
@@ -249,9 +249,9 @@
             // lbCardIndexList
             // 
             this.lbCardIndexList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbCardIndexList.Font = new System.Drawing.Font("Izhitsa", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbCardIndexList.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbCardIndexList.FormattingEnabled = true;
-            this.lbCardIndexList.ItemHeight = 22;
+            this.lbCardIndexList.ItemHeight = 24;
             this.lbCardIndexList.Location = new System.Drawing.Point(3, 3);
             this.lbCardIndexList.Name = "lbCardIndexList";
             this.lbCardIndexList.Size = new System.Drawing.Size(1004, 463);
@@ -280,7 +280,7 @@
             // buCardIndexListPrev
             // 
             this.buCardIndexListPrev.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexListPrev.Font = new System.Drawing.Font("Izhitsa", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexListPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexListPrev.Location = new System.Drawing.Point(839, 3);
             this.buCardIndexListPrev.Name = "buCardIndexListPrev";
             this.buCardIndexListPrev.Size = new System.Drawing.Size(162, 41);
@@ -313,7 +313,7 @@
             // buCardIndexListAdd
             // 
             this.buCardIndexListAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexListAdd.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexListAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexListAdd.Location = new System.Drawing.Point(3, 3);
             this.buCardIndexListAdd.Name = "buCardIndexListAdd";
             this.buCardIndexListAdd.Size = new System.Drawing.Size(126, 35);
@@ -324,7 +324,7 @@
             // buCardIndexListChange
             // 
             this.buCardIndexListChange.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexListChange.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexListChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexListChange.Location = new System.Drawing.Point(135, 3);
             this.buCardIndexListChange.Name = "buCardIndexListChange";
             this.buCardIndexListChange.Size = new System.Drawing.Size(126, 35);
@@ -335,7 +335,7 @@
             // buCardIndexListDelete
             // 
             this.buCardIndexListDelete.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexListDelete.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexListDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexListDelete.Location = new System.Drawing.Point(267, 3);
             this.buCardIndexListDelete.Name = "buCardIndexListDelete";
             this.buCardIndexListDelete.Size = new System.Drawing.Size(126, 35);
@@ -346,7 +346,7 @@
             // buCardIndexListSearch
             // 
             this.buCardIndexListSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexListSearch.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexListSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexListSearch.Location = new System.Drawing.Point(399, 3);
             this.buCardIndexListSearch.Name = "buCardIndexListSearch";
             this.buCardIndexListSearch.Size = new System.Drawing.Size(126, 35);
@@ -358,7 +358,7 @@
             // buCardIndexListClearSearch
             // 
             this.buCardIndexListClearSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexListClearSearch.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexListClearSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexListClearSearch.Location = new System.Drawing.Point(531, 3);
             this.buCardIndexListClearSearch.Name = "buCardIndexListClearSearch";
             this.buCardIndexListClearSearch.Size = new System.Drawing.Size(129, 35);
@@ -825,7 +825,7 @@
             // buCardIndexCardsPrev
             // 
             this.buCardIndexCardsPrev.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexCardsPrev.Font = new System.Drawing.Font("Izhitsa", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexCardsPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexCardsPrev.Location = new System.Drawing.Point(801, 1);
             this.buCardIndexCardsPrev.Margin = new System.Windows.Forms.Padding(0);
             this.buCardIndexCardsPrev.Name = "buCardIndexCardsPrev";

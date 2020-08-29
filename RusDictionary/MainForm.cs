@@ -607,5 +607,7 @@ namespace RusDictionary
             Properties.Settings.Default.ColorBackground = Color.SandyBrown;
             Properties.Settings.Default.ColorTextBox = Color.White;
         }
+
+
     }
 }
