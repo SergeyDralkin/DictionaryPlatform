@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 namespace RusDictionary
 {
@@ -34,18 +33,18 @@ namespace RusDictionary
 
         private void buSearch_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(MainForm.Connnect);
+            //MySqlConnection conn = new MySqlConnection(MainForm.Connnect);
             try
             {
                 // Подключаемся к БД
-                conn.Open();
+                //conn.Open();
                 //StatusConnect = true;
             }
             catch
             {
                 //StatusConnect = false;
             }
-            conn.Close();
+            //conn.Close();
         }
     }
 }

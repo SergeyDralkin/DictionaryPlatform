@@ -51,7 +51,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.tbCardNotes = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox7 = new System.Windows.Forms.TextBox();
@@ -429,7 +429,7 @@
             // 
             this.tableLayoutPanel12.ColumnCount = 1;
             this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.Controls.Add(this.textBox8, 0, 1);
+            this.tableLayoutPanel12.Controls.Add(this.tbCardNotes, 0, 1);
             this.tableLayoutPanel12.Controls.Add(this.label11, 0, 0);
             this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 387);
@@ -440,14 +440,14 @@
             this.tableLayoutPanel12.Size = new System.Drawing.Size(291, 93);
             this.tableLayoutPanel12.TabIndex = 7;
             // 
-            // textBox8
+            // tbCardNotes
             // 
-            this.textBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox8.Location = new System.Drawing.Point(3, 21);
-            this.textBox8.Multiline = true;
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(285, 69);
-            this.textBox8.TabIndex = 0;
+            this.tbCardNotes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbCardNotes.Location = new System.Drawing.Point(3, 21);
+            this.tbCardNotes.Multiline = true;
+            this.tbCardNotes.Name = "tbCardNotes";
+            this.tbCardNotes.Size = new System.Drawing.Size(285, 69);
+            this.tbCardNotes.TabIndex = 0;
             // 
             // label11
             // 
@@ -905,7 +905,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox tbCardNotes;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.TextBox textBox7;

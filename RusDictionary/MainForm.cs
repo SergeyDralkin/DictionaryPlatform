@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 using Microsoft.Win32;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -26,19 +25,7 @@ namespace RusDictionary
         /// <summary>
         /// Порт MySQL
         /// </summary>
-        string Port;
-        /// <summary>
-        /// Логин пользователя DB
-        /// </summary>
-        string User;
-        /// <summary>
-        /// Имя базы данных
-        /// </summary>
-        string NameDB;
-        /// <summary>
-        /// Пароль пользователя DB
-        /// </summary>
-        string Password;
+        string Port;      
         /// <summary>
         /// Путь к БД
         /// </summary>
@@ -58,11 +45,7 @@ namespace RusDictionary
         /// <summary>
         /// Вспомогательная переменная количества точек
         /// </summary>
-        int TMPMaxCountDot = 3;
-        /// <summary>
-        /// Видимость пароля на форме
-        /// </summary>
-        bool SeePass = false;
+        int TMPMaxCountDot = 3;        
         /// <summary>
         /// Цвет текста
         /// </summary>
@@ -75,14 +58,22 @@ namespace RusDictionary
         /// Цвет текстового поля
         /// </summary>
         Color ColorTextBox;
+        /// <summary>
+        /// Адрес сервера
+        /// </summary>
+        public static string URL = null;
+        /// <summary>
+        /// Количество попыток подключиться. Данная переменная нужна для отображения задержки отключения от сервера 
+        /// (если вдруг были потеряны пакеты и программа сразу же не отключила пользоватя от сервера) 
+        /// </summary>
+        int tmpConnect = 12;
         public MainForm()
         {
-            Program.f1 = this;
             InitializeComponent();
+            Program.f1 = this;            
             pbWait.Visible = false;
             laWait.Visible = false;
-            FillSetting();
-
+            FillSetting();            
             ToolTip t = new ToolTip();
             t.SetToolTip(pbStatusConnect, "Принудительное подключение к базе данных");
             StatusConnectionMethod();
@@ -93,18 +84,19 @@ namespace RusDictionary
         {
             IP = Properties.Settings.Default.IP;
             Port = Properties.Settings.Default.Port;
-            User = Properties.Settings.Default.User;
-            NameDB = Properties.Settings.Default.NameDB;
-            Password = Properties.Settings.Default.Password;
             ColorText = Properties.Settings.Default.ColorText;
             ColorBackground = Properties.Settings.Default.ColorBackground;
             ColorTextBox = Properties.Settings.Default.ColorTextBox;
-
+            if (Port == null || Port == "")
+            {
+                URL = "http://" + IP + "/?property=query&query=";
+            }
+            else
+            {
+                URL = "http://" + IP + ":" + Port + "/?property=query&query=";
+            }            
             tbIP.Text = IP;
             tbPort.Text = Port;
-            tbUser.Text = User;
-            tbPassword.Text = Password;
-            tbNameDB.Text = NameDB;
 
             foreach (Label label in GetAll(this, typeof(Label)))
             {
@@ -135,21 +127,17 @@ namespace RusDictionary
         /// Фоновый запрос в БД 
         /// </summary>
         void StatusConnectionMethod()
-        {
-            Connnect = "server=" + IP + ";user=" + User + ";database=" + NameDB + ";port=" + Port + ";password=" + Password;
-            // Создаем экземпляр подключения к БД
-            MySqlConnection conn = new MySqlConnection(Connnect);
+        {                   
             try
             {
-                // Подключаемся к БД
-                conn.Open();
+                string query = "SELECT 1";
+                JSON.Send(MainForm.URL + query);
                 StatusConnect = true;
             }
             catch
             {
                 StatusConnect = false;
             }
-            conn.Close();
         }
         /// <summary>
         /// Проверка подключения к БД
@@ -158,6 +146,7 @@ namespace RusDictionary
         {
             if (StatusConnect == true)
             {
+                tmpConnect = 0;
                 pbStatusConnect.BackgroundImage = Properties.Resources.StatusTrue;
                 ForcedConnect = false;
                 laStatus.Text = "Статус подключения к Базе Данных: Подключено";
@@ -167,12 +156,22 @@ namespace RusDictionary
             }
             else
             {
-                pbStatusConnect.BackgroundImage = Properties.Resources.StatusFalse;
-                ForcedConnect = true;
-                laStatus.Text = "Статус подключения к Базе Данных: Подключение отсутствует";
-                buCardIndexModule.Enabled = false;
-                buWordSearchModule.Enabled = false;
-                buIndexModule.Enabled = false;
+                tmpConnect++;                
+                if (tmpConnect > 10)
+                {
+                    pbStatusConnect.BackgroundImage = Properties.Resources.StatusFalse;
+                    ForcedConnect = true;
+                    laStatus.Text = "Статус подключения к Базе Данных: Подключение отсутствует";
+                    buCardIndexModule.Enabled = false;
+                    buWordSearchModule.Enabled = false;
+                    buIndexModule.Enabled = false;
+                    if ((MainTC.SelectedTab == tpCardIndex || MainTC.SelectedTab == tpWordSearch || MainTC.SelectedTab == tpPointer) && tmpConnect == 11)
+                    {
+                        MainTC.SelectedTab = tpMain;
+                        MessageBox.Show("Потеряно соединение с сервером");
+                        this.Activate();
+                    }
+                }
             }
         }
         /// <summary>
@@ -221,7 +220,6 @@ namespace RusDictionary
             textBox10.BackColor = tpAuthors.BackColor;
             textBox11.BackColor = tpAuthors.BackColor;
             textBox12.BackColor = tpAuthors.BackColor;
-            
         }
         /// <summary>
         /// Отключение курсора при нажатии на TextBox
@@ -420,49 +418,6 @@ namespace RusDictionary
             }
         }
 
-        private void buSeePass_Click(object sender, EventArgs e)
-        {
-            switch (SeePass)
-            {
-                case true:
-                    SeePass = false;
-                    buSeePass.Image = Properties.Resources.EyeClose;
-                    tbPassword.PasswordChar = '*';
-                    break;
-                case false:
-                    SeePass = true;
-                    buSeePass.Image = Properties.Resources.EyeOpen;
-                    tbPassword.PasswordChar = '\0';
-                    break;
-            }
-        }
-
-        private void buSeePass_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            switch (SeePass)
-            {
-                case false:
-                    buSeePass.Image = Properties.Resources.EyeOpen;
-                    break;
-                case true:
-                    buSeePass.Image = Properties.Resources.EyeClose;
-                    break;
-            }
-        }
-
-        private void buSeePass_MouseLeave(object sender, EventArgs e)
-        {
-            switch (SeePass)
-            {
-                case true:
-                    buSeePass.Image = Properties.Resources.EyeOpen;
-                    break;
-                case false:
-                    buSeePass.Image = Properties.Resources.EyeClose;
-                    break;
-            }
-        }
-
         private void buChangeColor_Click(object sender, EventArgs e)
         {
             if (cdChangeColor.ShowDialog() == DialogResult.OK)
@@ -510,16 +465,15 @@ namespace RusDictionary
                 ColorTextBox = cdChangeColor.Color;
             }
         }
-        public IEnumerable<Control> GetAll(Control control, Type type)
+        public static IEnumerable<Control> GetAll(Control control, Type type)
         {
             var controls = control.Controls.Cast<Control>();
             return controls.SelectMany(ctrl => GetAll(ctrl, type)).Concat(controls).Where(c => c.GetType() == type);
         }
 
         private void buPrevSettings_Click(object sender, EventArgs e)
-        {
-            MySqlConnection conn = new MySqlConnection(Connnect);
-            if (Properties.Settings.Default.IP == tbIP.Text && Properties.Settings.Default.Port == tbPort.Text && Properties.Settings.Default.User == tbUser.Text && Properties.Settings.Default.Password == tbPassword.Text && Properties.Settings.Default.NameDB == tbNameDB.Text && Properties.Settings.Default.ColorText == label1.ForeColor && Properties.Settings.Default.ColorBackground == tpMain.BackColor && Properties.Settings.Default.ColorTextBox == tbPassword.BackColor)
+        {            
+            if (Properties.Settings.Default.IP == tbIP.Text && Properties.Settings.Default.Port == tbPort.Text && Properties.Settings.Default.ColorText == label1.ForeColor && Properties.Settings.Default.ColorBackground == tpMain.BackColor && Properties.Settings.Default.ColorTextBox == tbIP.BackColor)
             {
                 MainTC.SelectedTab = tpMain;
             }
@@ -532,15 +486,9 @@ namespace RusDictionary
                         MainTC.SelectedTab = tpMain;
                         IP = tbIP.Text;
                         Port = tbPort.Text;
-                        User = tbUser.Text;
-                        Password = tbPassword.Text;
-                        NameDB = tbNameDB.Text;
 
                         Properties.Settings.Default.IP = IP;
                         Properties.Settings.Default.Port = Port;
-                        Properties.Settings.Default.User = User;
-                        Properties.Settings.Default.Password = Password;
-                        Properties.Settings.Default.NameDB = NameDB;
                         Properties.Settings.Default.ColorText = ColorText;
                         Properties.Settings.Default.ColorBackground = ColorBackground;
                         Properties.Settings.Default.ColorTextBox = ColorTextBox;
@@ -558,18 +506,12 @@ namespace RusDictionary
         {
             IP = tbIP.Text;
             Port = tbPort.Text;
-            User = tbUser.Text;
-            Password = tbPassword.Text;
-            NameDB = tbNameDB.Text;
             ColorText = label1.ForeColor;
             ColorBackground = tpMain.BackColor;
             ColorTextBox = tbIP.BackColor;
 
             Properties.Settings.Default.IP = IP;
             Properties.Settings.Default.Port = Port;
-            Properties.Settings.Default.User = User;
-            Properties.Settings.Default.Password = Password;
-            Properties.Settings.Default.NameDB = NameDB;
             Properties.Settings.Default.ColorText = ColorText;
             Properties.Settings.Default.ColorBackground = ColorBackground;
             Properties.Settings.Default.ColorTextBox = ColorTextBox;

@@ -23,3 +23,5 @@ D:\DD\DeadDed\RusDictionary\obj\Release\RusDictionary.csproj.CoreCompileInputs.c
 D:\DD\DeadDed\RusDictionary\obj\Release\RusDictionary.csproj.CopyComplete
 D:\DD\DeadDed\RusDictionary\obj\Release\RusDictionary.exe
 D:\DD\DeadDed\RusDictionary\obj\Release\RusDictionary.pdb
+D:\DD\DeadDed\RusDictionary\bin\Release\Newtonsoft.Json.dll
+D:\DD\DeadDed\RusDictionary\bin\Release\Newtonsoft.Json.xml

@@ -6,16 +6,7 @@
       <Value Profile="(Default)">127.0.0.1</Value>
     </Setting>
     <Setting Name="Port" Type="System.String" Scope="User">
-      <Value Profile="(Default)">3306</Value>
-    </Setting>
-    <Setting Name="User" Type="System.String" Scope="User">
-      <Value Profile="(Default)">mysql</Value>
-    </Setting>
-    <Setting Name="Password" Type="System.String" Scope="User">
-      <Value Profile="(Default)">mysql</Value>
-    </Setting>
-    <Setting Name="NameDB" Type="System.String" Scope="User">
-      <Value Profile="(Default)">db</Value>
+      <Value Profile="(Default)">8080</Value>
     </Setting>
     <Setting Name="ColorText" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>

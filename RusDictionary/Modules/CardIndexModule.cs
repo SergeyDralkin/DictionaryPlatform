@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 using System.IO;
 
 namespace RusDictionary.Modules
@@ -20,11 +16,15 @@ namespace RusDictionary.Modules
         /// <summary>
         /// Первый список элементов
         /// </summary>
-        List<string> FirstListItems = new List<string>();
+        List<Movie> FirstListItems = new List<Movie>();
         /// <summary>
         /// Второй список элементов
         /// </summary>
-        List<string> SecondListItems = new List<string>();
+        List<Movie> SecondListItems = new List<Movie>();
+        /// <summary>
+        /// Список элементов одной карточки
+        /// </summary>
+        List<Movie> CardItems = new List<Movie>();
         /// <summary>
         /// Класс формы поиска
         /// </summary>
@@ -45,14 +45,38 @@ namespace RusDictionary.Modules
         /// Отслеживание нажатия на кнопку "Буква"
         /// </summary>
         public static bool CardIndexMenuLetter = false;
-
+        /// <summary>
+        /// Маркер карточки
+        /// </summary>
+        string CardMarker;
+        /// <summary>
+        /// Текст с карточки
+        /// </summary>
+        string CardText;
+        /// <summary>
+        /// Примечание с карточки
+        /// </summary>
+        string CardNotes;
+        /// <summary>
+        /// Изображение карточки
+        /// </summary>
         Image CardImage;
-        string CardLetter;
-        string CardBox;
+        /// <summary>
+        /// Буква карточки
+        /// </summary>
+        string CardSymbol;
+        /// <summary>
+        /// Номер ящика карточки
+        /// </summary>
+        string CardNumberBox;
+        /// <summary>
+        /// Первый разделитель ящика
+        /// </summary>
         string CardFirstSeparator;
+        /// <summary>
+        /// Последний разделитель ящика
+        /// </summary>
         string CardLastSeparator;
-
-
 
         public CardIndexModule()
         {
@@ -86,10 +110,41 @@ namespace RusDictionary.Modules
                 Thread.Sleep(1);
                 Application.DoEvents();
             }
-            for (int i = 0; i < FirstListItems.Count; i++)
+            switch (NameClickButton)
             {
-                lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i]);
-            }
+                case "buCardIndexMenuMarker":
+                    {
+                        for (int i = 0; i < FirstListItems.Count; i++)
+                        {
+                            lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Marker);
+                        }
+                        break;
+                    }
+                case "buCardIndexMenuSeparator":
+                    {
+                        for (int i = 0; i < FirstListItems.Count; i++)
+                        {
+                            lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].CardSeparator);
+                        }
+                        break;
+                    }
+                case "buCardIndexMenuBox":
+                    {
+                        for (int i = 0; i < FirstListItems.Count; i++)
+                        {
+                            lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].NumberBox);
+                        }
+                        break;
+                    }
+                case "buCardIndexMenuLetter":
+                    {
+                        for (int i = 0; i < FirstListItems.Count; i++)
+                        {
+                            lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Symbol);
+                        }
+                        break;
+                    }
+            }            
             lbCardIndexList.Update();
             tcCards.SelectedTab = tpList; 
             Program.f1.PictAndLableWait(false);
@@ -100,60 +155,24 @@ namespace RusDictionary.Modules
             switch (NameClickButton)
             {
                 case "buCardIndexMenuSeparator":
-                    {
-                        MySqlConnection conn = new MySqlConnection(MainForm.Connnect);
-                        try
-                        {
-                            conn.Open();
-                            string NewSql = "SELECT Marker FROM cardindex WHERE CardSeparator = " + ListBoxSelectedIndex;
-                            MySqlCommand command = new MySqlCommand(NewSql, conn);
-                            MySqlDataReader reader = command.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                SecondListItems.Add(reader["Marker"].ToString());
-                            }
-                            conn.Close();
-                        }
-                        catch
-                        { }
+                    {                       
+                        string query = "SELECT Marker FROM cardindex WHERE CardSeparator = " + ListBoxSelectedIndex;
+                        JSON.Send(MainForm.URL + query);
+                        SecondListItems = JSON.Result;
                         break;
                     }
                 case "buCardIndexMenuBox":
-                    {
-                        MySqlConnection conn = new MySqlConnection(MainForm.Connnect);
-                        try
-                        {
-                            conn.Open();
-                            string NewSql = "SELECT Marker FROM cardindex WHERE Box = " + ListBoxSelectedIndex;
-                            MySqlCommand command = new MySqlCommand(NewSql, conn);
-                            MySqlDataReader reader = command.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                SecondListItems.Add(reader["Marker"].ToString());
-                            }
-                            conn.Close();
-                        }
-                        catch
-                        { }
+                    {                       
+                        string query = "SELECT Marker FROM cardindex WHERE NumberBox = " + ListBoxSelectedIndex;
+                        JSON.Send(MainForm.URL + query);
+                        SecondListItems = JSON.Result;                       
                         break;
                     }
                 case "buCardIndexMenuLetter":
-                    {
-                        MySqlConnection conn = new MySqlConnection(MainForm.Connnect);
-                        try
-                        {
-                            conn.Open();
-                            string NewSql = "SELECT Marker FROM cardindex WHERE Letter = " + ListBoxSelectedIndex;
-                            MySqlCommand command = new MySqlCommand(NewSql, conn);
-                            MySqlDataReader reader = command.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                SecondListItems.Add(reader["Marker"].ToString());
-                            }
-                            conn.Close();
-                        }
-                        catch
-                        { }
+                    {                        
+                        string query = "SELECT Marker FROM cardindex WHERE Symbol = " + ListBoxSelectedIndex;
+                        JSON.Send(MainForm.URL + query);
+                        SecondListItems = JSON.Result;
                         break;
                     }
             }
@@ -164,26 +183,14 @@ namespace RusDictionary.Modules
             switch (NameButton)
             {
                 case "buCardIndexMenuMarker":
-                    {                        
-                        MySqlConnection conn = new MySqlConnection(MainForm.Connnect);
-                        try
-                        {
-                            CardIndexMenuMarker = true;
-                            CardIndexMenuSeparator = false;
-                            CardIndexMenuBox = false;
-                            CardIndexMenuLetter = false;
-                            conn.Open();
-                            string NewSql = "SELECT Marker FROM cardindex";
-                            MySqlCommand command = new MySqlCommand(NewSql, conn);
-                            MySqlDataReader reader = command.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                FirstListItems.Add(reader["Marker"].ToString());
-                            }
-                            conn.Close();
-                        }
-                        catch
-                        { }
+                    {
+                        CardIndexMenuMarker = true;
+                        CardIndexMenuSeparator = false;
+                        CardIndexMenuBox = false;
+                        CardIndexMenuLetter = false;
+                        string query = "SELECT Marker FROM cardindex";
+                        JSON.Send(MainForm.URL + query);
+                        FirstListItems = JSON.Result;
                         break;
                     }
                 case "buCardIndexMenuSeparator":
@@ -191,23 +198,10 @@ namespace RusDictionary.Modules
                         CardIndexMenuMarker = false;
                         CardIndexMenuSeparator = true;
                         CardIndexMenuBox = false;
-                        CardIndexMenuLetter = false;
-                        MySqlConnection conn = new MySqlConnection(MainForm.Connnect);
-                        try
-                        {
-                            conn.Open();
-                            string NewSql = "SELECT CardSeparator FROM cardseparator";
-                            MySqlCommand command = new MySqlCommand(NewSql, conn);
-                            MySqlDataReader reader = command.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                FirstListItems.Add(reader["CardSeparator"].ToString());
-                            }
-                            lbCardIndexList.Update();
-                            conn.Close();
-                        }
-                        catch
-                        { }
+                        CardIndexMenuLetter = false;                        
+                        string query = "SELECT CardSeparator FROM cardseparator";
+                        JSON.Send(MainForm.URL + query);
+                        FirstListItems = JSON.Result;
                         break;
                     }
                 case "buCardIndexMenuBox":
@@ -216,21 +210,9 @@ namespace RusDictionary.Modules
                         CardIndexMenuSeparator = false;
                         CardIndexMenuBox = true;
                         CardIndexMenuLetter = false;
-                        MySqlConnection conn = new MySqlConnection(MainForm.Connnect);
-                        try
-                        {
-                            conn.Open();
-                            string NewSql = "SELECT NumberBox FROM box";
-                            MySqlCommand command = new MySqlCommand(NewSql, conn);
-                            MySqlDataReader reader = command.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                FirstListItems.Add(reader["NumberBox"].ToString());
-                            }
-                            conn.Close();
-                        }
-                        catch
-                        { }
+                        string query = "SELECT NumberBox FROM box";
+                        JSON.Send(MainForm.URL + query);
+                        FirstListItems = JSON.Result;
                         break;
                     }
                 case "buCardIndexMenuLetter":
@@ -238,22 +220,10 @@ namespace RusDictionary.Modules
                         CardIndexMenuMarker = false;
                         CardIndexMenuSeparator = false;
                         CardIndexMenuBox = false;
-                        CardIndexMenuLetter = true;
-                        MySqlConnection conn = new MySqlConnection(MainForm.Connnect);
-                        try
-                        {
-                            conn.Open();
-                            string NewSql = "SELECT Symbol FROM letter";
-                            MySqlCommand command = new MySqlCommand(NewSql, conn);
-                            MySqlDataReader reader = command.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                FirstListItems.Add(reader["Symbol"].ToString());
-                            }
-                            conn.Close();
-                        }
-                        catch
-                        { }
+                        CardIndexMenuLetter = true;                        
+                        string query = "SELECT Symbol FROM letter";
+                        JSON.Send(MainForm.URL + query);
+                        FirstListItems = JSON.Result;
                         break;
                     }
             }
@@ -281,9 +251,32 @@ namespace RusDictionary.Modules
                     CardIndexMenuMarker = false;
                     ClearMainList();
                     ListBoxPrev = true;
-                    for (int i = 0; i < FirstListItems.Count; i++)
+                    switch (NameClickButton)
                     {
-                        lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i]);
+                        case "buCardIndexMenuSeparator":
+                            {
+                                for (int i = 0; i < FirstListItems.Count; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].CardSeparator);
+                                }
+                                break;
+                            }
+                        case "buCardIndexMenuBox":
+                            {
+                                for (int i = 0; i < FirstListItems.Count; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].NumberBox);
+                                }
+                                break;
+                            }
+                        case "buCardIndexMenuLetter":
+                            {
+                                for (int i = 0; i < FirstListItems.Count; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Symbol);
+                                }
+                                break;
+                            }
                     }
                 }
                 else
@@ -295,6 +288,14 @@ namespace RusDictionary.Modules
 
         private void lbCardIndexList_DoubleClick(object sender, EventArgs e)
         {
+            foreach (Button button in MainForm.GetAll(tpList, typeof(Button)))
+            {
+                button.Enabled = false;
+            }
+            foreach (ListBox listbox in MainForm.GetAll(tpList, typeof(ListBox)))
+            {
+                listbox.Enabled = false;
+            }
             ListBoxSelectedIndex = lbCardIndexList.SelectedIndex + 1;
             ListBoxPrev = false;
             if (CardIndexMenuMarker == true)
@@ -309,13 +310,23 @@ namespace RusDictionary.Modules
                     Application.DoEvents();
                 }
                 pbPictCard.BackgroundImage = CardImage;
-                laCardsNumberCard.Text = "Текст карточки №" + SplitItem.Last() + ":";
-                laCardsLetter.Text = CardLetter;
-                laCardsNumberBox.Text = CardBox;
+                laCardsNumberCard.Text = "Текст карточки №" + CardMarker + ":";
+                laCardsLetter.Text = CardSymbol;
+                laCardsNumberBox.Text = CardNumberBox;
                 laCardsFirstSeparator.Text = CardFirstSeparator;
                 laCardsLastSeparator.Text = CardLastSeparator;
+                tbTextCard.Text = CardText;
+                tbCardNotes.Text = CardNotes;
                 tcCards.SelectedTab = tpCards;
                 Program.f1.PictAndLableWait(false);
+                foreach (Button button in MainForm.GetAll(tpList, typeof(Button)))
+                {
+                    button.Enabled = true;
+                }
+                foreach (ListBox listbox in MainForm.GetAll(tpList, typeof(ListBox)))
+                {
+                    listbox.Enabled = true;
+                }
             }
             else
             {
@@ -328,9 +339,41 @@ namespace RusDictionary.Modules
                     Application.DoEvents();
                 }
                 ClearMainList();
-                for (int i = 0; i < SecondListItems.Count; i++)
+                switch (NameClickButton)
                 {
-                    lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i]);
+                    case "buCardIndexMenuSeparator":
+                        {
+                            for (int i = 0; i < SecondListItems.Count; i++)
+                            {
+                                lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Marker);
+                            }
+                            break;
+                        }
+                    case "buCardIndexMenuBox":
+                        {
+                            for (int i = 0; i < SecondListItems.Count; i++)
+                            {
+                                lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Marker);
+                            }
+                            break;
+                        }
+                    case "buCardIndexMenuLetter":
+                        {
+                            for (int i = 0; i < SecondListItems.Count; i++)
+                            {
+                                lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Marker);
+                            }
+                            break;
+                        }
+
+                }
+                foreach (Button button in MainForm.GetAll(tpList, typeof(Button)))
+                {
+                    button.Enabled = true;
+                }
+                foreach (ListBox listbox in MainForm.GetAll(tpList, typeof(ListBox)))
+                {
+                    listbox.Enabled = true;
                 }
                 lbCardIndexList.Update();
                 CardIndexMenuMarker = true;
@@ -341,60 +384,28 @@ namespace RusDictionary.Modules
 
         void ShowCards(object Number)
         {            
-            MySqlConnection conn = new MySqlConnection(MainForm.Connnect);
-            try
-            {
-                conn.Open();
-                string NewSql = "SELECT * FROM cardindex WHERE Marker = '" + Number + "'";
-                MySqlCommand command = new MySqlCommand(NewSql, conn);
-                MySqlDataReader reader = command.ExecuteReader();
-                reader.Read();
-                CardImage = DecodeImageFromDB(reader["img"].ToString());
-                string ReadSymbol = reader["Letter"].ToString();
-                string ReadBox = reader["Box"].ToString();
-                reader.Close();
-                ////////////////////////
-                string Sql = "SELECT Symbol FROM letter WHERE ID = " + ReadSymbol;                
-                MySqlCommand command1 = new MySqlCommand(Sql, conn);
-                MySqlDataReader reader1 = command1.ExecuteReader();
-                while (reader1.Read())
-                {
-                    CardLetter = "Буква: " + reader1["Symbol"].ToString();
-                }
-                reader1.Close();
-                ////////////////////////
-                Sql = "SELECT NumberBox FROM box WHERE ID = " + ReadBox;
-                command1 = new MySqlCommand(Sql, conn);
-                reader1 = command1.ExecuteReader();
-                while (reader1.Read())
-                {
-                    CardBox = "Ящик: " + reader1["NumberBox"].ToString();
-                }
-                reader1.Close();
-                ////////////////////////
-                Sql = "SELECT CardSeparator FROM cardseparator WHERE BoxNumber = " + ReadBox;
-                command1 = new MySqlCommand(Sql, conn);
-                reader1 = command1.ExecuteReader();
-                bool tmp = false;
-                while (reader1.Read())
-                {
-                    if (tmp == false)
-                    {
-                        CardFirstSeparator = "Первый разделитель: " + reader1["CardSeparator"].ToString();
-                        tmp = !tmp;
-                    }
-                    else
-                    {
-                        CardLastSeparator = "Последний разделитель: " + reader1["CardSeparator"].ToString();
-                    }
-                }
-                reader1.Close();
-                conn.Close();                    
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.ToString());
-            }                     
+            string query = "SELECT * FROM cardindex WHERE Marker = '" + Number + "'";
+            JSON.Send(MainForm.URL + query);
+            CardItems = JSON.Result;
+            
+            //Подумать над сепаратором между карточками
+
+            CardMarker = CardItems[0].Marker;
+            CardNotes = CardItems[0].Notes;
+            CardNumberBox = CardItems[0].NumberBox;
+            CardSymbol = CardItems[0].Symbol;
+            CardImage = DecodeImageFromDB(CardItems[0].img);
+            CardText = CardItems[0].imgText;
+            query = "SELECT Symbol FROM letter WHERE ID = " + CardSymbol;
+            JSON.Send(MainForm.URL + query);
+            CardSymbol = "Буква: " + JSON.Result[0].Symbol;
+            query = "SELECT CardSeparator FROM cardseparator WHERE BoxNumber = " + CardNumberBox;
+            JSON.Send(MainForm.URL + query);
+            CardFirstSeparator = "Первый разделитель: " + JSON.Result[0].CardSeparator;
+            CardLastSeparator = "Последний разделитель: " + JSON.Result.Last().CardSeparator;
+            query = "SELECT NumberBox FROM box WHERE ID = " + CardNumberBox;
+            JSON.Send(MainForm.URL + query);
+            CardNumberBox = "Ящик: " + JSON.Result[0].NumberBox;            
         }
         /// <summary>
         /// Кодирование изображения в base64
