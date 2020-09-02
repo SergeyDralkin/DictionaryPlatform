@@ -75,6 +75,9 @@ namespace RusDictionary
         public MainForm()
         {
             InitializeComponent();
+            //Для тестов закоментировать строчку снизу
+            //HideTabs();
+            //Для тестов закоментировать строчку сверху
             SetupFont();
             Program.f1 = this;            
             pbWait.Visible = false;
@@ -86,6 +89,22 @@ namespace RusDictionary
             ChangeStatus();
             TimerStatusConnect.Start();
         }
+        /// <summary>
+        /// Скрыть вкладки
+        /// </summary>
+        void HideTabs()
+        {
+            foreach (TabControl tabControl in GetAll(this, typeof(TabControl)))
+            {
+                tabControl.Appearance = TabAppearance.FlatButtons;
+                tabControl.ItemSize = new Size(0, 1);
+                tabControl.SizeMode = TabSizeMode.Fixed;
+                tabControl.TabStop = false;
+            }
+        }
+        /// <summary>
+        /// Установить шрифты на форме
+        /// </summary>
         void SetupFont()
         {            
             string fileName = Path.GetTempFileName();
@@ -102,10 +121,22 @@ namespace RusDictionary
                 {
                     label.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
                 }
+                else if (label.Name == "label3" || label.Name == "label9" || label.Name == "label22" || label.Name == "label16")
+                {
+                    label.Font = new Font("Izhitsa", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
+                }
+                else if (label.Name == "label15")
+                {
+                    label.Font = new Font("Izhitsa", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+                }
+                else if (label.Name == "label6" || label.Name == "label8" || label.Name == "label10" || label.Name == "label14" || label.Name == "label13" || label.Name == "label2" || label.Name == "label26" || label.Name == "label25" || label.Name == "label24" || label.Name == "label20" || label.Name == "label18")
+                {
+                    label.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+                }
                 else
                 {
                     label.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-                }                
+                }
             }
             foreach (Button button in GetAll(this, typeof(Button)))
             {
@@ -119,13 +150,13 @@ namespace RusDictionary
                 }
                 else
                 {
-                    button.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 204); ;
+                    button.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 204);
                 }                
             }
             foreach (ListBox listbox in GetAll(this, typeof(ListBox)))
             {
-                listbox.Font = new Font("Izhitsa", 14F, FontStyle.Regular, GraphicsUnit.Point, 0); ;
-            }
+                listbox.Font = new Font("Izhitsa", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            }            
         }
         void FillSetting()
         {

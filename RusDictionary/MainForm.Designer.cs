@@ -47,8 +47,11 @@
             this.buWordSearchModule = new System.Windows.Forms.Button();
             this.buCardIndexModule = new System.Windows.Forms.Button();
             this.tpCardIndex = new System.Windows.Forms.TabPage();
+            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
             this.tpPointer = new System.Windows.Forms.TabPage();
+            this.indexModule1 = new RusDictionary.Modules.IndexModule();
             this.tpWordSearch = new System.Windows.Forms.TabPage();
+            this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
             this.tpAuthors = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
@@ -106,6 +109,7 @@
             this.tpSettings = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel22 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel29 = new System.Windows.Forms.TableLayoutPanel();
+            this.buButtonColor = new System.Windows.Forms.Button();
             this.buColorDefault = new System.Windows.Forms.Button();
             this.buTextBoxColor = new System.Windows.Forms.Button();
             this.buTextColor = new System.Windows.Forms.Button();
@@ -126,10 +130,6 @@
             this.pbWait = new System.Windows.Forms.PictureBox();
             this.laWait = new System.Windows.Forms.Label();
             this.cdChangeColor = new System.Windows.Forms.ColorDialog();
-            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
-            this.indexModule1 = new RusDictionary.Modules.IndexModule();
-            this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
-            this.buButtonColor = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.MainTC.SuspendLayout();
             this.tpMain.SuspendLayout();
@@ -400,6 +400,15 @@
             this.tpCardIndex.TabIndex = 1;
             this.tpCardIndex.Text = "Картотека";
             // 
+            // cardIndexModule
+            // 
+            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
+            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
+            this.cardIndexModule.Name = "cardIndexModule";
+            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
+            this.cardIndexModule.TabIndex = 0;
+            // 
             // tpPointer
             // 
             this.tpPointer.Controls.Add(this.indexModule1);
@@ -410,6 +419,15 @@
             this.tpPointer.Text = "Указатели";
             this.tpPointer.UseVisualStyleBackColor = true;
             // 
+            // indexModule1
+            // 
+            this.indexModule1.BackColor = System.Drawing.Color.Transparent;
+            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.indexModule1.Location = new System.Drawing.Point(0, 0);
+            this.indexModule1.Name = "indexModule1";
+            this.indexModule1.Size = new System.Drawing.Size(1054, 580);
+            this.indexModule1.TabIndex = 0;
+            // 
             // tpWordSearch
             // 
             this.tpWordSearch.Controls.Add(this.wordSearchModule1);
@@ -419,6 +437,14 @@
             this.tpWordSearch.TabIndex = 3;
             this.tpWordSearch.Text = "Поиск слов";
             this.tpWordSearch.UseVisualStyleBackColor = true;
+            // 
+            // wordSearchModule1
+            // 
+            this.wordSearchModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wordSearchModule1.Location = new System.Drawing.Point(0, 0);
+            this.wordSearchModule1.Name = "wordSearchModule1";
+            this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
+            this.wordSearchModule1.TabIndex = 0;
             // 
             // tpAuthors
             // 
@@ -490,7 +516,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Izhitsa", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label15.Location = new System.Drawing.Point(3, 63);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(247, 75);
@@ -514,7 +540,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.Font = new System.Drawing.Font("Izhitsa", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label17.Location = new System.Drawing.Point(3, 138);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(247, 37);
@@ -652,7 +678,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label21.Location = new System.Drawing.Point(3, 75);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(247, 25);
@@ -664,7 +690,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Font = new System.Drawing.Font("Izhitsa", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label22.Location = new System.Drawing.Point(3, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(247, 75);
@@ -1287,6 +1313,18 @@
             this.tableLayoutPanel29.Size = new System.Drawing.Size(1048, 63);
             this.tableLayoutPanel29.TabIndex = 6;
             // 
+            // buButtonColor
+            // 
+            this.buButtonColor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buButtonColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buButtonColor.Location = new System.Drawing.Point(630, 3);
+            this.buButtonColor.Name = "buButtonColor";
+            this.buButtonColor.Size = new System.Drawing.Size(203, 57);
+            this.buButtonColor.TabIndex = 5;
+            this.buButtonColor.Text = "Цвет кнопок";
+            this.buButtonColor.UseVisualStyleBackColor = true;
+            this.buButtonColor.Click += new System.EventHandler(this.buButtonColor_Click);
+            // 
             // buColorDefault
             // 
             this.buColorDefault.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1510,11 +1548,11 @@
             this.tableLayoutPanel21.Controls.Add(this.pbWait, 0, 0);
             this.tableLayoutPanel21.Controls.Add(this.laWait, 1, 0);
             this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tableLayoutPanel21.Location = new System.Drawing.Point(885, 3);
+            this.tableLayoutPanel21.Location = new System.Drawing.Point(732, 3);
             this.tableLayoutPanel21.Name = "tableLayoutPanel21";
             this.tableLayoutPanel21.RowCount = 1;
             this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel21.Size = new System.Drawing.Size(174, 28);
+            this.tableLayoutPanel21.Size = new System.Drawing.Size(327, 28);
             this.tableLayoutPanel21.TabIndex = 3;
             // 
             // pbWait
@@ -1536,48 +1574,10 @@
             this.laWait.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.laWait.Location = new System.Drawing.Point(42, 0);
             this.laWait.Name = "laWait";
-            this.laWait.Size = new System.Drawing.Size(268, 28);
+            this.laWait.Size = new System.Drawing.Size(282, 28);
             this.laWait.TabIndex = 1;
             this.laWait.Text = "Выполняется запрос, пожалуйства, подождите";
             this.laWait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cardIndexModule
-            // 
-            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
-            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
-            this.cardIndexModule.Name = "cardIndexModule";
-            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
-            this.cardIndexModule.TabIndex = 0;
-            // 
-            // indexModule1
-            // 
-            this.indexModule1.BackColor = System.Drawing.Color.Transparent;
-            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.indexModule1.Location = new System.Drawing.Point(0, 0);
-            this.indexModule1.Name = "indexModule1";
-            this.indexModule1.Size = new System.Drawing.Size(1054, 580);
-            this.indexModule1.TabIndex = 0;
-            // 
-            // wordSearchModule1
-            // 
-            this.wordSearchModule1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wordSearchModule1.Location = new System.Drawing.Point(0, 0);
-            this.wordSearchModule1.Name = "wordSearchModule1";
-            this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
-            this.wordSearchModule1.TabIndex = 0;
-            // 
-            // buButtonColor
-            // 
-            this.buButtonColor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buButtonColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buButtonColor.Location = new System.Drawing.Point(630, 3);
-            this.buButtonColor.Name = "buButtonColor";
-            this.buButtonColor.Size = new System.Drawing.Size(203, 57);
-            this.buButtonColor.TabIndex = 5;
-            this.buButtonColor.Text = "Цвет кнопок";
-            this.buButtonColor.UseVisualStyleBackColor = true;
-            this.buButtonColor.Click += new System.EventHandler(this.buButtonColor_Click);
             // 
             // MainForm
             // 

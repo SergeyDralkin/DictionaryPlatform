@@ -36,6 +36,7 @@
             this.buCardIndexMenuBox = new System.Windows.Forms.Button();
             this.buCardIndexMenuLetter = new System.Windows.Forms.Button();
             this.buCardIndexMenuPrev = new System.Windows.Forms.Button();
+            this.buTest = new System.Windows.Forms.Button();
             this.tpList = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.lbCardIndexList = new System.Windows.Forms.ListBox();
@@ -55,19 +56,19 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.label100 = new System.Windows.Forms.Label();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label99 = new System.Windows.Forms.Label();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label88 = new System.Windows.Forms.Label();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -142,6 +143,7 @@
             this.tableLayoutPanel13.Controls.Add(this.buCardIndexMenuBox, 2, 5);
             this.tableLayoutPanel13.Controls.Add(this.buCardIndexMenuLetter, 2, 6);
             this.tableLayoutPanel13.Controls.Add(this.buCardIndexMenuPrev, 4, 9);
+            this.tableLayoutPanel13.Controls.Add(this.buTest, 3, 8);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
@@ -163,9 +165,9 @@
             // 
             this.buCardIndexMenuMarker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuMarker.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuMarker.Location = new System.Drawing.Point(358, 159);
+            this.buCardIndexMenuMarker.Location = new System.Drawing.Point(358, 132);
             this.buCardIndexMenuMarker.Name = "buCardIndexMenuMarker";
-            this.buCardIndexMenuMarker.Size = new System.Drawing.Size(298, 46);
+            this.buCardIndexMenuMarker.Size = new System.Drawing.Size(298, 58);
             this.buCardIndexMenuMarker.TabIndex = 0;
             this.buCardIndexMenuMarker.Text = "Маркер изображения";
             this.buCardIndexMenuMarker.UseVisualStyleBackColor = true;
@@ -175,9 +177,9 @@
             // 
             this.buCardIndexMenuSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuSeparator.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuSeparator.Location = new System.Drawing.Point(358, 211);
+            this.buCardIndexMenuSeparator.Location = new System.Drawing.Point(358, 196);
             this.buCardIndexMenuSeparator.Name = "buCardIndexMenuSeparator";
-            this.buCardIndexMenuSeparator.Size = new System.Drawing.Size(298, 46);
+            this.buCardIndexMenuSeparator.Size = new System.Drawing.Size(298, 58);
             this.buCardIndexMenuSeparator.TabIndex = 1;
             this.buCardIndexMenuSeparator.Text = "Карточка-разделитель";
             this.buCardIndexMenuSeparator.UseVisualStyleBackColor = true;
@@ -187,9 +189,9 @@
             // 
             this.buCardIndexMenuBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuBox.Location = new System.Drawing.Point(358, 263);
+            this.buCardIndexMenuBox.Location = new System.Drawing.Point(358, 260);
             this.buCardIndexMenuBox.Name = "buCardIndexMenuBox";
-            this.buCardIndexMenuBox.Size = new System.Drawing.Size(298, 46);
+            this.buCardIndexMenuBox.Size = new System.Drawing.Size(298, 58);
             this.buCardIndexMenuBox.TabIndex = 2;
             this.buCardIndexMenuBox.Text = "Ящик";
             this.buCardIndexMenuBox.UseVisualStyleBackColor = true;
@@ -199,9 +201,9 @@
             // 
             this.buCardIndexMenuLetter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuLetter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuLetter.Location = new System.Drawing.Point(358, 315);
+            this.buCardIndexMenuLetter.Location = new System.Drawing.Point(358, 324);
             this.buCardIndexMenuLetter.Name = "buCardIndexMenuLetter";
-            this.buCardIndexMenuLetter.Size = new System.Drawing.Size(298, 46);
+            this.buCardIndexMenuLetter.Size = new System.Drawing.Size(298, 58);
             this.buCardIndexMenuLetter.TabIndex = 3;
             this.buCardIndexMenuLetter.Text = "Буква";
             this.buCardIndexMenuLetter.UseVisualStyleBackColor = true;
@@ -211,13 +213,23 @@
             // 
             this.buCardIndexMenuPrev.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuPrev.Location = new System.Drawing.Point(814, 471);
+            this.buCardIndexMenuPrev.Location = new System.Drawing.Point(814, 474);
             this.buCardIndexMenuPrev.Name = "buCardIndexMenuPrev";
-            this.buCardIndexMenuPrev.Size = new System.Drawing.Size(199, 54);
+            this.buCardIndexMenuPrev.Size = new System.Drawing.Size(199, 51);
             this.buCardIndexMenuPrev.TabIndex = 4;
             this.buCardIndexMenuPrev.Text = "Назад";
             this.buCardIndexMenuPrev.UseVisualStyleBackColor = true;
             this.buCardIndexMenuPrev.Click += new System.EventHandler(this.buCardIndexMenuPrev_Click);
+            // 
+            // buTest
+            // 
+            this.buTest.Location = new System.Drawing.Point(662, 431);
+            this.buTest.Name = "buTest";
+            this.buTest.Size = new System.Drawing.Size(75, 23);
+            this.buTest.TabIndex = 5;
+            this.buTest.Text = "test";
+            this.buTest.UseVisualStyleBackColor = true;
+            this.buTest.Click += new System.EventHandler(this.buTest_Click);
             // 
             // tpList
             // 
@@ -465,7 +477,7 @@
             this.tableLayoutPanel11.ColumnCount = 1;
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel11.Controls.Add(this.textBox7, 0, 1);
-            this.tableLayoutPanel11.Controls.Add(this.label10, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.label100, 0, 0);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 339);
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
@@ -484,23 +496,23 @@
             this.textBox7.Size = new System.Drawing.Size(285, 20);
             this.textBox7.TabIndex = 0;
             // 
-            // label10
+            // label100
             // 
-            this.label10.AutoSize = true;
-            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(3, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(285, 16);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Автор:";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label100.AutoSize = true;
+            this.label100.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label100.Location = new System.Drawing.Point(3, 0);
+            this.label100.Name = "label100";
+            this.label100.Size = new System.Drawing.Size(285, 16);
+            this.label100.TabIndex = 1;
+            this.label100.Text = "Автор:";
+            this.label100.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel10
             // 
             this.tableLayoutPanel10.ColumnCount = 1;
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel10.Controls.Add(this.textBox6, 0, 1);
-            this.tableLayoutPanel10.Controls.Add(this.label9, 0, 0);
+            this.tableLayoutPanel10.Controls.Add(this.label99, 0, 0);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 291);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -519,23 +531,23 @@
             this.textBox6.Size = new System.Drawing.Size(285, 20);
             this.textBox6.TabIndex = 0;
             // 
-            // label9
+            // label99
             // 
-            this.label9.AutoSize = true;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(3, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(285, 16);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Уточненная дата:";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label99.AutoSize = true;
+            this.label99.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label99.Location = new System.Drawing.Point(3, 0);
+            this.label99.Name = "label99";
+            this.label99.Size = new System.Drawing.Size(285, 16);
+            this.label99.TabIndex = 1;
+            this.label99.Text = "Уточненная дата:";
+            this.label99.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel9
             // 
             this.tableLayoutPanel9.ColumnCount = 1;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel9.Controls.Add(this.textBox5, 0, 1);
-            this.tableLayoutPanel9.Controls.Add(this.label8, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.label88, 0, 0);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 243);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
@@ -554,16 +566,16 @@
             this.textBox5.Size = new System.Drawing.Size(285, 20);
             this.textBox5.TabIndex = 0;
             // 
-            // label8
+            // label88
             // 
-            this.label8.AutoSize = true;
-            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(3, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(285, 16);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Дата источника:";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label88.AutoSize = true;
+            this.label88.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label88.Location = new System.Drawing.Point(3, 0);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(285, 16);
+            this.label88.TabIndex = 1;
+            this.label88.Text = "Дата источника:";
+            this.label88.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel8
             // 
@@ -605,7 +617,7 @@
             this.tableLayoutPanel7.ColumnCount = 1;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.Controls.Add(this.textBox3, 0, 1);
-            this.tableLayoutPanel7.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.label66, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 147);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -624,16 +636,16 @@
             this.textBox3.Size = new System.Drawing.Size(285, 20);
             this.textBox3.TabIndex = 0;
             // 
-            // label6
+            // label66
             // 
-            this.label6.AutoSize = true;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(3, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(285, 16);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Уточнение к источнику:";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label66.AutoSize = true;
+            this.label66.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label66.Location = new System.Drawing.Point(3, 0);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(285, 16);
+            this.label66.TabIndex = 1;
+            this.label66.Text = "Уточнение к источнику:";
+            this.label66.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel5
             // 
@@ -756,11 +768,11 @@
             this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel4.ColumnCount = 5;
             this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel4, 2);
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel4.Controls.Add(this.laCardsLastSeparator, 3, 0);
             this.tableLayoutPanel4.Controls.Add(this.laCardsFirstSeparator, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.laCardsNumberBox, 1, 0);
@@ -779,9 +791,9 @@
             this.laCardsLastSeparator.AutoSize = true;
             this.laCardsLastSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.laCardsLastSeparator.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laCardsLastSeparator.Location = new System.Drawing.Point(504, 1);
+            this.laCardsLastSeparator.Location = new System.Drawing.Point(301, 1);
             this.laCardsLastSeparator.Name = "laCardsLastSeparator";
-            this.laCardsLastSeparator.Size = new System.Drawing.Size(293, 25);
+            this.laCardsLastSeparator.Size = new System.Drawing.Size(223, 25);
             this.laCardsLastSeparator.TabIndex = 3;
             this.laCardsLastSeparator.Text = "Последний разделитель: САДОВЫЙ";
             this.laCardsLastSeparator.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -791,9 +803,9 @@
             this.laCardsFirstSeparator.AutoSize = true;
             this.laCardsFirstSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.laCardsFirstSeparator.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laCardsFirstSeparator.Location = new System.Drawing.Point(204, 1);
+            this.laCardsFirstSeparator.Location = new System.Drawing.Point(145, 1);
             this.laCardsFirstSeparator.Name = "laCardsFirstSeparator";
-            this.laCardsFirstSeparator.Size = new System.Drawing.Size(293, 25);
+            this.laCardsFirstSeparator.Size = new System.Drawing.Size(149, 25);
             this.laCardsFirstSeparator.TabIndex = 2;
             this.laCardsFirstSeparator.Text = "Первый разделитель: С";
             this.laCardsFirstSeparator.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -803,9 +815,9 @@
             this.laCardsNumberBox.AutoSize = true;
             this.laCardsNumberBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.laCardsNumberBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laCardsNumberBox.Location = new System.Drawing.Point(104, 1);
+            this.laCardsNumberBox.Location = new System.Drawing.Point(69, 1);
             this.laCardsNumberBox.Name = "laCardsNumberBox";
-            this.laCardsNumberBox.Size = new System.Drawing.Size(93, 25);
+            this.laCardsNumberBox.Size = new System.Drawing.Size(69, 25);
             this.laCardsNumberBox.TabIndex = 1;
             this.laCardsNumberBox.Text = "Ящик: 577";
             this.laCardsNumberBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -817,14 +829,15 @@
             this.laCardsLetter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.laCardsLetter.Location = new System.Drawing.Point(4, 1);
             this.laCardsLetter.Name = "laCardsLetter";
-            this.laCardsLetter.Size = new System.Drawing.Size(93, 25);
+            this.laCardsLetter.Size = new System.Drawing.Size(58, 25);
             this.laCardsLetter.TabIndex = 0;
             this.laCardsLetter.Text = "Буква: С";
             this.laCardsLetter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // buCardIndexCardsPrev
             // 
-            this.buCardIndexCardsPrev.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buCardIndexCardsPrev.AutoSize = true;
+            this.buCardIndexCardsPrev.Dock = System.Windows.Forms.DockStyle.Right;
             this.buCardIndexCardsPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexCardsPrev.Location = new System.Drawing.Point(801, 1);
             this.buCardIndexCardsPrev.Margin = new System.Windows.Forms.Padding(0);
@@ -903,19 +916,19 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label66;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
         private System.Windows.Forms.TextBox tbCardNotes;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label100;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label99;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label88;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label7;
@@ -936,5 +949,6 @@
         private System.Windows.Forms.Button buCardIndexListSearch;
         private System.Windows.Forms.Button buCardIndexListClearSearch;
         private System.Windows.Forms.Button buCardIndexCardsPrev;
+        private System.Windows.Forms.Button buTest;
     }
 }
