@@ -89,7 +89,7 @@ namespace RusDictionary.Modules
             {
                 name = s.Substring(startIndex, finishIndex - startIndex) + "\r\n";
                 name = ClearTags(name);
-                //tbWordSearch_Text.Text += name;
+                tbWordSearch_Text.Text += name;
                 forExit = true;
                 i = finishIndex;
                 int endOfPometIndex = 0;
@@ -106,10 +106,10 @@ namespace RusDictionary.Modules
                 {
                     pomet = s.Substring(finishIndex + 5, endOfPometIndex - (finishIndex + 5)) + "\r\n"; // Вывод помет
                     pomet = ClearTags(pomet);
-                    //tbWordSearch_Text.Text += pomet;
+                    tbWordSearch_Text.Text += pomet;
                     description = s.Substring(endOfPometIndex + 5, s.Length - (endOfPometIndex + 5)) + "\r\n"; // Вывод описания
                     description = ClearTags(description);
-                    //tbWordSearch_Text.Text += description;
+                    tbWordSearch_Text.Text += description;
                 }
             }
         }

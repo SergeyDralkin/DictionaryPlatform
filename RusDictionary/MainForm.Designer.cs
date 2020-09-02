@@ -47,7 +47,6 @@
             this.buWordSearchModule = new System.Windows.Forms.Button();
             this.buCardIndexModule = new System.Windows.Forms.Button();
             this.tpCardIndex = new System.Windows.Forms.TabPage();
-            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
             this.tpPointer = new System.Windows.Forms.TabPage();
             this.tpWordSearch = new System.Windows.Forms.TabPage();
             this.tpAuthors = new System.Windows.Forms.TabPage();
@@ -127,7 +126,10 @@
             this.pbWait = new System.Windows.Forms.PictureBox();
             this.laWait = new System.Windows.Forms.Label();
             this.cdChangeColor = new System.Windows.Forms.ColorDialog();
+            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
+            this.indexModule1 = new RusDictionary.Modules.IndexModule();
             this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
+            this.buButtonColor = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.MainTC.SuspendLayout();
             this.tpMain.SuspendLayout();
@@ -137,6 +139,7 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tpCardIndex.SuspendLayout();
+            this.tpPointer.SuspendLayout();
             this.tpWordSearch.SuspendLayout();
             this.tpAuthors.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -278,7 +281,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Izhitsa", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(639, 48);
@@ -290,7 +293,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Font = new System.Drawing.Font("Izhitsa", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(3, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(639, 114);
@@ -357,6 +360,7 @@
             this.buIndexModule.TabIndex = 2;
             this.buIndexModule.Text = "Библиография и указатели на источники";
             this.buIndexModule.UseVisualStyleBackColor = false;
+            this.buIndexModule.Click += new System.EventHandler(this.buIndexModule_Click);
             // 
             // buWordSearchModule
             // 
@@ -369,13 +373,14 @@
             this.buWordSearchModule.TabIndex = 1;
             this.buWordSearchModule.Text = "Поиск слов по словарю";
             this.buWordSearchModule.UseVisualStyleBackColor = false;
+            this.buWordSearchModule.Click += new System.EventHandler(this.buWordSearchModule_Click);
             // 
             // buCardIndexModule
             // 
             this.buCardIndexModule.BackColor = System.Drawing.Color.SeaShell;
             this.buCardIndexModule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.buCardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexModule.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexModule.Font = new System.Drawing.Font("Izhitsa", 5.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Millimeter, ((byte)(0)));
             this.buCardIndexModule.Location = new System.Drawing.Point(3, 3);
             this.buCardIndexModule.Name = "buCardIndexModule";
             this.buCardIndexModule.Size = new System.Drawing.Size(639, 71);
@@ -395,17 +400,9 @@
             this.tpCardIndex.TabIndex = 1;
             this.tpCardIndex.Text = "Картотека";
             // 
-            // cardIndexModule
-            // 
-            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
-            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
-            this.cardIndexModule.Name = "cardIndexModule";
-            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
-            this.cardIndexModule.TabIndex = 0;
-            // 
             // tpPointer
             // 
+            this.tpPointer.Controls.Add(this.indexModule1);
             this.tpPointer.Location = new System.Drawing.Point(4, 22);
             this.tpPointer.Name = "tpPointer";
             this.tpPointer.Size = new System.Drawing.Size(1054, 580);
@@ -1256,28 +1253,28 @@
             this.tableLayoutPanel22.RowCount = 11;
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel22.Size = new System.Drawing.Size(1054, 580);
             this.tableLayoutPanel22.TabIndex = 0;
             // 
             // tableLayoutPanel29
             // 
-            this.tableLayoutPanel29.ColumnCount = 4;
-            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel29.Controls.Add(this.buColorDefault, 3, 0);
+            this.tableLayoutPanel29.ColumnCount = 5;
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel29.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel29.Controls.Add(this.buButtonColor, 3, 0);
+            this.tableLayoutPanel29.Controls.Add(this.buColorDefault, 4, 0);
             this.tableLayoutPanel29.Controls.Add(this.buTextBoxColor, 2, 0);
             this.tableLayoutPanel29.Controls.Add(this.buTextColor, 0, 0);
             this.tableLayoutPanel29.Controls.Add(this.buBackgroundColor, 1, 0);
@@ -1287,16 +1284,16 @@
             this.tableLayoutPanel29.Name = "tableLayoutPanel29";
             this.tableLayoutPanel29.RowCount = 1;
             this.tableLayoutPanel29.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel29.Size = new System.Drawing.Size(1048, 46);
+            this.tableLayoutPanel29.Size = new System.Drawing.Size(1048, 63);
             this.tableLayoutPanel29.TabIndex = 6;
             // 
             // buColorDefault
             // 
             this.buColorDefault.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buColorDefault.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buColorDefault.Location = new System.Drawing.Point(789, 3);
+            this.buColorDefault.Location = new System.Drawing.Point(839, 3);
             this.buColorDefault.Name = "buColorDefault";
-            this.buColorDefault.Size = new System.Drawing.Size(256, 40);
+            this.buColorDefault.Size = new System.Drawing.Size(206, 57);
             this.buColorDefault.TabIndex = 4;
             this.buColorDefault.Text = "Цвета по умолчанию";
             this.buColorDefault.UseVisualStyleBackColor = true;
@@ -1306,9 +1303,9 @@
             // 
             this.buTextBoxColor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buTextBoxColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buTextBoxColor.Location = new System.Drawing.Point(527, 3);
+            this.buTextBoxColor.Location = new System.Drawing.Point(421, 3);
             this.buTextBoxColor.Name = "buTextBoxColor";
-            this.buTextBoxColor.Size = new System.Drawing.Size(256, 40);
+            this.buTextBoxColor.Size = new System.Drawing.Size(203, 57);
             this.buTextBoxColor.TabIndex = 3;
             this.buTextBoxColor.Text = "Цвет текстового поля";
             this.buTextBoxColor.UseVisualStyleBackColor = true;
@@ -1320,7 +1317,7 @@
             this.buTextColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buTextColor.Location = new System.Drawing.Point(3, 3);
             this.buTextColor.Name = "buTextColor";
-            this.buTextColor.Size = new System.Drawing.Size(256, 40);
+            this.buTextColor.Size = new System.Drawing.Size(203, 57);
             this.buTextColor.TabIndex = 2;
             this.buTextColor.Text = "Цвет текста";
             this.buTextColor.UseVisualStyleBackColor = true;
@@ -1330,9 +1327,9 @@
             // 
             this.buBackgroundColor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buBackgroundColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buBackgroundColor.Location = new System.Drawing.Point(265, 3);
+            this.buBackgroundColor.Location = new System.Drawing.Point(212, 3);
             this.buBackgroundColor.Name = "buBackgroundColor";
-            this.buBackgroundColor.Size = new System.Drawing.Size(256, 40);
+            this.buBackgroundColor.Size = new System.Drawing.Size(203, 57);
             this.buBackgroundColor.TabIndex = 1;
             this.buBackgroundColor.Text = "Цвет фона";
             this.buBackgroundColor.UseVisualStyleBackColor = true;
@@ -1389,11 +1386,11 @@
             this.tableLayoutPanel23.Controls.Add(this.buPrevSettings, 2, 0);
             this.tableLayoutPanel23.Controls.Add(this.buSaveSettings, 1, 0);
             this.tableLayoutPanel23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel23.Location = new System.Drawing.Point(3, 523);
+            this.tableLayoutPanel23.Location = new System.Drawing.Point(3, 522);
             this.tableLayoutPanel23.Name = "tableLayoutPanel23";
             this.tableLayoutPanel23.RowCount = 1;
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel23.Size = new System.Drawing.Size(1048, 54);
+            this.tableLayoutPanel23.Size = new System.Drawing.Size(1048, 55);
             this.tableLayoutPanel23.TabIndex = 0;
             // 
             // buPrevSettings
@@ -1402,7 +1399,7 @@
             this.buPrevSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buPrevSettings.Location = new System.Drawing.Point(819, 3);
             this.buPrevSettings.Name = "buPrevSettings";
-            this.buPrevSettings.Size = new System.Drawing.Size(226, 48);
+            this.buPrevSettings.Size = new System.Drawing.Size(226, 49);
             this.buPrevSettings.TabIndex = 4;
             this.buPrevSettings.Text = "Назад";
             this.buPrevSettings.UseVisualStyleBackColor = true;
@@ -1414,7 +1411,7 @@
             this.buSaveSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buSaveSettings.Location = new System.Drawing.Point(589, 3);
             this.buSaveSettings.Name = "buSaveSettings";
-            this.buSaveSettings.Size = new System.Drawing.Size(224, 48);
+            this.buSaveSettings.Size = new System.Drawing.Size(224, 49);
             this.buSaveSettings.TabIndex = 3;
             this.buSaveSettings.Text = "Сохранить";
             this.buSaveSettings.UseVisualStyleBackColor = true;
@@ -1466,9 +1463,9 @@
             // tableLayoutPanel20
             // 
             this.tableLayoutPanel20.ColumnCount = 3;
-            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.5F));
-            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.5F));
-            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel20.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel20.Controls.Add(this.pbStatusConnect, 0, 0);
             this.tableLayoutPanel20.Controls.Add(this.laStatus, 1, 0);
             this.tableLayoutPanel20.Controls.Add(this.tableLayoutPanel21, 2, 0);
@@ -1499,24 +1496,25 @@
             this.laStatus.Location = new System.Drawing.Point(40, 0);
             this.laStatus.Margin = new System.Windows.Forms.Padding(3, 0, 3, 2);
             this.laStatus.Name = "laStatus";
-            this.laStatus.Size = new System.Drawing.Size(700, 32);
+            this.laStatus.Size = new System.Drawing.Size(218, 32);
             this.laStatus.TabIndex = 1;
             this.laStatus.Text = "Статус подключения к Базе Данных:";
             this.laStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel21
             // 
+            this.tableLayoutPanel21.AutoSize = true;
             this.tableLayoutPanel21.ColumnCount = 2;
-            this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 87.5F));
+            this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel21.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel21.Controls.Add(this.pbWait, 0, 0);
             this.tableLayoutPanel21.Controls.Add(this.laWait, 1, 0);
-            this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel21.Location = new System.Drawing.Point(746, 3);
+            this.tableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tableLayoutPanel21.Location = new System.Drawing.Point(885, 3);
             this.tableLayoutPanel21.Name = "tableLayoutPanel21";
             this.tableLayoutPanel21.RowCount = 1;
             this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel21.Size = new System.Drawing.Size(313, 28);
+            this.tableLayoutPanel21.Size = new System.Drawing.Size(174, 28);
             this.tableLayoutPanel21.TabIndex = 3;
             // 
             // pbWait
@@ -1540,8 +1538,26 @@
             this.laWait.Name = "laWait";
             this.laWait.Size = new System.Drawing.Size(268, 28);
             this.laWait.TabIndex = 1;
-            this.laWait.Text = "Выполняется запрос, пожалуйста, подождите";
+            this.laWait.Text = "Выполняется запрос, пожалуйства, подождите";
             this.laWait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cardIndexModule
+            // 
+            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
+            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
+            this.cardIndexModule.Name = "cardIndexModule";
+            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
+            this.cardIndexModule.TabIndex = 0;
+            // 
+            // indexModule1
+            // 
+            this.indexModule1.BackColor = System.Drawing.Color.Transparent;
+            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.indexModule1.Location = new System.Drawing.Point(0, 0);
+            this.indexModule1.Name = "indexModule1";
+            this.indexModule1.Size = new System.Drawing.Size(1054, 580);
+            this.indexModule1.TabIndex = 0;
             // 
             // wordSearchModule1
             // 
@@ -1550,6 +1566,18 @@
             this.wordSearchModule1.Name = "wordSearchModule1";
             this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
             this.wordSearchModule1.TabIndex = 0;
+            // 
+            // buButtonColor
+            // 
+            this.buButtonColor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buButtonColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buButtonColor.Location = new System.Drawing.Point(630, 3);
+            this.buButtonColor.Name = "buButtonColor";
+            this.buButtonColor.Size = new System.Drawing.Size(203, 57);
+            this.buButtonColor.TabIndex = 5;
+            this.buButtonColor.Text = "Цвет кнопок";
+            this.buButtonColor.UseVisualStyleBackColor = true;
+            this.buButtonColor.Click += new System.EventHandler(this.buButtonColor_Click);
             // 
             // MainForm
             // 
@@ -1574,6 +1602,7 @@
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tpCardIndex.ResumeLayout(false);
+            this.tpPointer.ResumeLayout(false);
             this.tpWordSearch.ResumeLayout(false);
             this.tpAuthors.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
@@ -1719,6 +1748,8 @@
         private System.Windows.Forms.Button buSaveSettings;
         private System.Windows.Forms.Button buColorDefault;
         private Modules.WordSearchModule wordSearchModule1;
+        private Modules.IndexModule indexModule1;
+        private System.Windows.Forms.Button buButtonColor;
     }
 }
 

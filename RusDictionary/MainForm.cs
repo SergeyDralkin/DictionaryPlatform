@@ -13,6 +13,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using System.Windows.Media.TextFormatting;
+using System.Drawing.Text;
 
 namespace RusDictionary
 {
@@ -59,6 +60,10 @@ namespace RusDictionary
         /// </summary>
         Color ColorTextBox;
         /// <summary>
+        /// Цвет фона кнопки
+        /// </summary>
+        Color ColorButton;
+        /// <summary>
         /// Адрес сервера
         /// </summary>
         public static string URL = null;
@@ -70,6 +75,7 @@ namespace RusDictionary
         public MainForm()
         {
             InitializeComponent();
+            SetupFont();
             Program.f1 = this;            
             pbWait.Visible = false;
             laWait.Visible = false;
@@ -80,6 +86,47 @@ namespace RusDictionary
             ChangeStatus();
             TimerStatusConnect.Start();
         }
+        void SetupFont()
+        {            
+            string fileName = Path.GetTempFileName();
+            File.WriteAllBytes(fileName, Properties.Resources.IZHITSA);
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            pfc.AddFontFile(fileName);
+            foreach (Label label in GetAll(this, typeof(Label)))
+            {
+                if (label.Name == "label1")
+                {
+                    label.Font = new Font("Izhitsa", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+                }
+                else if (label.Name == "label2")
+                {
+                    label.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+                }
+                else
+                {
+                    label.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+                }                
+            }
+            foreach (Button button in GetAll(this, typeof(Button)))
+            {
+                if (button.Name == "buCardIndexCardsPrev")
+                {
+                    button.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+                }
+                else if (button.Name == "buTextBoxColor" || button.Name == "buColorDefault")
+                {
+                    button.Font = new Font("Izhitsa", 13.5F, FontStyle.Regular, GraphicsUnit.Point, 204);
+                }
+                else
+                {
+                    button.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 204); ;
+                }                
+            }
+            foreach (ListBox listbox in GetAll(this, typeof(ListBox)))
+            {
+                listbox.Font = new Font("Izhitsa", 14F, FontStyle.Regular, GraphicsUnit.Point, 0); ;
+            }
+        }
         void FillSetting()
         {
             IP = Properties.Settings.Default.IP;
@@ -87,6 +134,7 @@ namespace RusDictionary
             ColorText = Properties.Settings.Default.ColorText;
             ColorBackground = Properties.Settings.Default.ColorBackground;
             ColorTextBox = Properties.Settings.Default.ColorTextBox;
+            ColorButton = Properties.Settings.Default.ColorButton;
             if (Port == null || Port == "")
             {
                 URL = "http://" + IP + "/?property=query&query=";
@@ -121,6 +169,10 @@ namespace RusDictionary
             foreach (ListBox listBox in GetAll(this, typeof(ListBox)))
             {
                 listBox.BackColor = Properties.Settings.Default.ColorTextBox;
+            }
+            foreach (Button button in GetAll(this, typeof(Button)))
+            {
+                button.BackColor = Properties.Settings.Default.ColorButton;
             }
         }
         /// <summary>
@@ -473,7 +525,7 @@ namespace RusDictionary
 
         private void buPrevSettings_Click(object sender, EventArgs e)
         {            
-            if (Properties.Settings.Default.IP == tbIP.Text && Properties.Settings.Default.Port == tbPort.Text && Properties.Settings.Default.ColorText == label1.ForeColor && Properties.Settings.Default.ColorBackground == tpMain.BackColor && Properties.Settings.Default.ColorTextBox == tbIP.BackColor)
+            if (Properties.Settings.Default.IP == tbIP.Text && Properties.Settings.Default.Port == tbPort.Text && Properties.Settings.Default.ColorText == label1.ForeColor && Properties.Settings.Default.ColorBackground == tpMain.BackColor && Properties.Settings.Default.ColorTextBox == tbIP.BackColor && Properties.Settings.Default.ColorButton == buAuthors.BackColor)
             {
                 MainTC.SelectedTab = tpMain;
             }
@@ -492,6 +544,7 @@ namespace RusDictionary
                         Properties.Settings.Default.ColorText = ColorText;
                         Properties.Settings.Default.ColorBackground = ColorBackground;
                         Properties.Settings.Default.ColorTextBox = ColorTextBox;
+                        Properties.Settings.Default.ColorButton = ColorButton;
                         Properties.Settings.Default.Save();
                         break;
                     case DialogResult.No:
@@ -509,12 +562,14 @@ namespace RusDictionary
             ColorText = label1.ForeColor;
             ColorBackground = tpMain.BackColor;
             ColorTextBox = tbIP.BackColor;
+            ColorButton = buAuthors.BackColor;
 
             Properties.Settings.Default.IP = IP;
             Properties.Settings.Default.Port = Port;
             Properties.Settings.Default.ColorText = ColorText;
             Properties.Settings.Default.ColorBackground = ColorBackground;
             Properties.Settings.Default.ColorTextBox = ColorTextBox;
+            Properties.Settings.Default.ColorButton = ColorButton;
             Properties.Settings.Default.Save();
             MessageBox.Show("Настройки были сохранены", "Сохранение настроек", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -545,11 +600,36 @@ namespace RusDictionary
             {
                 listBox.BackColor = Color.White;
             }
+            foreach (Button button in GetAll(this, typeof(Button)))
+            {
+                button.BackColor = Color.White;
+            }
             Properties.Settings.Default.ColorText = Color.Black;
             Properties.Settings.Default.ColorBackground = Color.SandyBrown;
             Properties.Settings.Default.ColorTextBox = Color.White;
+            Properties.Settings.Default.ColorButton = Color.White;
         }
 
+        private void buWordSearchModule_Click(object sender, EventArgs e)
+        {
+            MainTC.SelectedTab = tpWordSearch;
+        }
 
+        private void buIndexModule_Click(object sender, EventArgs e)
+        {
+            MainTC.SelectedTab = tpPointer;
+        }
+
+        private void buButtonColor_Click(object sender, EventArgs e)
+        {
+            if (cdChangeColor.ShowDialog() == DialogResult.OK)
+            {
+                foreach (Button button in GetAll(this, typeof(Button)))
+                {
+                    button.BackColor = cdChangeColor.Color;
+                }
+                ColorTextBox = cdChangeColor.Color;
+            }
+        }
     }
 }

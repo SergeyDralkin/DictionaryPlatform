@@ -82,5 +82,17 @@ namespace RusDictionary.Properties {
                 this["ColorTextBox"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ColorButton {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorButton"]));
+            }
+            set {
+                this["ColorButton"] = value;
+            }
+        }
     }
 }

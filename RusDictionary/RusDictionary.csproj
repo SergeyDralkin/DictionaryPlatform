@@ -160,11 +160,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\tom2.htm" />
+    <None Include="Resources\WordSearchModule\tom2.htm" />
     <None Include="Resources\CardIndexModule\noimage.png" />
-    <EmbeddedResource Include="Resources\IZHITSA.TTF">
+    <Content Include="Resources\IZHITSA.TTF">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
     <None Include="Resources\MainForm\spinner.gif" />
     <None Include="Resources\MainForm\PhilippovichYN.jpg" />
     <None Include="Resources\MainForm\PHIL1.GIF" />
@@ -186,7 +186,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\IndexModule\" />
-    <Folder Include="Resources\WordSearchModule\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

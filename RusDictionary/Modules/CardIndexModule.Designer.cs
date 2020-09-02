@@ -133,9 +133,9 @@
             // 
             this.tableLayoutPanel13.ColumnCount = 5;
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel13.Controls.Add(this.buCardIndexMenuMarker, 2, 3);
             this.tableLayoutPanel13.Controls.Add(this.buCardIndexMenuSeparator, 2, 4);
@@ -146,16 +146,16 @@
             this.tableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
             this.tableLayoutPanel13.RowCount = 10;
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.803922F));
             this.tableLayoutPanel13.Size = new System.Drawing.Size(1016, 528);
             this.tableLayoutPanel13.TabIndex = 0;
             // 
@@ -163,9 +163,9 @@
             // 
             this.buCardIndexMenuMarker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuMarker.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuMarker.Location = new System.Drawing.Point(409, 159);
+            this.buCardIndexMenuMarker.Location = new System.Drawing.Point(358, 159);
             this.buCardIndexMenuMarker.Name = "buCardIndexMenuMarker";
-            this.buCardIndexMenuMarker.Size = new System.Drawing.Size(197, 46);
+            this.buCardIndexMenuMarker.Size = new System.Drawing.Size(298, 46);
             this.buCardIndexMenuMarker.TabIndex = 0;
             this.buCardIndexMenuMarker.Text = "Маркер изображения";
             this.buCardIndexMenuMarker.UseVisualStyleBackColor = true;
@@ -175,9 +175,9 @@
             // 
             this.buCardIndexMenuSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuSeparator.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuSeparator.Location = new System.Drawing.Point(409, 211);
+            this.buCardIndexMenuSeparator.Location = new System.Drawing.Point(358, 211);
             this.buCardIndexMenuSeparator.Name = "buCardIndexMenuSeparator";
-            this.buCardIndexMenuSeparator.Size = new System.Drawing.Size(197, 46);
+            this.buCardIndexMenuSeparator.Size = new System.Drawing.Size(298, 46);
             this.buCardIndexMenuSeparator.TabIndex = 1;
             this.buCardIndexMenuSeparator.Text = "Карточка-разделитель";
             this.buCardIndexMenuSeparator.UseVisualStyleBackColor = true;
@@ -187,9 +187,9 @@
             // 
             this.buCardIndexMenuBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuBox.Location = new System.Drawing.Point(409, 263);
+            this.buCardIndexMenuBox.Location = new System.Drawing.Point(358, 263);
             this.buCardIndexMenuBox.Name = "buCardIndexMenuBox";
-            this.buCardIndexMenuBox.Size = new System.Drawing.Size(197, 46);
+            this.buCardIndexMenuBox.Size = new System.Drawing.Size(298, 46);
             this.buCardIndexMenuBox.TabIndex = 2;
             this.buCardIndexMenuBox.Text = "Ящик";
             this.buCardIndexMenuBox.UseVisualStyleBackColor = true;
@@ -199,9 +199,9 @@
             // 
             this.buCardIndexMenuLetter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuLetter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuLetter.Location = new System.Drawing.Point(409, 315);
+            this.buCardIndexMenuLetter.Location = new System.Drawing.Point(358, 315);
             this.buCardIndexMenuLetter.Name = "buCardIndexMenuLetter";
-            this.buCardIndexMenuLetter.Size = new System.Drawing.Size(197, 46);
+            this.buCardIndexMenuLetter.Size = new System.Drawing.Size(298, 46);
             this.buCardIndexMenuLetter.TabIndex = 3;
             this.buCardIndexMenuLetter.Text = "Буква";
             this.buCardIndexMenuLetter.UseVisualStyleBackColor = true;
@@ -211,9 +211,9 @@
             // 
             this.buCardIndexMenuPrev.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuPrev.Location = new System.Drawing.Point(815, 471);
+            this.buCardIndexMenuPrev.Location = new System.Drawing.Point(814, 471);
             this.buCardIndexMenuPrev.Name = "buCardIndexMenuPrev";
-            this.buCardIndexMenuPrev.Size = new System.Drawing.Size(198, 54);
+            this.buCardIndexMenuPrev.Size = new System.Drawing.Size(199, 54);
             this.buCardIndexMenuPrev.TabIndex = 4;
             this.buCardIndexMenuPrev.Text = "Назад";
             this.buCardIndexMenuPrev.UseVisualStyleBackColor = true;

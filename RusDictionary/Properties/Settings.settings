@@ -17,5 +17,8 @@
     <Setting Name="ColorTextBox" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
     </Setting>
+    <Setting Name="ColorButton" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
