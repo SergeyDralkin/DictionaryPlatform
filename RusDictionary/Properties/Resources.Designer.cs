@@ -209,5 +209,27 @@ namespace RusDictionary.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;html&gt;
+        ///
+        ///&lt;body lang=RU&gt;
+        ///
+        ///&lt;div class=WordSection11&gt;
+        ///
+        ///&lt;p class=Normal style=&apos;line-height:108%&apos;&gt;&lt;b&gt;ВА,&lt;/b&gt; &lt;i&gt;мест. личн. 2 л. дв.&lt;/i&gt;
+        ///ч. Вы Двое. Ты буй Рюриче и Давыдс, но ваю ли злачены-ми шеломы по крови
+        ///плавама? Не ваю ли храбрая дружина рыкаютъ акы тури, ранены саблями калеными.
+        ///Сл. о п. Иг., 29. Рече имъ царь: «но кто в#ру имает вама, яко есть послана отъ 
+        ///бога». (Сказ. о Моисее) Лож.иотреч. кн., 47. 1494 г.&lt;/p&gt;
+        ///
+        ///&lt;p class=Normal style=&apos;line-height:108%&apos;&gt;&lt;b&gt;ВАБИЛО,&lt;/b&gt; с. &lt;i&gt;Связка из перьев
+        /// [остаток строки не уместился]&quot;;.
+        /// </summary>
+        public static string tom2 {
+            get {
+                return ResourceManager.GetString("tom2", resourceCulture);
+            }
+        }
     }
 }

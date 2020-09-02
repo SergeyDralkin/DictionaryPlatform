@@ -127,6 +127,7 @@
             this.pbWait = new System.Windows.Forms.PictureBox();
             this.laWait = new System.Windows.Forms.Label();
             this.cdChangeColor = new System.Windows.Forms.ColorDialog();
+            this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
             this.tableLayoutPanel1.SuspendLayout();
             this.MainTC.SuspendLayout();
             this.tpMain.SuspendLayout();
@@ -136,6 +137,7 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tpCardIndex.SuspendLayout();
+            this.tpWordSearch.SuspendLayout();
             this.tpAuthors.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
@@ -276,7 +278,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Izhitsa", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(639, 48);
@@ -288,7 +290,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Izhitsa", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(3, 48);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(639, 114);
@@ -322,7 +324,7 @@
             // 
             this.buMainFormSetting.BackColor = System.Drawing.Color.SeaShell;
             this.buMainFormSetting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buMainFormSetting.Font = new System.Drawing.Font("Izhitsa", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buMainFormSetting.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buMainFormSetting.Location = new System.Drawing.Point(3, 311);
             this.buMainFormSetting.Name = "buMainFormSetting";
             this.buMainFormSetting.Size = new System.Drawing.Size(639, 74);
@@ -335,7 +337,7 @@
             // 
             this.buAuthors.BackColor = System.Drawing.Color.SeaShell;
             this.buAuthors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buAuthors.Font = new System.Drawing.Font("Izhitsa", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buAuthors.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buAuthors.Location = new System.Drawing.Point(3, 234);
             this.buAuthors.Name = "buAuthors";
             this.buAuthors.Size = new System.Drawing.Size(639, 71);
@@ -348,7 +350,7 @@
             // 
             this.buIndexModule.BackColor = System.Drawing.Color.SeaShell;
             this.buIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buIndexModule.Font = new System.Drawing.Font("Izhitsa", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buIndexModule.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buIndexModule.Location = new System.Drawing.Point(3, 157);
             this.buIndexModule.Name = "buIndexModule";
             this.buIndexModule.Size = new System.Drawing.Size(639, 71);
@@ -360,7 +362,7 @@
             // 
             this.buWordSearchModule.BackColor = System.Drawing.Color.SeaShell;
             this.buWordSearchModule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buWordSearchModule.Font = new System.Drawing.Font("Izhitsa", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buWordSearchModule.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buWordSearchModule.Location = new System.Drawing.Point(3, 80);
             this.buWordSearchModule.Name = "buWordSearchModule";
             this.buWordSearchModule.Size = new System.Drawing.Size(639, 71);
@@ -373,7 +375,7 @@
             this.buCardIndexModule.BackColor = System.Drawing.Color.SeaShell;
             this.buCardIndexModule.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.buCardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexModule.Font = new System.Drawing.Font("Izhitsa", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexModule.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buCardIndexModule.Location = new System.Drawing.Point(3, 3);
             this.buCardIndexModule.Name = "buCardIndexModule";
             this.buCardIndexModule.Size = new System.Drawing.Size(639, 71);
@@ -413,6 +415,7 @@
             // 
             // tpWordSearch
             // 
+            this.tpWordSearch.Controls.Add(this.wordSearchModule1);
             this.tpWordSearch.Location = new System.Drawing.Point(4, 22);
             this.tpWordSearch.Name = "tpWordSearch";
             this.tpWordSearch.Size = new System.Drawing.Size(1054, 580);
@@ -490,7 +493,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label15.Font = new System.Drawing.Font("Izhitsa", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(3, 63);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(247, 75);
@@ -502,7 +505,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label16.Font = new System.Drawing.Font("Izhitsa", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(3, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(247, 63);
@@ -514,7 +517,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label17.Font = new System.Drawing.Font("Izhitsa", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label17.Location = new System.Drawing.Point(3, 138);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(247, 37);
@@ -652,7 +655,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label21.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.Location = new System.Drawing.Point(3, 75);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(247, 25);
@@ -664,7 +667,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label22.Font = new System.Drawing.Font("Izhitsa", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.Location = new System.Drawing.Point(3, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(247, 75);
@@ -676,7 +679,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label23.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label23.Location = new System.Drawing.Point(3, 100);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(247, 37);
@@ -848,7 +851,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(3, 75);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(247, 25);
@@ -860,7 +863,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Font = new System.Drawing.Font("Izhitsa", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(3, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(247, 75);
@@ -872,7 +875,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label11.Location = new System.Drawing.Point(3, 100);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(247, 37);
@@ -1023,7 +1026,7 @@
             // buAuthorPrev
             // 
             this.buAuthorPrev.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buAuthorPrev.Font = new System.Drawing.Font("Izhitsa", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buAuthorPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buAuthorPrev.Location = new System.Drawing.Point(367, 3);
             this.buAuthorPrev.Name = "buAuthorPrev";
             this.buAuthorPrev.Size = new System.Drawing.Size(151, 36);
@@ -1082,7 +1085,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(3, 75);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(247, 25);
@@ -1094,7 +1097,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Izhitsa", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(247, 75);
@@ -1106,7 +1109,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Font = new System.Drawing.Font("Izhitsa", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(3, 100);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(247, 37);
@@ -1532,13 +1535,21 @@
             // 
             this.laWait.AutoSize = true;
             this.laWait.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.laWait.Font = new System.Drawing.Font("Izhitsa", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWait.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.laWait.Location = new System.Drawing.Point(42, 0);
             this.laWait.Name = "laWait";
             this.laWait.Size = new System.Drawing.Size(268, 28);
             this.laWait.TabIndex = 1;
             this.laWait.Text = "Выполняется запрос, пожалуйста, подождите";
             this.laWait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // wordSearchModule1
+            // 
+            this.wordSearchModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wordSearchModule1.Location = new System.Drawing.Point(0, 0);
+            this.wordSearchModule1.Name = "wordSearchModule1";
+            this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
+            this.wordSearchModule1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -1563,6 +1574,7 @@
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tpCardIndex.ResumeLayout(false);
+            this.tpWordSearch.ResumeLayout(false);
             this.tpAuthors.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel10.ResumeLayout(false);
@@ -1706,6 +1718,7 @@
         private System.Windows.Forms.Button buPrevSettings;
         private System.Windows.Forms.Button buSaveSettings;
         private System.Windows.Forms.Button buColorDefault;
+        private Modules.WordSearchModule wordSearchModule1;
     }
 }
 

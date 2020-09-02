@@ -160,6 +160,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\tom2.htm" />
     <None Include="Resources\CardIndexModule\noimage.png" />
     <EmbeddedResource Include="Resources\IZHITSA.TTF">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
