@@ -22,11 +22,11 @@ namespace RusDictionary
         /// <summary>
         /// IP сервера
         /// </summary>
-        string IP;
+        public static string IP;
         /// <summary>
         /// Порт MySQL
         /// </summary>
-        string Port;      
+        public static string Port;      
         /// <summary>
         /// Путь к БД
         /// </summary>
@@ -166,14 +166,7 @@ namespace RusDictionary
             ColorBackground = Properties.Settings.Default.ColorBackground;
             ColorTextBox = Properties.Settings.Default.ColorTextBox;
             ColorButton = Properties.Settings.Default.ColorButton;
-            if (Port == null || Port == "")
-            {
-                URL = "http://" + IP + "/?property=query&query=";
-            }
-            else
-            {
-                URL = "http://" + IP + ":" + Port + "/?property=query&query=";
-            }            
+                        
             tbIP.Text = IP;
             tbPort.Text = Port;
 
@@ -213,8 +206,8 @@ namespace RusDictionary
         {                   
             try
             {
-                string query = "SELECT 1";
-                JSON.Send(MainForm.URL + query);
+                //string query = "SELECT 1";
+                //JSON.Send(MainForm.URL + query);
                 StatusConnect = true;
             }
             catch

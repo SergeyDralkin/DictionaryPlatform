@@ -99,6 +99,14 @@ namespace RusDictionary.Modules
         }
         private void buCardIndexInMenuButton_Click(object sender, EventArgs e)
         {
+            foreach (Button button in MainForm.GetAll(tpCardsMenu, typeof(Button)))
+            {
+                button.Enabled = false;
+            }
+            foreach (ListBox listbox in MainForm.GetAll(tpCardsMenu, typeof(ListBox)))
+            {
+                listbox.Enabled = false;
+            }
             Program.f1.PictAndLableWait(true);
             NameClickButton = (sender as Button).Name.ToString();
             ClearMainList();
@@ -147,6 +155,14 @@ namespace RusDictionary.Modules
             lbCardIndexList.Update();
             tcCards.SelectedTab = tpList; 
             Program.f1.PictAndLableWait(false);
+            foreach (Button button in MainForm.GetAll(tpCardsMenu, typeof(Button)))
+            {
+                button.Enabled = true;
+            }
+            foreach (ListBox listbox in MainForm.GetAll(tpCardsMenu, typeof(ListBox)))
+            {
+                listbox.Enabled = true;
+            }
         }
         void CreateSecondListItems(object NameButton)
         {
@@ -156,21 +172,21 @@ namespace RusDictionary.Modules
                 case "buCardIndexMenuSeparator":
                     {                       
                         string query = "SELECT Marker FROM cardindex WHERE CardSeparator = " + ListBoxSelectedIndex;
-                        JSON.Send(MainForm.URL + query);
+                        JSON.Send(JSONFlags.Select, query);
                         SecondListItems = JSON.Decode();
                         break;
                     }
                 case "buCardIndexMenuBox":
                     {                       
                         string query = "SELECT Marker FROM cardindex WHERE NumberBox = " + ListBoxSelectedIndex;
-                        JSON.Send(MainForm.URL + query);
+                        JSON.Send(JSONFlags.Select, query);
                         SecondListItems = JSON.Decode();                       
                         break;
                     }
                 case "buCardIndexMenuLetter":
                     {                        
                         string query = "SELECT Marker FROM cardindex WHERE Symbol = " + ListBoxSelectedIndex;
-                        JSON.Send(MainForm.URL + query);
+                        JSON.Send(JSONFlags.Select, query);
                         SecondListItems = JSON.Decode();
                         break;
                     }
@@ -188,7 +204,7 @@ namespace RusDictionary.Modules
                         CardIndexMenuBox = false;
                         CardIndexMenuLetter = false;
                         string query = "SELECT Marker FROM cardindex";
-                        JSON.Send(MainForm.URL + query);
+                        JSON.Send(JSONFlags.Select, query);
                         FirstListItems = JSON.Decode();
                         break;
                     }
@@ -199,7 +215,7 @@ namespace RusDictionary.Modules
                         CardIndexMenuBox = false;
                         CardIndexMenuLetter = false;                        
                         string query = "SELECT CardSeparator FROM cardseparator";
-                        JSON.Send(MainForm.URL + query);
+                        JSON.Send(JSONFlags.Select, query);
                         FirstListItems = JSON.Decode();
                         break;
                     }
@@ -210,7 +226,7 @@ namespace RusDictionary.Modules
                         CardIndexMenuBox = true;
                         CardIndexMenuLetter = false;
                         string query = "SELECT NumberBox FROM box";
-                        JSON.Send(MainForm.URL + query);
+                        JSON.Send(JSONFlags.Select, query);
                         FirstListItems = JSON.Decode();
                         break;
                     }
@@ -221,7 +237,7 @@ namespace RusDictionary.Modules
                         CardIndexMenuBox = false;
                         CardIndexMenuLetter = true;                        
                         string query = "SELECT Symbol FROM letter";
-                        JSON.Send(MainForm.URL + query);
+                        JSON.Send(JSONFlags.Select, query);
                         FirstListItems = JSON.Decode();
                         break;
                     }
@@ -383,7 +399,7 @@ namespace RusDictionary.Modules
         void ShowCards(object Number)
         {            
             string query = "SELECT * FROM cardindex WHERE Marker = '" + Number + "'";
-            JSON.Send(MainForm.URL + query);
+            JSON.Send(JSONFlags.Select, query);
             CardItems = JSON.Decode();
             
             //Подумать над сепаратором между карточками
@@ -395,14 +411,14 @@ namespace RusDictionary.Modules
             CardImage = DecodeImageFromDB(CardItems[0].Img);
             CardText = CardItems[0].ImgText;
             query = "SELECT Symbol FROM letter WHERE ID = " + CardSymbol;
-            JSON.Send(MainForm.URL + query);
+            JSON.Send(JSONFlags.Select, query);
             CardSymbol = "Буква: " + JSON.Decode()[0].Symbol;
             query = "SELECT CardSeparator FROM cardseparator WHERE BoxNumber = " + CardNumberBox;
-            JSON.Send(MainForm.URL + query);
+            JSON.Send(JSONFlags.Select, query);
             CardFirstSeparator = "Первый разделитель: " + JSON.Decode()[0].CardSeparator;
             CardLastSeparator = "Последний разделитель: " + JSON.Decode().Last().CardSeparator;
             query = "SELECT NumberBox FROM box WHERE ID = " + CardNumberBox;
-            JSON.Send(MainForm.URL + query);
+            JSON.Send(JSONFlags.Select, query);
             CardNumberBox = "Ящик: " + JSON.Decode()[0].NumberBox;            
         }
         /// <summary>
@@ -438,8 +454,8 @@ namespace RusDictionary.Modules
 
         private void buTest_Click(object sender, EventArgs e)
         {
-            string query = "UPDATE `cardindex` SET `Notes` = 'Test' WHERE `Marker` = '5770004'";
-            JSON.Send(MainForm.URL + query);
+            string query = "UPDATE `cardindex` SET `Notes` = 'Test' WHERE `Marker` = '5770005'";
+            JSON.Send(JSONFlags.Update, query);
         }
     }
 }
