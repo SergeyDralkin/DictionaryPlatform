@@ -81,14 +81,7 @@ namespace RusDictionary.Modules
        
         private void buCardIndexInMenuButton_Click(object sender, EventArgs e)
         {
-            foreach (Button button in MainForm.GetAll(tpCardsMenu, typeof(Button)))
-            {
-                button.Enabled = false;
-            }
-            foreach (ListBox listbox in MainForm.GetAll(tpCardsMenu, typeof(ListBox)))
-            {
-                listbox.Enabled = false;
-            }
+            EnableElement(false);
             Program.f1.PictAndLableWait(true);
             NameClickButton = (sender as Button).Name.ToString();
             ClearMainList();
@@ -137,14 +130,7 @@ namespace RusDictionary.Modules
             lbCardIndexList.Update();
             tcCards.SelectedTab = tpList; 
             Program.f1.PictAndLableWait(false);
-            foreach (Button button in MainForm.GetAll(tpCardsMenu, typeof(Button)))
-            {
-                button.Enabled = true;
-            }
-            foreach (ListBox listbox in MainForm.GetAll(tpCardsMenu, typeof(ListBox)))
-            {
-                listbox.Enabled = true;
-            }
+            EnableElement(true);
         }
         void CreateSecondListItems(object NameButton)
         {
@@ -282,17 +268,42 @@ namespace RusDictionary.Modules
                 }                
             }            
         }
-
-        private void lbCardIndexList_DoubleClick(object sender, EventArgs e)
+        void EnableElement(bool parameter)
         {
             foreach (Button button in MainForm.GetAll(tpList, typeof(Button)))
             {
-                button.Enabled = false;
+                button.Enabled = parameter;
+            }
+            foreach (Button button in MainForm.GetAll(tpCardsMenu, typeof(Button)))
+            {
+                button.Enabled = parameter;
             }
             foreach (ListBox listbox in MainForm.GetAll(tpList, typeof(ListBox)))
             {
-                listbox.Enabled = false;
+                listbox.Enabled = parameter;
             }
+        }
+        void EnableOnCardPage(bool parameter)
+        {
+            foreach (Button button in MainForm.GetAll(tpCards, typeof(Button)))
+            {
+                if (button.Name != "buCardIndexCardsPrev")
+                {
+                    button.Enabled = parameter;
+                }
+                if (button.Name == "buCardIndexCardsSave")
+                {
+                    button.Visible = parameter;
+                }
+            }
+            foreach (TextBox textBox in MainForm.GetAll(tpCards, typeof(TextBox)))
+            {
+                textBox.Enabled = parameter;
+            }
+        }
+        private void lbCardIndexList_DoubleClick(object sender, EventArgs e)
+        {
+            EnableElement(false);
             ListBoxSelectedIndex = lbCardIndexList.SelectedIndex + 1;
             ListBoxPrev = false;
             if (CardIndexMenuMarker == true)
@@ -314,16 +325,10 @@ namespace RusDictionary.Modules
                 laCardsLastSeparator.Text = CardLastSeparator;
                 tbTextCard.Text = CardText;
                 tbCardNotes.Text = CardNotes;
+                EnableOnCardPage(false);
                 tcCards.SelectedTab = tpCards;
                 Program.f1.PictAndLableWait(false);
-                foreach (Button button in MainForm.GetAll(tpList, typeof(Button)))
-                {
-                    button.Enabled = true;
-                }
-                foreach (ListBox listbox in MainForm.GetAll(tpList, typeof(ListBox)))
-                {
-                    listbox.Enabled = true;
-                }
+                EnableElement(true);
             }
             else
             {
@@ -363,14 +368,7 @@ namespace RusDictionary.Modules
                             break;
                         }
                 }
-                foreach (Button button in MainForm.GetAll(tpList, typeof(Button)))
-                {
-                    button.Enabled = true;
-                }
-                foreach (ListBox listbox in MainForm.GetAll(tpList, typeof(ListBox)))
-                {
-                    listbox.Enabled = true;
-                }
+                EnableElement(true);
                 lbCardIndexList.Update();
                 CardIndexMenuMarker = true;
                 lbCardIndexList.Visible = true;
@@ -432,17 +430,13 @@ namespace RusDictionary.Modules
         private void buCardIndexCardsPrev_Click(object sender, EventArgs e)
         {
             tcCards.SelectedTab = tpList;
+            EnableOnCardPage(true);
         }
 
         private void buTest_Click(object sender, EventArgs e)
         {
             string query = "UPDATE `cardindex` SET `Notes` = 'Test' WHERE `Marker` = '5770005'";
             JSON.Send(JSONFlags.Update, query);
-        }
-
-        private void buCardIndexListClearSearch_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void buCardIndexListDelete_Click(object sender, EventArgs e)
