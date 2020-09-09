@@ -30,7 +30,7 @@
         {
             this.tcCards = new System.Windows.Forms.TabControl();
             this.tpCardsMenu = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.buCardIndexMenuMarker = new System.Windows.Forms.Button();
             this.buCardIndexMenuSeparator = new System.Windows.Forms.Button();
             this.buCardIndexMenuBox = new System.Windows.Forms.Button();
@@ -38,48 +38,46 @@
             this.buCardIndexMenuPrev = new System.Windows.Forms.Button();
             this.buTest = new System.Windows.Forms.Button();
             this.tpList = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.lbCardIndexList = new System.Windows.Forms.ListBox();
-            this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
-            this.buCardIndexListPrev = new System.Windows.Forms.Button();
-            this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
             this.buCardIndexListAdd = new System.Windows.Forms.Button();
             this.buCardIndexListChange = new System.Windows.Forms.Button();
             this.buCardIndexListDelete = new System.Windows.Forms.Button();
-            this.buCardIndexListSearch = new System.Windows.Forms.Button();
-            this.buCardIndexListClearSearch = new System.Windows.Forms.Button();
+            this.buCardIndexListPrev = new System.Windows.Forms.Button();
             this.tpCards = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.tbCardNotes = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label100 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label99 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label88 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label66 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.Cardslabel11 = new System.Windows.Forms.Label();
+            this.CardstableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstextBox7 = new System.Windows.Forms.TextBox();
+            this.Cardslabel100 = new System.Windows.Forms.Label();
+            this.CardstableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstextBox6 = new System.Windows.Forms.TextBox();
+            this.Cardslabel99 = new System.Windows.Forms.Label();
+            this.CardstableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstextBox5 = new System.Windows.Forms.TextBox();
+            this.Cardslabel88 = new System.Windows.Forms.Label();
+            this.CardstableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstextBox4 = new System.Windows.Forms.TextBox();
+            this.Cardslabel7 = new System.Windows.Forms.Label();
+            this.CardstableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstextBox3 = new System.Windows.Forms.TextBox();
+            this.Cardslabel66 = new System.Windows.Forms.Label();
+            this.CardstableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.Cardslabel5 = new System.Windows.Forms.Label();
+            this.CardstextBox2 = new System.Windows.Forms.TextBox();
+            this.CardstableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstextBox1 = new System.Windows.Forms.TextBox();
+            this.Cardslabel4 = new System.Windows.Forms.Label();
             this.pbPictCard = new System.Windows.Forms.PictureBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.laCardsNumberCard = new System.Windows.Forms.Label();
             this.tbTextCard = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.CardstableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.buCardIndexCardsSave = new System.Windows.Forms.Button();
             this.laCardsLastSeparator = new System.Windows.Forms.Label();
             this.laCardsFirstSeparator = new System.Windows.Forms.Label();
             this.laCardsNumberBox = new System.Windows.Forms.Label();
@@ -87,25 +85,24 @@
             this.buCardIndexCardsPrev = new System.Windows.Forms.Button();
             this.tcCards.SuspendLayout();
             this.tpCardsMenu.SuspendLayout();
-            this.tableLayoutPanel13.SuspendLayout();
+            this.CardstableLayoutPanel13.SuspendLayout();
             this.tpList.SuspendLayout();
-            this.tableLayoutPanel14.SuspendLayout();
-            this.tableLayoutPanel15.SuspendLayout();
-            this.tableLayoutPanel16.SuspendLayout();
+            this.CardstableLayoutPanel14.SuspendLayout();
+            this.CardstableLayoutPanel15.SuspendLayout();
             this.tpCards.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel12.SuspendLayout();
-            this.tableLayoutPanel11.SuspendLayout();
-            this.tableLayoutPanel10.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
+            this.CardstableLayoutPanel1.SuspendLayout();
+            this.CardstableLayoutPanel2.SuspendLayout();
+            this.CardstableLayoutPanel12.SuspendLayout();
+            this.CardstableLayoutPanel11.SuspendLayout();
+            this.CardstableLayoutPanel10.SuspendLayout();
+            this.CardstableLayoutPanel9.SuspendLayout();
+            this.CardstableLayoutPanel8.SuspendLayout();
+            this.CardstableLayoutPanel7.SuspendLayout();
+            this.CardstableLayoutPanel5.SuspendLayout();
+            this.CardstableLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPictCard)).BeginInit();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
+            this.CardstableLayoutPanel3.SuspendLayout();
+            this.CardstableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcCards
@@ -123,43 +120,43 @@
             // tpCardsMenu
             // 
             this.tpCardsMenu.BackColor = System.Drawing.Color.SandyBrown;
-            this.tpCardsMenu.Controls.Add(this.tableLayoutPanel13);
+            this.tpCardsMenu.Controls.Add(this.CardstableLayoutPanel13);
             this.tpCardsMenu.Location = new System.Drawing.Point(4, 22);
             this.tpCardsMenu.Name = "tpCardsMenu";
             this.tpCardsMenu.Size = new System.Drawing.Size(1016, 528);
             this.tpCardsMenu.TabIndex = 2;
             this.tpCardsMenu.Text = "Меню";
             // 
-            // tableLayoutPanel13
+            // CardstableLayoutPanel13
             // 
-            this.tableLayoutPanel13.ColumnCount = 5;
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel13.Controls.Add(this.buCardIndexMenuMarker, 2, 3);
-            this.tableLayoutPanel13.Controls.Add(this.buCardIndexMenuSeparator, 2, 4);
-            this.tableLayoutPanel13.Controls.Add(this.buCardIndexMenuBox, 2, 5);
-            this.tableLayoutPanel13.Controls.Add(this.buCardIndexMenuLetter, 2, 6);
-            this.tableLayoutPanel13.Controls.Add(this.buCardIndexMenuPrev, 4, 9);
-            this.tableLayoutPanel13.Controls.Add(this.buTest, 3, 8);
-            this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-            this.tableLayoutPanel13.RowCount = 10;
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.803922F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(1016, 528);
-            this.tableLayoutPanel13.TabIndex = 0;
+            this.CardstableLayoutPanel13.ColumnCount = 5;
+            this.CardstableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.CardstableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.CardstableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.CardstableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.CardstableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuMarker, 2, 3);
+            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuSeparator, 2, 4);
+            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuBox, 2, 5);
+            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuLetter, 2, 6);
+            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuPrev, 4, 9);
+            this.CardstableLayoutPanel13.Controls.Add(this.buTest, 3, 8);
+            this.CardstableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel13.Location = new System.Drawing.Point(0, 0);
+            this.CardstableLayoutPanel13.Name = "CardstableLayoutPanel13";
+            this.CardstableLayoutPanel13.RowCount = 10;
+            this.CardstableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
+            this.CardstableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
+            this.CardstableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
+            this.CardstableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
+            this.CardstableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
+            this.CardstableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
+            this.CardstableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2549F));
+            this.CardstableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
+            this.CardstableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.235293F));
+            this.CardstableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.803922F));
+            this.CardstableLayoutPanel13.Size = new System.Drawing.Size(1016, 528);
+            this.CardstableLayoutPanel13.TabIndex = 0;
             // 
             // buCardIndexMenuMarker
             // 
@@ -234,7 +231,7 @@
             // tpList
             // 
             this.tpList.BackColor = System.Drawing.Color.SandyBrown;
-            this.tpList.Controls.Add(this.tableLayoutPanel14);
+            this.tpList.Controls.Add(this.CardstableLayoutPanel14);
             this.tpList.Location = new System.Drawing.Point(4, 22);
             this.tpList.Name = "tpList";
             this.tpList.Padding = new System.Windows.Forms.Padding(3);
@@ -242,21 +239,20 @@
             this.tpList.TabIndex = 1;
             this.tpList.Text = "Лист";
             // 
-            // tableLayoutPanel14
+            // CardstableLayoutPanel14
             // 
-            this.tableLayoutPanel14.ColumnCount = 1;
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel14.Controls.Add(this.lbCardIndexList, 0, 0);
-            this.tableLayoutPanel14.Controls.Add(this.tableLayoutPanel15, 0, 1);
-            this.tableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
-            this.tableLayoutPanel14.RowCount = 2;
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(1010, 522);
-            this.tableLayoutPanel14.TabIndex = 0;
+            this.CardstableLayoutPanel14.ColumnCount = 1;
+            this.CardstableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel14.Controls.Add(this.lbCardIndexList, 0, 0);
+            this.CardstableLayoutPanel14.Controls.Add(this.CardstableLayoutPanel15, 0, 1);
+            this.CardstableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel14.Location = new System.Drawing.Point(3, 3);
+            this.CardstableLayoutPanel14.Name = "CardstableLayoutPanel14";
+            this.CardstableLayoutPanel14.RowCount = 2;
+            this.CardstableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.CardstableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.CardstableLayoutPanel14.Size = new System.Drawing.Size(1010, 522);
+            this.CardstableLayoutPanel14.TabIndex = 0;
             // 
             // lbCardIndexList
             // 
@@ -270,66 +266,35 @@
             this.lbCardIndexList.TabIndex = 0;
             this.lbCardIndexList.DoubleClick += new System.EventHandler(this.lbCardIndexList_DoubleClick);
             // 
-            // tableLayoutPanel15
+            // CardstableLayoutPanel15
             // 
-            this.tableLayoutPanel15.ColumnCount = 3;
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66963F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66685F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66352F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel15.Controls.Add(this.buCardIndexListPrev, 2, 0);
-            this.tableLayoutPanel15.Controls.Add(this.tableLayoutPanel16, 0, 0);
-            this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 472);
-            this.tableLayoutPanel15.Name = "tableLayoutPanel15";
-            this.tableLayoutPanel15.RowCount = 1;
-            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel15.Size = new System.Drawing.Size(1004, 47);
-            this.tableLayoutPanel15.TabIndex = 1;
-            // 
-            // buCardIndexListPrev
-            // 
-            this.buCardIndexListPrev.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexListPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexListPrev.Location = new System.Drawing.Point(839, 3);
-            this.buCardIndexListPrev.Name = "buCardIndexListPrev";
-            this.buCardIndexListPrev.Size = new System.Drawing.Size(162, 41);
-            this.buCardIndexListPrev.TabIndex = 0;
-            this.buCardIndexListPrev.Text = "Назад";
-            this.buCardIndexListPrev.UseVisualStyleBackColor = true;
-            this.buCardIndexListPrev.Click += new System.EventHandler(this.buCardIndexListPrev_Click);
-            // 
-            // tableLayoutPanel16
-            // 
-            this.tableLayoutPanel16.ColumnCount = 5;
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel16.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel16.Controls.Add(this.buCardIndexListAdd, 0, 0);
-            this.tableLayoutPanel16.Controls.Add(this.buCardIndexListChange, 1, 0);
-            this.tableLayoutPanel16.Controls.Add(this.buCardIndexListDelete, 2, 0);
-            this.tableLayoutPanel16.Controls.Add(this.buCardIndexListSearch, 3, 0);
-            this.tableLayoutPanel16.Controls.Add(this.buCardIndexListClearSearch, 4, 0);
-            this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel16.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel16.Name = "tableLayoutPanel16";
-            this.tableLayoutPanel16.RowCount = 1;
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel16.Size = new System.Drawing.Size(663, 41);
-            this.tableLayoutPanel16.TabIndex = 1;
+            this.CardstableLayoutPanel15.ColumnCount = 5;
+            this.CardstableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.CardstableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.CardstableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.CardstableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.CardstableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.CardstableLayoutPanel15.Controls.Add(this.buCardIndexListAdd, 0, 0);
+            this.CardstableLayoutPanel15.Controls.Add(this.buCardIndexListChange, 0, 0);
+            this.CardstableLayoutPanel15.Controls.Add(this.buCardIndexListDelete, 2, 0);
+            this.CardstableLayoutPanel15.Controls.Add(this.buCardIndexListPrev, 4, 0);
+            this.CardstableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel15.Location = new System.Drawing.Point(3, 472);
+            this.CardstableLayoutPanel15.Name = "CardstableLayoutPanel15";
+            this.CardstableLayoutPanel15.RowCount = 1;
+            this.CardstableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.CardstableLayoutPanel15.Size = new System.Drawing.Size(1004, 47);
+            this.CardstableLayoutPanel15.TabIndex = 1;
             // 
             // buCardIndexListAdd
             // 
             this.buCardIndexListAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexListAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexListAdd.Location = new System.Drawing.Point(3, 3);
+            this.buCardIndexListAdd.Location = new System.Drawing.Point(203, 3);
             this.buCardIndexListAdd.Name = "buCardIndexListAdd";
-            this.buCardIndexListAdd.Size = new System.Drawing.Size(126, 35);
-            this.buCardIndexListAdd.TabIndex = 0;
+            this.buCardIndexListAdd.Size = new System.Drawing.Size(194, 41);
+            this.buCardIndexListAdd.TabIndex = 5;
             this.buCardIndexListAdd.Text = "Добавить";
             this.buCardIndexListAdd.UseVisualStyleBackColor = true;
             // 
@@ -337,10 +302,10 @@
             // 
             this.buCardIndexListChange.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexListChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexListChange.Location = new System.Drawing.Point(135, 3);
+            this.buCardIndexListChange.Location = new System.Drawing.Point(3, 3);
             this.buCardIndexListChange.Name = "buCardIndexListChange";
-            this.buCardIndexListChange.Size = new System.Drawing.Size(126, 35);
-            this.buCardIndexListChange.TabIndex = 1;
+            this.buCardIndexListChange.Size = new System.Drawing.Size(194, 41);
+            this.buCardIndexListChange.TabIndex = 4;
             this.buCardIndexListChange.Text = "Изменить";
             this.buCardIndexListChange.UseVisualStyleBackColor = true;
             // 
@@ -348,40 +313,30 @@
             // 
             this.buCardIndexListDelete.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexListDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexListDelete.Location = new System.Drawing.Point(267, 3);
+            this.buCardIndexListDelete.Location = new System.Drawing.Point(403, 3);
             this.buCardIndexListDelete.Name = "buCardIndexListDelete";
-            this.buCardIndexListDelete.Size = new System.Drawing.Size(126, 35);
-            this.buCardIndexListDelete.TabIndex = 2;
+            this.buCardIndexListDelete.Size = new System.Drawing.Size(194, 41);
+            this.buCardIndexListDelete.TabIndex = 3;
             this.buCardIndexListDelete.Text = "Удалить";
             this.buCardIndexListDelete.UseVisualStyleBackColor = true;
+            this.buCardIndexListDelete.Click += new System.EventHandler(this.buCardIndexListDelete_Click);
             // 
-            // buCardIndexListSearch
+            // buCardIndexListPrev
             // 
-            this.buCardIndexListSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexListSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexListSearch.Location = new System.Drawing.Point(399, 3);
-            this.buCardIndexListSearch.Name = "buCardIndexListSearch";
-            this.buCardIndexListSearch.Size = new System.Drawing.Size(126, 35);
-            this.buCardIndexListSearch.TabIndex = 3;
-            this.buCardIndexListSearch.Text = "Найти";
-            this.buCardIndexListSearch.UseVisualStyleBackColor = true;
-            this.buCardIndexListSearch.Click += new System.EventHandler(this.buCardIndexListSearch_Click);
-            // 
-            // buCardIndexListClearSearch
-            // 
-            this.buCardIndexListClearSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buCardIndexListClearSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexListClearSearch.Location = new System.Drawing.Point(531, 3);
-            this.buCardIndexListClearSearch.Name = "buCardIndexListClearSearch";
-            this.buCardIndexListClearSearch.Size = new System.Drawing.Size(129, 35);
-            this.buCardIndexListClearSearch.TabIndex = 4;
-            this.buCardIndexListClearSearch.Text = "Очистить поиск";
-            this.buCardIndexListClearSearch.UseVisualStyleBackColor = true;
+            this.buCardIndexListPrev.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buCardIndexListPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexListPrev.Location = new System.Drawing.Point(803, 3);
+            this.buCardIndexListPrev.Name = "buCardIndexListPrev";
+            this.buCardIndexListPrev.Size = new System.Drawing.Size(198, 41);
+            this.buCardIndexListPrev.TabIndex = 0;
+            this.buCardIndexListPrev.Text = "Назад";
+            this.buCardIndexListPrev.UseVisualStyleBackColor = true;
+            this.buCardIndexListPrev.Click += new System.EventHandler(this.buCardIndexListPrev_Click);
             // 
             // tpCards
             // 
             this.tpCards.BackColor = System.Drawing.Color.SandyBrown;
-            this.tpCards.Controls.Add(this.tableLayoutPanel1);
+            this.tpCards.Controls.Add(this.CardstableLayoutPanel1);
             this.tpCards.Location = new System.Drawing.Point(4, 22);
             this.tpCards.Name = "tpCards";
             this.tpCards.Padding = new System.Windows.Forms.Padding(3);
@@ -389,68 +344,68 @@
             this.tpCards.TabIndex = 0;
             this.tpCards.Text = "Карточка";
             // 
-            // tableLayoutPanel1
+            // CardstableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pbPictCard, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 74.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.5F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1010, 522);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.CardstableLayoutPanel1.ColumnCount = 2;
+            this.CardstableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.CardstableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.CardstableLayoutPanel1.Controls.Add(this.CardstableLayoutPanel2, 1, 0);
+            this.CardstableLayoutPanel1.Controls.Add(this.pbPictCard, 0, 0);
+            this.CardstableLayoutPanel1.Controls.Add(this.CardstableLayoutPanel3, 0, 1);
+            this.CardstableLayoutPanel1.Controls.Add(this.CardstableLayoutPanel4, 0, 2);
+            this.CardstableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.CardstableLayoutPanel1.Name = "CardstableLayoutPanel1";
+            this.CardstableLayoutPanel1.RowCount = 3;
+            this.CardstableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 74.5F));
+            this.CardstableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.5F));
+            this.CardstableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
+            this.CardstableLayoutPanel1.Size = new System.Drawing.Size(1010, 522);
+            this.CardstableLayoutPanel1.TabIndex = 1;
             // 
-            // tableLayoutPanel2
+            // CardstableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel12, 0, 7);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel11, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel10, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel9, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel8, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel7, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel5, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel6, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(710, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 8;
-            this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel2, 2);
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(297, 483);
-            this.tableLayoutPanel2.TabIndex = 0;
+            this.CardstableLayoutPanel2.ColumnCount = 1;
+            this.CardstableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel12, 0, 7);
+            this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel11, 0, 6);
+            this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel10, 0, 5);
+            this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel9, 0, 4);
+            this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel8, 0, 3);
+            this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel7, 0, 2);
+            this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel5, 0, 0);
+            this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel6, 0, 1);
+            this.CardstableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel2.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
+            this.CardstableLayoutPanel2.Location = new System.Drawing.Point(710, 3);
+            this.CardstableLayoutPanel2.Name = "CardstableLayoutPanel2";
+            this.CardstableLayoutPanel2.RowCount = 8;
+            this.CardstableLayoutPanel1.SetRowSpan(this.CardstableLayoutPanel2, 2);
+            this.CardstableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.CardstableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.CardstableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.CardstableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.CardstableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.CardstableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.CardstableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.CardstableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.CardstableLayoutPanel2.Size = new System.Drawing.Size(297, 483);
+            this.CardstableLayoutPanel2.TabIndex = 0;
             // 
-            // tableLayoutPanel12
+            // CardstableLayoutPanel12
             // 
-            this.tableLayoutPanel12.ColumnCount = 1;
-            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.Controls.Add(this.tbCardNotes, 0, 1);
-            this.tableLayoutPanel12.Controls.Add(this.label11, 0, 0);
-            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 387);
-            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
-            this.tableLayoutPanel12.RowCount = 2;
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(291, 93);
-            this.tableLayoutPanel12.TabIndex = 7;
+            this.CardstableLayoutPanel12.ColumnCount = 1;
+            this.CardstableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel12.Controls.Add(this.tbCardNotes, 0, 1);
+            this.CardstableLayoutPanel12.Controls.Add(this.Cardslabel11, 0, 0);
+            this.CardstableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel12.Location = new System.Drawing.Point(3, 387);
+            this.CardstableLayoutPanel12.Name = "CardstableLayoutPanel12";
+            this.CardstableLayoutPanel12.RowCount = 2;
+            this.CardstableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.CardstableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.CardstableLayoutPanel12.Size = new System.Drawing.Size(291, 93);
+            this.CardstableLayoutPanel12.TabIndex = 7;
             // 
             // tbCardNotes
             // 
@@ -461,261 +416,261 @@
             this.tbCardNotes.Size = new System.Drawing.Size(285, 69);
             this.tbCardNotes.TabIndex = 0;
             // 
-            // label11
+            // Cardslabel11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(3, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(285, 18);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "Примечание:";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Cardslabel11.AutoSize = true;
+            this.Cardslabel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cardslabel11.Location = new System.Drawing.Point(3, 0);
+            this.Cardslabel11.Name = "Cardslabel11";
+            this.Cardslabel11.Size = new System.Drawing.Size(285, 18);
+            this.Cardslabel11.TabIndex = 1;
+            this.Cardslabel11.Text = "Примечание:";
+            this.Cardslabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanel11
+            // CardstableLayoutPanel11
             // 
-            this.tableLayoutPanel11.ColumnCount = 1;
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Controls.Add(this.textBox7, 0, 1);
-            this.tableLayoutPanel11.Controls.Add(this.label100, 0, 0);
-            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 339);
-            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 2;
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(291, 42);
-            this.tableLayoutPanel11.TabIndex = 6;
+            this.CardstableLayoutPanel11.ColumnCount = 1;
+            this.CardstableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel11.Controls.Add(this.CardstextBox7, 0, 1);
+            this.CardstableLayoutPanel11.Controls.Add(this.Cardslabel100, 0, 0);
+            this.CardstableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel11.Location = new System.Drawing.Point(3, 339);
+            this.CardstableLayoutPanel11.Name = "CardstableLayoutPanel11";
+            this.CardstableLayoutPanel11.RowCount = 2;
+            this.CardstableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.CardstableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.CardstableLayoutPanel11.Size = new System.Drawing.Size(291, 42);
+            this.CardstableLayoutPanel11.TabIndex = 6;
             // 
-            // textBox7
+            // CardstextBox7
             // 
-            this.textBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox7.Location = new System.Drawing.Point(3, 19);
-            this.textBox7.Multiline = true;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(285, 20);
-            this.textBox7.TabIndex = 0;
+            this.CardstextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstextBox7.Location = new System.Drawing.Point(3, 19);
+            this.CardstextBox7.Multiline = true;
+            this.CardstextBox7.Name = "CardstextBox7";
+            this.CardstextBox7.Size = new System.Drawing.Size(285, 20);
+            this.CardstextBox7.TabIndex = 0;
             // 
-            // label100
+            // Cardslabel100
             // 
-            this.label100.AutoSize = true;
-            this.label100.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label100.Location = new System.Drawing.Point(3, 0);
-            this.label100.Name = "label100";
-            this.label100.Size = new System.Drawing.Size(285, 16);
-            this.label100.TabIndex = 1;
-            this.label100.Text = "Автор:";
-            this.label100.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Cardslabel100.AutoSize = true;
+            this.Cardslabel100.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cardslabel100.Location = new System.Drawing.Point(3, 0);
+            this.Cardslabel100.Name = "Cardslabel100";
+            this.Cardslabel100.Size = new System.Drawing.Size(285, 16);
+            this.Cardslabel100.TabIndex = 1;
+            this.Cardslabel100.Text = "Автор:";
+            this.Cardslabel100.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanel10
+            // CardstableLayoutPanel10
             // 
-            this.tableLayoutPanel10.ColumnCount = 1;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Controls.Add(this.textBox6, 0, 1);
-            this.tableLayoutPanel10.Controls.Add(this.label99, 0, 0);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 291);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 2;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(291, 42);
-            this.tableLayoutPanel10.TabIndex = 5;
+            this.CardstableLayoutPanel10.ColumnCount = 1;
+            this.CardstableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel10.Controls.Add(this.CardstextBox6, 0, 1);
+            this.CardstableLayoutPanel10.Controls.Add(this.Cardslabel99, 0, 0);
+            this.CardstableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel10.Location = new System.Drawing.Point(3, 291);
+            this.CardstableLayoutPanel10.Name = "CardstableLayoutPanel10";
+            this.CardstableLayoutPanel10.RowCount = 2;
+            this.CardstableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.CardstableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.CardstableLayoutPanel10.Size = new System.Drawing.Size(291, 42);
+            this.CardstableLayoutPanel10.TabIndex = 5;
             // 
-            // textBox6
+            // CardstextBox6
             // 
-            this.textBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox6.Location = new System.Drawing.Point(3, 19);
-            this.textBox6.Multiline = true;
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(285, 20);
-            this.textBox6.TabIndex = 0;
+            this.CardstextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstextBox6.Location = new System.Drawing.Point(3, 19);
+            this.CardstextBox6.Multiline = true;
+            this.CardstextBox6.Name = "CardstextBox6";
+            this.CardstextBox6.Size = new System.Drawing.Size(285, 20);
+            this.CardstextBox6.TabIndex = 0;
             // 
-            // label99
+            // Cardslabel99
             // 
-            this.label99.AutoSize = true;
-            this.label99.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label99.Location = new System.Drawing.Point(3, 0);
-            this.label99.Name = "label99";
-            this.label99.Size = new System.Drawing.Size(285, 16);
-            this.label99.TabIndex = 1;
-            this.label99.Text = "Уточненная дата:";
-            this.label99.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Cardslabel99.AutoSize = true;
+            this.Cardslabel99.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cardslabel99.Location = new System.Drawing.Point(3, 0);
+            this.Cardslabel99.Name = "Cardslabel99";
+            this.Cardslabel99.Size = new System.Drawing.Size(285, 16);
+            this.Cardslabel99.TabIndex = 1;
+            this.Cardslabel99.Text = "Уточненная дата:";
+            this.Cardslabel99.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanel9
+            // CardstableLayoutPanel9
             // 
-            this.tableLayoutPanel9.ColumnCount = 1;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Controls.Add(this.textBox5, 0, 1);
-            this.tableLayoutPanel9.Controls.Add(this.label88, 0, 0);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 243);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 2;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(291, 42);
-            this.tableLayoutPanel9.TabIndex = 4;
+            this.CardstableLayoutPanel9.ColumnCount = 1;
+            this.CardstableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel9.Controls.Add(this.CardstextBox5, 0, 1);
+            this.CardstableLayoutPanel9.Controls.Add(this.Cardslabel88, 0, 0);
+            this.CardstableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel9.Location = new System.Drawing.Point(3, 243);
+            this.CardstableLayoutPanel9.Name = "CardstableLayoutPanel9";
+            this.CardstableLayoutPanel9.RowCount = 2;
+            this.CardstableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.CardstableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.CardstableLayoutPanel9.Size = new System.Drawing.Size(291, 42);
+            this.CardstableLayoutPanel9.TabIndex = 4;
             // 
-            // textBox5
+            // CardstextBox5
             // 
-            this.textBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox5.Location = new System.Drawing.Point(3, 19);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(285, 20);
-            this.textBox5.TabIndex = 0;
+            this.CardstextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstextBox5.Location = new System.Drawing.Point(3, 19);
+            this.CardstextBox5.Multiline = true;
+            this.CardstextBox5.Name = "CardstextBox5";
+            this.CardstextBox5.Size = new System.Drawing.Size(285, 20);
+            this.CardstextBox5.TabIndex = 0;
             // 
-            // label88
+            // Cardslabel88
             // 
-            this.label88.AutoSize = true;
-            this.label88.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label88.Location = new System.Drawing.Point(3, 0);
-            this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(285, 16);
-            this.label88.TabIndex = 1;
-            this.label88.Text = "Дата источника:";
-            this.label88.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Cardslabel88.AutoSize = true;
+            this.Cardslabel88.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cardslabel88.Location = new System.Drawing.Point(3, 0);
+            this.Cardslabel88.Name = "Cardslabel88";
+            this.Cardslabel88.Size = new System.Drawing.Size(285, 16);
+            this.Cardslabel88.TabIndex = 1;
+            this.Cardslabel88.Text = "Дата источника:";
+            this.Cardslabel88.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanel8
+            // CardstableLayoutPanel8
             // 
-            this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Controls.Add(this.textBox4, 0, 1);
-            this.tableLayoutPanel8.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 195);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 2;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(291, 42);
-            this.tableLayoutPanel8.TabIndex = 3;
+            this.CardstableLayoutPanel8.ColumnCount = 1;
+            this.CardstableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel8.Controls.Add(this.CardstextBox4, 0, 1);
+            this.CardstableLayoutPanel8.Controls.Add(this.Cardslabel7, 0, 0);
+            this.CardstableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel8.Location = new System.Drawing.Point(3, 195);
+            this.CardstableLayoutPanel8.Name = "CardstableLayoutPanel8";
+            this.CardstableLayoutPanel8.RowCount = 2;
+            this.CardstableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.CardstableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.CardstableLayoutPanel8.Size = new System.Drawing.Size(291, 42);
+            this.CardstableLayoutPanel8.TabIndex = 3;
             // 
-            // textBox4
+            // CardstextBox4
             // 
-            this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox4.Location = new System.Drawing.Point(3, 19);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(285, 20);
-            this.textBox4.TabIndex = 0;
+            this.CardstextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstextBox4.Location = new System.Drawing.Point(3, 19);
+            this.CardstextBox4.Multiline = true;
+            this.CardstextBox4.Name = "CardstextBox4";
+            this.CardstextBox4.Size = new System.Drawing.Size(285, 20);
+            this.CardstextBox4.TabIndex = 0;
             // 
-            // label7
+            // Cardslabel7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(3, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(285, 16);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Пагинация:";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Cardslabel7.AutoSize = true;
+            this.Cardslabel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cardslabel7.Location = new System.Drawing.Point(3, 0);
+            this.Cardslabel7.Name = "Cardslabel7";
+            this.Cardslabel7.Size = new System.Drawing.Size(285, 16);
+            this.Cardslabel7.TabIndex = 1;
+            this.Cardslabel7.Text = "Пагинация:";
+            this.Cardslabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanel7
+            // CardstableLayoutPanel7
             // 
-            this.tableLayoutPanel7.ColumnCount = 1;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Controls.Add(this.textBox3, 0, 1);
-            this.tableLayoutPanel7.Controls.Add(this.label66, 0, 0);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 147);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 2;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(291, 42);
-            this.tableLayoutPanel7.TabIndex = 2;
+            this.CardstableLayoutPanel7.ColumnCount = 1;
+            this.CardstableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel7.Controls.Add(this.CardstextBox3, 0, 1);
+            this.CardstableLayoutPanel7.Controls.Add(this.Cardslabel66, 0, 0);
+            this.CardstableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel7.Location = new System.Drawing.Point(3, 147);
+            this.CardstableLayoutPanel7.Name = "CardstableLayoutPanel7";
+            this.CardstableLayoutPanel7.RowCount = 2;
+            this.CardstableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.CardstableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.CardstableLayoutPanel7.Size = new System.Drawing.Size(291, 42);
+            this.CardstableLayoutPanel7.TabIndex = 2;
             // 
-            // textBox3
+            // CardstextBox3
             // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(3, 19);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(285, 20);
-            this.textBox3.TabIndex = 0;
+            this.CardstextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstextBox3.Location = new System.Drawing.Point(3, 19);
+            this.CardstextBox3.Multiline = true;
+            this.CardstextBox3.Name = "CardstextBox3";
+            this.CardstextBox3.Size = new System.Drawing.Size(285, 20);
+            this.CardstextBox3.TabIndex = 0;
             // 
-            // label66
+            // Cardslabel66
             // 
-            this.label66.AutoSize = true;
-            this.label66.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label66.Location = new System.Drawing.Point(3, 0);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(285, 16);
-            this.label66.TabIndex = 1;
-            this.label66.Text = "Уточнение к источнику:";
-            this.label66.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Cardslabel66.AutoSize = true;
+            this.Cardslabel66.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cardslabel66.Location = new System.Drawing.Point(3, 0);
+            this.Cardslabel66.Name = "Cardslabel66";
+            this.Cardslabel66.Size = new System.Drawing.Size(285, 16);
+            this.Cardslabel66.TabIndex = 1;
+            this.Cardslabel66.Text = "Уточнение к источнику:";
+            this.Cardslabel66.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanel5
+            // CardstableLayoutPanel5
             // 
-            this.tableLayoutPanel5.ColumnCount = 1;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.textBox2, 0, 1);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(291, 90);
-            this.tableLayoutPanel5.TabIndex = 0;
+            this.CardstableLayoutPanel5.ColumnCount = 1;
+            this.CardstableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel5.Controls.Add(this.Cardslabel5, 0, 0);
+            this.CardstableLayoutPanel5.Controls.Add(this.CardstextBox2, 0, 1);
+            this.CardstableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.CardstableLayoutPanel5.Name = "CardstableLayoutPanel5";
+            this.CardstableLayoutPanel5.RowCount = 2;
+            this.CardstableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.CardstableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.CardstableLayoutPanel5.Size = new System.Drawing.Size(291, 90);
+            this.CardstableLayoutPanel5.TabIndex = 0;
             // 
-            // label5
+            // Cardslabel5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(285, 22);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Словоформы:";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Cardslabel5.AutoSize = true;
+            this.Cardslabel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cardslabel5.Location = new System.Drawing.Point(3, 0);
+            this.Cardslabel5.Name = "Cardslabel5";
+            this.Cardslabel5.Size = new System.Drawing.Size(285, 22);
+            this.Cardslabel5.TabIndex = 2;
+            this.Cardslabel5.Text = "Словоформы:";
+            this.Cardslabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox2
+            // CardstextBox2
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(3, 25);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(285, 62);
-            this.textBox2.TabIndex = 3;
+            this.CardstextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstextBox2.Location = new System.Drawing.Point(3, 25);
+            this.CardstextBox2.Multiline = true;
+            this.CardstextBox2.Name = "CardstextBox2";
+            this.CardstextBox2.Size = new System.Drawing.Size(285, 62);
+            this.CardstextBox2.TabIndex = 3;
             // 
-            // tableLayoutPanel6
+            // CardstableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 1;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.textBox1, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 99);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 2;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(291, 42);
-            this.tableLayoutPanel6.TabIndex = 1;
+            this.CardstableLayoutPanel6.ColumnCount = 1;
+            this.CardstableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel6.Controls.Add(this.CardstextBox1, 0, 1);
+            this.CardstableLayoutPanel6.Controls.Add(this.Cardslabel4, 0, 0);
+            this.CardstableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel6.Location = new System.Drawing.Point(3, 99);
+            this.CardstableLayoutPanel6.Name = "CardstableLayoutPanel6";
+            this.CardstableLayoutPanel6.RowCount = 2;
+            this.CardstableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.CardstableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.CardstableLayoutPanel6.Size = new System.Drawing.Size(291, 42);
+            this.CardstableLayoutPanel6.TabIndex = 1;
             // 
-            // textBox1
+            // CardstextBox1
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(3, 19);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(285, 20);
-            this.textBox1.TabIndex = 0;
+            this.CardstextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstextBox1.Location = new System.Drawing.Point(3, 19);
+            this.CardstextBox1.Multiline = true;
+            this.CardstextBox1.Name = "CardstextBox1";
+            this.CardstextBox1.Size = new System.Drawing.Size(285, 20);
+            this.CardstextBox1.TabIndex = 0;
             // 
-            // label4
+            // Cardslabel4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(285, 16);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Шифр источника:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Cardslabel4.AutoSize = true;
+            this.Cardslabel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cardslabel4.Location = new System.Drawing.Point(3, 0);
+            this.Cardslabel4.Name = "Cardslabel4";
+            this.Cardslabel4.Size = new System.Drawing.Size(285, 16);
+            this.Cardslabel4.TabIndex = 1;
+            this.Cardslabel4.Text = "Шифр источника:";
+            this.Cardslabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pbPictCard
             // 
@@ -728,20 +683,20 @@
             this.pbPictCard.TabIndex = 1;
             this.pbPictCard.TabStop = false;
             // 
-            // tableLayoutPanel3
+            // CardstableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.laCardsNumberCard, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.tbTextCard, 0, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 391);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(701, 95);
-            this.tableLayoutPanel3.TabIndex = 2;
+            this.CardstableLayoutPanel3.ColumnCount = 1;
+            this.CardstableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel3.Controls.Add(this.laCardsNumberCard, 0, 0);
+            this.CardstableLayoutPanel3.Controls.Add(this.tbTextCard, 0, 1);
+            this.CardstableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel3.Location = new System.Drawing.Point(3, 391);
+            this.CardstableLayoutPanel3.Name = "CardstableLayoutPanel3";
+            this.CardstableLayoutPanel3.RowCount = 2;
+            this.CardstableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.CardstableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.CardstableLayoutPanel3.Size = new System.Drawing.Size(701, 95);
+            this.CardstableLayoutPanel3.TabIndex = 2;
             // 
             // laCardsNumberCard
             // 
@@ -763,37 +718,52 @@
             this.tbTextCard.Size = new System.Drawing.Size(695, 75);
             this.tbTextCard.TabIndex = 1;
             // 
-            // tableLayoutPanel4
+            // CardstableLayoutPanel4
             // 
-            this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel4.ColumnCount = 5;
-            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel4, 2);
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.Controls.Add(this.laCardsLastSeparator, 3, 0);
-            this.tableLayoutPanel4.Controls.Add(this.laCardsFirstSeparator, 2, 0);
-            this.tableLayoutPanel4.Controls.Add(this.laCardsNumberBox, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.laCardsLetter, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.buCardIndexCardsPrev, 4, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 492);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1004, 27);
-            this.tableLayoutPanel4.TabIndex = 3;
+            this.CardstableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.CardstableLayoutPanel4.ColumnCount = 6;
+            this.CardstableLayoutPanel1.SetColumnSpan(this.CardstableLayoutPanel4, 2);
+            this.CardstableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.843137F));
+            this.CardstableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.803922F));
+            this.CardstableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.96078F));
+            this.CardstableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.96078F));
+            this.CardstableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.21569F));
+            this.CardstableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.21569F));
+            this.CardstableLayoutPanel4.Controls.Add(this.buCardIndexCardsSave, 4, 0);
+            this.CardstableLayoutPanel4.Controls.Add(this.laCardsLastSeparator, 3, 0);
+            this.CardstableLayoutPanel4.Controls.Add(this.laCardsFirstSeparator, 2, 0);
+            this.CardstableLayoutPanel4.Controls.Add(this.laCardsNumberBox, 1, 0);
+            this.CardstableLayoutPanel4.Controls.Add(this.laCardsLetter, 0, 0);
+            this.CardstableLayoutPanel4.Controls.Add(this.buCardIndexCardsPrev, 5, 0);
+            this.CardstableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel4.Location = new System.Drawing.Point(3, 492);
+            this.CardstableLayoutPanel4.Name = "CardstableLayoutPanel4";
+            this.CardstableLayoutPanel4.RowCount = 1;
+            this.CardstableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel4.Size = new System.Drawing.Size(1004, 27);
+            this.CardstableLayoutPanel4.TabIndex = 3;
+            // 
+            // buCardIndexCardsSave
+            // 
+            this.buCardIndexCardsSave.AutoSize = true;
+            this.buCardIndexCardsSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buCardIndexCardsSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buCardIndexCardsSave.Location = new System.Drawing.Point(716, 1);
+            this.buCardIndexCardsSave.Margin = new System.Windows.Forms.Padding(0);
+            this.buCardIndexCardsSave.Name = "buCardIndexCardsSave";
+            this.buCardIndexCardsSave.Size = new System.Drawing.Size(141, 25);
+            this.buCardIndexCardsSave.TabIndex = 5;
+            this.buCardIndexCardsSave.Text = "Сохранить";
+            this.buCardIndexCardsSave.UseVisualStyleBackColor = true;
             // 
             // laCardsLastSeparator
             // 
             this.laCardsLastSeparator.AutoSize = true;
             this.laCardsLastSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.laCardsLastSeparator.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laCardsLastSeparator.Location = new System.Drawing.Point(301, 1);
+            this.laCardsLastSeparator.Location = new System.Drawing.Point(450, 1);
             this.laCardsLastSeparator.Name = "laCardsLastSeparator";
-            this.laCardsLastSeparator.Size = new System.Drawing.Size(223, 25);
+            this.laCardsLastSeparator.Size = new System.Drawing.Size(262, 25);
             this.laCardsLastSeparator.TabIndex = 3;
             this.laCardsLastSeparator.Text = "Последний разделитель: САДОВЫЙ";
             this.laCardsLastSeparator.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -803,9 +773,9 @@
             this.laCardsFirstSeparator.AutoSize = true;
             this.laCardsFirstSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.laCardsFirstSeparator.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laCardsFirstSeparator.Location = new System.Drawing.Point(145, 1);
+            this.laCardsFirstSeparator.Location = new System.Drawing.Point(181, 1);
             this.laCardsFirstSeparator.Name = "laCardsFirstSeparator";
-            this.laCardsFirstSeparator.Size = new System.Drawing.Size(149, 25);
+            this.laCardsFirstSeparator.Size = new System.Drawing.Size(262, 25);
             this.laCardsFirstSeparator.TabIndex = 2;
             this.laCardsFirstSeparator.Text = "Первый разделитель: С";
             this.laCardsFirstSeparator.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -815,9 +785,9 @@
             this.laCardsNumberBox.AutoSize = true;
             this.laCardsNumberBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.laCardsNumberBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laCardsNumberBox.Location = new System.Drawing.Point(69, 1);
+            this.laCardsNumberBox.Location = new System.Drawing.Point(83, 1);
             this.laCardsNumberBox.Name = "laCardsNumberBox";
-            this.laCardsNumberBox.Size = new System.Drawing.Size(69, 25);
+            this.laCardsNumberBox.Size = new System.Drawing.Size(91, 25);
             this.laCardsNumberBox.TabIndex = 1;
             this.laCardsNumberBox.Text = "Ящик: 577";
             this.laCardsNumberBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -829,7 +799,7 @@
             this.laCardsLetter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.laCardsLetter.Location = new System.Drawing.Point(4, 1);
             this.laCardsLetter.Name = "laCardsLetter";
-            this.laCardsLetter.Size = new System.Drawing.Size(58, 25);
+            this.laCardsLetter.Size = new System.Drawing.Size(72, 25);
             this.laCardsLetter.TabIndex = 0;
             this.laCardsLetter.Text = "Буква: С";
             this.laCardsLetter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -837,12 +807,12 @@
             // buCardIndexCardsPrev
             // 
             this.buCardIndexCardsPrev.AutoSize = true;
-            this.buCardIndexCardsPrev.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buCardIndexCardsPrev.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexCardsPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexCardsPrev.Location = new System.Drawing.Point(801, 1);
+            this.buCardIndexCardsPrev.Location = new System.Drawing.Point(858, 1);
             this.buCardIndexCardsPrev.Margin = new System.Windows.Forms.Padding(0);
             this.buCardIndexCardsPrev.Name = "buCardIndexCardsPrev";
-            this.buCardIndexCardsPrev.Size = new System.Drawing.Size(202, 25);
+            this.buCardIndexCardsPrev.Size = new System.Drawing.Size(145, 25);
             this.buCardIndexCardsPrev.TabIndex = 4;
             this.buCardIndexCardsPrev.Text = "Назад";
             this.buCardIndexCardsPrev.UseVisualStyleBackColor = true;
@@ -858,35 +828,34 @@
             this.Size = new System.Drawing.Size(1024, 554);
             this.tcCards.ResumeLayout(false);
             this.tpCardsMenu.ResumeLayout(false);
-            this.tableLayoutPanel13.ResumeLayout(false);
+            this.CardstableLayoutPanel13.ResumeLayout(false);
             this.tpList.ResumeLayout(false);
-            this.tableLayoutPanel14.ResumeLayout(false);
-            this.tableLayoutPanel15.ResumeLayout(false);
-            this.tableLayoutPanel16.ResumeLayout(false);
+            this.CardstableLayoutPanel14.ResumeLayout(false);
+            this.CardstableLayoutPanel15.ResumeLayout(false);
             this.tpCards.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel12.ResumeLayout(false);
-            this.tableLayoutPanel12.PerformLayout();
-            this.tableLayoutPanel11.ResumeLayout(false);
-            this.tableLayoutPanel11.PerformLayout();
-            this.tableLayoutPanel10.ResumeLayout(false);
-            this.tableLayoutPanel10.PerformLayout();
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.tableLayoutPanel9.PerformLayout();
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel8.PerformLayout();
-            this.tableLayoutPanel7.ResumeLayout(false);
-            this.tableLayoutPanel7.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
+            this.CardstableLayoutPanel1.ResumeLayout(false);
+            this.CardstableLayoutPanel2.ResumeLayout(false);
+            this.CardstableLayoutPanel12.ResumeLayout(false);
+            this.CardstableLayoutPanel12.PerformLayout();
+            this.CardstableLayoutPanel11.ResumeLayout(false);
+            this.CardstableLayoutPanel11.PerformLayout();
+            this.CardstableLayoutPanel10.ResumeLayout(false);
+            this.CardstableLayoutPanel10.PerformLayout();
+            this.CardstableLayoutPanel9.ResumeLayout(false);
+            this.CardstableLayoutPanel9.PerformLayout();
+            this.CardstableLayoutPanel8.ResumeLayout(false);
+            this.CardstableLayoutPanel8.PerformLayout();
+            this.CardstableLayoutPanel7.ResumeLayout(false);
+            this.CardstableLayoutPanel7.PerformLayout();
+            this.CardstableLayoutPanel5.ResumeLayout(false);
+            this.CardstableLayoutPanel5.PerformLayout();
+            this.CardstableLayoutPanel6.ResumeLayout(false);
+            this.CardstableLayoutPanel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPictCard)).EndInit();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
+            this.CardstableLayoutPanel3.ResumeLayout(false);
+            this.CardstableLayoutPanel3.PerformLayout();
+            this.CardstableLayoutPanel4.ResumeLayout(false);
+            this.CardstableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -895,60 +864,58 @@
 
         private System.Windows.Forms.TabControl tcCards;
         private System.Windows.Forms.TabPage tpCards;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel2;
         private System.Windows.Forms.PictureBox pbPictCard;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel3;
         private System.Windows.Forms.Label laCardsNumberCard;
         private System.Windows.Forms.TextBox tbTextCard;
         private System.Windows.Forms.TabPage tpList;
         private System.Windows.Forms.TabPage tpCardsMenu;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel4;
         private System.Windows.Forms.Label laCardsLetter;
         private System.Windows.Forms.Label laCardsNumberBox;
         private System.Windows.Forms.Label laCardsFirstSeparator;
         private System.Windows.Forms.Label laCardsLastSeparator;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label66;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel5;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel6;
+        private System.Windows.Forms.TextBox CardstextBox1;
+        private System.Windows.Forms.Label Cardslabel4;
+        private System.Windows.Forms.Label Cardslabel5;
+        private System.Windows.Forms.TextBox CardstextBox2;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel7;
+        private System.Windows.Forms.TextBox CardstextBox3;
+        private System.Windows.Forms.Label Cardslabel66;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel12;
         private System.Windows.Forms.TextBox tbCardNotes;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Label label100;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label99;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label88;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        private System.Windows.Forms.Label Cardslabel11;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel11;
+        private System.Windows.Forms.TextBox CardstextBox7;
+        private System.Windows.Forms.Label Cardslabel100;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel10;
+        private System.Windows.Forms.TextBox CardstextBox6;
+        private System.Windows.Forms.Label Cardslabel99;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel9;
+        private System.Windows.Forms.TextBox CardstextBox5;
+        private System.Windows.Forms.Label Cardslabel88;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel8;
+        private System.Windows.Forms.TextBox CardstextBox4;
+        private System.Windows.Forms.Label Cardslabel7;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel13;
         private System.Windows.Forms.Button buCardIndexMenuMarker;
         private System.Windows.Forms.Button buCardIndexMenuSeparator;
         private System.Windows.Forms.Button buCardIndexMenuBox;
         private System.Windows.Forms.Button buCardIndexMenuLetter;
         private System.Windows.Forms.Button buCardIndexMenuPrev;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel14;
         private System.Windows.Forms.ListBox lbCardIndexList;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel15;
         private System.Windows.Forms.Button buCardIndexListPrev;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
+        private System.Windows.Forms.Button buCardIndexCardsPrev;
+        private System.Windows.Forms.Button buTest;
         private System.Windows.Forms.Button buCardIndexListAdd;
         private System.Windows.Forms.Button buCardIndexListChange;
         private System.Windows.Forms.Button buCardIndexListDelete;
-        private System.Windows.Forms.Button buCardIndexListSearch;
-        private System.Windows.Forms.Button buCardIndexListClearSearch;
-        private System.Windows.Forms.Button buCardIndexCardsPrev;
-        private System.Windows.Forms.Button buTest;
+        private System.Windows.Forms.Button buCardIndexCardsSave;
     }
 }

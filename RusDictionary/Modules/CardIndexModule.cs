@@ -26,10 +26,6 @@ namespace RusDictionary.Modules
         /// </summary>
         List<JSONArray> CardItems = new List<JSONArray>();
         /// <summary>
-        /// Класс формы поиска
-        /// </summary>
-        public static Search f4 = new Search();
-        /// <summary>
         /// Отслеживание нажатия на кнопку "Маркер"
         /// </summary>
         public static bool CardIndexMenuMarker = false;
@@ -81,22 +77,8 @@ namespace RusDictionary.Modules
         public CardIndexModule()
         {
             InitializeComponent();
-        }
-
-        private void buCardIndexListSearch_Click(object sender, EventArgs e)
-        {
-            ShowSearchForm();
-        }
-        public static void ShowSearchForm()
-        {
-            //f1.DGVInicilizationResult();
-            //Если форма была закрыта
-            if (f4.ActiveFormSearch == false)
-            {
-                f4.ActiveFormSearch = true; // Присвоить значение true для переменной ActiveForm2 второй формы
-                f4.Show(); // Отобразить форму
-            }
-        }
+        }       
+       
         private void buCardIndexInMenuButton_Click(object sender, EventArgs e)
         {
             foreach (Button button in MainForm.GetAll(tpCardsMenu, typeof(Button)))
@@ -456,6 +438,26 @@ namespace RusDictionary.Modules
         {
             string query = "UPDATE `cardindex` SET `Notes` = 'Test' WHERE `Marker` = '5770005'";
             JSON.Send(JSONFlags.Update, query);
+        }
+
+        private void buCardIndexListClearSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buCardIndexListDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить данную запись?", "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.No)
+            {
+
+            }
+            if (result == DialogResult.Yes)
+            {
+                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                string query = "UPDATE `cardindex` SET `Marker` = is NULL,`CardSeparator` = is NULL,`NumberBox` = is NULL,`Symbol` = is NULL,`img` = is NULL, `imgText` = is NULL, `Notes` = is NULL, WHERE `Marker` = '" + NumberCardForDelete[2] + "'";                
+                JSON.Send(JSONFlags.Update, query);
+            }
         }
     }
 }

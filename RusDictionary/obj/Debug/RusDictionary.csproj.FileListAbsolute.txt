@@ -44,13 +44,11 @@ D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.Modules.CardIndexModule.reso
 D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.Modules.IndexModule.resources
 D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.Modules.WordSearchModule.resources
 D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.Properties.Resources.resources
-D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.Search.resources
 D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.csproj.GenerateResource.cache
 D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.csproj.CoreCompileInputs.cache
 D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.csproj.CopyComplete
 D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.exe
 D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.pdb
-D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.csprojAssemblyReference.cache
 C:\Users\treky\Desktop\DeadDed\RusDictionary\bin\Debug\Resources\MainForm\Icon.ico
 C:\Users\treky\Desktop\DeadDed\RusDictionary\bin\Debug\Resources\MainForm\StatusFalse.png
 C:\Users\treky\Desktop\DeadDed\RusDictionary\bin\Debug\Resources\MainForm\StatusTrue.png
@@ -73,3 +71,4 @@ C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.csproj.Core
 C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.csproj.CopyComplete
 C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.exe
 C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.pdb
+D:\DD\DeadDed\RusDictionary\obj\Debug\RusDictionary.csprojAssemblyReference.cache

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
@@ -7,10 +8,11 @@ namespace RusDictionary
 {
     class JSON
     {        
-        static string ReturnJSON = null;
+        static string ReturnJSON = null;        
         /// <summary>
         /// Метод отправки на сервер запроса
         /// </summary>
+        /// <param name="flag">Тип запроса</param>
         /// <param name="query">Ссылка с запросом</param>
         public static void Send(JSONFlags flag, string query)
         {

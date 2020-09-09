@@ -20,6 +20,10 @@ namespace RusDictionary
     public partial class MainForm : Form
     {
         /// <summary>
+        /// Имя вкладки, на которую нужно перейти
+        /// </summary>
+        public static string NameTabPage;
+        /// <summary>
         /// IP сервера
         /// </summary>
         public static string IP;
@@ -106,58 +110,121 @@ namespace RusDictionary
         /// Установить шрифты на форме
         /// </summary>
         void SetupFont()
-        {            
-            string fileName = Path.GetTempFileName();
-            File.WriteAllBytes(fileName, Properties.Resources.IZHITSA);
-            PrivateFontCollection pfc = new PrivateFontCollection();
-            pfc.AddFontFile(fileName);
-            foreach (Label label in GetAll(this, typeof(Label)))
+        {
+
+            laStatus.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            laWait.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            #region Вкладка "Главная"
+            label1.Font = new Font("Izhitsa", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);            
+            foreach (Button button in GetAll(tpMain, typeof(Button)))
             {
-                if (label.Name == "label1")
+                if (button.Name == "buCardIndexCardsPrev" || button.Name == "buCardIndexCardsSave")
                 {
-                    label.Font = new Font("Izhitsa", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+                    button.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
                 }
-                else if (label.Name == "label2")
+                else
                 {
-                    label.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+                    button.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 204);
                 }
-                else if (label.Name == "label3" || label.Name == "label9" || label.Name == "label22" || label.Name == "label16")
+            }
+            #endregion
+            #region Вкладка "Картотека"
+            foreach (ListBox listbox in GetAll(tpCardIndex, typeof(ListBox)))
+            {
+                listbox.Font = new Font("Izhitsa", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            }
+            #endregion
+            #region Вкладка "Указатели"
+            #endregion
+            #region Вкладка "Поиск слов"
+            #endregion
+            #region Вкладка "Авторы"
+            foreach (Label label in GetAll(tpAuthors, typeof(Label)))
+            {
+                if (label.Name == "label3" || label.Name == "label9" || label.Name == "label22" || label.Name == "label16")
                 {
                     label.Font = new Font("Izhitsa", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
+                }
+                else if (label.Name == "label12" || label.Name == "label6" || label.Name == "label8" || label.Name == "label10" || label.Name == "label14" || label.Name == "label13" || label.Name == "label2" || label.Name == "label26" || label.Name == "label25" || label.Name == "label24" || label.Name == "label20" || label.Name == "label18")
+                {
+                    label.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
                 }
                 else if (label.Name == "label15")
                 {
                     label.Font = new Font("Izhitsa", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-                }
-                else if (label.Name == "label6" || label.Name == "label8" || label.Name == "label10" || label.Name == "label14" || label.Name == "label13" || label.Name == "label2" || label.Name == "label26" || label.Name == "label25" || label.Name == "label24" || label.Name == "label20" || label.Name == "label18")
-                {
-                    label.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-                }
+                }                
                 else
                 {
                     label.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
                 }
             }
-            foreach (Button button in GetAll(this, typeof(Button)))
+            buAuthorPrev.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            #endregion
+            #region Вкладка "Настройки"
+            foreach (Label label in GetAll(tpSettings, typeof(Label)))
             {
-                if (button.Name == "buCardIndexCardsPrev")
-                {
-                    button.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-                }
-                else if (button.Name == "buTextBoxColor" || button.Name == "buColorDefault")
+                label.Font = new Font("Izhitsa", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            }
+            foreach (Button button in GetAll(tpSettings, typeof(Button)))
+            {
+                if (button.Name == "buTextBoxColor" || button.Name == "buColorDefault")
                 {
                     button.Font = new Font("Izhitsa", 13.5F, FontStyle.Regular, GraphicsUnit.Point, 204);
                 }
                 else
                 {
                     button.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 204);
-                }                
+                }
             }
-            foreach (ListBox listbox in GetAll(this, typeof(ListBox)))
+            #endregion
+        /*foreach (Label label in GetAll(this, typeof(Label)))
+        {
+            if (label.Name == "label1")
             {
-                listbox.Font = new Font("Izhitsa", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            }            
+                label.Font = new Font("Izhitsa", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            }
+            else if (label.Name == "label2")
+            {
+                label.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            }
+            else if (label.Name == "label3" || label.Name == "label9" || label.Name == "label22" || label.Name == "label16")
+            {
+                label.Font = new Font("Izhitsa", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            }
+            else if (label.Name == "label15")
+            {
+                label.Font = new Font("Izhitsa", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            }
+            else if (label.Name == "label12" || label.Name == "label6" || label.Name == "label8" || label.Name == "label10" || label.Name == "label14" || label.Name == "label13" || label.Name == "label2" || label.Name == "label26" || label.Name == "label25" || label.Name == "label24" || label.Name == "label20" || label.Name == "label18")
+            {
+                label.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            }
+            else
+            {
+                label.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            }
         }
+        foreach (Button button in GetAll(this, typeof(Button)))
+        {
+            if (button.Name == "buCardIndexCardsPrev" || button.Name == "buCardIndexCardsSave")
+            {
+                button.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            }
+            else if (button.Name == "buTextBoxColor" || button.Name == "buColorDefault")
+            {
+                button.Font = new Font("Izhitsa", 13.5F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            }
+            else
+            {
+                button.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            }                
+        }
+        foreach (ListBox listbox in GetAll(this, typeof(ListBox)))
+        {
+            listbox.Font = new Font("Izhitsa", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        }  */
+    }
         void FillSetting()
         {
             IP = Properties.Settings.Default.IP;
@@ -351,6 +418,7 @@ namespace RusDictionary
         private void buCardIndexModule_Click(object sender, EventArgs e)
         {
             MainTC.SelectedTab = tpCardIndex;
+            NameTabPage = MainTC.SelectedTab.Name;
         }
 
         public void TCPrev()
@@ -637,11 +705,13 @@ namespace RusDictionary
         private void buWordSearchModule_Click(object sender, EventArgs e)
         {
             MainTC.SelectedTab = tpWordSearch;
+            NameTabPage = MainTC.SelectedTab.Name;
         }
 
         private void buIndexModule_Click(object sender, EventArgs e)
         {
             MainTC.SelectedTab = tpPointer;
+            NameTabPage = MainTC.SelectedTab.Name;
         }
 
         private void buButtonColor_Click(object sender, EventArgs e)
