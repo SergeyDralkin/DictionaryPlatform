@@ -156,5 +156,45 @@ namespace RusDictionary.Modules
         {
             ReadingHTM();
         }
+        List<JSONArray> MainWords = new List<JSONArray>();
+        List<string> FindedWords = new List<string>();
+        void FillMainWordsList()
+        {
+            MainWords.Clear();
+            FindedWords.Clear();
+            string query = "SELECT NAME FROM dictionaryentries";
+            JSON.Send(JSONFlags.Select, query);
+            MainWords = JSON.Decode();
+            for(int i = 0; i < MainWords.Count; i++)
+            {
+                if(MainWords[i].Name.Contains(tbWordSearch_SearchingWord.Text))
+                {
+                    FindedWords.Add(MainWords[i].Name);
+                }
+            }
+        }
+        void ShowResults()
+        {
+            if(FindedWords.Count != 0)
+            {
+                string query;
+                for (int i = 0; i < FindedWords.Count; i++)
+                {
+                    MainWords.Clear();
+                    query = "SELECT * FROM dictionaryentries WHERE NAME = '" + FindedWords[i] + "'";
+                    JSON.Send(JSONFlags.Select, query);
+                    MainWords = JSON.Decode();
+                    for (int j = 0; j < MainWords.Count; j++)
+                    {
+                        tbWordSearch_FindedWords.Text += MainWords[j].Name + " | " + MainWords[j].Pomet + " | " + MainWords[j].Definition + "\r\n";
+                    }
+                }
+            }
+        }
+        private void buWordSearch_FindWord_Click(object sender, EventArgs e)
+        {
+            FillMainWordsList();
+            ShowResults();
+        }
     }
 }

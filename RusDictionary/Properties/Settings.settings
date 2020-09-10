@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="IP" Type="System.String" Scope="User">
-      <Value Profile="(Default)">127.0.0.1</Value>
+      <Value Profile="(Default)">82.148.31.141</Value>
     </Setting>
     <Setting Name="Port" Type="System.String" Scope="User">
-      <Value Profile="(Default)">8080</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ColorText" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">Black</Value>
