@@ -17,7 +17,6 @@ namespace RusDictionary
         public static void Send(JSONFlags flag, string query)
         {
             ReturnJSON = null;
-            string s = SendURL(flag) + query.Replace(" ", "%20");
             WebRequest req = WebRequest.Create(SendURL(flag) + query.Replace(" ", "%20"));
             WebResponse resp = req.GetResponse();
             Stream stream = resp.GetResponseStream();
