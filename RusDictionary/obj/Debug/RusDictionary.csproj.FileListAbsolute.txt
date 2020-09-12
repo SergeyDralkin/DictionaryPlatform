@@ -65,7 +65,6 @@ C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.Modules.Car
 C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.Modules.IndexModule.resources
 C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.Modules.WordSearchModule.resources
 C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.Properties.Resources.resources
-C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.Search.resources
 C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.csproj.GenerateResource.cache
 C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.csproj.CoreCompileInputs.cache
 C:\Users\treky\Desktop\DeadDed\RusDictionary\obj\Debug\RusDictionary.csproj.CopyComplete
