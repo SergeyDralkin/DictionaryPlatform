@@ -220,9 +220,10 @@
             // 
             // buTest
             // 
+            this.buTest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buTest.Location = new System.Drawing.Point(662, 431);
             this.buTest.Name = "buTest";
-            this.buTest.Size = new System.Drawing.Size(75, 23);
+            this.buTest.Size = new System.Drawing.Size(146, 37);
             this.buTest.TabIndex = 5;
             this.buTest.Text = "test";
             this.buTest.UseVisualStyleBackColor = true;
@@ -264,6 +265,7 @@
             this.lbCardIndexList.Name = "lbCardIndexList";
             this.lbCardIndexList.Size = new System.Drawing.Size(1004, 463);
             this.lbCardIndexList.TabIndex = 0;
+            this.lbCardIndexList.SelectedIndexChanged += new System.EventHandler(this.lbCardIndexList_SelectedIndexChanged);
             this.lbCardIndexList.DoubleClick += new System.EventHandler(this.lbCardIndexList_DoubleClick);
             // 
             // CardstableLayoutPanel15
@@ -308,6 +310,7 @@
             this.buCardIndexListChange.TabIndex = 4;
             this.buCardIndexListChange.Text = "Изменить";
             this.buCardIndexListChange.UseVisualStyleBackColor = true;
+            this.buCardIndexListChange.Click += new System.EventHandler(this.buCardIndexListChange_Click);
             // 
             // buCardIndexListDelete
             // 
@@ -755,6 +758,7 @@
             this.buCardIndexCardsSave.TabIndex = 5;
             this.buCardIndexCardsSave.Text = "Сохранить";
             this.buCardIndexCardsSave.UseVisualStyleBackColor = true;
+            this.buCardIndexCardsSave.Click += new System.EventHandler(this.buCardIndexCardsSave_Click);
             // 
             // laCardsLastSeparator
             // 

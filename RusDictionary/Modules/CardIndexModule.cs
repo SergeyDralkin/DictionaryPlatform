@@ -77,8 +77,20 @@ namespace RusDictionary.Modules
         public CardIndexModule()
         {
             InitializeComponent();
-        }       
-       
+        }
+
+        void VisibleDown3button(bool parameter)
+        {
+            buCardIndexListChange.Visible = parameter;
+            buCardIndexListAdd.Visible = parameter;
+            buCardIndexListDelete.Visible = parameter;
+        }
+        void ActiveDown3button(bool parameter)
+        {
+            buCardIndexListChange.Enabled = parameter;
+            buCardIndexListAdd.Enabled = parameter;
+            buCardIndexListDelete.Enabled = parameter;
+        }
         private void buCardIndexInMenuButton_Click(object sender, EventArgs e)
         {
             EnableElement(false);
@@ -91,7 +103,7 @@ namespace RusDictionary.Modules
             {
                 Thread.Sleep(1);
                 Application.DoEvents();
-            }
+            }            
             switch (NameClickButton)
             {
                 case "buCardIndexMenuMarker":
@@ -100,6 +112,8 @@ namespace RusDictionary.Modules
                         {
                             lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Marker);
                         }
+                        VisibleDown3button(true);
+                        ActiveDown3button(false);
                         break;
                     }
                 case "buCardIndexMenuSeparator":
@@ -108,6 +122,8 @@ namespace RusDictionary.Modules
                         {
                             lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].CardSeparator);
                         }
+                        VisibleDown3button(false);
+                        ActiveDown3button(false);
                         break;
                     }
                 case "buCardIndexMenuBox":
@@ -116,6 +132,8 @@ namespace RusDictionary.Modules
                         {
                             lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].NumberBox);
                         }
+                        VisibleDown3button(false);
+                        ActiveDown3button(false);
                         break;
                     }
                 case "buCardIndexMenuLetter":
@@ -124,13 +142,44 @@ namespace RusDictionary.Modules
                         {
                             lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Symbol);
                         }
+                        VisibleDown3button(false);
+                        ActiveDown3button(false);
                         break;
                     }
             }            
+            
+            
             lbCardIndexList.Update();
-            tcCards.SelectedTab = tpList; 
-            Program.f1.PictAndLableWait(false);
+            tcCards.SelectedTab = tpList;
             EnableElement(true);
+            switch (NameClickButton)
+            {
+                case "buCardIndexMenuMarker":
+                    {
+                        VisibleDown3button(true);
+                        ActiveDown3button(false);
+                        break;
+                    }
+                case "buCardIndexMenuSeparator":
+                    {
+                        VisibleDown3button(false);
+                        ActiveDown3button(false);
+                        break;
+                    }
+                case "buCardIndexMenuBox":
+                    {
+                        VisibleDown3button(false);
+                        ActiveDown3button(false);
+                        break;
+                    }
+                case "buCardIndexMenuLetter":
+                    {
+                        VisibleDown3button(false);
+                        ActiveDown3button(false);
+                        break;
+                    }
+            }
+            Program.f1.PictAndLableWait(false);
         }
         void CreateSecondListItems(object NameButton)
         {
@@ -229,6 +278,8 @@ namespace RusDictionary.Modules
             }
             else
             {
+                VisibleDown3button(false);
+                ActiveDown3button(false);
                 if (ListBoxPrev != true)
                 {
                     CardIndexMenuMarker = false;
@@ -332,6 +383,7 @@ namespace RusDictionary.Modules
             }
             else
             {
+                EnableElement(false);
                 Program.f1.PictAndLableWait(true);
                 Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                 myThread.Start(NameClickButton); // Запускаем поток
@@ -341,6 +393,7 @@ namespace RusDictionary.Modules
                     Application.DoEvents();
                 }
                 ClearMainList();
+                EnableElement(true);
                 switch (NameClickButton)
                 {
                     case "buCardIndexMenuSeparator":
@@ -349,6 +402,8 @@ namespace RusDictionary.Modules
                             {
                                 lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Marker);
                             }
+                            VisibleDown3button(true);
+                            ActiveDown3button(false);
                             break;
                         }
                     case "buCardIndexMenuBox":
@@ -357,6 +412,8 @@ namespace RusDictionary.Modules
                             {
                                 lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Marker);
                             }
+                            VisibleDown3button(true);
+                            ActiveDown3button(false);
                             break;
                         }
                     case "buCardIndexMenuLetter":
@@ -365,10 +422,12 @@ namespace RusDictionary.Modules
                             {
                                 lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Marker);
                             }
+                            VisibleDown3button(true);
+                            ActiveDown3button(false);
                             break;
                         }
                 }
-                EnableElement(true);
+                
                 lbCardIndexList.Update();
                 CardIndexMenuMarker = true;
                 lbCardIndexList.Visible = true;
@@ -382,7 +441,7 @@ namespace RusDictionary.Modules
             JSON.Send(JSONFlags.Select, query);
             CardItems = JSON.Decode();
             
-            //Подумать над сепаратором между карточками
+            //Подумать над сепаратором между карточками (отображаются на форме внизу при открытой карточке)
 
             CardMarker = CardItems[0].Marker;
             CardNotes = CardItems[0].Notes;
@@ -452,6 +511,43 @@ namespace RusDictionary.Modules
                 string query = "UPDATE `cardindex` SET `Marker` = is NULL,`CardSeparator` = is NULL,`NumberBox` = is NULL,`Symbol` = is NULL,`img` = is NULL, `imgText` = is NULL, `Notes` = is NULL, WHERE `Marker` = '" + NumberCardForDelete[2] + "'";                
                 JSON.Send(JSONFlags.Update, query);
             }
+        }
+
+        private void lbCardIndexList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActiveDown3button(true);
+        }
+
+        private void buCardIndexListChange_Click(object sender, EventArgs e)
+        {
+            EnableElement(false);
+            ListBoxSelectedIndex = lbCardIndexList.SelectedIndex + 1;
+            Program.f1.PictAndLableWait(true);
+            Thread myThread = new Thread(new ParameterizedThreadStart(ShowCards)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+            myThread.Start(SplitItem.Last()); // Запускаем поток
+            while (myThread.IsAlive)
+            {
+                Thread.Sleep(1);
+                Application.DoEvents();
+            }
+            pbPictCard.BackgroundImage = CardImage;
+            laCardsNumberCard.Text = "Текст карточки №" + CardMarker + ":";
+            laCardsLetter.Text = CardSymbol;
+            laCardsNumberBox.Text = CardNumberBox;
+            laCardsFirstSeparator.Text = CardFirstSeparator;
+            laCardsLastSeparator.Text = CardLastSeparator;
+            tbTextCard.Text = CardText;
+            tbCardNotes.Text = CardNotes;
+            EnableOnCardPage(true);
+            tcCards.SelectedTab = tpCards;
+            Program.f1.PictAndLableWait(false);
+            EnableElement(true);            
+        }
+
+        private void buCardIndexCardsSave_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
