@@ -16,6 +16,5 @@ namespace RusDictionary.Modules
         {
             InitializeComponent();
         }
-
     }
 }
