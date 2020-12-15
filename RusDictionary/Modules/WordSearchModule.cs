@@ -163,7 +163,7 @@ namespace RusDictionary.Modules
             MainWords.Clear();
             FindedWords.Clear();
             string query = "SELECT NAME FROM dictionaryentries";
-            JSON.Send(JSONFlags.Select, query);
+            JSON.Send(query, JSONFlags.Select);
             MainWords = JSON.Decode();
             for(int i = 0; i < MainWords.Count; i++)
             {
@@ -182,7 +182,7 @@ namespace RusDictionary.Modules
                 {
                     MainWords.Clear();
                     query = "SELECT * FROM dictionaryentries WHERE NAME = '" + FindedWords[i] + "'";
-                    JSON.Send(JSONFlags.Select, query);
+                    JSON.Send(query, JSONFlags.Select);
                     MainWords = JSON.Decode();
                     for (int j = 0; j < MainWords.Count; j++)
                     {

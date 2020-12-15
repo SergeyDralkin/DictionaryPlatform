@@ -227,6 +227,7 @@
             this.buTest.TabIndex = 5;
             this.buTest.Text = "test";
             this.buTest.UseVisualStyleBackColor = true;
+            this.buTest.Visible = false;
             this.buTest.Click += new System.EventHandler(this.buTest_Click);
             // 
             // tpList

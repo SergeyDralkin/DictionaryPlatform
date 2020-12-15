@@ -189,21 +189,21 @@ namespace RusDictionary.Modules
                 case "buCardIndexMenuSeparator":
                     {                       
                         string query = "SELECT Marker FROM cardindex WHERE CardSeparator = " + ListBoxSelectedIndex;
-                        JSON.Send(JSONFlags.Select, query);
+                        JSON.Send(query, JSONFlags.Select);
                         SecondListItems = JSON.Decode();
                         break;
                     }
                 case "buCardIndexMenuBox":
                     {                       
                         string query = "SELECT Marker FROM cardindex WHERE NumberBox = " + ListBoxSelectedIndex;
-                        JSON.Send(JSONFlags.Select, query);
+                        JSON.Send(query, JSONFlags.Select);
                         SecondListItems = JSON.Decode();                       
                         break;
                     }
                 case "buCardIndexMenuLetter":
                     {                        
                         string query = "SELECT Marker FROM cardindex WHERE Symbol = " + ListBoxSelectedIndex;
-                        JSON.Send(JSONFlags.Select, query);
+                        JSON.Send(query, JSONFlags.Select);
                         SecondListItems = JSON.Decode();
                         break;
                     }
@@ -221,7 +221,7 @@ namespace RusDictionary.Modules
                         CardIndexMenuBox = false;
                         CardIndexMenuLetter = false;
                         string query = "SELECT Marker FROM cardindex";
-                        JSON.Send(JSONFlags.Select, query);
+                        JSON.Send(query, JSONFlags.Select);
                         FirstListItems = JSON.Decode();
                         break;
                     }
@@ -232,7 +232,7 @@ namespace RusDictionary.Modules
                         CardIndexMenuBox = false;
                         CardIndexMenuLetter = false;                        
                         string query = "SELECT CardSeparator FROM cardseparator";
-                        JSON.Send(JSONFlags.Select, query);
+                        JSON.Send(query, JSONFlags.Select);
                         FirstListItems = JSON.Decode();
                         break;
                     }
@@ -243,7 +243,7 @@ namespace RusDictionary.Modules
                         CardIndexMenuBox = true;
                         CardIndexMenuLetter = false;
                         string query = "SELECT NumberBox FROM box";
-                        JSON.Send(JSONFlags.Select, query);
+                        JSON.Send(query, JSONFlags.Select);
                         FirstListItems = JSON.Decode();
                         break;
                     }
@@ -254,7 +254,7 @@ namespace RusDictionary.Modules
                         CardIndexMenuBox = false;
                         CardIndexMenuLetter = true;                        
                         string query = "SELECT Symbol FROM letter";
-                        JSON.Send(JSONFlags.Select, query);
+                        JSON.Send(query, JSONFlags.Select);
                         FirstListItems = JSON.Decode();
                         break;
                     }
@@ -438,7 +438,7 @@ namespace RusDictionary.Modules
         void ShowCards(object Number)
         {            
             string query = "SELECT * FROM cardindex WHERE Marker = '" + Number + "'";
-            JSON.Send(JSONFlags.Select, query);
+            JSON.Send(query, JSONFlags.Select);
             CardItems = JSON.Decode();
             
             //Подумать над сепаратором между карточками (отображаются на форме внизу при открытой карточке)
@@ -450,14 +450,14 @@ namespace RusDictionary.Modules
             CardImage = DecodeImageFromDB(CardItems[0].Img);
             CardText = CardItems[0].ImgText;
             query = "SELECT Symbol FROM letter WHERE ID = " + CardSymbol;
-            JSON.Send(JSONFlags.Select, query);
+            JSON.Send(query, JSONFlags.Select);
             CardSymbol = "Буква: " + JSON.Decode()[0].Symbol;
             query = "SELECT CardSeparator FROM cardseparator WHERE BoxNumber = " + CardNumberBox;
-            JSON.Send(JSONFlags.Select, query);
+            JSON.Send(query, JSONFlags.Select);
             CardFirstSeparator = "Первый разделитель: " + JSON.Decode()[0].CardSeparator;
             CardLastSeparator = "Последний разделитель: " + JSON.Decode().Last().CardSeparator;
             query = "SELECT NumberBox FROM box WHERE ID = " + CardNumberBox;
-            JSON.Send(JSONFlags.Select, query);
+            JSON.Send(query, JSONFlags.Select);
             CardNumberBox = "Ящик: " + JSON.Decode()[0].NumberBox;            
         }
         /// <summary>
@@ -495,7 +495,7 @@ namespace RusDictionary.Modules
         private void buTest_Click(object sender, EventArgs e)
         {
             string query = "UPDATE `cardindex` SET `Notes` = 'Test' WHERE `Marker` = '5770005'";
-            JSON.Send(JSONFlags.Update, query);
+            JSON.Send(query, JSONFlags.Update);
         }
 
         private void buCardIndexListDelete_Click(object sender, EventArgs e)
@@ -509,7 +509,7 @@ namespace RusDictionary.Modules
             {
                 string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
                 string query = "UPDATE `cardindex` SET `Marker` = is NULL,`CardSeparator` = is NULL,`NumberBox` = is NULL,`Symbol` = is NULL,`img` = is NULL, `imgText` = is NULL, `Notes` = is NULL, WHERE `Marker` = '" + NumberCardForDelete[2] + "'";                
-                JSON.Send(JSONFlags.Update, query);
+                JSON.Send(query, JSONFlags.Update);
             }
         }
 

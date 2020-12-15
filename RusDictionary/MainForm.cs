@@ -248,8 +248,8 @@ namespace RusDictionary
         {                   
             try
             {
-                //string query = "SELECT 1";
-                //JSON.Send(MainForm.URL + query);
+                string query = "SELECT 1";
+                JSON.Send(query);
                 StatusConnect = true;
             }
             catch
