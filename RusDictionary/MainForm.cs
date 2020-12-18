@@ -249,7 +249,7 @@ namespace RusDictionary
             try
             {
                 string query = "SELECT 1";
-                JSON.Send(query);
+                JSON.Send(query, JSONFlags.Select);
                 StatusConnect = true;
             }
             catch

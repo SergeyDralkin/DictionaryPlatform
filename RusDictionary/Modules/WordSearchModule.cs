@@ -19,8 +19,8 @@ namespace RusDictionary.Modules
         }
         void ReadingHTM()
         {
-            //string query = "DELETE FROM dictionaryentries";
-            //JSON.Send(query, JSONFlags.Delete);
+            string query = "TRUNCATE TABLE dictionaryentries";
+            JSON.Send(query, JSONFlags.Truncate);
 
             StringReader sr = new StringReader(Properties.Resources.tom2);
             string line;
@@ -190,10 +190,19 @@ namespace RusDictionary.Modules
                 name = name.Replace("'", "");
                 pomet = pomet.Replace("'", "");
                 description = description.Replace("'", "");
-                tbWordSearch_Text.Text += name + "---";
+                /*name = name.Replace("#", "");
+                pomet = pomet.Replace("#", "");
+                description = description.Replace("#", "");
+                name = name.Replace("&lt;", "");
+                pomet = pomet.Replace("&lt;", "");
+                description = description.Replace("&lt;", "");
+                name = name.Replace("&gt;", "");
+                pomet = pomet.Replace("&gt;", "");
+                description = description.Replace("&gt;", "");*/
+                /*tbWordSearch_Text.Text += name + "---";
                 tbWordSearch_Text.Text += pomet + "---";
-                tbWordSearch_Text.Text += description + "\r\n";
-                //AddBD(name, pomet, description);
+                tbWordSearch_Text.Text += description + "\r\n";*/
+                AddBD(name, pomet, description);
             }
         }
         string ClearTags(string s) // Очищение тагов
@@ -235,7 +244,7 @@ namespace RusDictionary.Modules
         {
             string query = "INSERT INTO dictionaryentries (`NAME`, `POMET`, `DEFINITION`) VALUES ('" + nam + "', '" + pom + "', '" + def + "')";
             // объект для выполнения SQL-запроса
-            JSON.Send(query, JSONFlags.Insert);
+            JSON.Send(System.Net.WebUtility.UrlEncode(query), JSONFlags.Insert);
         }
         private void buWordSearch_Read_Click(object sender, EventArgs e)
         {

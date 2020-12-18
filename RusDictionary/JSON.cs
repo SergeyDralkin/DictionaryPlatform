@@ -14,7 +14,7 @@ namespace RusDictionary
         /// </summary>
         /// <param name="flag">Тип запроса</param>
         /// <param name="query">Ссылка с запросом</param>
-        public static void Send(string query, JSONFlags flag = 0)
+        public static void Send(string query, JSONFlags flag)
         {
             ReturnJSON = null;
             WebRequest req = WebRequest.Create(SendURL(flag) + query.Replace(" ", "%20"));
@@ -55,6 +55,10 @@ namespace RusDictionary
                 case JSONFlags.Insert:
                     {
                         return MainForm.URL + "/?property=insert&query=";
+                    }
+                case JSONFlags.Truncate:
+                    {
+                        return MainForm.URL + "/?property=truncate&query=";
                     }
                 default:
                     {

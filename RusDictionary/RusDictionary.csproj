@@ -71,6 +71,7 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
