@@ -19,39 +19,81 @@ namespace RusDictionary.Modules
         }
         void ReadingHTM()
         {
+            //string query = "DELETE FROM dictionaryentries";
+            //JSON.Send(query, JSONFlags.Delete);
+
             StringReader sr = new StringReader(Properties.Resources.tom2);
             string line;
-            bool next = true; // Переключатель завершения считывания
-            int count = 0; // Количество строк для считывания
-            int globCount = 0; // Номера словарных статей
+            //bool next = true; // Переключатель завершения считывания
+            //int count = 0; // Количество строк для считывания
+           // int globCount = 0; // Количество строк для считывания
             bool read = false; // Переключатель считывания статей
             string dictionaryEntry = "";
-            while ((line = sr.ReadLine()) != null && next)
+            string tmp = "";
+            bool newEntry = true;
+            bool mainWord = false;
+
+            while ((line = sr.ReadLine()) != null /*&& next*/)
             {
                 if (line.Contains("<p"))
                 {
                     read = true;
-                }
-                if (line.Contains("<b>"))
-                {
-                    globCount++;
-                    DictionaryEntryDivide(dictionaryEntry);
-                    dictionaryEntry = "";
+                    if (line.Contains("<b"))
+                    {
+                        mainWord = true;
+                    }
                 }
                 if (read)
                 {
-                    dictionaryEntry += line;
+                    tmp += line;
                 }
                 if (line.Contains("</p"))
                 {
+                    if (newEntry)
+                    {
+                        dictionaryEntry = tmp;
+                        tmp = "";
+                        newEntry = false;
+                    }
+                    else
+                    {
+                        if (tmp.Contains("<b") && mainWord)
+                        {
+                            newEntry = true;
+                        }
+                        else
+                        {
+                            dictionaryEntry += tmp;
+                            tmp = "";
+                        }
+                    }
+                    mainWord = false;
                     read = false;
                 }
-                count++;
-                if (count > 1500)
+                if (!read && dictionaryEntry != "" && newEntry)
                 {
-                    next = false;
+                    DictionaryEntryDivide(dictionaryEntry);
+                    DictionaryEntryDivide(tmp);
+                    //globCount++;
+                    dictionaryEntry = "";
+                    tmp = "";
                 }
+                //count++;
+                //if (count > 1500)
+                //{
+                //    next = false;
+                //}
             }
+            //globCount = globCount;
+            //List<JSONArray> allWords = new List<JSONArray>();
+            //query = "SELECT ID FROM dictionaryentries";
+            //JSON.Send(query, JSONFlags.Select);
+            //allWords = JSON.Decode();
+            //for(int i = 0; i < allWords.Count; i++)
+            //{
+            //    query = "UPDATE dictionaryentries SET ID = '" + (i + 1).ToString() + "' ORDER BY ID";
+            //    JSON.Send(query, JSONFlags.Update);
+            //}
         }
         /// <summary>
         /// Разбиение словарной статьи
@@ -76,20 +118,47 @@ namespace RusDictionary.Modules
             }
             forExit = true;
             i = 0;
-            while (forExit && i < s.Length - 4) // Поиск конечного индекса
+            while (forExit && i < s.Length - 5) // Поиск конечного индекса
             {
-                if (s.Substring(i, 4) == "</b>")
+                if (s.Substring(i, 5) == ",</b>")
                 {
-                    finishIndex = i - 1;
+                    finishIndex = i;
                     forExit = false;
                 }
                 i++;
             }
+            if (i >= s.Length - 5)
+            {
+                forExit = true;
+                i = 0;
+                while (forExit && i < s.Length - 4) // Поиск конечного индекса
+                {
+                    if (s.Substring(i, 5) == ".</b>")
+                    {
+                        finishIndex = i + 1;
+                        forExit = false;
+                    }
+                    i++;
+                }
+            }
+            if (i >= s.Length - 5)
+            {
+                forExit = true;
+                i = 0;
+                while (forExit && i < s.Length - 4) // Поиск конечного индекса
+                {
+                    if (s.Substring(i, 4) == "</b>")
+                    {
+                        finishIndex = i;
+                        forExit = false;
+                    }
+                    i++;
+                }
+            }
             if (finishIndex != 0 && finishIndex > startIndex) // Вывод заголовочного слова
             {
-                name = s.Substring(startIndex, finishIndex - startIndex) + "\r\n";
+                name = s.Substring(startIndex, finishIndex - startIndex);
                 name = ClearTags(name);
-                tbWordSearch_Text.Text += name;
                 forExit = true;
                 i = finishIndex;
                 int endOfPometIndex = 0;
@@ -97,27 +166,39 @@ namespace RusDictionary.Modules
                 {
                     if (s.Substring(i, 4) == "</i>")
                     {
-                        endOfPometIndex = i - 1;
+                        endOfPometIndex = i;
                         forExit = false;
                     }
                     i++;
                 }
                 if (finishIndex < endOfPometIndex)
                 {
-                    pomet = s.Substring(finishIndex + 5, endOfPometIndex - (finishIndex + 5)) + "\r\n"; // Вывод помет
+                    int tmp = endOfPometIndex - (finishIndex + 5);
+                    if (tmp < 0) tmp = 0;
+                    pomet = s.Substring(finishIndex + 5, tmp); // Вывод помет
                     pomet = ClearTags(pomet);
-                    tbWordSearch_Text.Text += pomet;
-                    description = s.Substring(endOfPometIndex + 5, s.Length - (endOfPometIndex + 5)) + "\r\n"; // Вывод описания
+                    tmp = s.Length - (endOfPometIndex + 5);
+                    if (tmp < 0) tmp = 0;
+                    description = s.Substring(endOfPometIndex + 4, tmp + 1); // Вывод описания
                     description = ClearTags(description);
-                    tbWordSearch_Text.Text += description;
                 }
+                if (endOfPometIndex == 0)
+                {
+                    description = s.Substring(finishIndex, s.Length - finishIndex);
+                    description = ClearTags(description);
+                }
+                name = name.Replace("'", "");
+                pomet = pomet.Replace("'", "");
+                description = description.Replace("'", "");
+                tbWordSearch_Text.Text += name + "---";
+                tbWordSearch_Text.Text += pomet + "---";
+                tbWordSearch_Text.Text += description + "\r\n";
+                //AddBD(name, pomet, description);
             }
         }
         string ClearTags(string s) // Очищение тагов
         {
             string outValue = s;
-
-            bool findTag;
             int i;
             int tagBegin;
             int tagEnd;
@@ -126,24 +207,23 @@ namespace RusDictionary.Modules
             {
                 tagBegin = -1;
                 tagEnd = -1;
-                findTag = true;
                 i = 0;
-                while (findTag && i < outValue.Length)
+                while (i < outValue.Length)
                 {
                     if (outValue[i].ToString() == "<")
                     {
                         tagBegin = i;
+
                     }
                     if (outValue[i].ToString() == ">")
                     {
                         tagEnd = i + 1;
-                        findTag = false;
                     }
                     i++;
                 }
-                if (tagBegin != -1 /*&& tagEnd != -1*/)
+                if (tagBegin != -1)
                 {
-                    if (tagEnd == -1) tagEnd = outValue.Length - 1;
+                    if (tagEnd <= tagBegin) tagEnd = outValue.Length - 1;
                     tag = outValue.Substring(tagBegin, tagEnd - tagBegin);
                     outValue = outValue.Replace(tag, "");
                 }
@@ -151,10 +231,16 @@ namespace RusDictionary.Modules
             }
             return outValue;
         }
-
+        void AddBD(string nam, string pom, string def)
+        {
+            string query = "INSERT INTO dictionaryentries (`NAME`, `POMET`, `DEFINITION`) VALUES ('" + nam + "', '" + pom + "', '" + def + "')";
+            // объект для выполнения SQL-запроса
+            JSON.Send(query, JSONFlags.Insert);
+        }
         private void buWordSearch_Read_Click(object sender, EventArgs e)
         {
             ReadingHTM();
+            MessageBox.Show("Готово");
         }
         List<JSONArray> MainWords = new List<JSONArray>();
         List<string> FindedWords = new List<string>();
