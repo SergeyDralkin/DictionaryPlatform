@@ -32,10 +32,18 @@ namespace RusDictionary.Modules
             string tmp = "";
             bool newEntry = true;
             bool mainWord = false;
-
+            bool table = false;
             while ((line = sr.ReadLine()) != null /*&& next*/)
             {
-                if (line.Contains("<p"))
+                if (line.Contains("<table"))
+                {
+                    table = true;
+                }
+                if (line.Contains("</table>"))
+                {
+                    table = false;
+                }
+                if (line.Contains("<p") && !table)
                 {
                     read = true;
                     if (line.Contains("<b>"))
@@ -46,8 +54,9 @@ namespace RusDictionary.Modules
                 if (read)
                 {
                     tmp += line;
+                    //dictionaryEntry += line;
                 }
-                if (line.Contains("</p"))
+                if (line.Contains("</p") && !table)
                 {
                     if (newEntry)
                     {
@@ -72,11 +81,14 @@ namespace RusDictionary.Modules
                 }
                 if (!read && dictionaryEntry != "" && newEntry)
                 {
-                    DictionaryEntryDivide(dictionaryEntry);
-                    DictionaryEntryDivide(tmp);
                     //globCount++;
-                    dictionaryEntry = "";
+                    //tbText.Text += dictionaryEntry + "\r\n" + "\r\n";
+                    DictionaryEntryDivide(dictionaryEntry);
+                    dictionaryEntry = tmp;
+                    //DictionaryEntryDivide(tmp);
+                    //dictionaryEntry = "";
                     tmp = "";
+                    newEntry = false;
                 }
                 //count++;
                 //if (count > 1500)
