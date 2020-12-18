@@ -38,7 +38,7 @@ namespace RusDictionary.Modules
                 if (line.Contains("<p"))
                 {
                     read = true;
-                    if (line.Contains("<b"))
+                    if (line.Contains("<b>"))
                     {
                         mainWord = true;
                     }
@@ -57,7 +57,7 @@ namespace RusDictionary.Modules
                     }
                     else
                     {
-                        if (tmp.Contains("<b") && mainWord)
+                        if (tmp.Contains("<b>") && mainWord)
                         {
                             newEntry = true;
                         }
@@ -85,15 +85,6 @@ namespace RusDictionary.Modules
                 //}
             }
             //globCount = globCount;
-            //List<JSONArray> allWords = new List<JSONArray>();
-            //query = "SELECT ID FROM dictionaryentries";
-            //JSON.Send(query, JSONFlags.Select);
-            //allWords = JSON.Decode();
-            //for(int i = 0; i < allWords.Count; i++)
-            //{
-            //    query = "UPDATE dictionaryentries SET ID = '" + (i + 1).ToString() + "' ORDER BY ID";
-            //    JSON.Send(query, JSONFlags.Update);
-            //}
         }
         /// <summary>
         /// Разбиение словарной статьи
@@ -236,8 +227,10 @@ namespace RusDictionary.Modules
                     tag = outValue.Substring(tagBegin, tagEnd - tagBegin);
                     outValue = outValue.Replace(tag, "");
                 }
-
             }
+            outValue = outValue.Replace("i>", "");
+            outValue = outValue.Replace("sup>", "");
+            outValue = outValue.Replace("/p>", "");
             return outValue;
         }
         void AddBD(string nam, string pom, string def)
