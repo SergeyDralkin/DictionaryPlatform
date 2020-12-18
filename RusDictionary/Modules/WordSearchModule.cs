@@ -275,7 +275,8 @@ namespace RusDictionary.Modules
         }
         void ShowResults()
         {
-            if(FindedWords.Count != 0)
+            tbWordSearch_FindedWords.Text = "";
+            if (FindedWords.Count != 0)
             {
                 string query;
                 for (int i = 0; i < FindedWords.Count; i++)
