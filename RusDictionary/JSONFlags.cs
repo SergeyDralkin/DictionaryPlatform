@@ -24,6 +24,10 @@ namespace RusDictionary
         /// <summary>
         /// Вставить данные в таблицу
         /// </summary>
-        Insert = 3
+        Insert = 3,
+        /// <summary>
+        /// Очистить таблицу со сбросом автоинкримента
+        /// </summary>
+        Truncate = 4
     }
 }
