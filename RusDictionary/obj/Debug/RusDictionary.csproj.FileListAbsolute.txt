@@ -123,3 +123,8 @@ C:\Users\treky\Desktop\DeadDed\RusDictionary\bin\Debug\CsvHelper.dll
 C:\Users\treky\Desktop\DeadDed\RusDictionary\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\treky\Desktop\DeadDed\RusDictionary\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\treky\Desktop\DeadDed\RusDictionary\bin\Debug\CsvHelper.xml
+D:\DeadDed\RusDictionary\bin\Debug\Resources\Ukaz_23a.csv
+D:\DeadDed\RusDictionary\bin\Debug\CsvHelper.dll
+D:\DeadDed\RusDictionary\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\DeadDed\RusDictionary\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\DeadDed\RusDictionary\bin\Debug\CsvHelper.xml

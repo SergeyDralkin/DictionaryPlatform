@@ -1576,7 +1576,7 @@
             this.laWait.Name = "laWait";
             this.laWait.Size = new System.Drawing.Size(282, 28);
             this.laWait.TabIndex = 1;
-            this.laWait.Text = "Выполняется запрос, пожалуйства, подождите";
+            this.laWait.Text = "Выполняется задача, пожалуйства, подождите";
             this.laWait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // MainForm
