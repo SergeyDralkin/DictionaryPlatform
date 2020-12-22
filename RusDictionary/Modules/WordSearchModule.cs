@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace RusDictionary.Modules
 {
@@ -267,7 +268,19 @@ namespace RusDictionary.Modules
         }
         private void buWordSearch_Read_Click(object sender, EventArgs e)
         {
-            ReadingHTM();
+            Program.f1.PictAndLableWait(true);
+            //Thread myThread = new Thread(new Thread(() => ReadingHTM()));
+
+            List<Thread> massThread = new List<Thread>();
+            massThread.Add(new Thread(() => ReadingHTM()));
+            massThread[0].Start();
+            while (massThread[0].IsAlive)
+            {
+                Thread.Sleep(1);
+                Application.DoEvents();
+            }
+            massThread.Clear();
+            Program.f1.PictAndLableWait(false);
             MessageBox.Show("Готово");
         }
         List<JSONArray> MainWords = new List<JSONArray>();
