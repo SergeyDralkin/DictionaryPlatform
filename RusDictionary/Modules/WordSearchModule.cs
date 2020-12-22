@@ -130,7 +130,7 @@ namespace RusDictionary.Modules
                 }
                 i++;
             }
-            if (i >= s.Length - 5)
+            if (forExit)
             {
                 forExit = true;
                 i = 0;
@@ -144,13 +144,27 @@ namespace RusDictionary.Modules
                     i++;
                 }
             }
-            if (i >= s.Length - 5)
+            if (forExit)
             {
                 forExit = true;
                 i = 0;
-                while (forExit && i < s.Length - 4) // Поиск конечного индекса
+                while (forExit && i < s.Length - 5) // Поиск конечного индекса
                 {
-                    if (s.Substring(i, 4) == "</b>")
+                    if (s.Substring(i, 4) == "</b>" && s.Substring(i, 5) == "</b>#")
+                    {
+                        finishIndex = i;
+                        forExit = false;
+                    }
+                    i++;
+                }
+            }
+            else
+            {
+                forExit = true;
+                i = 0;
+                while (forExit && i < s.Length - 5) // Поиск конечного индекса
+                {
+                    if (s.Substring(i, 4) == "</b>" && i < finishIndex && s.Substring(i, 5) == "</b>#")
                     {
                         finishIndex = i;
                         forExit = false;
@@ -283,7 +297,7 @@ namespace RusDictionary.Modules
                 {
                     MainWords.Clear();
                     query = "SELECT * FROM dictionaryentries WHERE NAME = '" + FindedWords[i] + "'";
-                    JSON.Send(query, JSONFlags.Select);
+                    JSON.Send(System.Net.WebUtility.UrlEncode(query), JSONFlags.Select);
                     MainWords = JSON.Decode();
                     for (int j = 0; j < MainWords.Count; j++)
                     {
