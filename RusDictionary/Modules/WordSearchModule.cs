@@ -150,7 +150,7 @@ namespace RusDictionary.Modules
                 i = 0;
                 while (forExit && i < s.Length - 5) // Поиск конечного индекса
                 {
-                    if (s.Substring(i, 4) == "</b>" && s.Substring(i, 5) == "</b>#")
+                    if (s.Substring(i, 4) == "</b>" && s.Substring(i, 5) != "</b>#")
                     {
                         finishIndex = i;
                         forExit = false;
@@ -164,7 +164,7 @@ namespace RusDictionary.Modules
                 i = 0;
                 while (forExit && i < s.Length - 5) // Поиск конечного индекса
                 {
-                    if (s.Substring(i, 4) == "</b>" && i < finishIndex && s.Substring(i, 5) == "</b>#")
+                    if (s.Substring(i, 4) == "</b>" && i < finishIndex && s.Substring(i, 5) != "</b>#")
                     {
                         finishIndex = i;
                         forExit = false;
