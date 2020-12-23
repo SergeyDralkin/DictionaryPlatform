@@ -36,7 +36,7 @@ namespace RusDictionary.Modules
             bool table = false;
             while ((line = sr.ReadLine()) != null /*&& next*/)
             {
-                if (line.Contains("<table"))
+                if (line.Contains("<table")) // Отброс таблиц
                 {
                     table = true;
                 }
@@ -44,20 +44,53 @@ namespace RusDictionary.Modules
                 {
                     table = false;
                 }
-                if (line.Contains("<p") && !table)
+                if (line.Contains("<p") && !table) // Поиск заглавных слов
                 {
                     read = true;
                     if (line.Contains("<b>"))
                     {
-                        mainWord = true;
+                        bool forExit = true;
+                        int i = 0;
+                        int start = 0;
+                        while (forExit && i < line.Length - 3)
+                        {
+                            if (line.Substring(i, 3) == "<b>")
+                            {
+                                start = i + 3;
+                                forExit = false;
+                            }
+                            i++;
+                        }
+                        string nam = line.Substring(start);
+                        int check = 0;
+                        int max = 0;
+                        for (i = 0; i < nam.Length; i++)
+                        {
+                            string s = nam[i].ToString();
+                            if (s.Any(char.IsUpper))
+                            {
+                                check++;
+                            }
+                            else
+                            {
+                                check = 0;
+                            }
+                            if (max < check)
+                            {
+                                max = check;
+                            }
+                        }
+                        if (max > 1)
+                        {
+                            mainWord = true;
+                        }
                     }
                 }
                 if (read)
                 {
                     tmp += line;
-                    //dictionaryEntry += line;
                 }
-                if (line.Contains("</p") && !table)
+                if (line.Contains("</p") && !table) // Переход между абзацами
                 {
                     if (newEntry)
                     {
@@ -73,26 +106,27 @@ namespace RusDictionary.Modules
                         }
                         else
                         {
-                            dictionaryEntry += tmp;
+                            if (!tmp.Contains("Словарь русского яз. XI—XVII"))
+                            {
+                                dictionaryEntry += tmp;
+                            }
                             tmp = "";
                         }
                     }
                     mainWord = false;
                     read = false;
                 }
-                if (!read && dictionaryEntry != "" && newEntry)
+                if (!read && dictionaryEntry != "" && newEntry) // Обработка статьи
                 {
                     //globCount++;
                     //tbText.Text += dictionaryEntry + "\r\n" + "\r\n";
                     DictionaryEntryDivide(dictionaryEntry);
                     dictionaryEntry = tmp;
-                    //DictionaryEntryDivide(tmp);
-                    //dictionaryEntry = "";
                     tmp = "";
                     newEntry = false;
                 }
                 //count++;
-                //if (count > 1500)
+                //if (count > 2500)
                 //{
                 //    next = false;
                 //}
@@ -111,6 +145,10 @@ namespace RusDictionary.Modules
             string name = "";
             string pomet = "";
             string description = "";
+            //string partOfSpeech = "";
+            //string rod = "";
+            //string defenition = "";
+            //string example = "";
             while (forExit && i < s.Length - 3) // Поиск начального индекса
             {
                 if (s.Substring(i, 3) == "<b>")
@@ -177,6 +215,7 @@ namespace RusDictionary.Modules
             {
                 name = s.Substring(startIndex, finishIndex - startIndex);
                 name = ClearTags(name);
+                //tbText.Text += name /*+ "\r\n"*/;
                 forExit = true;
                 i = finishIndex;
                 int endOfPometIndex = 0;
@@ -191,14 +230,16 @@ namespace RusDictionary.Modules
                 }
                 if (finishIndex < endOfPometIndex)
                 {
-                    int tmp = endOfPometIndex - (finishIndex + 5);
+                    int tmp = endOfPometIndex - (finishIndex + 4);
                     if (tmp < 0) tmp = 0;
-                    pomet = s.Substring(finishIndex + 5, tmp); // Вывод помет
+                    pomet = s.Substring(finishIndex + 4, tmp); // Вывод помет
                     pomet = ClearTags(pomet);
-                    tmp = s.Length - (endOfPometIndex + 5);
+                    //tbText.Text += pomet /*+ "\r\n"*/;
+                    tmp = s.Length - (endOfPometIndex + 4);
                     if (tmp < 0) tmp = 0;
-                    description = s.Substring(endOfPometIndex + 4, tmp + 1); // Вывод описания
+                    description = s.Substring(endOfPometIndex + 4, tmp); // Вывод описания
                     description = ClearTags(description);
+                    //tbText.Text += description/*+ "\r\n"*/;
                 }
                 if (endOfPometIndex == 0)
                 {
@@ -208,18 +249,48 @@ namespace RusDictionary.Modules
                 name = name.Replace("'", "");
                 pomet = pomet.Replace("'", "");
                 description = description.Replace("'", "");
-                /*name = name.Replace("#", "");
-                pomet = pomet.Replace("#", "");
-                description = description.Replace("#", "");
-                name = name.Replace("&lt;", "");
-                pomet = pomet.Replace("&lt;", "");
-                description = description.Replace("&lt;", "");
-                name = name.Replace("&gt;", "");
-                pomet = pomet.Replace("&gt;", "");
-                description = description.Replace("&gt;", "");*/
-                /*tbWordSearch_Text.Text += name + "---";
-                tbWordSearch_Text.Text += pomet + "---";
-                tbWordSearch_Text.Text += description + "\r\n";*/
+                // Тут код
+                if (name.Contains("см. "))
+                {
+                    forExit = true;
+                    i = 0;
+                    int st = 0;
+                    while (forExit && i < name.Length - 4)
+                    {
+                        if (name.Substring(i, 4) == "см. ")
+                        {
+                            st = i;
+                            forExit = false;
+                        }
+                        i++;
+                    }
+                    pomet = name.Substring(st, name.Length - st) + pomet;
+                    name = name.Substring(0, st);
+                }
+                string[] pmt = { "м.", "с.", "ж.", "1.", "2.", "3.", "4.", "5.", "1", "2", "3", "4", "5" };
+                for (int j = 0; j < pmt.Length; j++)
+                {
+                    if (name.Contains(pmt[j]))
+                    {
+                        name = name.Replace(pmt[j], "");
+                        if (!pomet.Contains(pmt[j]))
+                        {
+                            pomet = pmt[j] + " " + pomet;
+                        }
+                    }
+                }
+                forExit = true;
+                while (forExit)
+                {
+                    if (name[name.Length - 1] == ',' || name[name.Length - 1] == ' ' || name[name.Length - 1] == '.')
+                    {
+                        name = name.Substring(0, name.Length - 1);
+                    }
+                    else
+                    {
+                        forExit = false;
+                    }
+                }
                 AddBD(name, pomet, description);
             }
         }
@@ -258,6 +329,7 @@ namespace RusDictionary.Modules
             outValue = outValue.Replace("i>", "");
             outValue = outValue.Replace("sup>", "");
             outValue = outValue.Replace("/p>", "");
+            outValue = outValue.Replace(">", "");
             return outValue;
         }
         void AddBD(string nam, string pom, string def)
@@ -269,8 +341,6 @@ namespace RusDictionary.Modules
         private void buWordSearch_Read_Click(object sender, EventArgs e)
         {
             Program.f1.PictAndLableWait(true);
-            //Thread myThread = new Thread(new Thread(() => ReadingHTM()));
-
             List<Thread> massThread = new List<Thread>();
             massThread.Add(new Thread(() => ReadingHTM()));
             massThread[0].Start();
@@ -285,37 +355,48 @@ namespace RusDictionary.Modules
         }
         List<JSONArray> MainWords = new List<JSONArray>();
         List<string> FindedWords = new List<string>();
+        List<JSONArray> Pomets = new List<JSONArray>();
+        List<string> FindedPomets = new List<string>();
+        List<JSONArray> Descriptions = new List<JSONArray>();
+        List<string> FindedDescriptions = new List<string>();
         void FillMainWordsList()
         {
             MainWords.Clear();
+            Pomets.Clear();
+            Descriptions.Clear();
             FindedWords.Clear();
+            FindedPomets.Clear();
+            FindedDescriptions.Clear();
             string query = "SELECT NAME FROM dictionaryentries";
             JSON.Send(query, JSONFlags.Select);
             MainWords = JSON.Decode();
-            for(int i = 0; i < MainWords.Count; i++)
+            query = "SELECT POMET FROM dictionaryentries";
+            JSON.Send(query, JSONFlags.Select);
+            Pomets = JSON.Decode();
+            query = "SELECT DEFINITION FROM dictionaryentries";
+            JSON.Send(query, JSONFlags.Select);
+            Descriptions = JSON.Decode();
+            for (int i = 0; i < MainWords.Count; i++)
             {
                 if(MainWords[i].Name.Contains(tbWordSearch_SearchingWord.Text))
                 {
                     FindedWords.Add(MainWords[i].Name);
+                    FindedPomets.Add(Pomets[i].Pomet);
+                    FindedDescriptions.Add(Descriptions[i].Definition);
                 }
             }
+            MainWords.Clear();
+            Pomets.Clear();
+            Descriptions.Clear();
         }
         void ShowResults()
         {
             tbWordSearch_FindedWords.Text = "";
             if (FindedWords.Count != 0)
             {
-                string query;
                 for (int i = 0; i < FindedWords.Count; i++)
                 {
-                    MainWords.Clear();
-                    query = "SELECT * FROM dictionaryentries WHERE NAME = '" + FindedWords[i] + "'";
-                    JSON.Send(System.Net.WebUtility.UrlEncode(query), JSONFlags.Select);
-                    MainWords = JSON.Decode();
-                    for (int j = 0; j < MainWords.Count; j++)
-                    {
-                        tbWordSearch_FindedWords.Text += MainWords[j].Name + " | " + MainWords[j].Pomet + " | " + MainWords[j].Definition + "\r\n";
-                    }
+                    tbWordSearch_FindedWords.Text += FindedWords[i] + " | " + FindedPomets[i] + " | " + FindedDescriptions[i] + "\r\n";
                 }
             }
         }
