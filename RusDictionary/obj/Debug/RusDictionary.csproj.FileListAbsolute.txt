@@ -128,3 +128,4 @@ D:\DeadDed\RusDictionary\bin\Debug\CsvHelper.dll
 D:\DeadDed\RusDictionary\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 D:\DeadDed\RusDictionary\bin\Debug\System.Threading.Tasks.Extensions.dll
 D:\DeadDed\RusDictionary\bin\Debug\CsvHelper.xml
+C:\Users\kiriz\Documents\GitHub\DeadDed\RusDictionary\bin\Debug\Resources\Source.accdb

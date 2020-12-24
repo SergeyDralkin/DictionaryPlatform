@@ -28,31 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tc_index = new System.Windows.Forms.TabControl();
+            this.tp_menu = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buIndexSource = new System.Windows.Forms.Button();
             this.buIndexBilble = new System.Windows.Forms.Button();
             this.buIndexReturn = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tp_list_sign = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.buIndexBack = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lbName = new System.Windows.Forms.ListBox();
+            this.tp_sign = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tb_note = new System.Windows.Forms.TextBox();
+            this.tb_storage = new System.Windows.Forms.TextBox();
+            this.tb_reprint = new System.Windows.Forms.TextBox();
+            this.tb_date_structure = new System.Windows.Forms.TextBox();
+            this.tb_publication = new System.Windows.Forms.TextBox();
+            this.tb_other_list = new System.Windows.Forms.TextBox();
+            this.tb_translation = new System.Windows.Forms.TextBox();
+            this.tb_language = new System.Windows.Forms.TextBox();
+            this.tb_refind_date = new System.Windows.Forms.TextBox();
+            this.tb_date_source = new System.Windows.Forms.TextBox();
+            this.tb_researcher = new System.Windows.Forms.TextBox();
+            this.tb_author = new System.Windows.Forms.TextBox();
+            this.tb_name_source = new System.Windows.Forms.TextBox();
+            this.tb_synonym = new System.Windows.Forms.TextBox();
             this.laIndex16 = new System.Windows.Forms.Label();
             this.laIndex15 = new System.Windows.Forms.Label();
             this.laIndex14 = new System.Windows.Forms.Label();
@@ -69,9 +70,10 @@
             this.laIndex3 = new System.Windows.Forms.Label();
             this.laIndex4 = new System.Windows.Forms.Label();
             this.laIndex2 = new System.Windows.Forms.Label();
-            this.tb = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tb_cipher = new System.Windows.Forms.TextBox();
+            this.tb_description = new System.Windows.Forms.TextBox();
+            this.tp_list_author = new System.Windows.Forms.TabPage();
+            this.tp_author = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.laIndex17 = new System.Windows.Forms.Label();
             this.laIndex20 = new System.Windows.Forms.Label();
@@ -83,44 +85,42 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pbIndexScript = new System.Windows.Forms.PictureBox();
             this.pbIndexAutor = new System.Windows.Forms.PictureBox();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.lbName = new System.Windows.Forms.ListBox();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tc_index.SuspendLayout();
+            this.tp_menu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tp_list_sign.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tp_sign.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tp_author.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIndexScript)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbIndexAutor)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tc_index
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1024, 554);
-            this.tabControl1.TabIndex = 1;
+            this.tc_index.Controls.Add(this.tp_menu);
+            this.tc_index.Controls.Add(this.tp_list_sign);
+            this.tc_index.Controls.Add(this.tp_sign);
+            this.tc_index.Controls.Add(this.tp_list_author);
+            this.tc_index.Controls.Add(this.tp_author);
+            this.tc_index.Location = new System.Drawing.Point(0, 0);
+            this.tc_index.Name = "tc_index";
+            this.tc_index.SelectedIndex = 0;
+            this.tc_index.Size = new System.Drawing.Size(1024, 554);
+            this.tc_index.TabIndex = 1;
             // 
-            // tabPage1
+            // tp_menu
             // 
-            this.tabPage1.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1016, 528);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tp_menu.Controls.Add(this.tableLayoutPanel1);
+            this.tp_menu.Location = new System.Drawing.Point(4, 22);
+            this.tp_menu.Name = "tp_menu";
+            this.tp_menu.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_menu.Size = new System.Drawing.Size(1016, 528);
+            this.tp_menu.TabIndex = 0;
+            this.tp_menu.Text = "Меню";
+            this.tp_menu.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -178,16 +178,16 @@
             this.buIndexReturn.Text = "Назад";
             this.buIndexReturn.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tp_list_sign
             // 
-            this.tabPage2.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1016, 528);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tp_list_sign.Controls.Add(this.tableLayoutPanel2);
+            this.tp_list_sign.Location = new System.Drawing.Point(4, 22);
+            this.tp_list_sign.Name = "tp_list_sign";
+            this.tp_list_sign.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_list_sign.Size = new System.Drawing.Size(1016, 528);
+            this.tp_list_sign.TabIndex = 1;
+            this.tp_list_sign.Text = "Список источников";
+            this.tp_list_sign.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
             // 
@@ -214,16 +214,25 @@
             this.buIndexBack.Text = "Назад";
             this.buIndexBack.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // lbName
             // 
-            this.tabPage3.Controls.Add(this.tableLayoutPanel3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1016, 528);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.lbName.FormattingEnabled = true;
+            this.lbName.Location = new System.Drawing.Point(3, 3);
+            this.lbName.Name = "lbName";
+            this.lbName.Size = new System.Drawing.Size(885, 459);
+            this.lbName.TabIndex = 2;
+            this.lbName.SelectedIndexChanged += new System.EventHandler(this.lbName_SelectedIndexChanged);
+            // 
+            // tp_sign
+            // 
+            this.tp_sign.Controls.Add(this.tableLayoutPanel3);
+            this.tp_sign.Location = new System.Drawing.Point(4, 22);
+            this.tp_sign.Name = "tp_sign";
+            this.tp_sign.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_sign.Size = new System.Drawing.Size(1016, 528);
+            this.tp_sign.TabIndex = 2;
+            this.tp_sign.Text = "Источник";
+            this.tp_sign.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
             // 
@@ -231,20 +240,20 @@
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel3.Controls.Add(this.textBox16, 1, 15);
-            this.tableLayoutPanel3.Controls.Add(this.textBox15, 1, 14);
-            this.tableLayoutPanel3.Controls.Add(this.textBox14, 1, 13);
-            this.tableLayoutPanel3.Controls.Add(this.textBox13, 1, 12);
-            this.tableLayoutPanel3.Controls.Add(this.textBox12, 1, 11);
-            this.tableLayoutPanel3.Controls.Add(this.textBox11, 1, 10);
-            this.tableLayoutPanel3.Controls.Add(this.textBox10, 1, 9);
-            this.tableLayoutPanel3.Controls.Add(this.textBox9, 1, 8);
-            this.tableLayoutPanel3.Controls.Add(this.textBox8, 1, 7);
-            this.tableLayoutPanel3.Controls.Add(this.textBox7, 1, 6);
-            this.tableLayoutPanel3.Controls.Add(this.textBox6, 1, 5);
-            this.tableLayoutPanel3.Controls.Add(this.textBox5, 1, 4);
-            this.tableLayoutPanel3.Controls.Add(this.textBox4, 1, 3);
-            this.tableLayoutPanel3.Controls.Add(this.textBox3, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.tb_note, 1, 15);
+            this.tableLayoutPanel3.Controls.Add(this.tb_storage, 1, 14);
+            this.tableLayoutPanel3.Controls.Add(this.tb_reprint, 1, 13);
+            this.tableLayoutPanel3.Controls.Add(this.tb_date_structure, 1, 12);
+            this.tableLayoutPanel3.Controls.Add(this.tb_publication, 1, 11);
+            this.tableLayoutPanel3.Controls.Add(this.tb_other_list, 1, 10);
+            this.tableLayoutPanel3.Controls.Add(this.tb_translation, 1, 9);
+            this.tableLayoutPanel3.Controls.Add(this.tb_language, 1, 8);
+            this.tableLayoutPanel3.Controls.Add(this.tb_refind_date, 1, 7);
+            this.tableLayoutPanel3.Controls.Add(this.tb_date_source, 1, 6);
+            this.tableLayoutPanel3.Controls.Add(this.tb_researcher, 1, 5);
+            this.tableLayoutPanel3.Controls.Add(this.tb_author, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.tb_name_source, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.tb_synonym, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.laIndex16, 0, 15);
             this.tableLayoutPanel3.Controls.Add(this.laIndex15, 0, 14);
             this.tableLayoutPanel3.Controls.Add(this.laIndex14, 0, 13);
@@ -261,8 +270,8 @@
             this.tableLayoutPanel3.Controls.Add(this.laIndex3, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.laIndex4, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.laIndex2, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.tb, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.textBox2, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tb_cipher, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tb_description, 1, 1);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 16;
@@ -285,103 +294,103 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1016, 526);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
-            // textBox16
+            // tb_note
             // 
-            this.textBox16.Location = new System.Drawing.Point(206, 483);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(100, 20);
-            this.textBox16.TabIndex = 46;
+            this.tb_note.Location = new System.Drawing.Point(206, 483);
+            this.tb_note.Name = "tb_note";
+            this.tb_note.Size = new System.Drawing.Size(267, 20);
+            this.tb_note.TabIndex = 46;
             // 
-            // textBox15
+            // tb_storage
             // 
-            this.textBox15.Location = new System.Drawing.Point(206, 451);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(100, 20);
-            this.textBox15.TabIndex = 45;
+            this.tb_storage.Location = new System.Drawing.Point(206, 451);
+            this.tb_storage.Name = "tb_storage";
+            this.tb_storage.Size = new System.Drawing.Size(267, 20);
+            this.tb_storage.TabIndex = 45;
             // 
-            // textBox14
+            // tb_reprint
             // 
-            this.textBox14.Location = new System.Drawing.Point(206, 419);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(100, 20);
-            this.textBox14.TabIndex = 44;
+            this.tb_reprint.Location = new System.Drawing.Point(206, 419);
+            this.tb_reprint.Name = "tb_reprint";
+            this.tb_reprint.Size = new System.Drawing.Size(267, 20);
+            this.tb_reprint.TabIndex = 44;
             // 
-            // textBox13
+            // tb_date_structure
             // 
-            this.textBox13.Location = new System.Drawing.Point(206, 387);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(100, 20);
-            this.textBox13.TabIndex = 43;
+            this.tb_date_structure.Location = new System.Drawing.Point(206, 387);
+            this.tb_date_structure.Name = "tb_date_structure";
+            this.tb_date_structure.Size = new System.Drawing.Size(267, 20);
+            this.tb_date_structure.TabIndex = 43;
             // 
-            // textBox12
+            // tb_publication
             // 
-            this.textBox12.Location = new System.Drawing.Point(206, 355);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(100, 20);
-            this.textBox12.TabIndex = 42;
+            this.tb_publication.Location = new System.Drawing.Point(206, 355);
+            this.tb_publication.Name = "tb_publication";
+            this.tb_publication.Size = new System.Drawing.Size(267, 20);
+            this.tb_publication.TabIndex = 42;
             // 
-            // textBox11
+            // tb_other_list
             // 
-            this.textBox11.Location = new System.Drawing.Point(206, 323);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(100, 20);
-            this.textBox11.TabIndex = 41;
+            this.tb_other_list.Location = new System.Drawing.Point(206, 323);
+            this.tb_other_list.Name = "tb_other_list";
+            this.tb_other_list.Size = new System.Drawing.Size(267, 20);
+            this.tb_other_list.TabIndex = 41;
             // 
-            // textBox10
+            // tb_translation
             // 
-            this.textBox10.Location = new System.Drawing.Point(206, 291);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 20);
-            this.textBox10.TabIndex = 40;
+            this.tb_translation.Location = new System.Drawing.Point(206, 291);
+            this.tb_translation.Name = "tb_translation";
+            this.tb_translation.Size = new System.Drawing.Size(267, 20);
+            this.tb_translation.TabIndex = 40;
             // 
-            // textBox9
+            // tb_language
             // 
-            this.textBox9.Location = new System.Drawing.Point(206, 259);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 20);
-            this.textBox9.TabIndex = 39;
+            this.tb_language.Location = new System.Drawing.Point(206, 259);
+            this.tb_language.Name = "tb_language";
+            this.tb_language.Size = new System.Drawing.Size(267, 20);
+            this.tb_language.TabIndex = 39;
             // 
-            // textBox8
+            // tb_refind_date
             // 
-            this.textBox8.Location = new System.Drawing.Point(206, 227);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 38;
+            this.tb_refind_date.Location = new System.Drawing.Point(206, 227);
+            this.tb_refind_date.Name = "tb_refind_date";
+            this.tb_refind_date.Size = new System.Drawing.Size(267, 20);
+            this.tb_refind_date.TabIndex = 38;
             // 
-            // textBox7
+            // tb_date_source
             // 
-            this.textBox7.Location = new System.Drawing.Point(206, 195);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 37;
+            this.tb_date_source.Location = new System.Drawing.Point(206, 195);
+            this.tb_date_source.Name = "tb_date_source";
+            this.tb_date_source.Size = new System.Drawing.Size(267, 20);
+            this.tb_date_source.TabIndex = 37;
             // 
-            // textBox6
+            // tb_researcher
             // 
-            this.textBox6.Location = new System.Drawing.Point(206, 163);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 36;
+            this.tb_researcher.Location = new System.Drawing.Point(206, 163);
+            this.tb_researcher.Name = "tb_researcher";
+            this.tb_researcher.Size = new System.Drawing.Size(267, 20);
+            this.tb_researcher.TabIndex = 36;
             // 
-            // textBox5
+            // tb_author
             // 
-            this.textBox5.Location = new System.Drawing.Point(206, 131);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 35;
+            this.tb_author.Location = new System.Drawing.Point(206, 131);
+            this.tb_author.Name = "tb_author";
+            this.tb_author.Size = new System.Drawing.Size(267, 20);
+            this.tb_author.TabIndex = 35;
             // 
-            // textBox4
+            // tb_name_source
             // 
-            this.textBox4.Location = new System.Drawing.Point(206, 99);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 34;
+            this.tb_name_source.Location = new System.Drawing.Point(206, 99);
+            this.tb_name_source.Name = "tb_name_source";
+            this.tb_name_source.Size = new System.Drawing.Size(267, 20);
+            this.tb_name_source.TabIndex = 34;
             // 
-            // textBox3
+            // tb_synonym
             // 
-            this.textBox3.Location = new System.Drawing.Point(206, 67);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 33;
+            this.tb_synonym.Location = new System.Drawing.Point(206, 67);
+            this.tb_synonym.Name = "tb_synonym";
+            this.tb_synonym.Size = new System.Drawing.Size(267, 20);
+            this.tb_synonym.TabIndex = 33;
             // 
             // laIndex16
             // 
@@ -527,32 +536,42 @@
             this.laIndex2.TabIndex = 1;
             this.laIndex2.Text = "Полное описание";
             // 
-            // tb
+            // tb_cipher
             // 
-            this.tb.Location = new System.Drawing.Point(206, 3);
-            this.tb.Name = "tb";
-            this.tb.Size = new System.Drawing.Size(100, 20);
-            this.tb.TabIndex = 31;
+            this.tb_cipher.Location = new System.Drawing.Point(206, 3);
+            this.tb_cipher.Name = "tb_cipher";
+            this.tb_cipher.Size = new System.Drawing.Size(267, 20);
+            this.tb_cipher.TabIndex = 31;
             // 
-            // textBox2
+            // tb_description
             // 
-            this.textBox2.Location = new System.Drawing.Point(206, 35);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 32;
+            this.tb_description.Location = new System.Drawing.Point(206, 35);
+            this.tb_description.Name = "tb_description";
+            this.tb_description.Size = new System.Drawing.Size(267, 20);
+            this.tb_description.TabIndex = 32;
             // 
-            // tabPage4
+            // tp_list_author
             // 
-            this.tabPage4.BackColor = System.Drawing.Color.SandyBrown;
-            this.tabPage4.Controls.Add(this.tableLayoutPanel4);
-            this.tabPage4.Controls.Add(this.pbIndexScript);
-            this.tabPage4.Controls.Add(this.pbIndexAutor);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1016, 528);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "tabPage4";
+            this.tp_list_author.Location = new System.Drawing.Point(4, 22);
+            this.tp_list_author.Name = "tp_list_author";
+            this.tp_list_author.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_list_author.Size = new System.Drawing.Size(1016, 528);
+            this.tp_list_author.TabIndex = 4;
+            this.tp_list_author.Text = "Список авторов";
+            this.tp_list_author.UseVisualStyleBackColor = true;
+            // 
+            // tp_author
+            // 
+            this.tp_author.BackColor = System.Drawing.Color.SandyBrown;
+            this.tp_author.Controls.Add(this.tableLayoutPanel4);
+            this.tp_author.Controls.Add(this.pbIndexScript);
+            this.tp_author.Controls.Add(this.pbIndexAutor);
+            this.tp_author.Location = new System.Drawing.Point(4, 22);
+            this.tp_author.Name = "tp_author";
+            this.tp_author.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_author.Size = new System.Drawing.Size(1016, 528);
+            this.tp_author.TabIndex = 3;
+            this.tp_author.Text = "Автор";
             // 
             // tableLayoutPanel4
             // 
@@ -658,41 +677,23 @@
             this.pbIndexAutor.TabIndex = 0;
             this.pbIndexAutor.TabStop = false;
             // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1016, 528);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "tabPage5";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // lbName
-            // 
-            this.lbName.FormattingEnabled = true;
-            this.lbName.Location = new System.Drawing.Point(3, 3);
-            this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(885, 459);
-            this.lbName.TabIndex = 2;
-            // 
             // IndexModule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tc_index);
             this.Name = "IndexModule";
             this.Size = new System.Drawing.Size(1024, 554);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tc_index.ResumeLayout(false);
+            this.tp_menu.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.tp_list_sign.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
+            this.tp_sign.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
+            this.tp_author.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIndexScript)).EndInit();
@@ -703,33 +704,33 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl tc_index;
+        private System.Windows.Forms.TabPage tp_menu;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tp_list_sign;
+        private System.Windows.Forms.TabPage tp_sign;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button buIndexSource;
         private System.Windows.Forms.Button buIndexBilble;
         private System.Windows.Forms.Button buIndexBack;
         private System.Windows.Forms.Button buIndexReturn;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TabPage tp_author;
+        private System.Windows.Forms.TabPage tp_list_author;
+        private System.Windows.Forms.TextBox tb_note;
+        private System.Windows.Forms.TextBox tb_storage;
+        private System.Windows.Forms.TextBox tb_reprint;
+        private System.Windows.Forms.TextBox tb_date_structure;
+        private System.Windows.Forms.TextBox tb_publication;
+        private System.Windows.Forms.TextBox tb_other_list;
+        private System.Windows.Forms.TextBox tb_translation;
+        private System.Windows.Forms.TextBox tb_language;
+        private System.Windows.Forms.TextBox tb_refind_date;
+        private System.Windows.Forms.TextBox tb_date_source;
+        private System.Windows.Forms.TextBox tb_researcher;
+        private System.Windows.Forms.TextBox tb_author;
+        private System.Windows.Forms.TextBox tb_name_source;
+        private System.Windows.Forms.TextBox tb_synonym;
         private System.Windows.Forms.Label laIndex16;
         private System.Windows.Forms.Label laIndex15;
         private System.Windows.Forms.Label laIndex14;
@@ -746,8 +747,8 @@
         private System.Windows.Forms.Label laIndex3;
         private System.Windows.Forms.Label laIndex4;
         private System.Windows.Forms.Label laIndex2;
-        private System.Windows.Forms.TextBox tb;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tb_cipher;
+        private System.Windows.Forms.TextBox tb_description;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label laIndex17;
         private System.Windows.Forms.Label laIndex20;
