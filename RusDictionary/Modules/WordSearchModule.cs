@@ -330,6 +330,10 @@ namespace RusDictionary.Modules
             outValue = outValue.Replace("sup>", "");
             outValue = outValue.Replace("/p>", "");
             outValue = outValue.Replace(">", "");
+            outValue = outValue.Replace("&nbsp;", "");
+            outValue = outValue.Replace("&lt;", "<");
+            outValue = outValue.Replace("&gt;", ">");
+            outValue = outValue.Replace("&quot;", "\"");
             return outValue;
         }
         void AddBD(string nam, string pom, string def)
