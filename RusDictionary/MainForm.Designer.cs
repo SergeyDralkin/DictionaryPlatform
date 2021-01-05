@@ -33,6 +33,15 @@
             this.TimerStatusConnect = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.MainTC = new System.Windows.Forms.TabControl();
+            this.tpLogin = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel25 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel26 = new System.Windows.Forms.TableLayoutPanel();
+            this.laLogin = new System.Windows.Forms.Label();
+            this.tbLogin = new System.Windows.Forms.TextBox();
+            this.laPassword = new System.Windows.Forms.Label();
+            this.buLogin = new System.Windows.Forms.Button();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.buSettingLogin = new System.Windows.Forms.Button();
             this.tpMain = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -127,17 +136,16 @@
             this.pbWait = new System.Windows.Forms.PictureBox();
             this.laWait = new System.Windows.Forms.Label();
             this.cdChangeColor = new System.Windows.Forms.ColorDialog();
-            this.tpLogin = new System.Windows.Forms.TabPage();
-            this.tbLogin = new System.Windows.Forms.TextBox();
-            this.buLogin = new System.Windows.Forms.Button();
-            this.laLogin = new System.Windows.Forms.Label();
-            this.tbPassword = new System.Windows.Forms.TextBox();
-            this.laPassword = new System.Windows.Forms.Label();
             this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
             this.indexModule1 = new RusDictionary.Modules.IndexModule();
             this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
+            this.buVisiblePass = new System.Windows.Forms.Button();
+            this.buExitLogin = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.MainTC.SuspendLayout();
+            this.tpLogin.SuspendLayout();
+            this.tableLayoutPanel25.SuspendLayout();
+            this.tableLayoutPanel26.SuspendLayout();
             this.tpMain.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -176,7 +184,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbStatusConnect)).BeginInit();
             this.tableLayoutPanel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbWait)).BeginInit();
-            this.tpLogin.SuspendLayout();
             this.SuspendLayout();
             // 
             // TimerStatusConnect
@@ -213,6 +220,128 @@
             this.MainTC.SelectedIndex = 0;
             this.MainTC.Size = new System.Drawing.Size(1062, 606);
             this.MainTC.TabIndex = 1;
+            // 
+            // tpLogin
+            // 
+            this.tpLogin.BackColor = System.Drawing.Color.SandyBrown;
+            this.tpLogin.Controls.Add(this.tableLayoutPanel25);
+            this.tpLogin.Location = new System.Drawing.Point(4, 22);
+            this.tpLogin.Name = "tpLogin";
+            this.tpLogin.Size = new System.Drawing.Size(1054, 580);
+            this.tpLogin.TabIndex = 6;
+            this.tpLogin.Text = "Логин";
+            // 
+            // tableLayoutPanel25
+            // 
+            this.tableLayoutPanel25.ColumnCount = 3;
+            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel25.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel25.Controls.Add(this.tableLayoutPanel26, 1, 0);
+            this.tableLayoutPanel25.Controls.Add(this.buSettingLogin, 2, 0);
+            this.tableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel25.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel25.Name = "tableLayoutPanel25";
+            this.tableLayoutPanel25.RowCount = 1;
+            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel25.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 580F));
+            this.tableLayoutPanel25.Size = new System.Drawing.Size(1054, 580);
+            this.tableLayoutPanel25.TabIndex = 17;
+            // 
+            // tableLayoutPanel26
+            // 
+            this.tableLayoutPanel26.ColumnCount = 3;
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel26.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel26.Controls.Add(this.laLogin, 0, 1);
+            this.tableLayoutPanel26.Controls.Add(this.tbLogin, 1, 1);
+            this.tableLayoutPanel26.Controls.Add(this.laPassword, 0, 2);
+            this.tableLayoutPanel26.Controls.Add(this.buLogin, 1, 3);
+            this.tableLayoutPanel26.Controls.Add(this.tbPassword, 1, 2);
+            this.tableLayoutPanel26.Controls.Add(this.buVisiblePass, 2, 2);
+            this.tableLayoutPanel26.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel26.Location = new System.Drawing.Point(354, 3);
+            this.tableLayoutPanel26.Name = "tableLayoutPanel26";
+            this.tableLayoutPanel26.RowCount = 5;
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel26.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel26.Size = new System.Drawing.Size(345, 574);
+            this.tableLayoutPanel26.TabIndex = 0;
+            // 
+            // laLogin
+            // 
+            this.laLogin.AutoSize = true;
+            this.laLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.laLogin.Location = new System.Drawing.Point(3, 229);
+            this.laLogin.Name = "laLogin";
+            this.laLogin.Size = new System.Drawing.Size(63, 28);
+            this.laLogin.TabIndex = 12;
+            this.laLogin.Text = "Логин:";
+            this.laLogin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tbLogin
+            // 
+            this.tbLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbLogin.Location = new System.Drawing.Point(72, 232);
+            this.tbLogin.MaxLength = 20;
+            this.tbLogin.Multiline = true;
+            this.tbLogin.Name = "tbLogin";
+            this.tbLogin.Size = new System.Drawing.Size(235, 22);
+            this.tbLogin.TabIndex = 13;
+            this.tbLogin.Text = "DralkinSS";
+            this.tbLogin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // laPassword
+            // 
+            this.laPassword.AutoSize = true;
+            this.laPassword.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.laPassword.Location = new System.Drawing.Point(3, 257);
+            this.laPassword.Name = "laPassword";
+            this.laPassword.Size = new System.Drawing.Size(63, 28);
+            this.laPassword.TabIndex = 14;
+            this.laPassword.Text = "Пароль:";
+            this.laPassword.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buLogin
+            // 
+            this.buLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buLogin.Location = new System.Drawing.Point(72, 288);
+            this.buLogin.Name = "buLogin";
+            this.buLogin.Size = new System.Drawing.Size(235, 51);
+            this.buLogin.TabIndex = 16;
+            this.buLogin.Text = "Войти";
+            this.buLogin.UseVisualStyleBackColor = true;
+            this.buLogin.Click += new System.EventHandler(this.buLogin_Click);
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbPassword.Location = new System.Drawing.Point(72, 260);
+            this.tbPassword.MaxLength = 20;
+            this.tbPassword.Multiline = true;
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
+            this.tbPassword.Size = new System.Drawing.Size(235, 22);
+            this.tbPassword.TabIndex = 15;
+            this.tbPassword.Text = "SS12343";
+            this.tbPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // buSettingLogin
+            // 
+            this.buSettingLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buSettingLogin.Image = global::RusDictionary.Properties.Resources.Setting;
+            this.buSettingLogin.Location = new System.Drawing.Point(1011, 537);
+            this.buSettingLogin.Name = "buSettingLogin";
+            this.buSettingLogin.Size = new System.Drawing.Size(40, 40);
+            this.buSettingLogin.TabIndex = 1;
+            this.buSettingLogin.UseVisualStyleBackColor = true;
+            this.buSettingLogin.Click += new System.EventHandler(this.buSettingLogin_Click);
             // 
             // tpMain
             // 
@@ -313,6 +442,7 @@
             // 
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.buExitLogin, 0, 5);
             this.tableLayoutPanel5.Controls.Add(this.buMainFormSetting, 0, 4);
             this.tableLayoutPanel5.Controls.Add(this.buAuthors, 0, 3);
             this.tableLayoutPanel5.Controls.Add(this.buIndexModule, 0, 2);
@@ -322,12 +452,13 @@
             this.tableLayoutPanel5.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 171);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 5;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel5.RowCount = 6;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(645, 388);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
@@ -336,9 +467,9 @@
             this.buMainFormSetting.BackColor = System.Drawing.Color.SeaShell;
             this.buMainFormSetting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buMainFormSetting.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buMainFormSetting.Location = new System.Drawing.Point(3, 311);
+            this.buMainFormSetting.Location = new System.Drawing.Point(3, 259);
             this.buMainFormSetting.Name = "buMainFormSetting";
-            this.buMainFormSetting.Size = new System.Drawing.Size(639, 74);
+            this.buMainFormSetting.Size = new System.Drawing.Size(639, 58);
             this.buMainFormSetting.TabIndex = 4;
             this.buMainFormSetting.Text = "Настройки программы";
             this.buMainFormSetting.UseVisualStyleBackColor = false;
@@ -349,9 +480,9 @@
             this.buAuthors.BackColor = System.Drawing.Color.SeaShell;
             this.buAuthors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buAuthors.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buAuthors.Location = new System.Drawing.Point(3, 234);
+            this.buAuthors.Location = new System.Drawing.Point(3, 195);
             this.buAuthors.Name = "buAuthors";
-            this.buAuthors.Size = new System.Drawing.Size(639, 71);
+            this.buAuthors.Size = new System.Drawing.Size(639, 58);
             this.buAuthors.TabIndex = 3;
             this.buAuthors.Text = "Авторы";
             this.buAuthors.UseVisualStyleBackColor = false;
@@ -362,9 +493,9 @@
             this.buIndexModule.BackColor = System.Drawing.Color.SeaShell;
             this.buIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buIndexModule.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buIndexModule.Location = new System.Drawing.Point(3, 157);
+            this.buIndexModule.Location = new System.Drawing.Point(3, 131);
             this.buIndexModule.Name = "buIndexModule";
-            this.buIndexModule.Size = new System.Drawing.Size(639, 71);
+            this.buIndexModule.Size = new System.Drawing.Size(639, 58);
             this.buIndexModule.TabIndex = 2;
             this.buIndexModule.Text = "Библиография и указатели на источники";
             this.buIndexModule.UseVisualStyleBackColor = false;
@@ -375,9 +506,9 @@
             this.buWordSearchModule.BackColor = System.Drawing.Color.SeaShell;
             this.buWordSearchModule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buWordSearchModule.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buWordSearchModule.Location = new System.Drawing.Point(3, 80);
+            this.buWordSearchModule.Location = new System.Drawing.Point(3, 67);
             this.buWordSearchModule.Name = "buWordSearchModule";
-            this.buWordSearchModule.Size = new System.Drawing.Size(639, 71);
+            this.buWordSearchModule.Size = new System.Drawing.Size(639, 58);
             this.buWordSearchModule.TabIndex = 1;
             this.buWordSearchModule.Text = "Поиск слов по словарю";
             this.buWordSearchModule.UseVisualStyleBackColor = false;
@@ -391,7 +522,7 @@
             this.buCardIndexModule.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buCardIndexModule.Location = new System.Drawing.Point(3, 3);
             this.buCardIndexModule.Name = "buCardIndexModule";
-            this.buCardIndexModule.Size = new System.Drawing.Size(639, 71);
+            this.buCardIndexModule.Size = new System.Drawing.Size(639, 58);
             this.buCardIndexModule.TabIndex = 0;
             this.buCardIndexModule.Text = "Электронная картотека русского языка XI - XVII вв.";
             this.buCardIndexModule.UseVisualStyleBackColor = false;
@@ -1561,77 +1692,6 @@
             this.laWait.Text = "Выполняется задача, пожалуйства, подождите";
             this.laWait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tpLogin
-            // 
-            this.tpLogin.BackColor = System.Drawing.Color.SandyBrown;
-            this.tpLogin.Controls.Add(this.tbLogin);
-            this.tpLogin.Controls.Add(this.buLogin);
-            this.tpLogin.Controls.Add(this.laLogin);
-            this.tpLogin.Controls.Add(this.tbPassword);
-            this.tpLogin.Controls.Add(this.laPassword);
-            this.tpLogin.Location = new System.Drawing.Point(4, 22);
-            this.tpLogin.Name = "tpLogin";
-            this.tpLogin.Size = new System.Drawing.Size(1054, 580);
-            this.tpLogin.TabIndex = 6;
-            this.tpLogin.Text = "Логин";
-            // 
-            // tbLogin
-            // 
-            this.tbLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLogin.Location = new System.Drawing.Point(400, 241);
-            this.tbLogin.MaxLength = 20;
-            this.tbLogin.Name = "tbLogin";
-            this.tbLogin.Size = new System.Drawing.Size(162, 20);
-            this.tbLogin.TabIndex = 13;
-            this.tbLogin.Text = "DralkinSS";
-            // 
-            // buLogin
-            // 
-            this.buLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buLogin.Location = new System.Drawing.Point(400, 293);
-            this.buLogin.Name = "buLogin";
-            this.buLogin.Size = new System.Drawing.Size(162, 20);
-            this.buLogin.TabIndex = 16;
-            this.buLogin.Text = "Войти";
-            this.buLogin.UseVisualStyleBackColor = true;
-            this.buLogin.Click += new System.EventHandler(this.buLogin_Click);
-            // 
-            // laLogin
-            // 
-            this.laLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.laLogin.AutoSize = true;
-            this.laLogin.Location = new System.Drawing.Point(346, 244);
-            this.laLogin.Name = "laLogin";
-            this.laLogin.Size = new System.Drawing.Size(41, 13);
-            this.laLogin.TabIndex = 12;
-            this.laLogin.Text = "Логин:";
-            // 
-            // tbPassword
-            // 
-            this.tbPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPassword.Location = new System.Drawing.Point(400, 267);
-            this.tbPassword.MaxLength = 20;
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.PasswordChar = '*';
-            this.tbPassword.Size = new System.Drawing.Size(162, 20);
-            this.tbPassword.TabIndex = 15;
-            this.tbPassword.Text = "SS12343";
-            // 
-            // laPassword
-            // 
-            this.laPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.laPassword.AutoSize = true;
-            this.laPassword.Location = new System.Drawing.Point(346, 270);
-            this.laPassword.Name = "laPassword";
-            this.laPassword.Size = new System.Drawing.Size(48, 13);
-            this.laPassword.TabIndex = 14;
-            this.laPassword.Text = "Пароль:";
-            // 
             // cardIndexModule
             // 
             this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
@@ -1658,6 +1718,33 @@
             this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
             this.wordSearchModule1.TabIndex = 0;
             // 
+            // buVisiblePass
+            // 
+            this.buVisiblePass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buVisiblePass.Image = global::RusDictionary.Properties.Resources.EyeClose;
+            this.buVisiblePass.Location = new System.Drawing.Point(310, 257);
+            this.buVisiblePass.Margin = new System.Windows.Forms.Padding(0);
+            this.buVisiblePass.Name = "buVisiblePass";
+            this.buVisiblePass.Size = new System.Drawing.Size(35, 28);
+            this.buVisiblePass.TabIndex = 17;
+            this.buVisiblePass.UseVisualStyleBackColor = true;
+            this.buVisiblePass.Click += new System.EventHandler(this.buVisiblePass_Click);
+            this.buVisiblePass.MouseLeave += new System.EventHandler(this.buVisiblePass_MouseLeave);
+            this.buVisiblePass.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buVisiblePass_MouseMove);
+            // 
+            // buExitLogin
+            // 
+            this.buExitLogin.BackColor = System.Drawing.Color.SeaShell;
+            this.buExitLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buExitLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buExitLogin.Location = new System.Drawing.Point(3, 323);
+            this.buExitLogin.Name = "buExitLogin";
+            this.buExitLogin.Size = new System.Drawing.Size(639, 62);
+            this.buExitLogin.TabIndex = 5;
+            this.buExitLogin.Text = "Выйти";
+            this.buExitLogin.UseVisualStyleBackColor = false;
+            this.buExitLogin.Click += new System.EventHandler(this.buExitLogin_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1673,6 +1760,10 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.MainTC.ResumeLayout(false);
+            this.tpLogin.ResumeLayout(false);
+            this.tableLayoutPanel25.ResumeLayout(false);
+            this.tableLayoutPanel26.ResumeLayout(false);
+            this.tableLayoutPanel26.PerformLayout();
             this.tpMain.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -1724,8 +1815,6 @@
             this.tableLayoutPanel21.ResumeLayout(false);
             this.tableLayoutPanel21.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbWait)).EndInit();
-            this.tpLogin.ResumeLayout(false);
-            this.tpLogin.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1837,6 +1926,11 @@
         private System.Windows.Forms.Label laLogin;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label laPassword;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel25;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel26;
+        private System.Windows.Forms.Button buSettingLogin;
+        private System.Windows.Forms.Button buVisiblePass;
+        private System.Windows.Forms.Button buExitLogin;
     }
 }
 

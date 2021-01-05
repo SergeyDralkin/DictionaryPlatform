@@ -84,6 +84,10 @@ namespace RusDictionary
         /// Список того, что может делать роль пользователя
         /// </summary>
         public static List<JSONArray> CanDoItList = new List<JSONArray>();
+        /// <summary>
+        /// Отобразить пароль
+        /// </summary>
+        bool VisiblePass = false;
         public MainForm()
         {
             InitializeComponent();
@@ -121,6 +125,10 @@ namespace RusDictionary
         {
             laStatus.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             laWait.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            #region Вкладка "Логин"
+            laLogin.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            laPassword.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);            
+            #endregion
             #region Вкладка "Главная"
             label1.Font = new Font("Izhitsa", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);            
@@ -530,7 +538,6 @@ namespace RusDictionary
                                     TMPDot++;
                                 }
                             }
-
                         }
                     }
                 }
@@ -602,7 +609,15 @@ namespace RusDictionary
         {            
             if (Properties.Settings.Default.IP == tbIP.Text && Properties.Settings.Default.Port == tbPort.Text && Properties.Settings.Default.ColorText == label1.ForeColor && Properties.Settings.Default.ColorBackground == tpMain.BackColor && Properties.Settings.Default.ColorTextBox == tbIP.BackColor && Properties.Settings.Default.ColorButton == buAuthors.BackColor)
             {
-                MainTC.SelectedTab = tpMain;
+                if (IfLogin == true)
+                {
+                    MainTC.SelectedTab = tpMain;
+                }
+                else
+                {
+                    MainTC.SelectedTab = tpLogin;
+                }
+                
             }
             else
             {
@@ -622,11 +637,25 @@ namespace RusDictionary
                         Properties.Settings.Default.ColorTextBox = ColorTextBox;
                         Properties.Settings.Default.ColorButton = ColorButton;
                         Properties.Settings.Default.Save();
-                        MainTC.SelectedTab = tpMain;                        
+                        if (IfLogin == true)
+                        {
+                            MainTC.SelectedTab = tpMain;
+                        }
+                        else
+                        {
+                            MainTC.SelectedTab = tpLogin;
+                        }
                         break;
                     case DialogResult.No:
                         FillSetting();
-                        MainTC.SelectedTab = tpMain;
+                        if (IfLogin == true)
+                        {
+                            MainTC.SelectedTab = tpMain;
+                        }
+                        else
+                        {
+                            MainTC.SelectedTab = tpLogin;
+                        }
                         break;
                 }
             }
@@ -716,7 +745,7 @@ namespace RusDictionary
         private void buLogin_Click(object sender, EventArgs e)
         {
             IfLogin = false;
-            List<JSONArray> PasswordList = new List<JSONArray>();
+            List<JSONArray> PasswordList = new List<JSONArray>();            
             string Login = tbLogin.Text.ToString();
             string Password = tbPassword.Text.ToString();            
             if (Login != null && Login != "" && Password != null && Password != "")
@@ -726,26 +755,21 @@ namespace RusDictionary
                 PasswordList = JSON.Decode();
                 try
                 {
-                    if (PasswordList[0].Password.Equals(Password))
+                    if (PasswordList != null)
                     {
-                        query = "SELECT * FROM roles WHERE ID = '" + PasswordList[0].Role + "'";
-                        JSON.Send(query, JSONFlags.Select);
-                        CanDoItList = JSON.Decode();
-                        //UserRole();
-                        //query = "SELECT Код FROM Пользователь WHERE Логин = '" + Login + "'";
-                        //command = new OleDbCommand(query, myConnection);
-                        //IDUser = int.Parse(command.ExecuteScalar().ToString());
-                        //query = "SELECT ФИО FROM Пользователь WHERE Логин = '" + Login + "'";
-                        //command = new OleDbCommand(query, myConnection);
-                        //FIO = command.ExecuteScalar().ToString();
-                        IfLogin = true;
-                        //laLoginNow.Visible = true;
-                        //lilabelExit.Visible = true;
-                        //laLoginNow.Text = "Вы вошли как: " + FIO + ". Роль: " + Role + ".";
-                        //reader.Close();
-                        //ChooseRole();
-                        MainTC.SelectedTab = tpMain;
+                        if (PasswordList[0].Password.Equals(Password))
+                        {
+                            query = "SELECT * FROM roles WHERE ID = '" + PasswordList[0].Role + "'";
+                            JSON.Send(query, JSONFlags.Select);
+                            CanDoItList = JSON.Decode();                            
+                            IfLogin = true;                            
+                            MainTC.SelectedTab = tpMain;
+                        }
                     }
+                    else
+                    {
+                        IfLogin = false;
+                    }                    
                 }
                 catch
                 {
@@ -756,6 +780,60 @@ namespace RusDictionary
             {
                 MessageBox.Show("Не правильно введён логин или пароль. Повторите попытку");
             }
+        }
+
+        private void buSettingLogin_Click(object sender, EventArgs e)
+        {
+            MainTC.SelectedTab = tpSettings;
+        }
+
+        private void buVisiblePass_MouseLeave(object sender, EventArgs e)
+        {
+            switch (VisiblePass)
+            {
+                case true:
+                    buVisiblePass.Image = Properties.Resources.EyeOpen;
+                    break;
+                case false:
+                    buVisiblePass.Image = Properties.Resources.EyeClose;
+                    break;
+            }
+        }
+
+        private void buVisiblePass_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            switch (VisiblePass)
+            {
+                case false:
+                    buVisiblePass.Image = Properties.Resources.EyeOpen;
+                    break;
+                case true:
+                    buVisiblePass.Image = Properties.Resources.EyeClose;
+                    break;
+            }
+        }
+
+        private void buVisiblePass_Click(object sender, EventArgs e)
+        {
+            switch (VisiblePass)
+            {
+                case false:
+                    buVisiblePass.Image = Properties.Resources.EyeOpen;
+                    tbPassword.PasswordChar = '\0';
+                    VisiblePass = true;
+                    break;
+                case true:
+                    buVisiblePass.Image = Properties.Resources.EyeClose;
+                    tbPassword.PasswordChar = '*';
+                    VisiblePass = false;
+                    break;
+            }
+        }
+
+        private void buExitLogin_Click(object sender, EventArgs e)
+        {
+            IfLogin = false;
+            MainTC.SelectedTab = tpLogin;
         }
     }
 }

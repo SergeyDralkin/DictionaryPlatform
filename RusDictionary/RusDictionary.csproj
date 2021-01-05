@@ -196,6 +196,7 @@
     <Content Include="Resources\MainForm\Icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\MainForm\Setting.png" />
     <Content Include="Resources\MainForm\StatusFalse.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
