@@ -68,11 +68,40 @@ namespace RusDictionary.Modules
         /// <summary>
         /// Первый разделитель ящика
         /// </summary>
-        string CardFirstSeparator;
+        string CardSeparator;
         /// <summary>
-        /// Последний разделитель ящика
+        /// Слово карточки
         /// </summary>
-        string CardLastSeparator;
+        string CardWord;
+        /// <summary>
+        /// Связанные со словом словосочения
+        /// </summary>
+        string CardRelatedCombinations;
+        /// <summary>
+        /// Значние слова
+        /// </summary>
+        string CardValue;
+        /// <summary>
+        /// Шифр Источника
+        /// </summary>
+        string CardSourceCode;
+        /// <summary>
+        /// Уточнение к источнику
+        /// </summary>
+        string CardSourceClarification;
+        /// <summary>
+        /// Пагинация карточки
+        /// </summary>
+        string CardPagination;
+        /// <summary>
+        /// Дата источника
+        /// </summary>
+        string CardSourceDate;
+        /// <summary>
+        /// Уточненная дата
+        /// </summary>
+        string CardSourceDateClarification;
+
 
         public CardIndexModule()
         {
@@ -349,7 +378,7 @@ namespace RusDictionary.Modules
             }
             foreach (TextBox textBox in MainForm.GetAll(tpCards, typeof(TextBox)))
             {
-                textBox.Enabled = parameter;
+                textBox.ReadOnly = !parameter;
             }
         }
         private void lbCardIndexList_DoubleClick(object sender, EventArgs e)
@@ -368,14 +397,22 @@ namespace RusDictionary.Modules
                     Thread.Sleep(1);
                     Application.DoEvents();
                 }
-                pbPictCard.BackgroundImage = CardImage;
                 laCardsNumberCard.Text = "Текст карточки №" + CardMarker + ":";
-                laCardsLetter.Text = CardSymbol;
+                laCardsFirstSeparator.Text = CardSeparator;
                 laCardsNumberBox.Text = CardNumberBox;
-                laCardsFirstSeparator.Text = CardFirstSeparator;
-                laCardsLastSeparator.Text = CardLastSeparator;
-                tbTextCard.Text = CardText;
+                laCardsLetter.Text = CardSymbol;
+                pbPictCard.BackgroundImage = CardImage;   
+                laCardsWord.Text = CardWord;
+                tbCardText.Text = CardText;
+                tbCardRelatedCombinations.Text = CardRelatedCombinations;
+                tbCardValue.Text = CardValue;
+                tbCardSourceCode.Text = CardSourceCode;
+                tbCardSourceClarification.Text = CardSourceClarification;
+                tbCardPagination.Text = CardPagination;
+                tbCardSourceDate.Text = CardSourceDate;
+                tbCardSourceDateClarification.Text = CardSourceDateClarification;
                 tbCardNotes.Text = CardNotes;
+
                 EnableOnCardPage(false);
                 tcCards.SelectedTab = tpCards;
                 Program.f1.PictAndLableWait(false);
@@ -444,21 +481,26 @@ namespace RusDictionary.Modules
             //Подумать над сепаратором между карточками (отображаются на форме внизу при открытой карточке)
 
             CardMarker = CardItems[0].Marker;
-            CardNotes = CardItems[0].Notes;
-            CardNumberBox = CardItems[0].NumberBox;
-            CardSymbol = CardItems[0].Symbol;
-            CardImage = DecodeImageFromDB(CardItems[0].Img);
-            CardText = CardItems[0].ImgText;
-            query = "SELECT Symbol FROM letter WHERE ID = " + CardSymbol;
+            query = "SELECT CardSeparator FROM cardseparator WHERE ID = " + CardItems[0].CardSeparator;
+            JSON.Send(query, JSONFlags.Select);
+            CardSeparator = "Разделитель: " + JSON.Decode()[0].CardSeparator;
+            query = "SELECT NumberBox FROM box WHERE ID = " + CardItems[0].NumberBox;
+            JSON.Send(query, JSONFlags.Select);
+            CardNumberBox = "Ящик: " + JSON.Decode()[0].NumberBox;
+            query = "SELECT Symbol FROM letter WHERE ID = " + CardItems[0].Symbol;
             JSON.Send(query, JSONFlags.Select);
             CardSymbol = "Буква: " + JSON.Decode()[0].Symbol;
-            query = "SELECT CardSeparator FROM cardseparator WHERE BoxNumber = " + CardNumberBox;
-            JSON.Send(query, JSONFlags.Select);
-            CardFirstSeparator = "Первый разделитель: " + JSON.Decode()[0].CardSeparator;
-            CardLastSeparator = "Последний разделитель: " + JSON.Decode().Last().CardSeparator;
-            query = "SELECT NumberBox FROM box WHERE ID = " + CardNumberBox;
-            JSON.Send(query, JSONFlags.Select);
-            CardNumberBox = "Ящик: " + JSON.Decode()[0].NumberBox;            
+            CardImage = DecodeImageFromDB(CardItems[0].Img);
+            CardWord = "Слово: " + CardItems[0].Word;
+            CardText = CardItems[0].ImgText;
+            CardRelatedCombinations = CardItems[0].RelatedCombinations;
+            CardValue = CardItems[0].Value;
+            CardSourceCode = CardItems[0].SourceCode;
+            CardSourceClarification = CardItems[0].SourceClarification;
+            CardPagination = CardItems[0].Pagination;
+            CardSourceDate = CardItems[0].SourceDate;
+            CardSourceDateClarification = CardItems[0].SourceDateClarification;
+            CardNotes = CardItems[0].Notes;                       
         }
         /// <summary>
         /// Кодирование изображения в base64
@@ -535,9 +577,9 @@ namespace RusDictionary.Modules
             laCardsNumberCard.Text = "Текст карточки №" + CardMarker + ":";
             laCardsLetter.Text = CardSymbol;
             laCardsNumberBox.Text = CardNumberBox;
-            laCardsFirstSeparator.Text = CardFirstSeparator;
-            laCardsLastSeparator.Text = CardLastSeparator;
-            tbTextCard.Text = CardText;
+            laCardsFirstSeparator.Text = CardSeparator;
+            laCardsWord.Text = CardWord;
+            tbCardText.Text = CardText;
             tbCardNotes.Text = CardNotes;
             EnableOnCardPage(true);
             tcCards.SelectedTab = tpCards;

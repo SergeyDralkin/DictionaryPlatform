@@ -98,9 +98,9 @@ namespace RusDictionary
         public string CardSeparator { get; set; }
         public string NumberBox { get; set; }
         public string Symbol { get; set; }
-        public string Img { get; set; }
-        public string Word { get; set; }
+        public string Img { get; set; }        
         public string ImgText { get; set; }
+        public string Word { get; set; }
         public string RelatedCombinations { get; set; }
         public string Value { get; set; }
         public string SourceCode { get; set; }

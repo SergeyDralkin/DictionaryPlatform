@@ -52,33 +52,33 @@
             this.tbCardNotes = new System.Windows.Forms.TextBox();
             this.Cardslabel11 = new System.Windows.Forms.Label();
             this.CardstableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
-            this.CardstextBox7 = new System.Windows.Forms.TextBox();
+            this.tbCardRelatedCombinations = new System.Windows.Forms.TextBox();
             this.Cardslabel100 = new System.Windows.Forms.Label();
             this.CardstableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.CardstextBox6 = new System.Windows.Forms.TextBox();
+            this.tbCardSourceDateClarification = new System.Windows.Forms.TextBox();
             this.Cardslabel99 = new System.Windows.Forms.Label();
             this.CardstableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.CardstextBox5 = new System.Windows.Forms.TextBox();
+            this.tbCardSourceDate = new System.Windows.Forms.TextBox();
             this.Cardslabel88 = new System.Windows.Forms.Label();
-            this.CardstableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.CardstextBox4 = new System.Windows.Forms.TextBox();
+            this.CardstableLayoutPanel44 = new System.Windows.Forms.TableLayoutPanel();
+            this.tbCardPagination = new System.Windows.Forms.TextBox();
             this.Cardslabel7 = new System.Windows.Forms.Label();
             this.CardstableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.CardstextBox3 = new System.Windows.Forms.TextBox();
+            this.tbCardSourceClarification = new System.Windows.Forms.TextBox();
             this.Cardslabel66 = new System.Windows.Forms.Label();
             this.CardstableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.Cardslabel5 = new System.Windows.Forms.Label();
-            this.CardstextBox2 = new System.Windows.Forms.TextBox();
+            this.tbCardValue = new System.Windows.Forms.TextBox();
             this.CardstableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.CardstextBox1 = new System.Windows.Forms.TextBox();
+            this.tbCardSourceCode = new System.Windows.Forms.TextBox();
             this.Cardslabel4 = new System.Windows.Forms.Label();
             this.pbPictCard = new System.Windows.Forms.PictureBox();
             this.CardstableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.laCardsNumberCard = new System.Windows.Forms.Label();
-            this.tbTextCard = new System.Windows.Forms.TextBox();
+            this.tbCardText = new System.Windows.Forms.TextBox();
             this.CardstableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.buCardIndexCardsSave = new System.Windows.Forms.Button();
-            this.laCardsLastSeparator = new System.Windows.Forms.Label();
+            this.laCardsWord = new System.Windows.Forms.Label();
             this.laCardsFirstSeparator = new System.Windows.Forms.Label();
             this.laCardsNumberBox = new System.Windows.Forms.Label();
             this.laCardsLetter = new System.Windows.Forms.Label();
@@ -96,7 +96,7 @@
             this.CardstableLayoutPanel11.SuspendLayout();
             this.CardstableLayoutPanel10.SuspendLayout();
             this.CardstableLayoutPanel9.SuspendLayout();
-            this.CardstableLayoutPanel8.SuspendLayout();
+            this.CardstableLayoutPanel44.SuspendLayout();
             this.CardstableLayoutPanel7.SuspendLayout();
             this.CardstableLayoutPanel5.SuspendLayout();
             this.CardstableLayoutPanel6.SuspendLayout();
@@ -375,7 +375,7 @@
             this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel11, 0, 6);
             this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel10, 0, 5);
             this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel9, 0, 4);
-            this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel8, 0, 3);
+            this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel44, 0, 3);
             this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel7, 0, 2);
             this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel5, 0, 0);
             this.CardstableLayoutPanel2.Controls.Add(this.CardstableLayoutPanel6, 0, 1);
@@ -435,7 +435,7 @@
             // 
             this.CardstableLayoutPanel11.ColumnCount = 1;
             this.CardstableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.CardstableLayoutPanel11.Controls.Add(this.CardstextBox7, 0, 1);
+            this.CardstableLayoutPanel11.Controls.Add(this.tbCardRelatedCombinations, 0, 1);
             this.CardstableLayoutPanel11.Controls.Add(this.Cardslabel100, 0, 0);
             this.CardstableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CardstableLayoutPanel11.Location = new System.Drawing.Point(3, 339);
@@ -446,14 +446,14 @@
             this.CardstableLayoutPanel11.Size = new System.Drawing.Size(291, 42);
             this.CardstableLayoutPanel11.TabIndex = 6;
             // 
-            // CardstextBox7
+            // tbCardRelatedCombinations
             // 
-            this.CardstextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CardstextBox7.Location = new System.Drawing.Point(3, 19);
-            this.CardstextBox7.Multiline = true;
-            this.CardstextBox7.Name = "CardstextBox7";
-            this.CardstextBox7.Size = new System.Drawing.Size(285, 20);
-            this.CardstextBox7.TabIndex = 0;
+            this.tbCardRelatedCombinations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbCardRelatedCombinations.Location = new System.Drawing.Point(3, 19);
+            this.tbCardRelatedCombinations.Multiline = true;
+            this.tbCardRelatedCombinations.Name = "tbCardRelatedCombinations";
+            this.tbCardRelatedCombinations.Size = new System.Drawing.Size(285, 20);
+            this.tbCardRelatedCombinations.TabIndex = 0;
             // 
             // Cardslabel100
             // 
@@ -463,14 +463,14 @@
             this.Cardslabel100.Name = "Cardslabel100";
             this.Cardslabel100.Size = new System.Drawing.Size(285, 16);
             this.Cardslabel100.TabIndex = 1;
-            this.Cardslabel100.Text = "Автор:";
+            this.Cardslabel100.Text = "Cвяз. сочетания:";
             this.Cardslabel100.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CardstableLayoutPanel10
             // 
             this.CardstableLayoutPanel10.ColumnCount = 1;
             this.CardstableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.CardstableLayoutPanel10.Controls.Add(this.CardstextBox6, 0, 1);
+            this.CardstableLayoutPanel10.Controls.Add(this.tbCardSourceDateClarification, 0, 1);
             this.CardstableLayoutPanel10.Controls.Add(this.Cardslabel99, 0, 0);
             this.CardstableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CardstableLayoutPanel10.Location = new System.Drawing.Point(3, 291);
@@ -481,14 +481,14 @@
             this.CardstableLayoutPanel10.Size = new System.Drawing.Size(291, 42);
             this.CardstableLayoutPanel10.TabIndex = 5;
             // 
-            // CardstextBox6
+            // tbCardSourceDateClarification
             // 
-            this.CardstextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CardstextBox6.Location = new System.Drawing.Point(3, 19);
-            this.CardstextBox6.Multiline = true;
-            this.CardstextBox6.Name = "CardstextBox6";
-            this.CardstextBox6.Size = new System.Drawing.Size(285, 20);
-            this.CardstextBox6.TabIndex = 0;
+            this.tbCardSourceDateClarification.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbCardSourceDateClarification.Location = new System.Drawing.Point(3, 19);
+            this.tbCardSourceDateClarification.Multiline = true;
+            this.tbCardSourceDateClarification.Name = "tbCardSourceDateClarification";
+            this.tbCardSourceDateClarification.Size = new System.Drawing.Size(285, 20);
+            this.tbCardSourceDateClarification.TabIndex = 0;
             // 
             // Cardslabel99
             // 
@@ -505,7 +505,7 @@
             // 
             this.CardstableLayoutPanel9.ColumnCount = 1;
             this.CardstableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.CardstableLayoutPanel9.Controls.Add(this.CardstextBox5, 0, 1);
+            this.CardstableLayoutPanel9.Controls.Add(this.tbCardSourceDate, 0, 1);
             this.CardstableLayoutPanel9.Controls.Add(this.Cardslabel88, 0, 0);
             this.CardstableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CardstableLayoutPanel9.Location = new System.Drawing.Point(3, 243);
@@ -516,14 +516,14 @@
             this.CardstableLayoutPanel9.Size = new System.Drawing.Size(291, 42);
             this.CardstableLayoutPanel9.TabIndex = 4;
             // 
-            // CardstextBox5
+            // tbCardSourceDate
             // 
-            this.CardstextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CardstextBox5.Location = new System.Drawing.Point(3, 19);
-            this.CardstextBox5.Multiline = true;
-            this.CardstextBox5.Name = "CardstextBox5";
-            this.CardstextBox5.Size = new System.Drawing.Size(285, 20);
-            this.CardstextBox5.TabIndex = 0;
+            this.tbCardSourceDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbCardSourceDate.Location = new System.Drawing.Point(3, 19);
+            this.tbCardSourceDate.Multiline = true;
+            this.tbCardSourceDate.Name = "tbCardSourceDate";
+            this.tbCardSourceDate.Size = new System.Drawing.Size(285, 20);
+            this.tbCardSourceDate.TabIndex = 0;
             // 
             // Cardslabel88
             // 
@@ -536,29 +536,29 @@
             this.Cardslabel88.Text = "Дата источника:";
             this.Cardslabel88.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // CardstableLayoutPanel8
+            // CardstableLayoutPanel44
             // 
-            this.CardstableLayoutPanel8.ColumnCount = 1;
-            this.CardstableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.CardstableLayoutPanel8.Controls.Add(this.CardstextBox4, 0, 1);
-            this.CardstableLayoutPanel8.Controls.Add(this.Cardslabel7, 0, 0);
-            this.CardstableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CardstableLayoutPanel8.Location = new System.Drawing.Point(3, 195);
-            this.CardstableLayoutPanel8.Name = "CardstableLayoutPanel8";
-            this.CardstableLayoutPanel8.RowCount = 2;
-            this.CardstableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.CardstableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.CardstableLayoutPanel8.Size = new System.Drawing.Size(291, 42);
-            this.CardstableLayoutPanel8.TabIndex = 3;
+            this.CardstableLayoutPanel44.ColumnCount = 1;
+            this.CardstableLayoutPanel44.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.CardstableLayoutPanel44.Controls.Add(this.tbCardPagination, 0, 1);
+            this.CardstableLayoutPanel44.Controls.Add(this.Cardslabel7, 0, 0);
+            this.CardstableLayoutPanel44.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CardstableLayoutPanel44.Location = new System.Drawing.Point(3, 195);
+            this.CardstableLayoutPanel44.Name = "CardstableLayoutPanel44";
+            this.CardstableLayoutPanel44.RowCount = 2;
+            this.CardstableLayoutPanel44.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.CardstableLayoutPanel44.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.CardstableLayoutPanel44.Size = new System.Drawing.Size(291, 42);
+            this.CardstableLayoutPanel44.TabIndex = 3;
             // 
-            // CardstextBox4
+            // tbCardPagination
             // 
-            this.CardstextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CardstextBox4.Location = new System.Drawing.Point(3, 19);
-            this.CardstextBox4.Multiline = true;
-            this.CardstextBox4.Name = "CardstextBox4";
-            this.CardstextBox4.Size = new System.Drawing.Size(285, 20);
-            this.CardstextBox4.TabIndex = 0;
+            this.tbCardPagination.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbCardPagination.Location = new System.Drawing.Point(3, 19);
+            this.tbCardPagination.Multiline = true;
+            this.tbCardPagination.Name = "tbCardPagination";
+            this.tbCardPagination.Size = new System.Drawing.Size(285, 20);
+            this.tbCardPagination.TabIndex = 0;
             // 
             // Cardslabel7
             // 
@@ -575,7 +575,7 @@
             // 
             this.CardstableLayoutPanel7.ColumnCount = 1;
             this.CardstableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.CardstableLayoutPanel7.Controls.Add(this.CardstextBox3, 0, 1);
+            this.CardstableLayoutPanel7.Controls.Add(this.tbCardSourceClarification, 0, 1);
             this.CardstableLayoutPanel7.Controls.Add(this.Cardslabel66, 0, 0);
             this.CardstableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CardstableLayoutPanel7.Location = new System.Drawing.Point(3, 147);
@@ -586,14 +586,14 @@
             this.CardstableLayoutPanel7.Size = new System.Drawing.Size(291, 42);
             this.CardstableLayoutPanel7.TabIndex = 2;
             // 
-            // CardstextBox3
+            // tbCardSourceClarification
             // 
-            this.CardstextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CardstextBox3.Location = new System.Drawing.Point(3, 19);
-            this.CardstextBox3.Multiline = true;
-            this.CardstextBox3.Name = "CardstextBox3";
-            this.CardstextBox3.Size = new System.Drawing.Size(285, 20);
-            this.CardstextBox3.TabIndex = 0;
+            this.tbCardSourceClarification.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbCardSourceClarification.Location = new System.Drawing.Point(3, 19);
+            this.tbCardSourceClarification.Multiline = true;
+            this.tbCardSourceClarification.Name = "tbCardSourceClarification";
+            this.tbCardSourceClarification.Size = new System.Drawing.Size(285, 20);
+            this.tbCardSourceClarification.TabIndex = 0;
             // 
             // Cardslabel66
             // 
@@ -611,7 +611,7 @@
             this.CardstableLayoutPanel5.ColumnCount = 1;
             this.CardstableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.CardstableLayoutPanel5.Controls.Add(this.Cardslabel5, 0, 0);
-            this.CardstableLayoutPanel5.Controls.Add(this.CardstextBox2, 0, 1);
+            this.CardstableLayoutPanel5.Controls.Add(this.tbCardValue, 0, 1);
             this.CardstableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CardstableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
             this.CardstableLayoutPanel5.Name = "CardstableLayoutPanel5";
@@ -632,20 +632,20 @@
             this.Cardslabel5.Text = "Словоформы:";
             this.Cardslabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // CardstextBox2
+            // tbCardValue
             // 
-            this.CardstextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CardstextBox2.Location = new System.Drawing.Point(3, 25);
-            this.CardstextBox2.Multiline = true;
-            this.CardstextBox2.Name = "CardstextBox2";
-            this.CardstextBox2.Size = new System.Drawing.Size(285, 62);
-            this.CardstextBox2.TabIndex = 3;
+            this.tbCardValue.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbCardValue.Location = new System.Drawing.Point(3, 25);
+            this.tbCardValue.Multiline = true;
+            this.tbCardValue.Name = "tbCardValue";
+            this.tbCardValue.Size = new System.Drawing.Size(285, 62);
+            this.tbCardValue.TabIndex = 3;
             // 
             // CardstableLayoutPanel6
             // 
             this.CardstableLayoutPanel6.ColumnCount = 1;
             this.CardstableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.CardstableLayoutPanel6.Controls.Add(this.CardstextBox1, 0, 1);
+            this.CardstableLayoutPanel6.Controls.Add(this.tbCardSourceCode, 0, 1);
             this.CardstableLayoutPanel6.Controls.Add(this.Cardslabel4, 0, 0);
             this.CardstableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CardstableLayoutPanel6.Location = new System.Drawing.Point(3, 99);
@@ -656,14 +656,14 @@
             this.CardstableLayoutPanel6.Size = new System.Drawing.Size(291, 42);
             this.CardstableLayoutPanel6.TabIndex = 1;
             // 
-            // CardstextBox1
+            // tbCardSourceCode
             // 
-            this.CardstextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CardstextBox1.Location = new System.Drawing.Point(3, 19);
-            this.CardstextBox1.Multiline = true;
-            this.CardstextBox1.Name = "CardstextBox1";
-            this.CardstextBox1.Size = new System.Drawing.Size(285, 20);
-            this.CardstextBox1.TabIndex = 0;
+            this.tbCardSourceCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbCardSourceCode.Location = new System.Drawing.Point(3, 19);
+            this.tbCardSourceCode.Multiline = true;
+            this.tbCardSourceCode.Name = "tbCardSourceCode";
+            this.tbCardSourceCode.Size = new System.Drawing.Size(285, 20);
+            this.tbCardSourceCode.TabIndex = 0;
             // 
             // Cardslabel4
             // 
@@ -692,7 +692,7 @@
             this.CardstableLayoutPanel3.ColumnCount = 1;
             this.CardstableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.CardstableLayoutPanel3.Controls.Add(this.laCardsNumberCard, 0, 0);
-            this.CardstableLayoutPanel3.Controls.Add(this.tbTextCard, 0, 1);
+            this.CardstableLayoutPanel3.Controls.Add(this.tbCardText, 0, 1);
             this.CardstableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CardstableLayoutPanel3.Location = new System.Drawing.Point(3, 391);
             this.CardstableLayoutPanel3.Name = "CardstableLayoutPanel3";
@@ -713,14 +713,14 @@
             this.laCardsNumberCard.TabIndex = 0;
             this.laCardsNumberCard.Text = "Текст карточки №00000000:";
             // 
-            // tbTextCard
+            // tbCardText
             // 
-            this.tbTextCard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbTextCard.Location = new System.Drawing.Point(3, 17);
-            this.tbTextCard.Multiline = true;
-            this.tbTextCard.Name = "tbTextCard";
-            this.tbTextCard.Size = new System.Drawing.Size(695, 75);
-            this.tbTextCard.TabIndex = 1;
+            this.tbCardText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbCardText.Location = new System.Drawing.Point(3, 17);
+            this.tbCardText.Multiline = true;
+            this.tbCardText.Name = "tbCardText";
+            this.tbCardText.Size = new System.Drawing.Size(695, 75);
+            this.tbCardText.TabIndex = 1;
             // 
             // CardstableLayoutPanel4
             // 
@@ -734,7 +734,7 @@
             this.CardstableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.21569F));
             this.CardstableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.21569F));
             this.CardstableLayoutPanel4.Controls.Add(this.buCardIndexCardsSave, 4, 0);
-            this.CardstableLayoutPanel4.Controls.Add(this.laCardsLastSeparator, 3, 0);
+            this.CardstableLayoutPanel4.Controls.Add(this.laCardsWord, 3, 0);
             this.CardstableLayoutPanel4.Controls.Add(this.laCardsFirstSeparator, 2, 0);
             this.CardstableLayoutPanel4.Controls.Add(this.laCardsNumberBox, 1, 0);
             this.CardstableLayoutPanel4.Controls.Add(this.laCardsLetter, 0, 0);
@@ -761,17 +761,17 @@
             this.buCardIndexCardsSave.UseVisualStyleBackColor = true;
             this.buCardIndexCardsSave.Click += new System.EventHandler(this.buCardIndexCardsSave_Click);
             // 
-            // laCardsLastSeparator
+            // laCardsWord
             // 
-            this.laCardsLastSeparator.AutoSize = true;
-            this.laCardsLastSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.laCardsLastSeparator.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laCardsLastSeparator.Location = new System.Drawing.Point(450, 1);
-            this.laCardsLastSeparator.Name = "laCardsLastSeparator";
-            this.laCardsLastSeparator.Size = new System.Drawing.Size(262, 25);
-            this.laCardsLastSeparator.TabIndex = 3;
-            this.laCardsLastSeparator.Text = "Последний разделитель: САДОВЫЙ";
-            this.laCardsLastSeparator.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.laCardsWord.AutoSize = true;
+            this.laCardsWord.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.laCardsWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laCardsWord.Location = new System.Drawing.Point(450, 1);
+            this.laCardsWord.Name = "laCardsWord";
+            this.laCardsWord.Size = new System.Drawing.Size(262, 25);
+            this.laCardsWord.TabIndex = 3;
+            this.laCardsWord.Text = "Последний разделитель: САДОВЫЙ";
+            this.laCardsWord.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // laCardsFirstSeparator
             // 
@@ -848,8 +848,8 @@
             this.CardstableLayoutPanel10.PerformLayout();
             this.CardstableLayoutPanel9.ResumeLayout(false);
             this.CardstableLayoutPanel9.PerformLayout();
-            this.CardstableLayoutPanel8.ResumeLayout(false);
-            this.CardstableLayoutPanel8.PerformLayout();
+            this.CardstableLayoutPanel44.ResumeLayout(false);
+            this.CardstableLayoutPanel44.PerformLayout();
             this.CardstableLayoutPanel7.ResumeLayout(false);
             this.CardstableLayoutPanel7.PerformLayout();
             this.CardstableLayoutPanel5.ResumeLayout(false);
@@ -874,37 +874,37 @@
         private System.Windows.Forms.PictureBox pbPictCard;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel3;
         private System.Windows.Forms.Label laCardsNumberCard;
-        private System.Windows.Forms.TextBox tbTextCard;
+        private System.Windows.Forms.TextBox tbCardText;
         private System.Windows.Forms.TabPage tpList;
         private System.Windows.Forms.TabPage tpCardsMenu;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel4;
         private System.Windows.Forms.Label laCardsLetter;
         private System.Windows.Forms.Label laCardsNumberBox;
         private System.Windows.Forms.Label laCardsFirstSeparator;
-        private System.Windows.Forms.Label laCardsLastSeparator;
+        private System.Windows.Forms.Label laCardsWord;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel5;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel6;
-        private System.Windows.Forms.TextBox CardstextBox1;
+        private System.Windows.Forms.TextBox tbCardSourceCode;
         private System.Windows.Forms.Label Cardslabel4;
         private System.Windows.Forms.Label Cardslabel5;
-        private System.Windows.Forms.TextBox CardstextBox2;
+        private System.Windows.Forms.TextBox tbCardValue;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel7;
-        private System.Windows.Forms.TextBox CardstextBox3;
+        private System.Windows.Forms.TextBox tbCardSourceClarification;
         private System.Windows.Forms.Label Cardslabel66;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel12;
         private System.Windows.Forms.TextBox tbCardNotes;
         private System.Windows.Forms.Label Cardslabel11;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel11;
-        private System.Windows.Forms.TextBox CardstextBox7;
+        private System.Windows.Forms.TextBox tbCardRelatedCombinations;
         private System.Windows.Forms.Label Cardslabel100;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel10;
-        private System.Windows.Forms.TextBox CardstextBox6;
+        private System.Windows.Forms.TextBox tbCardSourceDateClarification;
         private System.Windows.Forms.Label Cardslabel99;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel9;
-        private System.Windows.Forms.TextBox CardstextBox5;
+        private System.Windows.Forms.TextBox tbCardSourceDate;
         private System.Windows.Forms.Label Cardslabel88;
-        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel8;
-        private System.Windows.Forms.TextBox CardstextBox4;
+        private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel44;
+        private System.Windows.Forms.TextBox tbCardPagination;
         private System.Windows.Forms.Label Cardslabel7;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel13;
         private System.Windows.Forms.Button buCardIndexMenuMarker;
