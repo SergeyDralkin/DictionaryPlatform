@@ -72,10 +72,18 @@ namespace RusDictionary
         /// </summary>
         public static string URL = null;
         /// <summary>
+        /// Залогинен
+        /// </summary>
+        bool IfLogin = false;
+        /// <summary>
         /// Количество попыток подключиться. Данная переменная нужна для отображения задержки отключения от сервера 
         /// (если вдруг были потеряны пакеты и программа сразу же не отключила пользоватя от сервера) 
         /// </summary>
         int tmpConnect = 12;
+        /// <summary>
+        /// Список того, что может делать роль пользователя
+        /// </summary>
+        public static List<JSONArray> CanDoItList = new List<JSONArray>();
         public MainForm()
         {
             InitializeComponent();
@@ -601,11 +609,12 @@ namespace RusDictionary
                 DialogResult result = MessageBox.Show("Настройки были изменены.\n\n Сохранить изменения?", "Настройки", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 switch (result)
                 {
-                    case DialogResult.Yes:
-                        MainTC.SelectedTab = tpMain;
+                    case DialogResult.Yes:                        
+                        URL = null;
+                        StatusConnect = false;
+                        ChangeStatus();
                         IP = tbIP.Text;
                         Port = tbPort.Text;
-
                         Properties.Settings.Default.IP = IP;
                         Properties.Settings.Default.Port = Port;
                         Properties.Settings.Default.ColorText = ColorText;
@@ -613,6 +622,7 @@ namespace RusDictionary
                         Properties.Settings.Default.ColorTextBox = ColorTextBox;
                         Properties.Settings.Default.ColorButton = ColorButton;
                         Properties.Settings.Default.Save();
+                        MainTC.SelectedTab = tpMain;                        
                         break;
                     case DialogResult.No:
                         FillSetting();
@@ -624,13 +634,15 @@ namespace RusDictionary
 
         private void buSaveSettings_Click(object sender, EventArgs e)
         {
+            URL = null;
+            StatusConnect = false;
+            ChangeStatus();
             IP = tbIP.Text;
             Port = tbPort.Text;
             ColorText = label1.ForeColor;
             ColorBackground = tpMain.BackColor;
             ColorTextBox = tbIP.BackColor;
             ColorButton = buAuthors.BackColor;
-
             Properties.Settings.Default.IP = IP;
             Properties.Settings.Default.Port = Port;
             Properties.Settings.Default.ColorText = ColorText;
@@ -698,6 +710,51 @@ namespace RusDictionary
                     button.BackColor = cdChangeColor.Color;
                 }
                 ColorTextBox = cdChangeColor.Color;
+            }
+        }
+
+        private void buLogin_Click(object sender, EventArgs e)
+        {
+            IfLogin = false;
+            List<JSONArray> PasswordList = new List<JSONArray>();
+            string Login = tbLogin.Text.ToString();
+            string Password = tbPassword.Text.ToString();            
+            if (Login != null && Login != "" && Password != null && Password != "")
+            {
+                string query = "SELECT * FROM users WHERE Login = '" + Login + "'";
+                JSON.Send(query, JSONFlags.Select);
+                PasswordList = JSON.Decode();
+                try
+                {
+                    if (PasswordList[0].Password.Equals(Password))
+                    {
+                        query = "SELECT * FROM roles WHERE ID = '" + PasswordList[0].Role + "'";
+                        JSON.Send(query, JSONFlags.Select);
+                        CanDoItList = JSON.Decode();
+                        //UserRole();
+                        //query = "SELECT Код FROM Пользователь WHERE Логин = '" + Login + "'";
+                        //command = new OleDbCommand(query, myConnection);
+                        //IDUser = int.Parse(command.ExecuteScalar().ToString());
+                        //query = "SELECT ФИО FROM Пользователь WHERE Логин = '" + Login + "'";
+                        //command = new OleDbCommand(query, myConnection);
+                        //FIO = command.ExecuteScalar().ToString();
+                        IfLogin = true;
+                        //laLoginNow.Visible = true;
+                        //lilabelExit.Visible = true;
+                        //laLoginNow.Text = "Вы вошли как: " + FIO + ". Роль: " + Role + ".";
+                        //reader.Close();
+                        //ChooseRole();
+                        MainTC.SelectedTab = tpMain;
+                    }
+                }
+                catch
+                {
+                    IfLogin = false;
+                }                
+            }
+            if (IfLogin == false)
+            {
+                MessageBox.Show("Не правильно введён логин или пароль. Повторите попытку");
             }
         }
     }

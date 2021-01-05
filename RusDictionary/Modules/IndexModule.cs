@@ -21,7 +21,7 @@ namespace RusDictionary.Modules
 
         private void buIndexSource_Click(object sender, EventArgs e)
         {
-            string strDSN = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source = Resources/Source.accdb";
+            string strDSN = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Resources/IndexModule/Source.mdb";
             string strSQL = "SELECT * FROM UKAZ";
             OleDbConnection myConn = new OleDbConnection(strDSN);
             OleDbDataAdapter myCmd = new OleDbDataAdapter(strSQL, myConn);

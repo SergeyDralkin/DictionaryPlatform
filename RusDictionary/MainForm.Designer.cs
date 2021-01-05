@@ -47,11 +47,8 @@
             this.buWordSearchModule = new System.Windows.Forms.Button();
             this.buCardIndexModule = new System.Windows.Forms.Button();
             this.tpCardIndex = new System.Windows.Forms.TabPage();
-            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
             this.tpPointer = new System.Windows.Forms.TabPage();
-            this.indexModule1 = new RusDictionary.Modules.IndexModule();
             this.tpWordSearch = new System.Windows.Forms.TabPage();
-            this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
             this.tpAuthors = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
@@ -130,6 +127,15 @@
             this.pbWait = new System.Windows.Forms.PictureBox();
             this.laWait = new System.Windows.Forms.Label();
             this.cdChangeColor = new System.Windows.Forms.ColorDialog();
+            this.tpLogin = new System.Windows.Forms.TabPage();
+            this.tbLogin = new System.Windows.Forms.TextBox();
+            this.buLogin = new System.Windows.Forms.Button();
+            this.laLogin = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.laPassword = new System.Windows.Forms.Label();
+            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
+            this.indexModule1 = new RusDictionary.Modules.IndexModule();
+            this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
             this.tableLayoutPanel1.SuspendLayout();
             this.MainTC.SuspendLayout();
             this.tpMain.SuspendLayout();
@@ -170,6 +176,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbStatusConnect)).BeginInit();
             this.tableLayoutPanel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbWait)).BeginInit();
+            this.tpLogin.SuspendLayout();
             this.SuspendLayout();
             // 
             // TimerStatusConnect
@@ -193,6 +200,7 @@
             // 
             // MainTC
             // 
+            this.MainTC.Controls.Add(this.tpLogin);
             this.MainTC.Controls.Add(this.tpMain);
             this.MainTC.Controls.Add(this.tpCardIndex);
             this.MainTC.Controls.Add(this.tpPointer);
@@ -400,15 +408,6 @@
             this.tpCardIndex.TabIndex = 1;
             this.tpCardIndex.Text = "Картотека";
             // 
-            // cardIndexModule
-            // 
-            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
-            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
-            this.cardIndexModule.Name = "cardIndexModule";
-            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
-            this.cardIndexModule.TabIndex = 0;
-            // 
             // tpPointer
             // 
             this.tpPointer.Controls.Add(this.indexModule1);
@@ -419,15 +418,6 @@
             this.tpPointer.Text = "Указатели";
             this.tpPointer.UseVisualStyleBackColor = true;
             // 
-            // indexModule1
-            // 
-            this.indexModule1.BackColor = System.Drawing.Color.Transparent;
-            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.indexModule1.Location = new System.Drawing.Point(0, 0);
-            this.indexModule1.Name = "indexModule1";
-            this.indexModule1.Size = new System.Drawing.Size(1054, 580);
-            this.indexModule1.TabIndex = 0;
-            // 
             // tpWordSearch
             // 
             this.tpWordSearch.Controls.Add(this.wordSearchModule1);
@@ -437,14 +427,6 @@
             this.tpWordSearch.TabIndex = 3;
             this.tpWordSearch.Text = "Поиск слов";
             this.tpWordSearch.UseVisualStyleBackColor = true;
-            // 
-            // wordSearchModule1
-            // 
-            this.wordSearchModule1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wordSearchModule1.Location = new System.Drawing.Point(0, 0);
-            this.wordSearchModule1.Name = "wordSearchModule1";
-            this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
-            this.wordSearchModule1.TabIndex = 0;
             // 
             // tpAuthors
             // 
@@ -1579,6 +1561,103 @@
             this.laWait.Text = "Выполняется задача, пожалуйства, подождите";
             this.laWait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // tpLogin
+            // 
+            this.tpLogin.BackColor = System.Drawing.Color.SandyBrown;
+            this.tpLogin.Controls.Add(this.tbLogin);
+            this.tpLogin.Controls.Add(this.buLogin);
+            this.tpLogin.Controls.Add(this.laLogin);
+            this.tpLogin.Controls.Add(this.tbPassword);
+            this.tpLogin.Controls.Add(this.laPassword);
+            this.tpLogin.Location = new System.Drawing.Point(4, 22);
+            this.tpLogin.Name = "tpLogin";
+            this.tpLogin.Size = new System.Drawing.Size(1054, 580);
+            this.tpLogin.TabIndex = 6;
+            this.tpLogin.Text = "Логин";
+            // 
+            // tbLogin
+            // 
+            this.tbLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbLogin.Location = new System.Drawing.Point(400, 241);
+            this.tbLogin.MaxLength = 20;
+            this.tbLogin.Name = "tbLogin";
+            this.tbLogin.Size = new System.Drawing.Size(162, 20);
+            this.tbLogin.TabIndex = 13;
+            this.tbLogin.Text = "DralkinSS";
+            // 
+            // buLogin
+            // 
+            this.buLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buLogin.Location = new System.Drawing.Point(400, 293);
+            this.buLogin.Name = "buLogin";
+            this.buLogin.Size = new System.Drawing.Size(162, 20);
+            this.buLogin.TabIndex = 16;
+            this.buLogin.Text = "Войти";
+            this.buLogin.UseVisualStyleBackColor = true;
+            this.buLogin.Click += new System.EventHandler(this.buLogin_Click);
+            // 
+            // laLogin
+            // 
+            this.laLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.laLogin.AutoSize = true;
+            this.laLogin.Location = new System.Drawing.Point(346, 244);
+            this.laLogin.Name = "laLogin";
+            this.laLogin.Size = new System.Drawing.Size(41, 13);
+            this.laLogin.TabIndex = 12;
+            this.laLogin.Text = "Логин:";
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPassword.Location = new System.Drawing.Point(400, 267);
+            this.tbPassword.MaxLength = 20;
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
+            this.tbPassword.Size = new System.Drawing.Size(162, 20);
+            this.tbPassword.TabIndex = 15;
+            this.tbPassword.Text = "SS12343";
+            // 
+            // laPassword
+            // 
+            this.laPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.laPassword.AutoSize = true;
+            this.laPassword.Location = new System.Drawing.Point(346, 270);
+            this.laPassword.Name = "laPassword";
+            this.laPassword.Size = new System.Drawing.Size(48, 13);
+            this.laPassword.TabIndex = 14;
+            this.laPassword.Text = "Пароль:";
+            // 
+            // cardIndexModule
+            // 
+            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
+            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
+            this.cardIndexModule.Name = "cardIndexModule";
+            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
+            this.cardIndexModule.TabIndex = 0;
+            // 
+            // indexModule1
+            // 
+            this.indexModule1.BackColor = System.Drawing.Color.Transparent;
+            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.indexModule1.Location = new System.Drawing.Point(0, 0);
+            this.indexModule1.Name = "indexModule1";
+            this.indexModule1.Size = new System.Drawing.Size(1054, 580);
+            this.indexModule1.TabIndex = 0;
+            // 
+            // wordSearchModule1
+            // 
+            this.wordSearchModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wordSearchModule1.Location = new System.Drawing.Point(0, 0);
+            this.wordSearchModule1.Name = "wordSearchModule1";
+            this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
+            this.wordSearchModule1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1645,6 +1724,8 @@
             this.tableLayoutPanel21.ResumeLayout(false);
             this.tableLayoutPanel21.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbWait)).EndInit();
+            this.tpLogin.ResumeLayout(false);
+            this.tpLogin.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1750,6 +1831,12 @@
         private Modules.WordSearchModule wordSearchModule1;
         private Modules.IndexModule indexModule1;
         private System.Windows.Forms.Button buButtonColor;
+        private System.Windows.Forms.TabPage tpLogin;
+        private System.Windows.Forms.TextBox tbLogin;
+        private System.Windows.Forms.Button buLogin;
+        private System.Windows.Forms.Label laLogin;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.Label laPassword;
     }
 }
 

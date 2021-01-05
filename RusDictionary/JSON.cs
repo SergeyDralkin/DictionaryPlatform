@@ -82,13 +82,32 @@ namespace RusDictionary
     /// </summary>
     public class JSONArray
     {
+        #region MainModule       
+        public string FIO { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
+        public string RoleName { get; set; }
+        public string CanSelect { get; set; }
+        public string CanUpdate { get; set; }
+        public string CanInsert { get; set; }
+        public string CanDelete { get; set; }
+        #endregion
         #region CardIndexModule       
         public string Marker { get; set; }
         public string CardSeparator { get; set; }
         public string NumberBox { get; set; }
         public string Symbol { get; set; }
         public string Img { get; set; }
+        public string Word { get; set; }
         public string ImgText { get; set; }
+        public string RelatedCombinations { get; set; }
+        public string Value { get; set; }
+        public string SourceCode { get; set; }
+        public string SourceClarification { get; set; }
+        public string Pagination { get; set; }
+        public string SourceDate { get; set; }
+        public string SourceDateClarification { get; set; }
         public string Notes { get; set; }
         #endregion
         #region IndexModule 
