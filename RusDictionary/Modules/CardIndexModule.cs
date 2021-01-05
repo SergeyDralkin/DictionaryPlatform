@@ -379,7 +379,7 @@ namespace RusDictionary.Modules
         }
         void EnableOnCardPage(bool parameter)
         {
-            foreach (Button button in MainForm.GetAll(tpCards, typeof(Button)))
+            foreach (Button button in MainForm.GetAll(tpCardsSelect, typeof(Button)))
             {
                 if (button.Name != "buCardIndexCardsPrev")
                 {
@@ -390,7 +390,7 @@ namespace RusDictionary.Modules
                     button.Visible = parameter;
                 }
             }
-            foreach (TextBox textBox in MainForm.GetAll(tpCards, typeof(TextBox)))
+            foreach (TextBox textBox in MainForm.GetAll(tpCardsSelect, typeof(TextBox)))
             {
                 textBox.ReadOnly = !parameter;
             }
@@ -428,7 +428,7 @@ namespace RusDictionary.Modules
                 tbCardNotes.Text = CardNotes;
 
                 EnableOnCardPage(false);
-                tcCards.SelectedTab = tpCards;
+                tcCards.SelectedTab = tpCardsSelect;
                 Program.f1.PictAndLableWait(false);
                 EnableElement(true);
             }
@@ -596,7 +596,7 @@ namespace RusDictionary.Modules
             tbCardText.Text = CardText;
             tbCardNotes.Text = CardNotes;
             EnableOnCardPage(true);
-            tcCards.SelectedTab = tpCards;
+            tcCards.SelectedTab = tpCardsSelect;
             Program.f1.PictAndLableWait(false);
             EnableElement(true);            
         }

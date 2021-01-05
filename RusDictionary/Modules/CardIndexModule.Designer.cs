@@ -45,7 +45,7 @@
             this.buCardIndexListChange = new System.Windows.Forms.Button();
             this.buCardIndexListDelete = new System.Windows.Forms.Button();
             this.buCardIndexListPrev = new System.Windows.Forms.Button();
-            this.tpCards = new System.Windows.Forms.TabPage();
+            this.tpCardsSelect = new System.Windows.Forms.TabPage();
             this.CardstableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.CardstableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.CardstableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
@@ -83,13 +83,14 @@
             this.laCardsNumberBox = new System.Windows.Forms.Label();
             this.laCardsLetter = new System.Windows.Forms.Label();
             this.buCardIndexCardsPrev = new System.Windows.Forms.Button();
+            this.tpCardsInsertAndUpdate = new System.Windows.Forms.TabPage();
             this.tcCards.SuspendLayout();
             this.tpCardsMenu.SuspendLayout();
             this.CardstableLayoutPanel13.SuspendLayout();
             this.tpList.SuspendLayout();
             this.CardstableLayoutPanel14.SuspendLayout();
             this.CardstableLayoutPanel15.SuspendLayout();
-            this.tpCards.SuspendLayout();
+            this.tpCardsSelect.SuspendLayout();
             this.CardstableLayoutPanel1.SuspendLayout();
             this.CardstableLayoutPanel2.SuspendLayout();
             this.CardstableLayoutPanel12.SuspendLayout();
@@ -109,7 +110,8 @@
             // 
             this.tcCards.Controls.Add(this.tpCardsMenu);
             this.tcCards.Controls.Add(this.tpList);
-            this.tcCards.Controls.Add(this.tpCards);
+            this.tcCards.Controls.Add(this.tpCardsSelect);
+            this.tcCards.Controls.Add(this.tpCardsInsertAndUpdate);
             this.tcCards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcCards.Location = new System.Drawing.Point(0, 0);
             this.tcCards.Name = "tcCards";
@@ -340,16 +342,16 @@
             this.buCardIndexListPrev.UseVisualStyleBackColor = true;
             this.buCardIndexListPrev.Click += new System.EventHandler(this.buCardIndexListPrev_Click);
             // 
-            // tpCards
+            // tpCardsSelect
             // 
-            this.tpCards.BackColor = System.Drawing.Color.SandyBrown;
-            this.tpCards.Controls.Add(this.CardstableLayoutPanel1);
-            this.tpCards.Location = new System.Drawing.Point(4, 22);
-            this.tpCards.Name = "tpCards";
-            this.tpCards.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCards.Size = new System.Drawing.Size(1016, 528);
-            this.tpCards.TabIndex = 0;
-            this.tpCards.Text = "Карточка";
+            this.tpCardsSelect.BackColor = System.Drawing.Color.SandyBrown;
+            this.tpCardsSelect.Controls.Add(this.CardstableLayoutPanel1);
+            this.tpCardsSelect.Location = new System.Drawing.Point(4, 22);
+            this.tpCardsSelect.Name = "tpCardsSelect";
+            this.tpCardsSelect.Padding = new System.Windows.Forms.Padding(3);
+            this.tpCardsSelect.Size = new System.Drawing.Size(1016, 528);
+            this.tpCardsSelect.TabIndex = 0;
+            this.tpCardsSelect.Text = "Просмотреть карточку";
             // 
             // CardstableLayoutPanel1
             // 
@@ -773,7 +775,7 @@
             this.laCardsWord.Name = "laCardsWord";
             this.laCardsWord.Size = new System.Drawing.Size(262, 25);
             this.laCardsWord.TabIndex = 3;
-            this.laCardsWord.Text = "Последний разделитель: САДОВЫЙ";
+            this.laCardsWord.Text = "Слово:";
             this.laCardsWord.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // laCardsFirstSeparator
@@ -826,6 +828,15 @@
             this.buCardIndexCardsPrev.UseVisualStyleBackColor = true;
             this.buCardIndexCardsPrev.Click += new System.EventHandler(this.buCardIndexCardsPrev_Click);
             // 
+            // tpCardsInsertAndUpdate
+            // 
+            this.tpCardsInsertAndUpdate.BackColor = System.Drawing.Color.SandyBrown;
+            this.tpCardsInsertAndUpdate.Location = new System.Drawing.Point(4, 22);
+            this.tpCardsInsertAndUpdate.Name = "tpCardsInsertAndUpdate";
+            this.tpCardsInsertAndUpdate.Size = new System.Drawing.Size(1016, 528);
+            this.tpCardsInsertAndUpdate.TabIndex = 3;
+            this.tpCardsInsertAndUpdate.Text = "Изменить и добавить карточку";
+            // 
             // CardIndexModule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -840,7 +851,7 @@
             this.tpList.ResumeLayout(false);
             this.CardstableLayoutPanel14.ResumeLayout(false);
             this.CardstableLayoutPanel15.ResumeLayout(false);
-            this.tpCards.ResumeLayout(false);
+            this.tpCardsSelect.ResumeLayout(false);
             this.CardstableLayoutPanel1.ResumeLayout(false);
             this.CardstableLayoutPanel2.ResumeLayout(false);
             this.CardstableLayoutPanel12.ResumeLayout(false);
@@ -871,7 +882,7 @@
         #endregion
 
         private System.Windows.Forms.TabControl tcCards;
-        private System.Windows.Forms.TabPage tpCards;
+        private System.Windows.Forms.TabPage tpCardsSelect;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel CardstableLayoutPanel2;
         private System.Windows.Forms.PictureBox pbPictCard;
@@ -925,5 +936,6 @@
         private System.Windows.Forms.Button buCardIndexListChange;
         private System.Windows.Forms.Button buCardIndexListDelete;
         private System.Windows.Forms.Button buCardIndexCardsSave;
+        private System.Windows.Forms.TabPage tpCardsInsertAndUpdate;
     }
 }
