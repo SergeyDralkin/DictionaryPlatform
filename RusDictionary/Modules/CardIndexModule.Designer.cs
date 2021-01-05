@@ -298,6 +298,7 @@
             this.buCardIndexListAdd.Name = "buCardIndexListAdd";
             this.buCardIndexListAdd.Size = new System.Drawing.Size(194, 41);
             this.buCardIndexListAdd.TabIndex = 5;
+            this.buCardIndexListAdd.Tag = "Insert";
             this.buCardIndexListAdd.Text = "Добавить";
             this.buCardIndexListAdd.UseVisualStyleBackColor = true;
             // 
@@ -309,6 +310,7 @@
             this.buCardIndexListChange.Name = "buCardIndexListChange";
             this.buCardIndexListChange.Size = new System.Drawing.Size(194, 41);
             this.buCardIndexListChange.TabIndex = 4;
+            this.buCardIndexListChange.Tag = "Update";
             this.buCardIndexListChange.Text = "Изменить";
             this.buCardIndexListChange.UseVisualStyleBackColor = true;
             this.buCardIndexListChange.Click += new System.EventHandler(this.buCardIndexListChange_Click);
@@ -321,6 +323,7 @@
             this.buCardIndexListDelete.Name = "buCardIndexListDelete";
             this.buCardIndexListDelete.Size = new System.Drawing.Size(194, 41);
             this.buCardIndexListDelete.TabIndex = 3;
+            this.buCardIndexListDelete.Tag = "Delete";
             this.buCardIndexListDelete.Text = "Удалить";
             this.buCardIndexListDelete.UseVisualStyleBackColor = true;
             this.buCardIndexListDelete.Click += new System.EventHandler(this.buCardIndexListDelete_Click);

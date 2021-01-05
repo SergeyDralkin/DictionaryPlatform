@@ -158,6 +158,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include=".editorconfig" />
     <None Include="Manifest.manifest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -116,9 +116,23 @@ namespace RusDictionary.Modules
         }
         void ActiveDown3button(bool parameter)
         {
-            buCardIndexListChange.Enabled = parameter;
-            buCardIndexListAdd.Enabled = parameter;
-            buCardIndexListDelete.Enabled = parameter;
+            if (parameter == true)
+            {
+                foreach (Button button in MainForm.GetAll(this, typeof(Button)))
+                {
+                    if (button.Tag == "Insert" && MainForm.CanDoItList[0].CanInsert == 1.ToString() || button.Tag == "Update" && MainForm.CanDoItList[0].CanUpdate == 1.ToString() || button.Tag == "Delete" && MainForm.CanDoItList[0].CanDelete == 1.ToString() || button.Tag == "Select" && MainForm.CanDoItList[0].CanSelect == 1.ToString())
+                    {
+                        button.Enabled = parameter;
+                    }                    
+                }
+            }
+            else
+            {
+                buCardIndexListAdd.Enabled = parameter;
+                buCardIndexListChange.Enabled = parameter;
+                buCardIndexListDelete.Enabled = parameter;
+            }
+                          
         }
         private void buCardIndexInMenuButton_Click(object sender, EventArgs e)
         {
