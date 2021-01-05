@@ -340,7 +340,7 @@ namespace RusDictionary.Modules
         {
             string query = "INSERT INTO dictionaryentries (`NAME`, `POMET`, `DEFINITION`) VALUES ('" + nam + "', '" + pom + "', '" + def + "')";
             // объект для выполнения SQL-запроса
-            JSON.Send(System.Net.WebUtility.UrlEncode(query), JSONFlags.Insert);
+            JSON.Send(query, JSONFlags.Insert);
         }
         private void buWordSearch_Read_Click(object sender, EventArgs e)
         {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Common;
 using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
@@ -17,7 +16,7 @@ namespace RusDictionary
         public static void Send(string query, JSONFlags flag)
         {
             ReturnJSON = null;
-            WebRequest req = WebRequest.Create(SendURL(flag) + query.Replace(" ", "%20"));
+            WebRequest req = WebRequest.Create(SendURL(flag) + WebUtility.UrlEncode(query));
             WebResponse resp = req.GetResponse();
             Stream stream = resp.GetResponseStream();
             StreamReader sr = new StreamReader(stream);
