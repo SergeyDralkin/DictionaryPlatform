@@ -27,7 +27,7 @@ namespace RusDictionary.Modules
             string line;
             //bool next = true; // Переключатель завершения считывания
             //int count = 0; // Количество строк для считывания
-           // int globCount = 0; // Количество строк для считывания
+            //int globCount = 0; // Номера словарных статей
             bool read = false; // Переключатель считывания статей
             string dictionaryEntry = "";
             string tmp = "";
@@ -61,28 +61,44 @@ namespace RusDictionary.Modules
                             }
                             i++;
                         }
-                        string nam = line.Substring(start);
-                        int check = 0;
-                        int max = 0;
-                        for (i = 0; i < nam.Length; i++)
+
+                        forExit = true;
+                        i = 0;
+                        int end = 0;
+                        while (forExit && i <= line.Length - 4)
                         {
-                            string s = nam[i].ToString();
-                            if (s.Any(char.IsUpper))
+                            if (line.Substring(i, 4) == "</b>")
                             {
-                                check++;
+                                end = i;
+                                forExit = false;
                             }
-                            else
-                            {
-                                check = 0;
-                            }
-                            if (max < check)
-                            {
-                                max = check;
-                            }
+                            i++;
                         }
-                        if (max > 1 || (nam.Length == 1 && max > 0))
+                        if (end > start)
                         {
-                            mainWord = true;
+                            string nam = line.Substring(start, end - start);
+                            int check = 0;
+                            int max = 0;
+                            for (i = 0; i < nam.Length; i++)
+                            {
+                                string s = nam[i].ToString();
+                                if (s.Any(char.IsUpper))
+                                {
+                                    check++;
+                                }
+                                else
+                                {
+                                    check = 0;
+                                }
+                                if (max < check)
+                                {
+                                    max = check;
+                                }
+                            }
+                            if (max > 1 || (nam.Length == 1 && max > 0))
+                            {
+                                mainWord = true;
+                            }
                         }
                     }
                 }
@@ -119,6 +135,89 @@ namespace RusDictionary.Modules
                 if (!read && dictionaryEntry != "" && newEntry)
                 {
                     //globCount++;
+                    //dictionaryEntry = dictionaryEntry.Replace("<b>", "//<b>");  возможно это лучше
+                    //List<string> tmpDic = new List<string>();
+                    //string[] sprt = {"//"};
+                    //tmpDic.AddRange(dictionaryEntry.Split(sprt, StringSplitOptions.RemoveEmptyEntries));
+                    //List<string> Dic = new List<string>();
+                    //if(tmpDic.Count > 1)
+                    //{
+                    //    Dic.Add(tmpDic[0] + tmpDic[1]);
+                    //    if(tmpDic.Count > 2)
+                    //    {
+                    //        for (int i = 2; i < tmpDic.Count; i++)
+                    //        {
+                    //            if(tmpDic[i - 1][tmpDic[i - 1].Length - 1] == '#')
+                    //            {
+                    //                Dic[Dic.Count - 1] += tmpDic[i];
+                    //            }
+                    //            else
+                    //            {
+                    //                bool forExit = true;
+                    //                int j = 0;
+                    //                int start = 0;
+                    //                while (forExit && j <= tmpDic[i].Length - 3)
+                    //                {
+                    //                    if (tmpDic[i].Substring(j, 3) == "<b>")
+                    //                    {
+                    //                        start = j + 3;
+                    //                        forExit = false;
+                    //                    }
+                    //                    j++;
+                    //                }
+
+                    //                forExit = true;
+                    //                j = 0;
+                    //                int end = 0;
+                    //                while (forExit && j <= tmpDic[i].Length - 4)
+                    //                {
+                    //                    if (tmpDic[i].Substring(j, 4) == "</b>")
+                    //                    {
+                    //                        end = j;
+                    //                        forExit = false;
+                    //                    }
+                    //                    j++;
+                    //                }
+                    //                string nam = tmpDic[i].Substring(start, end - start);
+                    //                int check = 0;
+                    //                int max = 0;
+                    //                for (j = 0; j < nam.Length; j++)
+                    //                {
+                    //                    string s = nam[j].ToString();
+                    //                    if (s.Any(char.IsUpper) && s != "E" && s != "N" && s != "U" && s != "S")
+                    //                    {
+                    //                        check++;
+                    //                    }
+                    //                    else
+                    //                    {
+                    //                        check = 0;
+                    //                    }
+                    //                    if (max < check)
+                    //                    {
+                    //                        max = check;
+                    //                    }
+                    //                }
+                    //                if (max > 1 || (nam.Length == 1 && max > 0))
+                    //                {
+                    //                    Dic.Add(tmpDic[i]);
+                    //                }
+                    //                else
+                    //                {
+                    //                    Dic[Dic.Count - 1] += tmpDic[i];
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //    for (int i = 0; i < Dic.Count; i++)
+                    //    {
+                    //        DictionaryEntryDivide(Dic[i]);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    dictionaryEntry = dictionaryEntry.Replace("//<b>", "<b>");
+                    //    DictionaryEntryDivide(dictionaryEntry);
+                    //}
                     DictionaryEntryDivide(dictionaryEntry);
                     dictionaryEntry = tmp;
                     tmp = "";
@@ -147,7 +246,6 @@ namespace RusDictionary.Modules
             string rod = "";
             string num = "";
             string definition = "";
-
             while (forExit && i <= s.Length - 1/*- 3*/) // Поиск начального индекса
             {
                 if (s.Substring(i, /*3*/1) == ">"/*"<b>"*/)
@@ -268,10 +366,6 @@ namespace RusDictionary.Modules
                 name = name.Replace(" ", " ");
                 pomet = pomet.Replace(" ", " ");
                 description = description.Replace(" ", " ");
-
-
-
-
 
 
                 // перенос см. в описание
@@ -578,7 +672,7 @@ namespace RusDictionary.Modules
                         name = name.Replace(pmt[j], "");
                         if (!pomet.Contains(pmt[j]))
                         {
-                            pomet = pmt[j] + " " + pomet;
+                            pomet = " " + pmt[j] + " " + pomet;
                         }
                     }
                 }
@@ -599,41 +693,41 @@ namespace RusDictionary.Modules
                 // Определение рода
                 forExit = true;
                 i = 0;
-                while (forExit && i <= pomet.Length - 2)
+                while (forExit && i <= pomet.Length - 3)
                 {
-                    if (pomet.Substring(i, 2) == "с.")
+                    if (pomet.Substring(i, 3) == " с.")
                     {
                         rod = "с.";
                         tmpStr = pomet.Substring(0, i);
-                        if (i + 2 < pomet.Length)
+                        if (i + 3 < pomet.Length)
                         {
-                            tmpStr += pomet.Substring(i + 2);
+                            tmpStr += pomet.Substring(i + 3);
                         }
                         pomet = tmpStr;
                         forExit = false;
                     }
                     else
                     {
-                        if (pomet.Substring(i, 2) == "ж.")
+                        if (pomet.Substring(i, 3) == " ж.")
                         {
                             rod = "ж.";
                             tmpStr = pomet.Substring(0, i);
-                            if (i + 2 < pomet.Length)
+                            if (i + 3 < pomet.Length)
                             {
-                                tmpStr += pomet.Substring(i + 2);
+                                tmpStr += pomet.Substring(i + 3);
                             }
                             pomet = tmpStr;
                             forExit = false;
                         }
                         else
                         {
-                            if (pomet.Substring(i, 2) == "м.")
+                            if (pomet.Substring(i, 3) == " м.")
                             {
                                 rod = "м.";
                                 tmpStr = pomet.Substring(0, i);
-                                if (i + 2 < pomet.Length)
+                                if (i + 3 < pomet.Length)
                                 {
-                                    tmpStr += pomet.Substring(i + 2);
+                                    tmpStr += pomet.Substring(i + 3);
                                 }
                                 pomet = tmpStr;
                                 forExit = false;
@@ -1228,6 +1322,11 @@ namespace RusDictionary.Modules
                         }
                     }
                 }
+                if (definition == "см.")
+                {
+                    definition += description;
+                    description = "";
+                }
                 //description = ClearTags(description);
                 List<string> tmpEXMP = new List<string>(); // Заполнение цитат
                 List<string> EXMP = new List<string>(); // Соединение разорваных частей цитат
@@ -1451,8 +1550,6 @@ namespace RusDictionary.Modules
         private void buWordSearch_Read_Click(object sender, EventArgs e)
         {
             FileName.Clear();
-            //string query = "INSERT INTO dictionaryentries (NAME, PARTOFSPEECH, ROD, NUM, DEFINITION, EXAMPLE) VALUES ('1', '1', '1', '1', '1', '1')";
-            //JSON.Send(query, JSONFlags.Insert);
             OpenFileDialog OPF = new OpenFileDialog(); // Инициализация диалогового окна
             OPF.Filter = "HTM|*.htm"; // Фильтр в диалоговом окне
             if (OPF.ShowDialog() == DialogResult.OK)
