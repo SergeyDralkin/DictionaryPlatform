@@ -114,8 +114,11 @@ namespace RusDictionary
         #endregion
         #region WordSearchModule
         public string Name { get; set; }
-        public string Pomet { get; set; }
+        public string Partofspeech { get; set; }
+        public string Rod { get; set; }
+        public string Num { get; set; }
         public string Definition { get; set; }
+        public string Example { get; set; }
         #endregion
     }
 }
