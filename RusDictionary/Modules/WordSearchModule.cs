@@ -1555,20 +1555,20 @@ namespace RusDictionary.Modules
             if (OPF.ShowDialog() == DialogResult.OK)
             {
                 FileName.Add(OPF.FileName); // Добавление в массив пути картинки
+                sr = new StreamReader(FileName[0], Encoding.Default);
+                Program.f1.PictAndLableWait(true);
+                List<Thread> massThread = new List<Thread>();
+                massThread.Add(new Thread(() => ReadingHTM()));
+                massThread[0].Start();
+                while (massThread[0].IsAlive)
+                {
+                    Thread.Sleep(1);
+                    Application.DoEvents();
+                }
+                massThread.Clear();
+                Program.f1.PictAndLableWait(false);
+                MessageBox.Show("Готово");
             }
-            sr = new StreamReader(FileName[0], Encoding.Default);
-            Program.f1.PictAndLableWait(true);
-            List<Thread> massThread = new List<Thread>();
-            massThread.Add(new Thread(() => ReadingHTM()));
-            massThread[0].Start();
-            while (massThread[0].IsAlive)
-            {
-                Thread.Sleep(1);
-                Application.DoEvents();
-            }
-            massThread.Clear();
-            Program.f1.PictAndLableWait(false);
-            MessageBox.Show("Готово");
         }
         void FindWords()
         {
@@ -1595,11 +1595,24 @@ namespace RusDictionary.Modules
                 Examples.Add(jNames[i].Example);
             }
 
+            string tmpSearch = tbWordSearch_SearchingWord.Text;
+            string textSearch = null;
+            for (int i = 0; i < tmpSearch.Length; i++)
+            {
+                if(char.IsLetter(tmpSearch[i]))
+                {
+                    textSearch += char.ToUpper(tmpSearch[i]);
+                }
+                else
+                {
+                    textSearch += tmpSearch[i];
+                }
+            }
             string tmp = "";
             bool newWord = false;
             for (int i = 0; i < Names.Count; i++)
             {
-                if (Names[i].Contains(tbWordSearch_SearchingWord.Text))
+                if (Names[i].Contains(textSearch))
                 {
                     if (tmp != Names[i])
                     {
