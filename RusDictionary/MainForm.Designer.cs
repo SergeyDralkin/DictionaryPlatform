@@ -41,6 +41,7 @@
             this.laPassword = new System.Windows.Forms.Label();
             this.buLogin = new System.Windows.Forms.Button();
             this.tbPassword = new System.Windows.Forms.TextBox();
+            this.buVisiblePass = new System.Windows.Forms.Button();
             this.buSettingLogin = new System.Windows.Forms.Button();
             this.tpMain = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -50,14 +51,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.buExitLogin = new System.Windows.Forms.Button();
             this.buMainFormSetting = new System.Windows.Forms.Button();
             this.buAuthors = new System.Windows.Forms.Button();
             this.buIndexModule = new System.Windows.Forms.Button();
             this.buWordSearchModule = new System.Windows.Forms.Button();
             this.buCardIndexModule = new System.Windows.Forms.Button();
             this.tpCardIndex = new System.Windows.Forms.TabPage();
+            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
             this.tpPointer = new System.Windows.Forms.TabPage();
+            this.indexModule1 = new RusDictionary.Modules.IndexModule();
             this.tpWordSearch = new System.Windows.Forms.TabPage();
+            this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
             this.tpAuthors = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
@@ -136,11 +141,6 @@
             this.pbWait = new System.Windows.Forms.PictureBox();
             this.laWait = new System.Windows.Forms.Label();
             this.cdChangeColor = new System.Windows.Forms.ColorDialog();
-            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
-            this.indexModule1 = new RusDictionary.Modules.IndexModule();
-            this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
-            this.buVisiblePass = new System.Windows.Forms.Button();
-            this.buExitLogin = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.MainTC.SuspendLayout();
             this.tpLogin.SuspendLayout();
@@ -332,6 +332,20 @@
             this.tbPassword.Text = "SS12343";
             this.tbPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // buVisiblePass
+            // 
+            this.buVisiblePass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buVisiblePass.Image = global::RusDictionary.Properties.Resources.EyeClose;
+            this.buVisiblePass.Location = new System.Drawing.Point(310, 257);
+            this.buVisiblePass.Margin = new System.Windows.Forms.Padding(0);
+            this.buVisiblePass.Name = "buVisiblePass";
+            this.buVisiblePass.Size = new System.Drawing.Size(35, 28);
+            this.buVisiblePass.TabIndex = 17;
+            this.buVisiblePass.UseVisualStyleBackColor = true;
+            this.buVisiblePass.Click += new System.EventHandler(this.buVisiblePass_Click);
+            this.buVisiblePass.MouseLeave += new System.EventHandler(this.buVisiblePass_MouseLeave);
+            this.buVisiblePass.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buVisiblePass_MouseMove);
+            // 
             // buSettingLogin
             // 
             this.buSettingLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -462,6 +476,19 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(645, 388);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
+            // buExitLogin
+            // 
+            this.buExitLogin.BackColor = System.Drawing.Color.SeaShell;
+            this.buExitLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buExitLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buExitLogin.Location = new System.Drawing.Point(3, 323);
+            this.buExitLogin.Name = "buExitLogin";
+            this.buExitLogin.Size = new System.Drawing.Size(639, 62);
+            this.buExitLogin.TabIndex = 5;
+            this.buExitLogin.Text = "Выйти";
+            this.buExitLogin.UseVisualStyleBackColor = false;
+            this.buExitLogin.Click += new System.EventHandler(this.buExitLogin_Click);
+            // 
             // buMainFormSetting
             // 
             this.buMainFormSetting.BackColor = System.Drawing.Color.SeaShell;
@@ -539,6 +566,15 @@
             this.tpCardIndex.TabIndex = 1;
             this.tpCardIndex.Text = "Картотека";
             // 
+            // cardIndexModule
+            // 
+            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
+            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
+            this.cardIndexModule.Name = "cardIndexModule";
+            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
+            this.cardIndexModule.TabIndex = 0;
+            // 
             // tpPointer
             // 
             this.tpPointer.Controls.Add(this.indexModule1);
@@ -549,6 +585,15 @@
             this.tpPointer.Text = "Указатели";
             this.tpPointer.UseVisualStyleBackColor = true;
             // 
+            // indexModule1
+            // 
+            this.indexModule1.BackColor = System.Drawing.Color.Transparent;
+            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.indexModule1.Location = new System.Drawing.Point(0, 0);
+            this.indexModule1.Name = "indexModule1";
+            this.indexModule1.Size = new System.Drawing.Size(1054, 580);
+            this.indexModule1.TabIndex = 0;
+            // 
             // tpWordSearch
             // 
             this.tpWordSearch.Controls.Add(this.wordSearchModule1);
@@ -558,6 +603,14 @@
             this.tpWordSearch.TabIndex = 3;
             this.tpWordSearch.Text = "Поиск слов";
             this.tpWordSearch.UseVisualStyleBackColor = true;
+            // 
+            // wordSearchModule1
+            // 
+            this.wordSearchModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wordSearchModule1.Location = new System.Drawing.Point(0, 0);
+            this.wordSearchModule1.Name = "wordSearchModule1";
+            this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
+            this.wordSearchModule1.TabIndex = 0;
             // 
             // tpAuthors
             // 
@@ -1691,59 +1744,6 @@
             this.laWait.TabIndex = 1;
             this.laWait.Text = "Выполняется задача, пожалуйства, подождите";
             this.laWait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cardIndexModule
-            // 
-            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
-            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
-            this.cardIndexModule.Name = "cardIndexModule";
-            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
-            this.cardIndexModule.TabIndex = 0;
-            // 
-            // indexModule1
-            // 
-            this.indexModule1.BackColor = System.Drawing.Color.Transparent;
-            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.indexModule1.Location = new System.Drawing.Point(0, 0);
-            this.indexModule1.Name = "indexModule1";
-            this.indexModule1.Size = new System.Drawing.Size(1054, 580);
-            this.indexModule1.TabIndex = 0;
-            // 
-            // wordSearchModule1
-            // 
-            this.wordSearchModule1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wordSearchModule1.Location = new System.Drawing.Point(0, 0);
-            this.wordSearchModule1.Name = "wordSearchModule1";
-            this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
-            this.wordSearchModule1.TabIndex = 0;
-            // 
-            // buVisiblePass
-            // 
-            this.buVisiblePass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buVisiblePass.Image = global::RusDictionary.Properties.Resources.EyeClose;
-            this.buVisiblePass.Location = new System.Drawing.Point(310, 257);
-            this.buVisiblePass.Margin = new System.Windows.Forms.Padding(0);
-            this.buVisiblePass.Name = "buVisiblePass";
-            this.buVisiblePass.Size = new System.Drawing.Size(35, 28);
-            this.buVisiblePass.TabIndex = 17;
-            this.buVisiblePass.UseVisualStyleBackColor = true;
-            this.buVisiblePass.Click += new System.EventHandler(this.buVisiblePass_Click);
-            this.buVisiblePass.MouseLeave += new System.EventHandler(this.buVisiblePass_MouseLeave);
-            this.buVisiblePass.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buVisiblePass_MouseMove);
-            // 
-            // buExitLogin
-            // 
-            this.buExitLogin.BackColor = System.Drawing.Color.SeaShell;
-            this.buExitLogin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buExitLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buExitLogin.Location = new System.Drawing.Point(3, 323);
-            this.buExitLogin.Name = "buExitLogin";
-            this.buExitLogin.Size = new System.Drawing.Size(639, 62);
-            this.buExitLogin.TabIndex = 5;
-            this.buExitLogin.Text = "Выйти";
-            this.buExitLogin.UseVisualStyleBackColor = false;
-            this.buExitLogin.Click += new System.EventHandler(this.buExitLogin_Click);
             // 
             // MainForm
             // 

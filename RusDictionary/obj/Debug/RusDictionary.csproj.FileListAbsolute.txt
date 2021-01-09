@@ -144,7 +144,6 @@ D:\DictionaryPlatform\RusDictionary\RusDictionary\bin\Debug\Microsoft.Bcl.AsyncI
 D:\DictionaryPlatform\RusDictionary\RusDictionary\bin\Debug\System.Threading.Tasks.Extensions.dll
 D:\DictionaryPlatform\RusDictionary\RusDictionary\bin\Debug\CsvHelper.xml
 D:\DictionaryPlatform\RusDictionary\RusDictionary\bin\Debug\Newtonsoft.Json.xml
-D:\DictionaryPlatform\RusDictionary\RusDictionary\obj\Debug\RusDictionary.csprojAssemblyReference.cache
 D:\DictionaryPlatform\RusDictionary\RusDictionary\obj\Debug\RusDictionary.MainForm.resources
 D:\DictionaryPlatform\RusDictionary\RusDictionary\obj\Debug\RusDictionary.Modules.CardIndexModule.resources
 D:\DictionaryPlatform\RusDictionary\RusDictionary\obj\Debug\RusDictionary.Modules.IndexModule.resources
@@ -181,3 +180,4 @@ C:\Users\treky\Desktop\Dictionary\RusDictionary\obj\Debug\RusDictionary.csproj.C
 C:\Users\treky\Desktop\Dictionary\RusDictionary\obj\Debug\RusDictionary.csproj.CopyComplete
 C:\Users\treky\Desktop\Dictionary\RusDictionary\obj\Debug\RusDictionary.exe
 C:\Users\treky\Desktop\Dictionary\RusDictionary\obj\Debug\RusDictionary.pdb
+D:\DictionaryPlatform\RusDictionary\RusDictionary\obj\Debug\RusDictionary.csprojAssemblyReference.cache
