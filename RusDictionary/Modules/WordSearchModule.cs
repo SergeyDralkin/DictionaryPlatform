@@ -20,9 +20,12 @@ namespace RusDictionary.Modules
         }
         List<string> FileName = new List<string>();
         StreamReader sr;
+        int mainWordNum;
         void ReadingHTM()
         {
             string query = "TRUNCATE TABLE dictionaryentries";
+            JSON.Send(query, JSONFlags.Truncate);
+            query = "TRUNCATE TABLE mainwords";
             JSON.Send(query, JSONFlags.Truncate);
             string line;
             //bool next = true; // Переключатель завершения считывания
@@ -34,15 +37,12 @@ namespace RusDictionary.Modules
             bool newEntry = true;
             bool mainWord = false;
             bool table = false;
+            mainWordNum = 1;
             while ((line = sr.ReadLine()) != null /*&& next*/)
             {
                 if (line.Contains("<table"))
                 {
                     table = true;
-                }
-                if (line.Contains("</table>"))
-                {
-                    table = false;
                 }
                 if (line.Contains("<p") && !table)
                 {
@@ -61,7 +61,6 @@ namespace RusDictionary.Modules
                             }
                             i++;
                         }
-
                         forExit = true;
                         i = 0;
                         int end = 0;
@@ -106,7 +105,7 @@ namespace RusDictionary.Modules
                 {
                     tmp += " " + line;
                 }
-                if (line.Contains("</p") && !table)
+                if (line.Contains("</p>") && !table)
                 {
                     if (newEntry)
                     {
@@ -135,96 +134,17 @@ namespace RusDictionary.Modules
                 if (!read && dictionaryEntry != "" && newEntry)
                 {
                     //globCount++;
-                    //dictionaryEntry = dictionaryEntry.Replace("<b>", "//<b>");  возможно это лучше
-                    //List<string> tmpDic = new List<string>();
-                    //string[] sprt = {"//"};
-                    //tmpDic.AddRange(dictionaryEntry.Split(sprt, StringSplitOptions.RemoveEmptyEntries));
-                    //List<string> Dic = new List<string>();
-                    //if(tmpDic.Count > 1)
-                    //{
-                    //    Dic.Add(tmpDic[0] + tmpDic[1]);
-                    //    if(tmpDic.Count > 2)
-                    //    {
-                    //        for (int i = 2; i < tmpDic.Count; i++)
-                    //        {
-                    //            if(tmpDic[i - 1][tmpDic[i - 1].Length - 1] == '#')
-                    //            {
-                    //                Dic[Dic.Count - 1] += tmpDic[i];
-                    //            }
-                    //            else
-                    //            {
-                    //                bool forExit = true;
-                    //                int j = 0;
-                    //                int start = 0;
-                    //                while (forExit && j <= tmpDic[i].Length - 3)
-                    //                {
-                    //                    if (tmpDic[i].Substring(j, 3) == "<b>")
-                    //                    {
-                    //                        start = j + 3;
-                    //                        forExit = false;
-                    //                    }
-                    //                    j++;
-                    //                }
-
-                    //                forExit = true;
-                    //                j = 0;
-                    //                int end = 0;
-                    //                while (forExit && j <= tmpDic[i].Length - 4)
-                    //                {
-                    //                    if (tmpDic[i].Substring(j, 4) == "</b>")
-                    //                    {
-                    //                        end = j;
-                    //                        forExit = false;
-                    //                    }
-                    //                    j++;
-                    //                }
-                    //                string nam = tmpDic[i].Substring(start, end - start);
-                    //                int check = 0;
-                    //                int max = 0;
-                    //                for (j = 0; j < nam.Length; j++)
-                    //                {
-                    //                    string s = nam[j].ToString();
-                    //                    if (s.Any(char.IsUpper) && s != "E" && s != "N" && s != "U" && s != "S")
-                    //                    {
-                    //                        check++;
-                    //                    }
-                    //                    else
-                    //                    {
-                    //                        check = 0;
-                    //                    }
-                    //                    if (max < check)
-                    //                    {
-                    //                        max = check;
-                    //                    }
-                    //                }
-                    //                if (max > 1 || (nam.Length == 1 && max > 0))
-                    //                {
-                    //                    Dic.Add(tmpDic[i]);
-                    //                }
-                    //                else
-                    //                {
-                    //                    Dic[Dic.Count - 1] += tmpDic[i];
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-                    //    for (int i = 0; i < Dic.Count; i++)
-                    //    {
-                    //        DictionaryEntryDivide(Dic[i]);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    dictionaryEntry = dictionaryEntry.Replace("//<b>", "<b>");
-                    //    DictionaryEntryDivide(dictionaryEntry);
-                    //}
                     DictionaryEntryDivide(dictionaryEntry);
                     dictionaryEntry = tmp;
                     tmp = "";
                     newEntry = false;
                 }
+                if (line.Contains("</table>"))
+                {
+                    table = false;
+                }
                 //count++;
-                //if (count > 10000)
+                //if (count > 7000)
                 //{
                 //    next = false;
                 //}
@@ -240,12 +160,37 @@ namespace RusDictionary.Modules
             bool forExit = true;
             int i = 0;
             string name = "";
+            string semant = "";
             string pomet = "";
             string description = "";
             string partOfSpeech = "";
             string rod = "";
             string num = "";
             string definition = "";
+            string sr = "";
+
+            // приведение спеиальных слов к нормальной форме
+            s = s.Replace(" зная.", " знач.");
+            s = s.Replace(" знал.", " знач.");
+            s = s.Replace(" зкач.", " знач.");
+            s = s.Replace(" энач.", " знач.");
+            s = s.Replace(" анач.", " знач.");
+            s = s.Replace("уменъш. к", "уменьш. к");
+            s = s.Replace("Уменъш. к", "уменьш. к");
+            s = s.Replace("уменьш к", "уменьш. к");
+            s = s.Replace("уменъш.-ласкат. к", "уменьш.-ласкат. к");
+            s = s.Replace("несое.", "несов. к");
+            s = s.Replace("Лесов, к", "несов. к");
+            s = s.Replace("Страд, к", "страд. к");
+            s = s.Replace("страд, к", "страд. к");
+            s = s.Replace(" страД.", "страд. к");
+            s = s.Replace(" страд.", "страд. к");
+            s = s.Replace(" лрил.", " прил.");
+            s = s.Replace(" нрил.", " прил.");
+            s = s.Replace(" gрил.", " прил.");
+            s = s.Replace(" нвреч.", " нареч.");
+            s = s.Replace("То ме, что", "То же, что");
+
             while (forExit && i <= s.Length - 1/*- 3*/) // Поиск начального индекса
             {
                 if (s.Substring(i, /*3*/1) == ">"/*"<b>"*/)
@@ -257,7 +202,7 @@ namespace RusDictionary.Modules
             }
             forExit = true;
             i = 0;
-            while (forExit && i <= s.Length - 5) // Поиск конечного индекса
+            while (forExit && i <= s.Length - 5) // Поиск конечного индекса (с зяпятой)
             {
                 if (s.Substring(i, 5) == ",</b>")
                 {
@@ -266,11 +211,11 @@ namespace RusDictionary.Modules
                 }
                 i++;
             }
-            if (forExit)
+            if (forExit) // если не найдено в предыдущем цикле
             {
                 forExit = true;
                 i = 0;
-                while (forExit && i <= s.Length - 5) // Поиск конечного индекса
+                while (forExit && i <= s.Length - 5) // Поиск конечного индекса (с точкой)
                 {
                     if (s.Substring(i, 5) == ".</b>")
                     {
@@ -280,11 +225,11 @@ namespace RusDictionary.Modules
                     i++;
                 }
             }
-            if (forExit)
+            if (forExit) // если не найдено в предыдущих циклах
             {
                 forExit = true;
                 i = 0;
-                while (forExit && i <= s.Length - 5) // Поиск конечного индекса
+                while (forExit && i <= s.Length - 5) // Поиск конечного индекса (без точки, запятой и хештега)
                 {
                     if (s.Substring(i, 4) == "</b>" && s.Substring(i, 5) != "</b>#")
                     {
@@ -294,11 +239,11 @@ namespace RusDictionary.Modules
                     i++;
                 }
             }
-            else
+            else // если найдено в предыдущих циклах
             {
                 forExit = true;
                 i = 0;
-                while (forExit && i <= s.Length - 5) // Поиск конечного индекса
+                while (forExit && i <= s.Length - 5) // Поиск конечного индекса (без точки, запятой и хештега)
                 {
                     if (s.Substring(i, 4) == "</b>" && i < finishIndex && s.Substring(i, 5) != "</b>#")
                     {
@@ -308,14 +253,57 @@ namespace RusDictionary.Modules
                     i++;
                 }
             }
+            // для семантики
+            int semStartIndex = -1;
+            int semEndIndex = -1;
             if (finishIndex != 0 && finishIndex > startIndex) // Вывод заголовочного слова
             {
                 name = s.Substring(startIndex, finishIndex - startIndex);
+
+                forExit = true;
+                i = 0;
+                while (forExit && i <= name.Length - 5) // начало семантики
+                {
+                    if (name.Substring(i, 5) == "<sup>")
+                    {
+                        semStartIndex = i + 5;
+                        forExit = false;
+                    }
+                    i++;
+                }
+                forExit = true;
+                i = 0;
+                while (forExit && i <= name.Length - 6) // конец семантики
+                {
+                    if (name.Substring(i, 6) == "</sup>")
+                    {
+                        semEndIndex = i;
+                        forExit = false;
+                    }
+                    i++;
+                }
+                if (semStartIndex != -1 && semEndIndex != -1)
+                {
+                    semant = name.Substring(semStartIndex, semEndIndex - semStartIndex);
+                    name = name.Substring(0, semStartIndex - 5) + name.Substring(semEndIndex);
+                }
+                string[] smt = { "1,", "2,", "3,", "4,", "5," };
+                for (int j = 0; j < smt.Length; j++)
+                {
+                    if (name.Contains(smt[j]))
+                    {
+                        name = name.Replace(smt[j], "");
+                        semant = smt[j];
+                        semant = semant.Replace(",", "");
+                    }
+                }
+                semant = ClearTags(semant);
+                // очистка заг слова от маленьких букв в начале
                 name = ClearTags(name);
                 forExit = true;
                 i = 0;
                 string tmpName = "";
-                while (forExit && i < name.Length) // Поиск конечного индекса
+                while (forExit && i < name.Length)
                 {
                     string ss = name[i].ToString();
                     if (!ss.Any(char.IsUpper))
@@ -332,10 +320,11 @@ namespace RusDictionary.Modules
                 {
                     name = tmpName;
                 }
+                // Поиск помет
                 forExit = true;
                 i = finishIndex;
                 int endOfPometIndex = 0;
-                while (forExit && i <= s.Length - 4) // Поиск помет
+                while (forExit && i <= s.Length - 4)
                 {
                     if (s.Substring(i, 4) == "</i>")
                     {
@@ -349,6 +338,40 @@ namespace RusDictionary.Modules
                     int tmp = endOfPometIndex - (finishIndex + 4);
                     if (tmp < 0) tmp = 0;
                     pomet = s.Substring(finishIndex + 4, tmp); // Вывод помет
+
+                    if (semant == "")
+                    {
+                        semStartIndex = -1;
+                        semEndIndex = -1;
+                        forExit = true;
+                        i = 0;
+                        while (forExit && i <= pomet.Length - 5) // начало семантики
+                        {
+                            if (pomet.Substring(i, 5) == "<sup>")
+                            {
+                                semStartIndex = i + 5;
+                                forExit = false;
+                            }
+                            i++;
+                        }
+                        forExit = true;
+                        i = 0;
+                        while (forExit && i <= pomet.Length - 6) // конец семантики
+                        {
+                            if (pomet.Substring(i, 6) == "</sup>")
+                            {
+                                semEndIndex = i;
+                                forExit = false;
+                            }
+                            i++;
+                        }
+                        if (semStartIndex != -1 && semEndIndex != -1)
+                        {
+                            semant = pomet.Substring(semStartIndex, semEndIndex - semStartIndex);
+                            pomet = pomet.Substring(0, semStartIndex - 5) + pomet.Substring(semEndIndex);
+                        }
+                        semant = ClearTags(semant);
+                    }
                     pomet = ClearTags(pomet);
                     tmp = s.Length - (endOfPometIndex + 4);
                     if (tmp < 0) tmp = 0;
@@ -366,8 +389,6 @@ namespace RusDictionary.Modules
                 name = name.Replace(" ", " ");
                 pomet = pomet.Replace(" ", " ");
                 description = description.Replace(" ", " ");
-
-
                 // перенос см. в описание
                 if (name.Contains("см. "))
                 {
@@ -386,9 +407,10 @@ namespace RusDictionary.Modules
                     definition = name.Substring(st, name.Length - st) + pomet;
                     name = name.Substring(0, st);
                 }
+                // перенос символов нижнего регистра в поле pomet
                 forExit = true;
                 i = 0;
-                while (forExit && i < name.Length) // Поиск конечного индекса
+                while (forExit && i < name.Length)
                 {
                     string ss = name[i].ToString();
                     if (!ss.Any(char.IsUpper) && ss != "[" && ss != "]" && ss != "#" && ss != "(" &&
@@ -409,8 +431,7 @@ namespace RusDictionary.Modules
                     i = 0;
                     int st = 0;
                     bool zn = false;
-                    if (description.Contains(" знач.") || description.Contains(" зная.") || description.Contains(" знал.") ||
-                        description.Contains(" зкач.") || description.Contains(" энач."))
+                    if (description.Contains(" знач.") /*|| description.Contains(" зная.") || description.Contains(" знал.") || description.Contains(" зкач.") || description.Contains(" энач.")*/)
                     {
                         zn = true;
                     }
@@ -431,7 +452,7 @@ namespace RusDictionary.Modules
                         i++;
                     }
                     pomet += description.Substring(0, st);
-                    pomet = ClearTags(pomet);
+                    //pomet = ClearTags(pomet);
                     description = description.Substring(st);
                 }
                 // перенос Действие по глаг. (слово) в пометы
@@ -441,8 +462,7 @@ namespace RusDictionary.Modules
                     i = 0;
                     int st = 0;
                     bool zn = false;
-                    if (description.Contains(" знач.") || description.Contains(" зная.") || description.Contains(" знал.") ||
-                        description.Contains(" зкач.") || description.Contains(" энач."))
+                    if (description.Contains(" знач.") /*|| description.Contains(" зная.") || description.Contains(" знал.") || description.Contains(" зкач.") || description.Contains(" энач.")*/)
                     {
                         zn = true;
                     }
@@ -463,7 +483,7 @@ namespace RusDictionary.Modules
                         i++;
                     }
                     pomet += description.Substring(0, st);
-                    pomet = ClearTags(pomet);
+                    //pomet = ClearTags(pomet);
                     description = description.Substring(st);
                 }
                 // перенос многокр. (слово) в пометы
@@ -473,8 +493,7 @@ namespace RusDictionary.Modules
                     i = 0;
                     int st = 0;
                     bool zn = false;
-                    if (description.Contains(" знач.") || description.Contains(" зная.") || description.Contains(" знал.") ||
-                        description.Contains(" зкач.") || description.Contains(" энач."))
+                    if (description.Contains(" знач.") /*|| description.Contains(" зная.") || description.Contains(" знал.") || description.Contains(" зкач.") || description.Contains(" энач.")*/)
                     {
                         zn = true;
                     }
@@ -495,18 +514,19 @@ namespace RusDictionary.Modules
                         i++;
                     }
                     pomet += description.Substring(0, st);
-                    pomet = ClearTags(pomet);
+                    pomet = pomet.Replace("многокр.", "");
+                    num = "многокр.";
+                    //pomet = ClearTags(pomet);
                     description = description.Substring(st);
                 }
-                // перенос То же, что (слово) в пометы
-                if (pomet.Contains("То же, что") || pomet.Contains("То ме, что"))
+                // перенос однокр. (слово) в пометы
+                if (pomet.Contains("однокр."))
                 {
                     forExit = true;
                     i = 0;
                     int st = 0;
                     bool zn = false;
-                    if (description.Contains(" знач.") || description.Contains(" зная.") || description.Contains(" знал.") ||
-                        description.Contains(" зкач.") || description.Contains(" энач."))
+                    if (description.Contains(" знач.") /*|| description.Contains(" зная.") || description.Contains(" знал.") || description.Contains(" зкач.") || description.Contains(" энач.")*/)
                     {
                         zn = true;
                     }
@@ -527,7 +547,40 @@ namespace RusDictionary.Modules
                         i++;
                     }
                     pomet += description.Substring(0, st);
-                    pomet = ClearTags(pomet);
+                    pomet = pomet.Replace("однокр.", "");
+                    num = "однокр.";
+                    //pomet = ClearTags(pomet);
+                    description = description.Substring(st);
+                }
+                // перенос То же, что (слово) в пометы
+                if (pomet.Contains("То же, что") /*|| pomet.Contains("То ме, что")*/)
+                {
+                    forExit = true;
+                    i = 0;
+                    int st = 0;
+                    bool zn = false;
+                    if (description.Contains(" знач.") /*|| description.Contains(" зная.") || description.Contains(" знал.") || description.Contains(" зкач.") || description.Contains(" энач.")*/)
+                    {
+                        zn = true;
+                    }
+                    while (forExit && i <= description.Length - 1)
+                    {
+                        if (description[i] == '.' && zn)
+                        {
+                            zn = false;
+                        }
+                        else
+                        {
+                            if (description[i] == '.')
+                            {
+                                st = i + 1;
+                                forExit = false;
+                            }
+                        }
+                        i++;
+                    }
+                    pomet += description.Substring(0, st);
+                    //pomet = ClearTags(pomet);
                     description = description.Substring(st);
                 }
                 // перенос закртыие скобки в пометы
@@ -546,22 +599,17 @@ namespace RusDictionary.Modules
                         i++;
                     }
                     pomet += description.Substring(0, st);
-                    pomet = ClearTags(pomet);
+                    //pomet = ClearTags(pomet);
                     description = description.Substring(st);
                 }
                 // перенос уменъш. к страд, к несов. к (слово) в пометы
-                if (pomet.Contains("уменъш. к") || pomet.Contains("Уменъш. к") || pomet.Contains("уменъш.-ласкат. к") ||
-                    pomet.Contains("уменьш к") || pomet.Contains("несое.") || pomet.Contains(" Лесов, к") ||
-                    pomet.Contains("несов. к") ||
-                    pomet.Contains("Страд, к") || pomet.Contains("страд, к") || pomet.Contains(" страД.") ||
-                    pomet.Contains(" уничиж."))
+                if (pomet.Contains("уменьш. к") || pomet.Contains("уменьш.-ласкат. к") || pomet.Contains("несов. к") || pomet.Contains("страд. к") || pomet.Contains(" уничиж."))
                 {
                     forExit = true;
                     i = 0;
                     int st = 0;
                     bool zn = false;
-                    if (description.Contains(" знач.") || description.Contains(" зная.") || description.Contains(" знал.") ||
-                        description.Contains(" зкач.") || description.Contains(" энач."))
+                    if (description.Contains(" знач.") /*|| description.Contains(" зная.") || description.Contains(" знал.") || description.Contains(" зкач.") || description.Contains(" энач.")*/)
                     {
                         zn = true;
                     }
@@ -582,7 +630,7 @@ namespace RusDictionary.Modules
                         i++;
                     }
                     pomet += description.Substring(0, st);
-                    pomet = ClearTags(pomet);
+                    //pomet = ClearTags(pomet);
                     description = description.Substring(st);
                 }
                 // Убираем пробелы в начале description
@@ -659,12 +707,11 @@ namespace RusDictionary.Modules
                         i++;
                     }
                     pomet += description.Substring(0, st);
-                    pomet = ClearTags(pomet);
+                    //pomet = ClearTags(pomet);
                     description = description.Substring(st);
                 }
-
                 // преренос рода и номеров в пометы
-                string[] pmt = { "м.", "с.", "ж.", "1.", "2.", "3.", "4.", "5.", "1", "2", "3", "4", "5" };
+                string[] pmt = { "1.", "2.", "3.", "4.", "5.", "м.", "с.", "ж." };
                 for (int j = 0; j < pmt.Length; j++)
                 {
                     if (name.Contains(pmt[j]))
@@ -689,27 +736,25 @@ namespace RusDictionary.Modules
                         forExit = false;
                     }
                 }
-                string tmpStr;
                 // Определение рода
+                string tmpStr;
                 forExit = true;
                 i = 0;
                 while (forExit && i <= pomet.Length - 3)
                 {
-                    if (pomet.Substring(i, 3) == " с.")
+                    switch (pomet.Substring(i, 3))
                     {
-                        rod = "с.";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 3 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 3);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    else
-                    {
-                        if (pomet.Substring(i, 3) == " ж.")
-                        {
+                        case " с.":
+                            rod = "с.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 3 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 3);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        case " ж.":
                             rod = "ж.";
                             tmpStr = pomet.Substring(0, i);
                             if (i + 3 < pomet.Length)
@@ -718,21 +763,19 @@ namespace RusDictionary.Modules
                             }
                             pomet = tmpStr;
                             forExit = false;
-                        }
-                        else
-                        {
-                            if (pomet.Substring(i, 3) == " м.")
+                            break;
+                        case " м.":
+                            rod = "м.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 3 < pomet.Length)
                             {
-                                rod = "м.";
-                                tmpStr = pomet.Substring(0, i);
-                                if (i + 3 < pomet.Length)
-                                {
-                                    tmpStr += pomet.Substring(i + 3);
-                                }
-                                pomet = tmpStr;
-                                forExit = false;
+                                tmpStr += pomet.Substring(i + 3);
                             }
-                        }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        default:
+                            break;
                     }
                     i++;
                 }
@@ -741,39 +784,41 @@ namespace RusDictionary.Modules
                 i = 0;
                 while (forExit && i <= pomet.Length - 3) // мн.
                 {
-                    if (pomet.Substring(i, 3) == "мн.")
+                    switch (pomet.Substring(i, 3))
                     {
-                        num = "мн.";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 3 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 3);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
+                        case "мн.":
+                            num = "мн.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 3 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 3);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        case "дв.":
+                            num = "дв.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 3 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 3);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        default:
+                            break;
                     }
                     i++;
                 }
                 // Определение части речи
                 forExit = true;
                 i = 0;
-                while (forExit && i <= pomet.Length - 5) // прил.
+                while (forExit && i <= pomet.Length - 5) // прил. прич.
                 {
-                    if (pomet.Substring(i, 5) == "прил.")
+                    switch (pomet.Substring(i, 5))
                     {
-                        partOfSpeech = "прил.";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 5 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 5);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    else
-                    {
-                        if (pomet.Substring(i, 5) == "лрил.")
-                        {
+                        case "прил.":
                             partOfSpeech = "прил.";
                             tmpStr = pomet.Substring(0, i);
                             if (i + 5 < pomet.Length)
@@ -782,35 +827,49 @@ namespace RusDictionary.Modules
                             }
                             pomet = tmpStr;
                             forExit = false;
-                        }
-                        else
-                        {
-                            if (pomet.Substring(i, 5) == "нрил.")
+                            break;
+                        case "прич.":
+                            partOfSpeech = "прич.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 5 < pomet.Length)
                             {
-                                partOfSpeech = "прил.";
-                                tmpStr = pomet.Substring(0, i);
-                                if (i + 5 < pomet.Length)
-                                {
-                                    tmpStr += pomet.Substring(i + 5);
-                                }
-                                pomet = tmpStr;
-                                forExit = false;
+                                tmpStr += pomet.Substring(i + 5);
                             }
-                            else
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        case "мест.":
+                            partOfSpeech = "мест.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 5 < pomet.Length)
                             {
-                                if (pomet.Substring(i, 5) == "прич.")
-                                {
-                                    partOfSpeech = "прич.";
-                                    tmpStr = pomet.Substring(0, i);
-                                    if (i + 5 < pomet.Length)
-                                    {
-                                        tmpStr += pomet.Substring(i + 5);
-                                    }
-                                    pomet = tmpStr;
-                                    forExit = false;
-                                }
+                                tmpStr += pomet.Substring(i + 5);
                             }
-                        }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        case "союз.":
+                            partOfSpeech = "союз";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 5 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 5);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        case "межд.":
+                            partOfSpeech = "межд.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 5 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 5);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        default:
+                            break;
                     }
                     i++;
                 }
@@ -828,19 +887,35 @@ namespace RusDictionary.Modules
                         pomet = tmpStr;
                         forExit = false;
                     }
-                    else
+                    i++;
+                }
+                i = 0;
+                while (forExit && i <= pomet.Length - 8) // дееприч.
+                {
+                    switch (pomet.Substring(i, 8))
                     {
-                        if (pomet.Substring(i, 6) == "нвреч.")
-                        {
-                            partOfSpeech = "нареч.";
+                        case "дееприч.":
+                            partOfSpeech = "дееприч.";
                             tmpStr = pomet.Substring(0, i);
-                            if (i + 6 < pomet.Length)
+                            if (i + 8 < pomet.Length)
                             {
-                                tmpStr += pomet.Substring(i + 6);
+                                tmpStr += pomet.Substring(i + 8);
                             }
                             pomet = tmpStr;
                             forExit = false;
-                        }
+                            break;
+                        case "частица.":
+                            partOfSpeech = "частица";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 8 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 8);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        default:
+                            break;
                     }
                     i++;
                 }
@@ -854,70 +929,6 @@ namespace RusDictionary.Modules
                         if (i + 7 < pomet.Length)
                         {
                             tmpStr += pomet.Substring(i + 7);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    i++;
-                }
-                i = 0;
-                while (forExit && i <= pomet.Length - 5) // мест.
-                {
-                    if (pomet.Substring(i, 5) == "мест.")
-                    {
-                        partOfSpeech = "мест.";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 5 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 5);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    i++;
-                }
-                i = 0;
-                while (forExit && i <= pomet.Length - 5) // союз.
-                {
-                    if (pomet.Substring(i, 5) == "союз.")
-                    {
-                        partOfSpeech = "союз";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 5 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 5);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    i++;
-                }
-                i = 0;
-                while (forExit && i <= pomet.Length - 8) // частица.
-                {
-                    if (pomet.Substring(i, 8) == "частица.")
-                    {
-                        partOfSpeech = "частица";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 5 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 8);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    i++;
-                }
-                i = 0;
-                while (forExit && i <= pomet.Length - 5) // межд.
-                {
-                    if (pomet.Substring(i, 5) == "межд.")
-                    {
-                        partOfSpeech = "межд.";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 5 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 5);
                         }
                         pomet = tmpStr;
                         forExit = false;
@@ -948,7 +959,7 @@ namespace RusDictionary.Modules
                         }
                     }
                 }
-                // перенос первого предложения (слово) в пустые пометы еще раз
+                // перенос первого предложения (слово) в пустые пометы еще раз, если пусто
                 if (pomet == "" && description != "")
                 {
                     forExit = true;
@@ -1054,30 +1065,25 @@ namespace RusDictionary.Modules
                     pomet = ClearTags(pomet);
                     description = description.Substring(st);
                 }
-
-
-
-                //string tmpStr;
+                //ПОВТОРНАЯ ПРОВЕРКА ПОСЛЕ ПЕРЕНОСА
                 // Определение рода
                 forExit = true;
                 i = 0;
                 while (forExit && i <= pomet.Length - 3)
                 {
-                    if (pomet.Substring(i, 3) == " с.")
+                    switch (pomet.Substring(i, 3))
                     {
-                        rod = "с.";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 3 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 3);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    else
-                    {
-                        if (pomet.Substring(i, 3) == " ж.")
-                        {
+                        case " с.":
+                            rod = "с.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 3 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 3);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        case " ж.":
                             rod = "ж.";
                             tmpStr = pomet.Substring(0, i);
                             if (i + 3 < pomet.Length)
@@ -1086,21 +1092,19 @@ namespace RusDictionary.Modules
                             }
                             pomet = tmpStr;
                             forExit = false;
-                        }
-                        else
-                        {
-                            if (pomet.Substring(i, 3) == " м.")
+                            break;
+                        case " м.":
+                            rod = "м.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 3 < pomet.Length)
                             {
-                                rod = "м.";
-                                tmpStr = pomet.Substring(0, i);
-                                if (i + 3 < pomet.Length)
-                                {
-                                    tmpStr += pomet.Substring(i + 3);
-                                }
-                                pomet = tmpStr;
-                                forExit = false;
+                                tmpStr += pomet.Substring(i + 3);
                             }
-                        }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        default:
+                            break;
                     }
                     i++;
                 }
@@ -1109,16 +1113,30 @@ namespace RusDictionary.Modules
                 i = 0;
                 while (forExit && i <= pomet.Length - 4) // мн.
                 {
-                    if (pomet.Substring(i, 4) == " мн.")
+                    switch (pomet.Substring(i, 4))
                     {
-                        num = "мн.";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 4 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 4);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
+                        case " мн.":
+                            num = "мн.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 4 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 4);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        case " дв.":
+                            num = "дв.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 4 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 4);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        default:
+                            break;
                     }
                     i++;
                 }
@@ -1127,21 +1145,9 @@ namespace RusDictionary.Modules
                 i = 0;
                 while (forExit && i <= pomet.Length - 6) // прил.
                 {
-                    if (pomet.Substring(i, 5) == " прил.")
+                    switch (pomet.Substring(i, 6))
                     {
-                        partOfSpeech = "прил.";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 6 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 6);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    else
-                    {
-                        if (pomet.Substring(i, 6) == " лрил.")
-                        {
+                        case " прил.":
                             partOfSpeech = "прил.";
                             tmpStr = pomet.Substring(0, i);
                             if (i + 6 < pomet.Length)
@@ -1150,35 +1156,49 @@ namespace RusDictionary.Modules
                             }
                             pomet = tmpStr;
                             forExit = false;
-                        }
-                        else
-                        {
-                            if (pomet.Substring(i, 6) == " нрил.")
+                            break;
+                        case " прич.":
+                            partOfSpeech = "прич.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 6 < pomet.Length)
                             {
-                                partOfSpeech = "прил.";
-                                tmpStr = pomet.Substring(0, i);
-                                if (i + 6 < pomet.Length)
-                                {
-                                    tmpStr += pomet.Substring(i + 6);
-                                }
-                                pomet = tmpStr;
-                                forExit = false;
+                                tmpStr += pomet.Substring(i + 6);
                             }
-                            else
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        case " мест.":
+                            partOfSpeech = "мест.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 6 < pomet.Length)
                             {
-                                if (pomet.Substring(i, 6) == " прич.")
-                                {
-                                    partOfSpeech = "прич.";
-                                    tmpStr = pomet.Substring(0, i);
-                                    if (i + 6 < pomet.Length)
-                                    {
-                                        tmpStr += pomet.Substring(i + 6);
-                                    }
-                                    pomet = tmpStr;
-                                    forExit = false;
-                                }
+                                tmpStr += pomet.Substring(i + 6);
                             }
-                        }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        case " союз.":
+                            partOfSpeech = "союз";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 6 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 6);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        case " межд.":
+                            partOfSpeech = "межд.";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 6 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 6);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        default:
+                            break;
                     }
                     i++;
                 }
@@ -1196,19 +1216,35 @@ namespace RusDictionary.Modules
                         pomet = tmpStr;
                         forExit = false;
                     }
-                    else
+                    i++;
+                }
+                i = 0;
+                while (forExit && i <= pomet.Length - 9) // дееприч.
+                {
+                    switch (pomet.Substring(i, 9))
                     {
-                        if (pomet.Substring(i, 7) == " нвреч.")
-                        {
-                            partOfSpeech = "нареч.";
+                        case " дееприч.":
+                            partOfSpeech = "дееприч.";
                             tmpStr = pomet.Substring(0, i);
-                            if (i + 7 < pomet.Length)
+                            if (i + 9 < pomet.Length)
                             {
-                                tmpStr += pomet.Substring(i + 7);
+                                tmpStr += pomet.Substring(i + 9);
                             }
                             pomet = tmpStr;
                             forExit = false;
-                        }
+                            break;
+                        case " частица.":
+                            partOfSpeech = "частица";
+                            tmpStr = pomet.Substring(0, i);
+                            if (i + 9 < pomet.Length)
+                            {
+                                tmpStr += pomet.Substring(i + 9);
+                            }
+                            pomet = tmpStr;
+                            forExit = false;
+                            break;
+                        default:
+                            break;
                     }
                     i++;
                 }
@@ -1228,72 +1264,6 @@ namespace RusDictionary.Modules
                     }
                     i++;
                 }
-                i = 0;
-                while (forExit && i <= pomet.Length - 6) // мест.
-                {
-                    if (pomet.Substring(i, 6) == " мест.")
-                    {
-                        partOfSpeech = "мест.";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 6 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 6);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    i++;
-                }
-                i = 0;
-                while (forExit && i <= pomet.Length - 6) // союз.
-                {
-                    if (pomet.Substring(i, 6) == " союз.")
-                    {
-                        partOfSpeech = "союз";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 6 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 6);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    i++;
-                }
-                i = 0;
-                while (forExit && i <= pomet.Length - 9) // частица.
-                {
-                    if (pomet.Substring(i, 9) == " частица.")
-                    {
-                        partOfSpeech = "частица";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 5 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 9);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    i++;
-                }
-                i = 0;
-                while (forExit && i <= pomet.Length - 6) // межд.
-                {
-                    if (pomet.Substring(i, 6) == " межд.")
-                    {
-                        partOfSpeech = "межд.";
-                        tmpStr = pomet.Substring(0, i);
-                        if (i + 6 < pomet.Length)
-                        {
-                            tmpStr += pomet.Substring(i + 6);
-                        }
-                        pomet = tmpStr;
-                        forExit = false;
-                    }
-                    i++;
-                }
-
-
                 // Заполнение описания
                 if (definition == "")
                 {
@@ -1327,10 +1297,10 @@ namespace RusDictionary.Modules
                     definition += description;
                     description = "";
                 }
-                //description = ClearTags(description);
                 List<string> tmpEXMP = new List<string>(); // Заполнение цитат
                 List<string> EXMP = new List<string>(); // Соединение разорваных частей цитат
                 string[] defs = new string[1];
+                int st0;
                 if (description != "")
                 {
                     description = description.Replace(" г.", " г./");
@@ -1371,7 +1341,7 @@ namespace RusDictionary.Modules
                         {
                             if (tmpEXMP[j].Substring(0, 1) == "~" || tmpEXMP[j].Substring(0, 2) == "со" ||
                                 tmpEXMP[j].Substring(0, 1) == "X" || tmpEXMP[j].Substring(0, 1) == "I" ||
-                                tmpEXMP[j].Substring(0, 1) == "V")
+                                tmpEXMP[j].Substring(0, 1) == "V" || tmpEXMP[j].Substring(0, 2) == "оо") // оо
                             {
                                 EXMP[EXMP.Count - 1] += " " + tmpEXMP[j];
                             }
@@ -1383,7 +1353,52 @@ namespace RusDictionary.Modules
                     }
                     defs = new string[EXMP.Count]; // Заполнение описаний для цитат
                     defs[0] = definition;
+                    // проверка на (1555) в цитате (первой)
+                    forExit = true;
+                    i = 0;
+                    st0 = -1;
+                    while (forExit && i <= EXMP[0].Length - 6)
+                    {
+                        if (EXMP[0][i] == '(' && EXMP[0][i + 1].ToString().Any(char.IsDigit) &&
+                            EXMP[0][i + 2].ToString().Any(char.IsDigit) &&
+                            EXMP[0][i + 3].ToString().Any(char.IsDigit) &&
+                            EXMP[0][i + 4].ToString().Any(char.IsDigit) &&
+                            EXMP[0][i + 5] == ')')
+                        {
+                            st0 = i;
+                            forExit = false;
+                        }
+                        i++;
+                    }
+                    if (st0 != -1)
+                    {
+                        defs[0] = defs[0] + EXMP[0].Substring(0, st0);
+                        EXMP[0] = EXMP[0].Substring(st0);
+                    }
+                    // проверка на (155) в цитате (первой)
+                    forExit = true;
+                    i = 0;
+                    st0 = -1;
+                    while (forExit && i <= EXMP[0].Length - 5)
+                    {
+                        if (EXMP[0][i] == '(' && EXMP[0][i + 1].ToString().Any(char.IsDigit) &&
+                            EXMP[0][i + 2].ToString().Any(char.IsDigit) &&
+                            EXMP[0][i + 3].ToString().Any(char.IsDigit) &&
+                            EXMP[0][i + 4] == ')')
+                        {
+                            st0 = i;
+                            forExit = false;
+                        }
+                        i++;
+                    }
+                    if (st0 != -1)
+                    {
+                        defs[0] = defs[0] + EXMP[0].Substring(0, st0);
+                        EXMP[0] = EXMP[0].Substring(st0);
+                    }
+
                     string subTmp;
+                    int cnt = 1;
                     for (int j = 1; j < defs.Length; j++)
                     {
                         defs[j] = "";
@@ -1391,8 +1406,10 @@ namespace RusDictionary.Modules
                         if (EXMP[j].Length > 2)
                         {
                             subTmp = EXMP[j].Substring(0, 3);
-                            if (subTmp == "1. " || subTmp == "2. " || subTmp == "3. " || subTmp == "4. " || subTmp == "5. " ||
-                                subTmp == "6. " || subTmp == "7. " || subTmp == "8. " || subTmp == "9. ")
+                            if (subTmp == "1. " || subTmp == "2. " || subTmp == "3. " || subTmp == "4. " ||
+                                subTmp == "5. " || subTmp == "6. " || subTmp == "7. " || subTmp == "8. " ||
+                                subTmp == "9. " || subTmp == "|| " || subTmp == "() " || subTmp == "|) " ||
+                                subTmp == "|I " || subTmp == "|[ ")
                             {
                                 forExit = true;
                                 i = 2;
@@ -1408,6 +1425,21 @@ namespace RusDictionary.Modules
                                 }
                                 defs[j] = EXMP[j].Substring(0, st);
                                 EXMP[j] = EXMP[j].Substring(st);
+                                if (defs[j] != "")
+                                {
+                                    if (defs[j].Substring(0, 3) == "|| " || defs[j].Substring(0, 3) == "() " ||
+                                    defs[j].Substring(0, 3) == "|) " || defs[j].Substring(0, 3) == "|I " ||
+                                    defs[j].Substring(0, 3) == "|[ ")
+                                    {
+                                        defs[j] = cnt.ToString() + ") " + defs[j].Substring(3);
+                                        cnt++;
+                                    }
+                                    else
+                                    {
+                                        cnt = 1;
+                                    }
+                                }
+
                                 if (defs[j].Contains(" перен."))
                                 {
                                     forExit = true;
@@ -1443,22 +1475,18 @@ namespace RusDictionary.Modules
                                 defs[j] += EXMP[j].Substring(0, st);
                                 EXMP[j] = EXMP[j].Substring(st);
                             }
-                            if (EXMP[j].Contains("— Ср."))
+                            if (EXMP[j].Contains("— Ср.")) // исправить
                             {
-                                defs[j] += EXMP[j].Substring(0);
+                                //defs[j] += EXMP[j];
+                                sr = EXMP[j];
                                 EXMP[j] = "";
                             }
-                            if (EXMP[j].Contains(" знач."))
+                            if (EXMP[j].Contains(" знач.") /*|| EXMP[j].Contains(" зная.") || EXMP[j].Contains(" знал.") || EXMP[j].Contains(" зкач.") || EXMP[j].Contains(" энач.")*/)
                             {
                                 forExit = true;
                                 i = 0;
                                 st = 0;
                                 bool zn = true;
-                                //if (description.Contains(" знач.") || description.Contains(" зная.") || description.Contains(" знал.") ||
-                                //    description.Contains(" зкач.") || description.Contains(" энач."))
-                                //{
-                                //    zn = true;
-                                //}
                                 while (forExit && i <= EXMP[j].Length - 1)
                                 {
                                     if (EXMP[j][i] == '.' && zn)
@@ -1478,6 +1506,96 @@ namespace RusDictionary.Modules
                                 defs[j] += EXMP[j].Substring(0, st);
                                 EXMP[j] = EXMP[j].Substring(st);
                             }
+                            // проверка на (1555) в цитате
+                            forExit = true;
+                            i = 0;
+                            st = -1;
+                            while (forExit && i <= EXMP[j].Length - 6)
+                            {
+                                subTmp = EXMP[j].Substring(i, 6);
+                                if (subTmp[0] == '(' && subTmp[1].ToString().Any(char.IsDigit) &&
+                                    subTmp[2].ToString().Any(char.IsDigit) &&
+                                    subTmp[3].ToString().Any(char.IsDigit) &&
+                                    subTmp[4].ToString().Any(char.IsDigit) &&
+                                    subTmp[5] == ')')
+                                {
+                                    st = i;
+                                    forExit = false;
+                                }
+                                i++;
+                            }
+                            if (st != -1)
+                            {
+                                defs[j] = defs[j] + EXMP[j].Substring(0, st);
+                                EXMP[j] = EXMP[j].Substring(st);
+                            }
+                            // проверка на (155) в цитате
+                            forExit = true;
+                            i = 0;
+                            st = -1;
+                            while (forExit && i <= EXMP[j].Length - 5)
+                            {
+                                subTmp = EXMP[j].Substring(i, 5);
+                                if (subTmp[0] == '(' && subTmp[1].ToString().Any(char.IsDigit) &&
+                                    subTmp[2].ToString().Any(char.IsDigit) &&
+                                    subTmp[3].ToString().Any(char.IsDigit) &&
+                                    subTmp[4] == ')')
+                                {
+                                    st = i;
+                                    forExit = false;
+                                }
+                                i++;
+                            }
+                            if (st != -1)
+                            {
+                                defs[j] = defs[j] + EXMP[j].Substring(0, st);
+                                EXMP[j] = EXMP[j].Substring(st);
+                            }
+                            // проверка на (155) в описании
+                            forExit = true;
+                            i = 0;
+                            st = -1;
+                            while (forExit && i <= defs[j].Length - 5)
+                            {
+                                subTmp = defs[j].Substring(i, 5);
+                                if (subTmp[0] == '(' && subTmp[1].ToString().Any(char.IsDigit) &&
+                                    subTmp[2].ToString().Any(char.IsDigit) &&
+                                    subTmp[3].ToString().Any(char.IsDigit) &&
+                                    subTmp[4] == ')')
+                                {
+                                    st = i;
+                                    forExit = false;
+                                }
+                                i++;
+                            }
+                            if (st != -1)
+                            {
+                                EXMP[j] = defs[j].Substring(st) + EXMP[j];
+                                defs[j] = defs[j].Substring(0, st);
+                            }
+                            // проверка на (1555) в описании
+                            forExit = true;
+                            i = 0;
+                            st = -1;
+                            while (forExit && i <= defs[j].Length - 6)
+                            {
+                                subTmp = defs[j].Substring(i, 6);
+                                if (subTmp[0] == '(' && subTmp[1].ToString().Any(char.IsDigit) &&
+                                    subTmp[2].ToString().Any(char.IsDigit) &&
+                                    subTmp[3].ToString().Any(char.IsDigit) &&
+                                    subTmp[4].ToString().Any(char.IsDigit) &&
+                                    subTmp[5] == ')')
+                                {
+                                    st = i;
+                                    forExit = false;
+                                }
+                                i++;
+                            }
+                            if (st != -1)
+                            {
+                                EXMP[j] = defs[j].Substring(st) + EXMP[j];
+                                defs[j] = defs[j].Substring(0, st);
+                            }
                         }
                     }
                 }
@@ -1486,7 +1604,139 @@ namespace RusDictionary.Modules
                     EXMP.Add("");
                     defs[0] = definition;
                 }
-                AddBD(name, partOfSpeech, rod, num, defs, EXMP);
+                // проверка на (155) в описании для первого элемента
+                forExit = true;
+                i = 0;
+                st0 = -1;
+                while (forExit && i <= defs[0].Length - 5)
+                {
+                    if (defs[0][i] == '(' && defs[0][i + 1].ToString().Any(char.IsDigit) &&
+                        defs[0][i + 2].ToString().Any(char.IsDigit) &&
+                        defs[0][i + 3].ToString().Any(char.IsDigit) &&
+                        defs[0][i + 4] == ')')
+                    {
+                        st0 = i;
+                        forExit = false;
+                    }
+                    i++;
+                }
+                if (st0 != -1)
+                {
+                    EXMP[0] = defs[0].Substring(st0) + EXMP[0];
+                    defs[0] = defs[0].Substring(0, st0);
+                }
+                // проверка на (1555) в описании для первого элемента
+                forExit = true;
+                i = 0;
+                st0 = -1;
+                while (forExit && i <= defs[0].Length - 6)
+                {
+                    if (defs[0][i] == '(' && defs[0][i + 1].ToString().Any(char.IsDigit) &&
+                        defs[0][i + 2].ToString().Any(char.IsDigit) &&
+                        defs[0][i + 3].ToString().Any(char.IsDigit) &&
+                        defs[0][i + 4].ToString().Any(char.IsDigit) &&
+                        defs[0][i + 5] == ')')
+                    {
+                        st0 = i;
+                        forExit = false;
+                    }
+                    i++;
+                }
+                if (st0 != -1)
+                {
+                    EXMP[0] = defs[0].Substring(st0) + EXMP[0];
+                    defs[0] = defs[0].Substring(0, st0);
+                }
+
+                // здесь текст цитаты источник и дата
+                string[] sourceCode = new string[EXMP.Count];
+                string[] sourceDate = new string[EXMP.Count];
+                //string splitEXMP;
+                string[] sprt = { "///" };
+                for (i = 0; i < EXMP.Count; i++)
+                {
+                    //splitEXMP = EXMP[i];
+                    EXMP[i] = EXMP[i].Replace(". ", ". ///");
+                    string[] splitEXMP = EXMP[i].Split(sprt, StringSplitOptions.RemoveEmptyEntries);
+                    EXMP[i] = "";
+                    int textBorder = -1;
+                    int dateBorder = -1;
+                    bool firstDate = true;
+                    for (int j = 0; j < splitEXMP.Length; j++)
+                    {
+                        if (splitEXMP[j].Contains("#"))
+                        {
+                            textBorder = j;
+                        }
+                        if (firstDate && (splitEXMP[j].Contains(" в.") || splitEXMP[j].Contains(" вв.") || splitEXMP[j].Contains(" г.")))
+                        {
+                            dateBorder = j;
+                            firstDate = false;
+                        }
+                    }
+                    if (textBorder != -1 || dateBorder != -1)
+                    {
+                        if (dateBorder != -1)
+                        {
+                            for (int j = 0; j < splitEXMP.Length; j++)
+                            {
+                                if (j >= dateBorder)
+                                {
+                                    sourceDate[i] += splitEXMP[j];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int j = 0; j < splitEXMP.Length; j++)
+                            {
+                                if (j > textBorder)
+                                {
+                                    sourceCode[i] += splitEXMP[j];
+                                }
+                            }
+                        }
+                        if (textBorder != -1)
+                        {
+                            for (int j = 0; j < splitEXMP.Length; j++)
+                            {
+                                if (j <= textBorder)
+                                {
+                                    EXMP[i] += splitEXMP[j];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int j = 0; j < splitEXMP.Length; j++)
+                            {
+                                if (j < dateBorder)
+                                {
+                                    EXMP[i] += splitEXMP[j];
+                                }
+                            }
+                        }
+                        if (dateBorder != -1 && textBorder != -1)
+                        {
+                            for (int j = 0; j < splitEXMP.Length; j++)
+                            {
+                                if (j < dateBorder && j > textBorder)
+                                {
+                                    sourceCode[i] += splitEXMP[j];
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // перенести все в EXMP обратно
+                        for (int j = 0; j < splitEXMP.Length; j++)
+                        {
+                            EXMP[i] += splitEXMP[j];
+                        }
+                    }
+                }
+                AddBD(name, semant, partOfSpeech, rod, num, defs, EXMP, sourceCode, sourceDate, sr);
             }
         }
         string ClearTags(string s) // Очищение тагов
@@ -1531,24 +1781,29 @@ namespace RusDictionary.Modules
             outValue = outValue.Replace("&quot;", "\"");
             return outValue;
         }
-        void AddBD(string nam, string par, string rod, string num, string[] def, List<string> exm)
+        void AddBD(string nam, string sem, string par, string rod, string num, string[] def, List<string> exm, string[] cod, string[] dat, string com)
         {
-            string query = "INSERT INTO dictionaryentries (NAME, PARTOFSPEECH, ROD, NUM, DEFINITION, EXAMPLE) VALUES ('" +
-                    nam + "', '" + par + "', '" + rod + "', '" + num + "', '" + def[0] + "', '" + exm[0] + "')";
+            string query = "INSERT INTO mainwords (MAINWORD) VALUES ('" + nam + "')";
+            // объект для выполнения SQL-запроса
+            JSON.Send(query, JSONFlags.Insert);
+            query = "INSERT INTO dictionaryentries (NAME, SEMANTIC, PARTOFSPEECH, ROD, NUM, DEFINITION, EXAMPLE, SOURCECODE, SOURCEDATE, COMPARE) VALUES (" +
+                    mainWordNum.ToString() + ", '" + sem + "', '" + par + "', '" + rod + "', '" + num + "', '" + def[0] + "', '" + exm[0] + "', '" + cod[0] + "', '" + dat[0] + "', '" + com + "')";
             // объект для выполнения SQL-запроса
             JSON.Send(query, JSONFlags.Insert);
             if (exm.Count > 1)
             {
                 for (int i = 1; i < exm.Count; i++)
                 {
-                    query = "INSERT INTO dictionaryentries (NAME, PARTOFSPEECH, ROD, NUM, DEFINITION, EXAMPLE) VALUES ('" +
-                    nam + "', '', '', '', '" + def[i] + "', '" + exm[i] + "')";
+                    query = "INSERT INTO dictionaryentries (NAME, SEMANTIC, PARTOFSPEECH, ROD, NUM, DEFINITION, EXAMPLE, SOURCECODE, SOURCEDATE, COMPARE) VALUES (" +
+                                mainWordNum.ToString() + ", '', '', '', '', '" + def[i] + "', '" + exm[i] + "', '" + cod[i] + "', '" + dat[i] + "', '')";
                     JSON.Send(query, JSONFlags.Insert);
                 }
             }
+            mainWordNum++;
         }
         private void buWordSearch_Read_Click(object sender, EventArgs e)
         {
+            buWordSearch_Read.Enabled = false;
             FileName.Clear();
             OpenFileDialog OPF = new OpenFileDialog(); // Инициализация диалогового окна
             OPF.Filter = "HTM|*.htm"; // Фильтр в диалоговом окне
@@ -1567,17 +1822,23 @@ namespace RusDictionary.Modules
                 }
                 massThread.Clear();
                 Program.f1.PictAndLableWait(false);
-                MessageBox.Show("Готово");
+                MessageBox.Show("Готово", "Декомпозиция");
             }
+            buWordSearch_Read.Enabled = true;
         }
         void FindWords()
         {
             List<string> Names = new List<string>();
+            List<string> Semantic = new List<string>();
             List<string> PartsOfSpeech = new List<string>();
             List<string> Rods = new List<string>();
             List<string> Nums = new List<string>();
             List<string> Definitions = new List<string>();
             List<string> Examples = new List<string>();
+            List<string> SourceCode = new List<string>();
+            List<string> SourceDate = new List<string>();
+            List<string> Compare = new List<string>();
+            List<string> MainWord = new List<string>();
             List<JSONArray> jNames = new List<JSONArray>();
 
             tbWordSearch_FindedWords.Text = "";
@@ -1588,11 +1849,22 @@ namespace RusDictionary.Modules
             for (int i = 0; i < jNames.Count; i++)
             {
                 Names.Add(jNames[i].Name);
+                Semantic.Add(jNames[i].Semantic);
                 PartsOfSpeech.Add(jNames[i].Partofspeech);
                 Rods.Add(jNames[i].Rod);
                 Nums.Add(jNames[i].Num);
                 Definitions.Add(jNames[i].Definition);
                 Examples.Add(jNames[i].Example);
+                SourceCode.Add(jNames[i].SourceCode);
+                SourceDate.Add(jNames[i].SourceDate);
+                Compare.Add(jNames[i].Compare);
+            }
+            query = "SELECT * FROM mainwords";
+            JSON.Send(query, JSONFlags.Select);
+            jNames = JSON.Decode();
+            for (int i = 0; i < jNames.Count; i++)
+            {
+                MainWord.Add(jNames[i].Mainword);
             }
 
             string tmpSearch = tbWordSearch_SearchingWord.Text;
@@ -1612,50 +1884,200 @@ namespace RusDictionary.Modules
             bool newWord = false;
             for (int i = 0; i < Names.Count; i++)
             {
-                if (Names[i].Contains(textSearch))
+                //if (Names[i].Contains(textSearch))
+                //{
+                //    if (tmp != Names[i])
+                //    {
+                //        tmp = Names[i];
+                //        newWord = true;
+                //    }
+                //    if (newWord)
+                //    {
+                //        tbWordSearch_FindedWords.Text += "_____\r\n" + Names[i] + "\r\n";
+                //        if (PartsOfSpeech[i] != "")
+                //        {
+                //            tbWordSearch_FindedWords.Text += PartsOfSpeech[i] + "\r\n";
+                //        }
+                //        if (Rods[i] != "")
+                //        {
+                //            tbWordSearch_FindedWords.Text += Rods[i] + "\r\n";
+                //        }
+                //        if (Nums[i] != "")
+                //        {
+                //            tbWordSearch_FindedWords.Text += Nums[i] + "\r\n";
+                //        }
+                //        if (Definitions[i] != "")
+                //        {
+                //            tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
+                //        }
+                //        if (Examples[i] != "")
+                //        {
+                //            tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
+                //        }
+                //        newWord = false;
+                //    }
+                //    else
+                //    {
+                //        if (Definitions[i] != "")
+                //        {
+                //            tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
+                //        }
+                //        if (Examples[i] != "")
+                //        {
+                //            tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
+                //        }
+                //    }
+                //}
+                if (cbSearchType.Checked == true)
                 {
-                    if (tmp != Names[i])
+                    if (MainWord[Convert.ToInt32(Names[i]) - 1]/*Names[i]*/ == textSearch)
                     {
-                        tmp = Names[i];
-                        newWord = true;
-                    }
-                    if (newWord)
-                    {
-                        tbWordSearch_FindedWords.Text += "_____\r\n" + Names[i] + "\r\n";
-                        if (PartsOfSpeech[i] != "")
+                        if (tmp != Names[i])
                         {
-                            tbWordSearch_FindedWords.Text += PartsOfSpeech[i] + "\r\n";
+                            tmp = Names[i];
+                            newWord = true;
                         }
-                        if (Rods[i] != "")
+                        if (newWord /*|| Semantic[i] != ""*/)
                         {
-                            tbWordSearch_FindedWords.Text += Rods[i] + "\r\n";
+                            tbWordSearch_FindedWords.Text += "_____\r\n" + /*Names[i]*/MainWord[Convert.ToInt32(Names[i]) - 1];
+                            if (Semantic[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += " " + Semantic[i];
+                            }
+                            tbWordSearch_FindedWords.Text += "\r\n";
+                            if (PartsOfSpeech[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += PartsOfSpeech[i] + "\r\n";
+                            }
+                            if (Rods[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Rods[i] + "\r\n";
+                            }
+                            if (Nums[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Nums[i] + "\r\n";
+                            }
+                            if (Definitions[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
+                            }
+                            if (Examples[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
+                            }
+                            if (SourceCode[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += SourceCode[i] + "\r\n";
+                            }
+                            if (SourceDate[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += SourceDate[i] + "\r\n";
+                            }
+                            if (Compare[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Compare[i] + "\r\n";
+                            }
+                            newWord = false;
                         }
-                        if (Nums[i] != "")
+                        else
                         {
-                            tbWordSearch_FindedWords.Text += Nums[i] + "\r\n";
-                        }
-                        if (Definitions[i] != "")
-                        {
-                            tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
-                        }
-                        if (Examples[i] != "")
-                        {
-                            tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
-                        }
-                        newWord = false;
-                    }
-                    else
-                    {
-                        if (Definitions[i] != "")
-                        {
-                            tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
-                        }
-                        if (Examples[i] != "")
-                        {
-                            tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
+                            //tbText.Text += Defenitions[i] + "\r\n" + Examples[i] + "\r\n";
+                            if (Definitions[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
+                            }
+                            if (Examples[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
+                            }
+                            if (SourceCode[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += SourceCode[i] + "\r\n";
+                            }
+                            if (SourceDate[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += SourceDate[i] + "\r\n";
+                            }
                         }
                     }
                 }
+                else
+                {
+                    if (/*Names[i]*/MainWord[Convert.ToInt32(Names[i]) - 1].Contains(textSearch))
+                    {
+                        if (tmp != Names[i])
+                        {
+                            tmp = Names[i];
+                            newWord = true;
+                        }
+                        if (newWord /*|| Semantic[i] != ""*/)
+                        {
+                            tbWordSearch_FindedWords.Text += "_____\r\n" + /*Names[i]*/MainWord[Convert.ToInt32(Names[i]) - 1];
+                            if (Semantic[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += " " + Semantic[i];
+                            }
+                            tbWordSearch_FindedWords.Text += "\r\n";
+                            if (PartsOfSpeech[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += PartsOfSpeech[i] + "\r\n";
+                            }
+                            if (Rods[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Rods[i] + "\r\n";
+                            }
+                            if (Nums[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Nums[i] + "\r\n";
+                            }
+                            if (Definitions[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
+                            }
+                            if (Examples[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
+                            }
+                            if (SourceCode[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += SourceCode[i] + "\r\n";
+                            }
+                            if (SourceDate[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += SourceDate[i] + "\r\n";
+                            }
+                            if (Compare[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Compare[i] + "\r\n";
+                            }
+                            newWord = false;
+                        }
+                        else
+                        {
+                            //tbText.Text += Defenitions[i] + "\r\n" + Examples[i] + "\r\n";
+                            if (Definitions[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
+                            }
+                            if (Examples[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
+                            }
+                            if (SourceCode[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += SourceCode[i] + "\r\n";
+                            }
+                            if (SourceDate[i] != "")
+                            {
+                                tbWordSearch_FindedWords.Text += SourceDate[i] + "\r\n";
+                            }
+                        }
+                    }
+                }
+            }
+            if (tbWordSearch_FindedWords.Text == "")
+            {
+                tbWordSearch_FindedWords.Text = "Результатов не найдено...";
             }
         }
         private void buWordSearch_FindWord_Click(object sender, EventArgs e)
