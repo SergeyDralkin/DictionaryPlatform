@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace RusDictionary.Modules
 {
@@ -12,7 +13,8 @@ namespace RusDictionary.Modules
     {
         int ListBoxSelectedIndex;
         bool ListBoxPrev = true;
-        string NameClickButton;
+        string NameClickButtonInMenu;
+        string TagButtonChange;
         /// <summary>
         /// Первый список элементов
         /// </summary>
@@ -25,6 +27,18 @@ namespace RusDictionary.Modules
         /// Список элементов одной карточки
         /// </summary>
         List<JSONArray> CardItems = new List<JSONArray>();
+        /// <summary>
+        /// Список ящиков
+        /// </summary>
+        List<JSONArray> BoxItems = new List<JSONArray>();
+        /// <summary>
+        /// Список ящиков
+        /// </summary>
+        List<JSONArray> LetterItems = new List<JSONArray>();
+        /// <summary>
+        /// Список карт разделителей для одного ящика
+        /// </summary>
+        List<JSONArray> CardSeparatorItems = new List<JSONArray>();
         /// <summary>
         /// Отслеживание нажатия на кнопку "Маркер"
         /// </summary>
@@ -41,6 +55,10 @@ namespace RusDictionary.Modules
         /// Отслеживание нажатия на кнопку "Буква"
         /// </summary>
         public static bool CardIndexMenuLetter = false;
+        /// <summary>
+        /// Отслеживание нажатия на кнопку "Слово"
+        /// </summary>
+        public static bool CardIndexMenuWord = false;
         /// <summary>
         /// Маркер карточки
         /// </summary>
@@ -66,9 +84,17 @@ namespace RusDictionary.Modules
         /// </summary>
         string CardNumberBox;
         /// <summary>
-        /// Первый разделитель ящика
+        /// ID ящика карточки
+        /// </summary>
+        string CardNumberBoxID;
+        /// <summary>
+        /// Разделитель ящика
         /// </summary>
         string CardSeparator;
+        /// <summary>
+        /// ID разделителя ящика
+        /// </summary>
+        string CardSeparatorID;
         /// <summary>
         /// Слово карточки
         /// </summary>
@@ -102,18 +128,56 @@ namespace RusDictionary.Modules
         /// </summary>
         string CardSourceDateClarification;
 
-
         public CardIndexModule()
         {
             InitializeComponent();
+            SetupSettingForElements();
+            tlpWord.Width = panelWord.Width - 6;
+            tlpWord.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right;
+            tlpCard.Width = panelCard.Width - 6;
+            tlpCard.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right;
         }
-
-        //void VisibleDown3button(bool parameter)
-        //{
-        //    buCardIndexListChange.Visible = parameter;
-        //    buCardIndexListAdd.Visible = parameter;
-        //    buCardIndexListDelete.Visible = parameter;
-        //}
+        /// <summary>
+        /// Установка настроек элементов данного модуля
+        /// </summary>
+        void SetupSettingForElements()
+        {
+            foreach (ComboBox comboBox in MainForm.GetAll(this, typeof(ComboBox)))
+            {
+                comboBox.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);                
+            }
+            foreach (TextBox textbox in MainForm.GetAll(this, typeof(TextBox)))
+            {
+                textbox.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
+                textbox.ScrollBars = ScrollBars.Vertical;
+            }
+            foreach (ListBox listbox in MainForm.GetAll(this, typeof(ListBox)))
+            {
+                listbox.Font = new Font("Izhitsa", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            }
+            foreach (Label label in MainForm.GetAll(this, typeof(Label)))
+            {
+                if (label.Name == "laCardsFirstSeparator" || label.Name == "laCardsLastSeparator" || label.Name == "laCardsLetter" || label.Name == "laCardsNumberBox")
+                {
+                    label.Font = new Font("Izhitsa", 9.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+                }
+                else
+                {
+                    label.Font = new Font("Izhitsa", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+                }
+            }
+            foreach (Button button in MainForm.GetAll(this, typeof(Button)))
+            {
+                if (button.Name == "buCardIndexCardsPrev" || button.Name == "buSelectWordPrev")
+                {
+                    button.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+                }
+                else
+                {
+                    button.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 204);
+                }
+            }
+        }        
         void ActiveDown3button(bool parameter)
         {
             if (parameter == true)
@@ -138,16 +202,16 @@ namespace RusDictionary.Modules
         {
             EnableElement(false);
             Program.f1.PictAndLableWait(true);
-            NameClickButton = (sender as Button).Name.ToString();
+            NameClickButtonInMenu = (sender as Button).Name.ToString();
             ClearMainList();
             Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-            myThread.Start(NameClickButton); // Запускаем поток
+            myThread.Start(NameClickButtonInMenu); // Запускаем поток
             while (myThread.IsAlive)
             {
                 Thread.Sleep(1);
                 Application.DoEvents();
             }            
-            switch (NameClickButton)
+            switch (NameClickButtonInMenu)
             {
                 case "buCardIndexMenuMarker":
                     {
@@ -155,7 +219,7 @@ namespace RusDictionary.Modules
                         {
                             lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Marker);
                         }
-                        //VisibleDown3button(true);
+                        
                         ActiveDown3button(false);
                         break;
                     }
@@ -165,7 +229,7 @@ namespace RusDictionary.Modules
                         {
                             lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].CardSeparator);
                         }
-                        //VisibleDown3button(true);
+                        
                         ActiveDown3button(false);
                         break;
                     }
@@ -175,7 +239,7 @@ namespace RusDictionary.Modules
                         {
                             lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].NumberBox);
                         }
-                        //VisibleDown3button(true);
+                        
                         ActiveDown3button(false);
                         break;
                     }
@@ -185,39 +249,53 @@ namespace RusDictionary.Modules
                         {
                             lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Symbol);
                         }
-                        //VisibleDown3button(true);
+                        
                         ActiveDown3button(false);
                         break;
                     }
-            }            
-            
-            
+                case "buCardIndexMenuWord":
+                    {
+                        for (int i = 0; i < FirstListItems.Count; i++)
+                        {
+                            lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Word);
+                        }
+                        
+                        ActiveDown3button(false);
+                        break;
+                    }
+            }
             lbCardIndexList.Update();
             tcCards.SelectedTab = tpList;
             EnableElement(true);
-            switch (NameClickButton)
+            switch (NameClickButtonInMenu)
             {
                 case "buCardIndexMenuMarker":
                     {
-                        //VisibleDown3button(true);
+                        
                         ActiveDown3button(false);
                         break;
                     }
                 case "buCardIndexMenuSeparator":
                     {
-                        //VisibleDown3button(false);
+                        
                         ActiveDown3button(false);
                         break;
                     }
                 case "buCardIndexMenuBox":
                     {
-                        //VisibleDown3button(false);
+                        
                         ActiveDown3button(false);
                         break;
                     }
                 case "buCardIndexMenuLetter":
                     {
-                        //VisibleDown3button(false);
+                        
+                        ActiveDown3button(false);
+                        break;
+                    }
+                case "buCardIndexMenuWord":
+                    {
+                        
                         ActiveDown3button(false);
                         break;
                     }
@@ -226,29 +304,33 @@ namespace RusDictionary.Modules
         }
         void CreateSecondListItems(object NameButton)
         {
-            SecondListItems.Clear();
+            if (SecondListItems != null)
+            {
+                SecondListItems.Clear();
+            }
+            
             /*
              Тут нужно поменять с индекса элементана на самэлемент
              */
-            switch (NameClickButton)
+            switch (NameClickButtonInMenu)
             {
                 case "buCardIndexMenuSeparator":
                     {                       
-                        string query = "SELECT Marker FROM cardindex WHERE CardSeparator = " + ListBoxSelectedIndex;
+                        string query = "SELECT * FROM flotation WHERE CardSeparator = " + ListBoxSelectedIndex;
                         JSON.Send(query, JSONFlags.Select);
                         SecondListItems = JSON.Decode();
                         break;
                     }
                 case "buCardIndexMenuBox":
                     {                       
-                        string query = "SELECT Marker FROM cardindex WHERE NumberBox = " + ListBoxSelectedIndex;
+                        string query = "SELECT * FROM flotation WHERE NumberBox = " + ListBoxSelectedIndex;
                         JSON.Send(query, JSONFlags.Select);
                         SecondListItems = JSON.Decode();                       
                         break;
                     }
                 case "buCardIndexMenuLetter":
                     {                        
-                        string query = "SELECT Marker FROM cardindex WHERE Symbol = " + ListBoxSelectedIndex;
+                        string query = "SELECT * FROM flotation WHERE Symbol = " + ListBoxSelectedIndex;
                         JSON.Send(query, JSONFlags.Select);
                         SecondListItems = JSON.Decode();
                         break;
@@ -266,7 +348,8 @@ namespace RusDictionary.Modules
                         CardIndexMenuSeparator = false;
                         CardIndexMenuBox = false;
                         CardIndexMenuLetter = false;
-                        string query = "SELECT Marker FROM cardindex";
+                        CardIndexMenuWord = false;
+                        string query = "SELECT ID, Marker FROM cardindex";
                         JSON.Send(query, JSONFlags.Select);
                         FirstListItems = JSON.Decode();
                         break;
@@ -276,8 +359,9 @@ namespace RusDictionary.Modules
                         CardIndexMenuMarker = false;
                         CardIndexMenuSeparator = true;
                         CardIndexMenuBox = false;
-                        CardIndexMenuLetter = false;                        
-                        string query = "SELECT CardSeparator FROM cardseparator";
+                        CardIndexMenuLetter = false;
+                        CardIndexMenuWord = false;
+                        string query = "SELECT * FROM cardseparator";
                         JSON.Send(query, JSONFlags.Select);
                         FirstListItems = JSON.Decode();
                         break;
@@ -288,7 +372,8 @@ namespace RusDictionary.Modules
                         CardIndexMenuSeparator = false;
                         CardIndexMenuBox = true;
                         CardIndexMenuLetter = false;
-                        string query = "SELECT NumberBox FROM box";
+                        CardIndexMenuWord = false;
+                        string query = "SELECT * FROM box";
                         JSON.Send(query, JSONFlags.Select);
                         FirstListItems = JSON.Decode();
                         break;
@@ -298,8 +383,21 @@ namespace RusDictionary.Modules
                         CardIndexMenuMarker = false;
                         CardIndexMenuSeparator = false;
                         CardIndexMenuBox = false;
-                        CardIndexMenuLetter = true;                        
-                        string query = "SELECT Symbol FROM letter";
+                        CardIndexMenuLetter = true;
+                        CardIndexMenuWord = false;
+                        string query = "SELECT * FROM letter";
+                        JSON.Send(query, JSONFlags.Select);
+                        FirstListItems = JSON.Decode();
+                        break;
+                    }
+                case "buCardIndexMenuWord":
+                    {
+                        CardIndexMenuMarker = false;
+                        CardIndexMenuSeparator = false;
+                        CardIndexMenuBox = false;
+                        CardIndexMenuLetter = false;
+                        CardIndexMenuWord = true;
+                        string query = "SELECT ID, Word, Value FROM flotation";
                         JSON.Send(query, JSONFlags.Select);
                         FirstListItems = JSON.Decode();
                         break;
@@ -318,20 +416,19 @@ namespace RusDictionary.Modules
 
         private void buCardIndexListPrev_Click(object sender, EventArgs e)
         {
-            if (NameClickButton == "buCardIndexMenuMarker")
+            if (NameClickButtonInMenu == "buCardIndexMenuMarker" || NameClickButtonInMenu == "buCardIndexMenuWord")
             {
                 tcCards.SelectedTab = tpCardsMenu;
             }
             else
-            {
-                //VisibleDown3button(false);
+            {                
                 ActiveDown3button(false);
                 if (ListBoxPrev != true)
                 {
-                    CardIndexMenuMarker = false;
+                    CardIndexMenuWord = false;
                     ClearMainList();
                     ListBoxPrev = true;
-                    switch (NameClickButton)
+                    switch (NameClickButtonInMenu)
                     {
                         case "buCardIndexMenuSeparator":
                             {
@@ -380,138 +477,254 @@ namespace RusDictionary.Modules
                 listbox.Enabled = parameter;
             }
         }
-        void EnableOnCardPage(bool parameter)
-        {
-            foreach (Button button in MainForm.GetAll(tpCardsSelect, typeof(Button)))
+        void EnableOnCardPage(bool parameter, TabPage tab)
+        {            
+            foreach (Button button in MainForm.GetAll(tab, typeof(Button)))
             {
-                if (button.Name != "buCardIndexCardsPrev")
+                if (button.Name == "buCardIndexCardsPrev")
+                {
+                    button.Enabled = !parameter;
+                }
+                else if (button.Name == "buSelectWordPrev")
+                {
+                    button.Enabled = !parameter;
+                }
+                else
                 {
                     button.Enabled = parameter;
                 }
-                if (button.Name == "buCardIndexCardsSave")
-                {
-                    button.Visible = parameter;
-                }
             }
-            foreach (TextBox textBox in MainForm.GetAll(tpCardsSelect, typeof(TextBox)))
+            foreach (TextBox textBox in MainForm.GetAll(tab, typeof(TextBox)))
             {
                 textBox.ReadOnly = !parameter;
             }
         }
         private void lbCardIndexList_DoubleClick(object sender, EventArgs e)
         {
-            EnableElement(false);
-            ListBoxSelectedIndex = lbCardIndexList.SelectedIndex + 1;
-            ListBoxPrev = false;
-            if (CardIndexMenuMarker == true)
-            {
-                Program.f1.PictAndLableWait(true);
-                Thread myThread = new Thread(new ParameterizedThreadStart(ShowCards)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-                string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
-                myThread.Start(SplitItem.Last()); // Запускаем поток
-                while (myThread.IsAlive)
-                {
-                    Thread.Sleep(1);
-                    Application.DoEvents();
-                }
-                laCardsNumberCard.Text = "Текст карточки №" + CardMarker + ":";
-                laCardsFirstSeparator.Text = CardSeparator;
-                laCardsNumberBox.Text = CardNumberBox;
-                laCardsLetter.Text = CardSymbol;
-                pbPictCard.BackgroundImage = CardImage;
-                laCardsWord.Text = CardWord;
-                tbCardText.Text = CardText;
-                tbCardRelatedCombinations.Text = CardRelatedCombinations;
-                tbCardValue.Text = CardValue;
-                tbCardSourceCode.Text = CardSourceCode;
-                tbCardSourceClarification.Text = CardSourceClarification;
-                tbCardPagination.Text = CardPagination;
-                tbCardSourceDate.Text = CardSourceDate;
-                tbCardSourceDateClarification.Text = CardSourceDateClarification;
-                tbCardNotes.Text = CardNotes;
-
-                EnableOnCardPage(false);
-                tcCards.SelectedTab = tpCardsSelect;
-                Program.f1.PictAndLableWait(false);
-                EnableElement(true);
-            }
-            else
+            if (lbCardIndexList.SelectedItem != null)
             {
                 EnableElement(false);
-                Program.f1.PictAndLableWait(true);
-                Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-                myThread.Start(NameClickButton); // Запускаем поток
-                while (myThread.IsAlive)
+                ListBoxSelectedIndex = lbCardIndexList.SelectedIndex + 1;
+                ListBoxPrev = false;
+                if (CardIndexMenuMarker == true)
                 {
-                    Thread.Sleep(1);
-                    Application.DoEvents();
+                    Program.f1.PictAndLableWait(true);
+                    Thread myThread = new Thread(new ParameterizedThreadStart(ShowCards)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                    string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                    myThread.Start(SplitItem.Last()); // Запускаем поток
+                    while (myThread.IsAlive)
+                    {
+                        Thread.Sleep(1);
+                        Application.DoEvents();
+                    }
+                    laCardsNumberCard.Text = "Текст карточки №" + CardMarker + ":";
+                    //laCardsFirstSeparator.Text = "Разделитель: " + CardSeparator;
+                    laCardsNumberBox.Text = "Ящик: " + CardNumberBox;
+                    pbPictCard.BackgroundImage = CardImage;
+                    tbCardText.Text = CardText;
+                    tbCardSourceCode.Text = CardSourceCode;
+                    tbCardSourceClarification.Text = CardSourceClarification;
+                    tbCardPagination.Text = CardPagination;
+                    tbCardSourceDate.Text = CardSourceDate;
+                    tbCardSourceDateClarification.Text = CardSourceDateClarification;
+                    tbCardNotes.Text = CardNotes;
+
+                    EnableOnCardPage(false, tpCardsSelectCard);
+                    tcCards.SelectedTab = tpCardsSelectCard;
+                    Program.f1.PictAndLableWait(false);
+                    EnableElement(true);
                 }
-                ClearMainList();
-                EnableElement(true);
-                switch (NameClickButton)
+                else if (CardIndexMenuWord == true)
                 {
-                    case "buCardIndexMenuSeparator":
+                    if (CardIndexMenuSeparator == false && CardIndexMenuBox == false && CardIndexMenuLetter == false)
+                    {
+                        Program.f1.PictAndLableWait(true);
+                        string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(new string[] { ") " }, StringSplitOptions.RemoveEmptyEntries);
+
+                        int ID = lbCardIndexList.SelectedIndex;
+                        Thread myThread = new Thread(() => ShowWordWithCard(FirstListItems[ID].ID)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        myThread.Start(); // Запускаем поток
+                        while (myThread.IsAlive)
                         {
-                            for (int i = 0; i < SecondListItems.Count; i++)
-                            {
-                                lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Marker);
-                            }
-                            //VisibleDown3button(true);
-                            ActiveDown3button(false);
-                            break;
+                            Thread.Sleep(1);
+                            Application.DoEvents();
                         }
-                    case "buCardIndexMenuBox":
+                        laCardsSelectWordNumberCard.Text = "Текст карточки №" + CardMarker + ":";
+                        laCardsSelectWordSeparator.Text = "Разделитель: " + CardSeparator;
+                        laCardsSelectWordNumberBox.Text = "Ящик: " + CardNumberBox;
+                        laCardsSelectWordLetter.Text = "Буква: " + CardSymbol;                        
+                        laCardsSelectWordWord.Text = "Слово: " + CardWord;
+                        pbCardsSelectWordImage.BackgroundImage = CardImage;
+                        tbCardsSelectWordText.Text = CardText;
+                        tbCardsSelectWordValue.Text = CardValue;
+                        tbCardsSelectWordSourceCode.Text = CardSourceCode;
+                        tbCardsSelectWordSourceCodeClarification.Text = CardSourceClarification;
+                        tbCardsSelectWordPagination.Text = CardPagination;
+                        tbCardsSelectWordSourceDate.Text = CardSourceDate;
+                        tbCardsSelectWordSourceDateClarification.Text = CardSourceDateClarification;
+                        tbCardsSelectWordRelatedCombinations.Text = CardRelatedCombinations;
+                        tbCardsSelectWordNotes.Text = CardNotes;
+                        tcCards.SelectedTab = tpCardsSelectWord;
+
+                        EnableOnCardPage(false, tpCardsSelectWord);
+                        Program.f1.PictAndLableWait(false);
+                        EnableElement(true);
+                    }
+                    else
+                    {
+                        Program.f1.PictAndLableWait(true);
+                        string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(new string[] { ") " }, StringSplitOptions.RemoveEmptyEntries);
+
+                        int ID = lbCardIndexList.SelectedIndex;
+                        Thread myThread = new Thread(() => ShowWordWithCard(SecondListItems[ID].ID)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        myThread.Start(); // Запускаем поток
+                        while (myThread.IsAlive)
                         {
-                            for (int i = 0; i < SecondListItems.Count; i++)
-                            {
-                                lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Marker);
-                            }
-                            //VisibleDown3button(true);
-                            ActiveDown3button(false);
-                            break;
+                            Thread.Sleep(1);
+                            Application.DoEvents();
                         }
-                    case "buCardIndexMenuLetter":
-                        {
-                            for (int i = 0; i < SecondListItems.Count; i++)
-                            {
-                                lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Marker);
-                            }
-                            //VisibleDown3button(true);
-                            ActiveDown3button(false);
-                            break;
-                        }
+                        laCardsSelectWordNumberCard.Text = "Текст карточки №" + CardMarker + ":";
+                        laCardsSelectWordSeparator.Text = "Разделитель: " + CardSeparator;
+                        laCardsSelectWordNumberBox.Text = "Ящик: " + CardNumberBox;
+                        laCardsSelectWordLetter.Text = "Буква: " + CardSymbol;
+                        laCardsSelectWordWord.Text = "Слово: " + CardWord;
+                        pbCardsSelectWordImage.BackgroundImage = CardImage;                        
+                        tbCardsSelectWordText.Text = CardText;
+                        tbCardsSelectWordValue.Text = CardValue;
+                        tbCardsSelectWordSourceCode.Text = CardSourceCode;
+                        tbCardsSelectWordSourceCodeClarification.Text = CardSourceClarification;
+                        tbCardsSelectWordPagination.Text = CardPagination;
+                        tbCardsSelectWordSourceDate.Text = CardSourceDate;
+                        tbCardsSelectWordSourceDateClarification.Text = CardSourceDateClarification;
+                        tbCardsSelectWordRelatedCombinations.Text = CardRelatedCombinations;
+                        tbCardsSelectWordNotes.Text = CardNotes;
+                        tcCards.SelectedTab = tpCardsSelectWord;
+
+                        EnableOnCardPage(false, tpCardsSelectWord);
+                        Program.f1.PictAndLableWait(false);
+                        EnableElement(true);
+                    }
+                    //CardIndexMenuWord = false;
+                    
                 }
-                
-                lbCardIndexList.Update();
-                CardIndexMenuMarker = true;
-                lbCardIndexList.Visible = true;
-                Program.f1.PictAndLableWait(false);
-            }            
+                else
+                {
+                    EnableElement(false);
+                    Program.f1.PictAndLableWait(true);
+                    Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                    myThread.Start(NameClickButtonInMenu); // Запускаем поток
+                    while (myThread.IsAlive)
+                    {
+                        Thread.Sleep(1);
+                        Application.DoEvents();
+                    }
+                    ClearMainList();
+                    EnableElement(true);
+                    int CountList;
+                    if (SecondListItems == null)
+                    {
+                        CountList = 0;
+                    }
+                    else
+                    {
+                        CountList = SecondListItems.Count;
+                    }
+                    
+                    switch (NameClickButtonInMenu)
+                    {
+                        case "buCardIndexMenuSeparator":
+                            {
+                                for (int i = 0; i < CountList; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Word);
+                                }                                
+                                ActiveDown3button(false);
+                                break;
+                            }
+                        case "buCardIndexMenuBox":
+                            {
+                                for (int i = 0; i < CountList; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Word);
+                                }                                
+                                ActiveDown3button(false);
+                                break;
+                            }
+                        case "buCardIndexMenuLetter":
+                            {
+                                for (int i = 0; i < CountList; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Word);
+                                }                                
+                                ActiveDown3button(false);
+                                break;
+                            }
+                    }
+
+                    lbCardIndexList.Update();
+                    CardIndexMenuWord = true;
+                    lbCardIndexList.Visible = true;
+                    Program.f1.PictAndLableWait(false);
+                }
+            }
+        }
+        /// <summary>
+        /// Выбрать все ящики из БД
+        /// </summary>
+        void SelectAllBox()
+        {
+            string query = "SELECT * FROM Box";
+            JSON.Send(query, JSONFlags.Select);
+            BoxItems = JSON.Decode();
+        }
+        /// <summary>
+        /// Выбирает нужный ящик по ID ящика
+        /// </summary>
+        /// <param name="BoxID"></param>
+        void SelectBoxID(string BoxID)
+        {
+            string query = "SELECT * FROM Box WHERE ID = " + BoxID;
+            JSON.Send(query, JSONFlags.Select);
+            BoxItems = JSON.Decode();
+        }
+        /// <summary>
+        /// Выбрать букву по её ID
+        /// </summary>
+        /// <param name="LetterID"></param>
+        void SelectLetter(string LetterID)
+        {
+            string query = "SELECT * FROM Letter WHERE ID = " + LetterID;
+            JSON.Send(query, JSONFlags.Select);
+            LetterItems = JSON.Decode();
+        }
+        /// <summary>
+        /// Выбрать все карточки разделители
+        /// </summary>
+        void SelectAllCardSeparator()
+        {
+            string query = "SELECT * FROM CardSeparator";
+            JSON.Send(query, JSONFlags.Select);
+            CardSeparatorItems = JSON.Decode();
         }
 
+        void SelectAllCardSeparator(int ForCardSeparatorID)
+        {
+            string query = "SELECT * FROM CardSeparator WHERE ID = " + ForCardSeparatorID;
+            JSON.Send(query, JSONFlags.Select);
+            CardSeparatorItems = JSON.Decode();
+        }
         void ShowCards(object Number)
-        {   
-            /*
-             Тут придумать, если отображается несколько карточек с одинаковым именем
-             */
+        {
             string query = "SELECT * FROM cardindex WHERE Marker = '" + Number + "'";
             JSON.Send(query, JSONFlags.Select);
             CardItems = JSON.Decode();
-            
-            //Подумать над сепаратором между карточками (отображаются на форме внизу при открытой карточке)
-
             CardMarker = CardItems[0].Marker;
-            query = "SELECT CardSeparator FROM cardseparator WHERE ID = " + CardItems[0].CardSeparator;
+            CardNumberBoxID = CardItems[0].NumberBox;
+            query = "SELECT NumberBox FROM box WHERE ID = " + CardNumberBoxID;
             JSON.Send(query, JSONFlags.Select);
-            CardSeparator = "Разделитель: " + JSON.Decode()[0].CardSeparator;
-            query = "SELECT NumberBox FROM box WHERE ID = " + CardItems[0].NumberBox;
-            JSON.Send(query, JSONFlags.Select);
-            CardNumberBox = "Ящик: " + JSON.Decode()[0].NumberBox;
-            query = "SELECT Symbol FROM letter WHERE ID = " + CardItems[0].Symbol;
-            JSON.Send(query, JSONFlags.Select);
-            CardSymbol = "Буква: " + JSON.Decode()[0].Symbol;
+            CardNumberBox = JSON.Decode()[0].NumberBox;            
             CardImage = DecodeImageFromDB(CardItems[0].Img);
-            CardWord = "Слово: " + CardItems[0].Word;
+            CardWord = CardItems[0].Word;
             CardText = CardItems[0].ImgText;
             CardRelatedCombinations = CardItems[0].RelatedCombinations;
             CardValue = CardItems[0].Value;
@@ -520,7 +733,44 @@ namespace RusDictionary.Modules
             CardPagination = CardItems[0].Pagination;
             CardSourceDate = CardItems[0].SourceDate;
             CardSourceDateClarification = CardItems[0].SourceDateClarification;
-            CardNotes = CardItems[0].Notes;                       
+            CardNotes = CardItems[0].Notes;
+        }
+
+        void ShowWordWithCard(object ID)
+        {              
+            string query = "SELECT * FROM flotation WHERE ID = '" + ID + "'";
+            JSON.Send(query, JSONFlags.Select);
+            CardItems = JSON.Decode();
+            List<JSONArray> AboutCard = new List<JSONArray>();
+            query = "SELECT * FROM cardindex WHERE ID = " + CardItems[0].Card;
+            JSON.Send(query, JSONFlags.Select);
+            AboutCard = JSON.Decode();
+            CardMarker = AboutCard[0].Marker;
+            CardImage = DecodeImageFromDB(AboutCard[0].Img);
+            CardText = AboutCard[0].ImgText;
+            CardSourceCode = AboutCard[0].SourceCode;
+            CardSourceClarification = AboutCard[0].SourceClarification;
+            CardPagination = AboutCard[0].Pagination;
+            CardSourceDate = AboutCard[0].SourceDate;
+            CardSourceDateClarification = AboutCard[0].SourceDateClarification;
+            CardNotes = AboutCard[0].Notes;
+            //-------------\\
+            query = "SELECT NumberBox FROM box WHERE ID = " + CardItems[0].NumberBox;
+            JSON.Send(query, JSONFlags.Select);
+            CardNumberBox = JSON.Decode()[0].NumberBox;
+            //-------------\\
+            query = "SELECT Symbol FROM letter WHERE ID = " + CardItems[0].Symbol;
+            JSON.Send(query, JSONFlags.Select);
+            CardSymbol = JSON.Decode()[0].Symbol;
+            //-------------\\
+            CardSeparatorID = CardItems[0].CardSeparator;
+            query = "SELECT CardSeparator FROM cardseparator WHERE ID = " + CardSeparatorID;
+            JSON.Send(query, JSONFlags.Select);
+            CardSeparator = JSON.Decode()[0].CardSeparator;
+            //-------------\\
+            CardWord = CardItems[0].Word;
+            CardValue = CardItems[0].Value;
+            CardRelatedCombinations = CardItems[0].RelatedCombinations;
         }
         /// <summary>
         /// Кодирование изображения в base64
@@ -551,15 +801,13 @@ namespace RusDictionary.Modules
         private void buCardIndexCardsPrev_Click(object sender, EventArgs e)
         {
             tcCards.SelectedTab = tpList;
-            EnableOnCardPage(true);
+            EnableOnCardPage(true, tpCardsSelectCard);
         }
-
         private void buTest_Click(object sender, EventArgs e)
         {
             string query = "UPDATE `cardindex` SET `Notes` = 'Test' WHERE `Marker` = '5770005'";
             JSON.Send(query, JSONFlags.Update);
         }
-
         private void buCardIndexListDelete_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить данную запись?", "Удаление записи", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -574,60 +822,147 @@ namespace RusDictionary.Modules
                 JSON.Send(query, JSONFlags.Update);
             }
         }
-
         private void lbCardIndexList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ActiveDown3button(true);
+            if (lbCardIndexList.SelectedIndex != -1)
+            {
+                ActiveDown3button(true);
+            }
         }
-
         private void buCardIndexListChange_Click(object sender, EventArgs e)
         {
             EnableElement(false);
             ListBoxSelectedIndex = lbCardIndexList.SelectedIndex + 1;
             Program.f1.PictAndLableWait(true);
-            /*
-            tcCards.SelectedTab = tpCardsSelect;*/
-            switch (NameClickButton)
+            TagButtonChange = (sender as Button).Tag.ToString();            
+            switch (NameClickButtonInMenu)
             {
                 case "buCardIndexMenuMarker":
                     {
-                        Thread myThread = new Thread(new ParameterizedThreadStart(ShowCards)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        List<Thread> MyThreads = new List<Thread>();
                         string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
-                        myThread.Start(SplitItem.Last()); // Запускаем поток
-                        while (myThread.IsAlive)
+                        MyThreads.Add(new Thread(() => ShowCards(SplitItem.Last()))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        MyThreads[0].Start(); // Запускаем поток
+                        MyThreads[1].Start(); // Запускаем поток
+                        MyThreads[2].Start(); // Запускаем поток
+                        while (MyThreads[0].IsAlive || MyThreads[1].IsAlive || MyThreads[2].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
-                        laCardsNumberCard.Text = "Текст карточки №" + CardMarker + ":";
-                        laCardsFirstSeparator.Text = CardSeparator;
-                        laCardsNumberBox.Text = CardNumberBox;
-                        laCardsLetter.Text = CardSymbol;
-                        pbPictCard.BackgroundImage = CardImage;
-                        laCardsWord.Text = CardWord;
-                        tbCardText.Text = CardText;
-                        tbCardRelatedCombinations.Text = CardRelatedCombinations;
-                        tbCardValue.Text = CardValue;
-                        tbCardSourceCode.Text = CardSourceCode;
-                        tbCardSourceClarification.Text = CardSourceClarification;
-                        tbCardPagination.Text = CardPagination;
-                        tbCardSourceDate.Text = CardSourceDate;
-                        tbCardSourceDateClarification.Text = CardSourceDateClarification;
-                        tbCardNotes.Text = CardNotes;
+                        tbCardsInsertAndUpdateMarker.Text = CardMarker;
+
+                        /* Изменить на выпадающий список*/
+                        for (int i = 0; i < BoxItems.Count; i++)
+                        {
+                            cbCardsInsertAndUpdateBox.Items.Add(BoxItems[i].NumberBox);
+                            if (CardNumberBox.Equals(BoxItems[i].NumberBox))
+                            {
+                                cbCardsInsertAndUpdateBox.SelectedIndex = i;
+                            }
+                        }
+                        cbCardsInsertAndUpdateBox.Update();
+                        /**/
+
+                        /*
+                        for (int i = 0; i < CardSeparatorItems.Count; i++)
+                        {
+                            if (CardSeparatorItems[i].NumberBox == CardNumberBoxID)
+                            {
+                                cbCardsInsertAndUpdateCardSeparator.Items.Add(CardSeparatorItems[i].CardSeparator);
+                                if ((i + 1) == Convert.ToInt32(CardSeparatorID))
+                                {
+                                    cbCardsInsertAndUpdateCardSeparator.SelectedIndex = i;
+                                }
+                            }
+                        }
+
+                        cbCardsInsertAndUpdateCardSeparator.Update();
+                        */
+                        
+                        cbCardsInsertAndUpdateBox.Update();
+                        pbCardsInsertAndUpdateImage.BackgroundImage = CardImage;
+                        tbCardsInsertAndUpdateTextCard.Text = CardText;
+                        tbCardsInsertAndUpdateSourceCode.Text = CardSourceCode;
+                        tbCardsInsertAndUpdateSourceCodeClarification.Text = CardSourceClarification;
+                        tbCardsInsertAndUpdatePagination.Text = CardPagination;
+                        tbCardsInsertAndUpdateSourceDate.Text = CardSourceDate;
+                        tbCardsInsertAndUpdateSourceDateClarification.Text = CardSourceDateClarification;
+                        pbCardsInsertAndUpdateNotes.Text = CardNotes;
+                        tcCards.SelectedTab = tpCardsInsertAndUpdateCard;
                         break;
                     }
                 case "buCardIndexMenuSeparator":
                     {
+                        List<Thread> MyThreads = new List<Thread>();
+                        string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                        MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        
+                        MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        MyThreads[0].Start(); // Запускаем поток
+                        MyThreads[1].Start(); // Запускаем поток
+                        while (MyThreads[0].IsAlive || MyThreads[1].IsAlive)
+                        {
+                            Thread.Sleep(1);
+                            Application.DoEvents();
+                        }
+                        int idSeparator = Convert.ToInt32(CardSeparatorItems[lbCardIndexList.SelectedIndex].ID);
+                        for (int i = 0; i < BoxItems.Count; i++)
+                        {
+                            cbCardsInsertAndUpdateCardSeparatorBox.Items.Add(BoxItems[i].NumberBox);
+                            if (CardSeparatorItems[0].NumberBox == BoxItems[i].ID)
+                            {
+                                cbCardsInsertAndUpdateCardSeparatorBox.SelectedIndex = i;
+                            }
+                        }
+                        for (int i = 0; i < CardSeparatorItems.Count; i++)
+                        {
+                            if (CardSeparatorItems[i].ID.Equals(idSeparator.ToString()))
+                            {
+                                tbCardsInsertAndUpdateCardSeparatorLetter.Text = CardSeparatorItems[i].CardSeparator;
+                                break;
+                            }
+                        }                        
                         tcCards.SelectedTab = tpCardsInsertAndUpdateCardSeparator;
                         break;
                     }
                 case "buCardIndexMenuBox":
                     {
+                        List<Thread> MyThreads = new List<Thread>();
+                        string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                        string idbox = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
+                        MyThreads.Add(new Thread(() => SelectBoxID(idbox))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        MyThreads[0].Start(); // Запускаем поток
+                        while (MyThreads[0].IsAlive)
+                        {
+                            Thread.Sleep(1);
+                            Application.DoEvents();
+                        }
+                        tbCardsInsertAndUpdateBoxNumberBox.Text = BoxItems[0].NumberBox;
                         tcCards.SelectedTab = tpCardsInsertAndUpdateBox;
                         break;
                     }
                 case "buCardIndexMenuLetter":
                     {
+                        List<Thread> MyThreads = new List<Thread>();
+                        string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                        string idLetter = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
+                        MyThreads.Add(new Thread(() => SelectLetter(idLetter))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                        
+                        MyThreads[0].Start(); // Запускаем поток
+                        while (MyThreads[0].IsAlive)
+                        {
+                            Thread.Sleep(1);
+                            Application.DoEvents();
+                        }
+                        tbCardsInsertAndUpdateLetter.Text = LetterItems[0].Symbol;
+                        tcCards.SelectedTab = tpCardsInsertAndUpdateLetter;
+                        break;
+                    }
+                case "buCardIndexMenuWord":
+                    {
+
                         tcCards.SelectedTab = tpCardsInsertAndUpdateLetter;
                         break;
                     }
@@ -636,9 +971,88 @@ namespace RusDictionary.Modules
             EnableElement(true);            
         }
 
-        private void buCardIndexCardsSave_Click(object sender, EventArgs e)
+        private void buSelectWordPrev_Click(object sender, EventArgs e)
         {
+            tcCards.SelectedTab = tpList;
+            EnableOnCardPage(true, tpCardsSelectWord);
+        }
 
+        private void buttonInsertAndUpdatePrev_Click(object sender, EventArgs e)
+        {
+            switch (TagButtonChange)
+            {
+                case "Update":
+                    {
+                        DialogResult result = MessageBox.Show("Вы уверены, что хотите выйти? Все изменения не будут сохранены", "Возврат назад", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            tcCards.SelectedTab = tpList;
+                        }
+                        break;
+                    }
+                case "Insert":
+                    {
+                        DialogResult result = MessageBox.Show("Вы уверены, что хотите выйти? Введенные не будут сохранены!", "Возврат назад", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            tcCards.SelectedTab = tpList;
+                        }
+                        break;
+                    }
+            }
+        }
+
+        private void buttonInsertAndUpdateSave_Click(object sender, EventArgs e)
+        {
+            switch (tcCards.SelectedTab.Name)
+            {
+                case "tpCardsInsertAndUpdateCard":
+                    {
+
+                        break;
+                    }
+                case "tpCardsInsertAndUpdateWord":
+                    {
+
+                        break;
+                    }
+                case "tpCardsInsertAndUpdateLetter":
+                    {
+
+                        break;
+                    }
+                case "tpCardsInsertAndUpdateBox":
+                    {
+
+                        break;
+                    }
+                case "tpCardsInsertAndUpdateCardSeparator":
+                    {
+
+                        break;
+                    }
+            }                    
+            MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void CardIndexModule_SizeChanged(object sender, EventArgs e)
+        {
+            /*foreach (ComboBox comboBox in MainForm.GetAll(tpCardsInsertAndUpdateCard, typeof(ComboBox)))
+            {
+                comboBox.Size = new Size(comboBox.Size.Width, tbCardsInsertAndUpdateMarker.Height);
+                //SetComboBoxHeight(comboBox.Handle, tbCardsInsertAndUpdateMarker.Height);
+                comboBox.Refresh();
+            }
+            foreach (ComboBox comboBox in MainForm.GetAll(tpCardsInsertAndUpdateWord, typeof(ComboBox)))
+            {
+                SetComboBoxHeight(comboBox.Handle, buCardsInsertAndUpdateWordWord.Height);
+                comboBox.Refresh();
+            }
+            foreach (ComboBox comboBox in MainForm.GetAll(tpCardsInsertAndUpdateCardSeparator, typeof(ComboBox)))
+            {
+                SetComboBoxHeight(comboBox.Handle, tbCardsInsertAndUpdateCardSeparatorLetter.Height);
+                comboBox.Refresh();
+            }*/
         }
     }
 }

@@ -82,6 +82,7 @@ namespace RusDictionary
     /// </summary>
     public class JSONArray
     {
+        public string ID { get; set; }
         #region MainModule       
         public string FIO { get; set; }
         public string Login { get; set; }
@@ -93,7 +94,8 @@ namespace RusDictionary
         public string CanInsert { get; set; }
         public string CanDelete { get; set; }
         #endregion
-        #region CardIndexModule       
+        #region CardIndexModule     
+        public string Card { get; set; }
         public string Marker { get; set; }
         public string CardSeparator { get; set; }
         public string NumberBox { get; set; }

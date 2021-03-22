@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Input;
 using System.Windows.Media.TextFormatting;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 
 namespace RusDictionary
 {
@@ -127,7 +128,8 @@ namespace RusDictionary
             laWait.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             #region Вкладка "Логин"
             laLogin.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            laPassword.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);            
+            laPassword.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            buLogin.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
             #endregion
             #region Вкладка "Главная"
             label1.Font = new Font("Izhitsa", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -143,38 +145,6 @@ namespace RusDictionary
                     button.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 204);
                 }
             }
-            #endregion
-            #region Вкладка "Картотека"
-            foreach (ListBox listbox in GetAll(tpCardIndex, typeof(ListBox)))
-            {
-                listbox.Font = new Font("Izhitsa", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            }
-            foreach (Label label in GetAll(tpCardIndex, typeof(Label)))
-            {
-                if (label.Name == "laCardsFirstSeparator" || label.Name == "laCardsLastSeparator" || label.Name == "laCardsLetter" || label.Name == "laCardsNumberBox")
-                {
-                    label.Font = new Font("Izhitsa", 9.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-                }
-                else
-                {
-                    label.Font = new Font("Izhitsa", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-                }
-            }
-            foreach (Button button in GetAll(this, typeof(Button)))
-            {
-                if (button.Name == "buCardIndexCardsPrev" || button.Name == "buCardIndexCardsSave")
-                {
-                    button.Font = new Font("Izhitsa", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-                }
-                else
-                {
-                    button.Font = new Font("Izhitsa", 16F, FontStyle.Regular, GraphicsUnit.Point, 204);
-                }
-            }
-            #endregion
-            #region Вкладка "Указатели"
-            #endregion
-            #region Вкладка "Поиск слов"
             #endregion
             #region Вкладка "Авторы"
             foreach (Label label in GetAll(tpAuthors, typeof(Label)))
@@ -358,7 +328,7 @@ namespace RusDictionary
         /// <summary>
         /// Отключение курсора при нажатии на TextBox
         /// </summary>
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [DllImport("user32.dll")]
         private static extern bool HideCaret(IntPtr hWnd);
         /// <summary>
         /// Открытие ссылок в браузере
@@ -747,39 +717,50 @@ namespace RusDictionary
             IfLogin = false;
             List<JSONArray> PasswordList = new List<JSONArray>();            
             string Login = tbLogin.Text.ToString();
-            string Password = tbPassword.Text.ToString();            
+            string Password = tbPassword.Text.ToString();
             if (Login != null && Login != "" && Password != null && Password != "")
             {
                 string query = "SELECT * FROM users WHERE Login = '" + Login + "'";
-                JSON.Send(query, JSONFlags.Select);
-                PasswordList = JSON.Decode();
-                try
+                if (StatusConnect == true)
                 {
-                    if (PasswordList != null)
+                    JSON.Send(query, JSONFlags.Select);
+                    PasswordList = JSON.Decode();
+                    try
                     {
-                        if (PasswordList[0].Password.Equals(Password))
+                        if (PasswordList != null)
                         {
-                            query = "SELECT * FROM roles WHERE ID = '" + PasswordList[0].Role + "'";
-                            JSON.Send(query, JSONFlags.Select);
-                            CanDoItList = JSON.Decode();                            
-                            IfLogin = true;                            
-                            MainTC.SelectedTab = tpMain;
+                            if (PasswordList[0].Password.Equals(Password))
+                            {
+                                query = "SELECT * FROM roles WHERE ID = '" + PasswordList[0].Role + "'";
+                                JSON.Send(query, JSONFlags.Select);
+                                CanDoItList = JSON.Decode();
+                                IfLogin = true;
+                                MainTC.SelectedTab = tpMain;
+                            }
+                        }
+                        else
+                        {
+                            IfLogin = false;
                         }
                     }
-                    else
+                    catch
                     {
                         IfLogin = false;
-                    }                    
+                    }
+
+                    if (IfLogin == false)
+                    {
+                        MessageBox.Show("Не правильно введён логин или пароль. Повторите попытку");
+                    }
                 }
-                catch
-                {
-                    IfLogin = false;
-                }                
+                
             }
-            if (IfLogin == false)
+            if (StatusConnect == false)
             {
-                MessageBox.Show("Не правильно введён логин или пароль. Повторите попытку");
+                MessageBox.Show("Отсутствует подключение к серверу!");
             }
+
+            
         }
 
         private void buSettingLogin_Click(object sender, EventArgs e)
