@@ -36,6 +36,7 @@
             this.tbWordSearch_FindedWords = new System.Windows.Forms.TextBox();
             this.buWordSearch_FindWord = new System.Windows.Forms.Button();
             this.tbWordSearch_SearchingWord = new System.Windows.Forms.TextBox();
+            this.cbSearchType = new System.Windows.Forms.CheckBox();
             this.tcWordSearch_Main.SuspendLayout();
             this.tpWordSearch_ReadFiles.SuspendLayout();
             this.tpWordSearch_Search.SuspendLayout();
@@ -83,6 +84,7 @@
             // 
             // tpWordSearch_Search
             // 
+            this.tpWordSearch_Search.Controls.Add(this.cbSearchType);
             this.tpWordSearch_Search.Controls.Add(this.tbWordSearch_FindedWords);
             this.tpWordSearch_Search.Controls.Add(this.buWordSearch_FindWord);
             this.tpWordSearch_Search.Controls.Add(this.tbWordSearch_SearchingWord);
@@ -121,6 +123,16 @@
             this.tbWordSearch_SearchingWord.Size = new System.Drawing.Size(189, 20);
             this.tbWordSearch_SearchingWord.TabIndex = 0;
             // 
+            // cbSearchType
+            // 
+            this.cbSearchType.AutoSize = true;
+            this.cbSearchType.Location = new System.Drawing.Point(383, 64);
+            this.cbSearchType.Name = "cbSearchType";
+            this.cbSearchType.Size = new System.Drawing.Size(134, 17);
+            this.cbSearchType.TabIndex = 3;
+            this.cbSearchType.Text = "Точное соответствие";
+            this.cbSearchType.UseVisualStyleBackColor = true;
+            // 
             // WordSearchModule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,5 +159,6 @@
         private System.Windows.Forms.TextBox tbWordSearch_FindedWords;
         private System.Windows.Forms.Button buWordSearch_FindWord;
         private System.Windows.Forms.TextBox tbWordSearch_SearchingWord;
+        private System.Windows.Forms.CheckBox cbSearchType;
     }
 }

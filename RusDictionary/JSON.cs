@@ -73,6 +73,7 @@ namespace RusDictionary
         public static List<JSONArray> Decode()
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
+            serializer.MaxJsonLength = 2147483647;
             return serializer.Deserialize<List<JSONArray>>(ReturnJSON);
         }
     }
@@ -116,11 +117,14 @@ namespace RusDictionary
         #endregion
         #region WordSearchModule
         public string Name { get; set; }
+        public string Semantic { get; set; }
         public string Partofspeech { get; set; }
         public string Rod { get; set; }
         public string Num { get; set; }
         public string Definition { get; set; }
         public string Example { get; set; }
+        public string Compare { get; set; }
+        public string Mainword { get; set; }
         #endregion
     }
 }
