@@ -1826,6 +1826,7 @@ namespace RusDictionary.Modules
             }
             buWordSearch_Read.Enabled = true;
         }
+        List<string[]> table;
         void FindWords()
         {
             List<string> Names = new List<string>();
@@ -1841,7 +1842,6 @@ namespace RusDictionary.Modules
             List<string> MainWord = new List<string>();
             List<JSONArray> jNames = new List<JSONArray>();
 
-            tbWordSearch_FindedWords.Text = "";
 
             string query = "SELECT * FROM dictionaryentries";
             JSON.Send(query, JSONFlags.Select);
@@ -1882,52 +1882,11 @@ namespace RusDictionary.Modules
             }
             string tmp = "";
             bool newWord = false;
+            table = new List<string[]>();
+            string[] line;
             for (int i = 0; i < Names.Count; i++)
             {
-                //if (Names[i].Contains(textSearch))
-                //{
-                //    if (tmp != Names[i])
-                //    {
-                //        tmp = Names[i];
-                //        newWord = true;
-                //    }
-                //    if (newWord)
-                //    {
-                //        tbWordSearch_FindedWords.Text += "_____\r\n" + Names[i] + "\r\n";
-                //        if (PartsOfSpeech[i] != "")
-                //        {
-                //            tbWordSearch_FindedWords.Text += PartsOfSpeech[i] + "\r\n";
-                //        }
-                //        if (Rods[i] != "")
-                //        {
-                //            tbWordSearch_FindedWords.Text += Rods[i] + "\r\n";
-                //        }
-                //        if (Nums[i] != "")
-                //        {
-                //            tbWordSearch_FindedWords.Text += Nums[i] + "\r\n";
-                //        }
-                //        if (Definitions[i] != "")
-                //        {
-                //            tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
-                //        }
-                //        if (Examples[i] != "")
-                //        {
-                //            tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
-                //        }
-                //        newWord = false;
-                //    }
-                //    else
-                //    {
-                //        if (Definitions[i] != "")
-                //        {
-                //            tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
-                //        }
-                //        if (Examples[i] != "")
-                //        {
-                //            tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
-                //        }
-                //    }
-                //}
+                line = new string[10];
                 if (cbSearchType.Checked == true)
                 {
                     if (MainWord[Convert.ToInt32(Names[i]) - 1]/*Names[i]*/ == textSearch)
@@ -1939,65 +1898,32 @@ namespace RusDictionary.Modules
                         }
                         if (newWord /*|| Semantic[i] != ""*/)
                         {
-                            tbWordSearch_FindedWords.Text += "_____\r\n" + /*Names[i]*/MainWord[Convert.ToInt32(Names[i]) - 1];
-                            if (Semantic[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += " " + Semantic[i];
-                            }
-                            tbWordSearch_FindedWords.Text += "\r\n";
-                            if (PartsOfSpeech[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += PartsOfSpeech[i] + "\r\n";
-                            }
-                            if (Rods[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Rods[i] + "\r\n";
-                            }
-                            if (Nums[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Nums[i] + "\r\n";
-                            }
-                            if (Definitions[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
-                            }
-                            if (Examples[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
-                            }
-                            if (SourceCode[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += SourceCode[i] + "\r\n";
-                            }
-                            if (SourceDate[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += SourceDate[i] + "\r\n";
-                            }
-                            if (Compare[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Compare[i] + "\r\n";
-                            }
+                            line[0] = MainWord[Convert.ToInt32(Names[i]) - 1];
+                            line[1] = Semantic[i];
+                            line[2] = PartsOfSpeech[i];
+                            line[3] = Rods[i];
+                            line[4] = Nums[i];
+                            line[5] = Definitions[i];
+                            line[6] = Examples[i];
+                            line[7] = SourceCode[i];
+                            line[8] = SourceDate[i];
+                            line[9] = Compare[i];
+                            table.Add(line);
                             newWord = false;
                         }
                         else
                         {
-                            //tbText.Text += Defenitions[i] + "\r\n" + Examples[i] + "\r\n";
-                            if (Definitions[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
-                            }
-                            if (Examples[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
-                            }
-                            if (SourceCode[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += SourceCode[i] + "\r\n";
-                            }
-                            if (SourceDate[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += SourceDate[i] + "\r\n";
-                            }
+                            line[0] = "";
+                            line[1] = Semantic[i];
+                            line[2] = PartsOfSpeech[i];
+                            line[3] = Rods[i];
+                            line[4] = Nums[i];
+                            line[5] = Definitions[i];
+                            line[6] = Examples[i];
+                            line[7] = SourceCode[i];
+                            line[8] = SourceDate[i];
+                            line[9] = Compare[i];
+                            table.Add(line);
                         }
                     }
                 }
@@ -2012,77 +1938,122 @@ namespace RusDictionary.Modules
                         }
                         if (newWord /*|| Semantic[i] != ""*/)
                         {
-                            tbWordSearch_FindedWords.Text += "_____\r\n" + /*Names[i]*/MainWord[Convert.ToInt32(Names[i]) - 1];
-                            if (Semantic[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += " " + Semantic[i];
-                            }
-                            tbWordSearch_FindedWords.Text += "\r\n";
-                            if (PartsOfSpeech[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += PartsOfSpeech[i] + "\r\n";
-                            }
-                            if (Rods[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Rods[i] + "\r\n";
-                            }
-                            if (Nums[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Nums[i] + "\r\n";
-                            }
-                            if (Definitions[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
-                            }
-                            if (Examples[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
-                            }
-                            if (SourceCode[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += SourceCode[i] + "\r\n";
-                            }
-                            if (SourceDate[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += SourceDate[i] + "\r\n";
-                            }
-                            if (Compare[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Compare[i] + "\r\n";
-                            }
+                            line[0] = MainWord[Convert.ToInt32(Names[i]) - 1];
+                            line[1] = Semantic[i];
+                            line[2] = PartsOfSpeech[i];
+                            line[3] = Rods[i];
+                            line[4] = Nums[i];
+                            line[5] = Definitions[i];
+                            line[6] = Examples[i];
+                            line[7] = SourceCode[i];
+                            line[8] = SourceDate[i];
+                            line[9] = Compare[i];
+                            table.Add(line);
                             newWord = false;
                         }
                         else
                         {
-                            //tbText.Text += Defenitions[i] + "\r\n" + Examples[i] + "\r\n";
-                            if (Definitions[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Definitions[i] + "\r\n";
-                            }
-                            if (Examples[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += Examples[i] + "\r\n";
-                            }
-                            if (SourceCode[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += SourceCode[i] + "\r\n";
-                            }
-                            if (SourceDate[i] != "")
-                            {
-                                tbWordSearch_FindedWords.Text += SourceDate[i] + "\r\n";
-                            }
+                            line[0] = "";
+                            line[1] = Semantic[i];
+                            line[2] = PartsOfSpeech[i];
+                            line[3] = Rods[i];
+                            line[4] = Nums[i];
+                            line[5] = Definitions[i];
+                            line[6] = Examples[i];
+                            line[7] = SourceCode[i];
+                            line[8] = SourceDate[i];
+                            line[9] = Compare[i];
+                            table.Add(line);
                         }
                     }
                 }
             }
-            if (tbWordSearch_FindedWords.Text == "")
-            {
-                tbWordSearch_FindedWords.Text = "Результатов не найдено...";
-            }
         }
+        int page;
+        int pageCount;
         private void buWordSearch_FindWord_Click(object sender, EventArgs e)
         {
             FindWords();
+            dgvResults.Rows.Clear();
+            dgvResults.Columns.Clear();
+            dgvResults.Refresh();
+            dgvResults.Columns.Add("Column1", "Заголовочное слово");
+            dgvResults.Columns.Add("Column2", "Семантика");
+            dgvResults.Columns.Add("Column3", "Часть речи");
+            dgvResults.Columns.Add("Column4", "Род");
+            dgvResults.Columns.Add("Column5", "Число");
+            dgvResults.Columns.Add("Column6", "Определение");
+            dgvResults.Columns.Add("Column7", "Цитата");
+            dgvResults.Columns.Add("Column8", "Код цитаты");
+            dgvResults.Columns.Add("Column9", "Дата цитаты");
+            dgvResults.Columns.Add("Column10", "Сравнить");
+            dgvResults.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            cmbPage.Items.Clear();
+            buPageBack.Enabled = false;
+            buPageNext.Enabled = false;
+            cmbPage.Enabled = false;
+            if(table.Count > 0)
+            {
+                pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(table.Count) / 50.0));
+                page = 1;
+                for (int i = 0; i < pageCount; i++)
+                {
+                    cmbPage.Items.Add(i + 1);
+                }
+                if (pageCount > 1)
+                {
+                    buPageNext.Enabled = true;
+                    cmbPage.Enabled = true;
+                }
+                cmbPage.SelectedIndex = 0;
+            }
+            else
+            {
+                MessageBox.Show("Результатов не найдено", "Оповещение");
+            }
+        }
+
+        private void buPageNext_Click(object sender, EventArgs e)
+        {
+            page++;
+            if(page == pageCount)
+            {
+                buPageNext.Enabled = false;
+            }
+            buPageBack.Enabled = true;
+            cmbPage.SelectedIndex = page - 1;
+        }
+
+        private void buPageBack_Click(object sender, EventArgs e)
+        {
+            page--;
+            if (page == 1)
+            {
+                buPageBack.Enabled = false;
+            }
+            buPageNext.Enabled = true;
+            cmbPage.SelectedIndex = page - 1;
+        }
+
+        private void cmbPage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            page = Convert.ToInt32(cmbPage.SelectedItem);
+            if (page == 1)
+            {
+                buPageBack.Enabled = false;
+            }
+            if (page == pageCount)
+            {
+                buPageNext.Enabled = false;
+            }
+            dgvResults.Rows.Clear();
+            dgvResults.Refresh();
+            int i = 0 + (page - 1) * 50;
+            while (i < 50 * page && i < table.Count)
+            {
+                dgvResults.Rows.Add(table[i]);
+                i++;
+            }
         }
     }
 }

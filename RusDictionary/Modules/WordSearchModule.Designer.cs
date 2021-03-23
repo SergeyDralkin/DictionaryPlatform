@@ -28,18 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buWordSearch_Read = new System.Windows.Forms.Button();
-            this.tbWordSearch_Text = new System.Windows.Forms.TextBox();
             this.tcWordSearch_Main = new System.Windows.Forms.TabControl();
             this.tpWordSearch_ReadFiles = new System.Windows.Forms.TabPage();
             this.tpWordSearch_Search = new System.Windows.Forms.TabPage();
-            this.tbWordSearch_FindedWords = new System.Windows.Forms.TextBox();
+            this.cmbPage = new System.Windows.Forms.ComboBox();
+            this.buPageNext = new System.Windows.Forms.Button();
+            this.buPageBack = new System.Windows.Forms.Button();
+            this.dgvResults = new System.Windows.Forms.DataGridView();
+            this.cbSearchType = new System.Windows.Forms.CheckBox();
             this.buWordSearch_FindWord = new System.Windows.Forms.Button();
             this.tbWordSearch_SearchingWord = new System.Windows.Forms.TextBox();
-            this.cbSearchType = new System.Windows.Forms.CheckBox();
             this.tcWordSearch_Main.SuspendLayout();
             this.tpWordSearch_ReadFiles.SuspendLayout();
             this.tpWordSearch_Search.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).BeginInit();
             this.SuspendLayout();
             // 
             // buWordSearch_Read
@@ -51,14 +56,6 @@
             this.buWordSearch_Read.Text = "Считывание файла";
             this.buWordSearch_Read.UseVisualStyleBackColor = true;
             this.buWordSearch_Read.Click += new System.EventHandler(this.buWordSearch_Read_Click);
-            // 
-            // tbWordSearch_Text
-            // 
-            this.tbWordSearch_Text.Location = new System.Drawing.Point(35, 100);
-            this.tbWordSearch_Text.Multiline = true;
-            this.tbWordSearch_Text.Name = "tbWordSearch_Text";
-            this.tbWordSearch_Text.Size = new System.Drawing.Size(246, 174);
-            this.tbWordSearch_Text.TabIndex = 1;
             // 
             // tcWordSearch_Main
             // 
@@ -72,7 +69,6 @@
             // 
             // tpWordSearch_ReadFiles
             // 
-            this.tpWordSearch_ReadFiles.Controls.Add(this.tbWordSearch_Text);
             this.tpWordSearch_ReadFiles.Controls.Add(this.buWordSearch_Read);
             this.tpWordSearch_ReadFiles.Location = new System.Drawing.Point(4, 22);
             this.tpWordSearch_ReadFiles.Name = "tpWordSearch_ReadFiles";
@@ -84,8 +80,11 @@
             // 
             // tpWordSearch_Search
             // 
+            this.tpWordSearch_Search.Controls.Add(this.cmbPage);
+            this.tpWordSearch_Search.Controls.Add(this.buPageNext);
+            this.tpWordSearch_Search.Controls.Add(this.buPageBack);
+            this.tpWordSearch_Search.Controls.Add(this.dgvResults);
             this.tpWordSearch_Search.Controls.Add(this.cbSearchType);
-            this.tpWordSearch_Search.Controls.Add(this.tbWordSearch_FindedWords);
             this.tpWordSearch_Search.Controls.Add(this.buWordSearch_FindWord);
             this.tpWordSearch_Search.Controls.Add(this.tbWordSearch_SearchingWord);
             this.tpWordSearch_Search.Location = new System.Drawing.Point(4, 22);
@@ -96,19 +95,73 @@
             this.tpWordSearch_Search.Text = "Поиск слов";
             this.tpWordSearch_Search.UseVisualStyleBackColor = true;
             // 
-            // tbWordSearch_FindedWords
+            // cmbPage
             // 
-            this.tbWordSearch_FindedWords.Location = new System.Drawing.Point(6, 113);
-            this.tbWordSearch_FindedWords.Multiline = true;
-            this.tbWordSearch_FindedWords.Name = "tbWordSearch_FindedWords";
-            this.tbWordSearch_FindedWords.ReadOnly = true;
-            this.tbWordSearch_FindedWords.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbWordSearch_FindedWords.Size = new System.Drawing.Size(790, 403);
-            this.tbWordSearch_FindedWords.TabIndex = 2;
+            this.cmbPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPage.Enabled = false;
+            this.cmbPage.FormattingEnabled = true;
+            this.cmbPage.Location = new System.Drawing.Point(802, 495);
+            this.cmbPage.Name = "cmbPage";
+            this.cmbPage.Size = new System.Drawing.Size(121, 21);
+            this.cmbPage.TabIndex = 7;
+            this.cmbPage.SelectedIndexChanged += new System.EventHandler(this.cmbPage_SelectedIndexChanged);
+            // 
+            // buPageNext
+            // 
+            this.buPageNext.Enabled = false;
+            this.buPageNext.Location = new System.Drawing.Point(929, 493);
+            this.buPageNext.Name = "buPageNext";
+            this.buPageNext.Size = new System.Drawing.Size(75, 23);
+            this.buPageNext.TabIndex = 6;
+            this.buPageNext.Text = "Вперед";
+            this.buPageNext.UseVisualStyleBackColor = true;
+            this.buPageNext.Click += new System.EventHandler(this.buPageNext_Click);
+            // 
+            // buPageBack
+            // 
+            this.buPageBack.Enabled = false;
+            this.buPageBack.Location = new System.Drawing.Point(721, 493);
+            this.buPageBack.Name = "buPageBack";
+            this.buPageBack.Size = new System.Drawing.Size(75, 23);
+            this.buPageBack.TabIndex = 5;
+            this.buPageBack.Text = "Назад";
+            this.buPageBack.UseVisualStyleBackColor = true;
+            this.buPageBack.Click += new System.EventHandler(this.buPageBack_Click);
+            // 
+            // dgvResults
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvResults.Location = new System.Drawing.Point(6, 33);
+            this.dgvResults.Name = "dgvResults";
+            this.dgvResults.ReadOnly = true;
+            this.dgvResults.Size = new System.Drawing.Size(998, 454);
+            this.dgvResults.TabIndex = 4;
+            // 
+            // cbSearchType
+            // 
+            this.cbSearchType.AutoSize = true;
+            this.cbSearchType.Location = new System.Drawing.Point(282, 8);
+            this.cbSearchType.Name = "cbSearchType";
+            this.cbSearchType.Size = new System.Drawing.Size(134, 17);
+            this.cbSearchType.TabIndex = 3;
+            this.cbSearchType.Text = "Точное соответствие";
+            this.cbSearchType.UseVisualStyleBackColor = true;
             // 
             // buWordSearch_FindWord
             // 
-            this.buWordSearch_FindWord.Location = new System.Drawing.Point(302, 61);
+            this.buWordSearch_FindWord.Location = new System.Drawing.Point(201, 4);
             this.buWordSearch_FindWord.Name = "buWordSearch_FindWord";
             this.buWordSearch_FindWord.Size = new System.Drawing.Size(75, 23);
             this.buWordSearch_FindWord.TabIndex = 1;
@@ -118,20 +171,10 @@
             // 
             // tbWordSearch_SearchingWord
             // 
-            this.tbWordSearch_SearchingWord.Location = new System.Drawing.Point(107, 64);
+            this.tbWordSearch_SearchingWord.Location = new System.Drawing.Point(6, 6);
             this.tbWordSearch_SearchingWord.Name = "tbWordSearch_SearchingWord";
             this.tbWordSearch_SearchingWord.Size = new System.Drawing.Size(189, 20);
             this.tbWordSearch_SearchingWord.TabIndex = 0;
-            // 
-            // cbSearchType
-            // 
-            this.cbSearchType.AutoSize = true;
-            this.cbSearchType.Location = new System.Drawing.Point(383, 64);
-            this.cbSearchType.Name = "cbSearchType";
-            this.cbSearchType.Size = new System.Drawing.Size(134, 17);
-            this.cbSearchType.TabIndex = 3;
-            this.cbSearchType.Text = "Точное соответствие";
-            this.cbSearchType.UseVisualStyleBackColor = true;
             // 
             // WordSearchModule
             // 
@@ -142,9 +185,9 @@
             this.Size = new System.Drawing.Size(1024, 554);
             this.tcWordSearch_Main.ResumeLayout(false);
             this.tpWordSearch_ReadFiles.ResumeLayout(false);
-            this.tpWordSearch_ReadFiles.PerformLayout();
             this.tpWordSearch_Search.ResumeLayout(false);
             this.tpWordSearch_Search.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResults)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -152,13 +195,15 @@
         #endregion
 
         private System.Windows.Forms.Button buWordSearch_Read;
-        private System.Windows.Forms.TextBox tbWordSearch_Text;
         private System.Windows.Forms.TabControl tcWordSearch_Main;
         private System.Windows.Forms.TabPage tpWordSearch_ReadFiles;
         private System.Windows.Forms.TabPage tpWordSearch_Search;
-        private System.Windows.Forms.TextBox tbWordSearch_FindedWords;
         private System.Windows.Forms.Button buWordSearch_FindWord;
         private System.Windows.Forms.TextBox tbWordSearch_SearchingWord;
         private System.Windows.Forms.CheckBox cbSearchType;
+        private System.Windows.Forms.DataGridView dgvResults;
+        private System.Windows.Forms.Button buPageNext;
+        private System.Windows.Forms.Button buPageBack;
+        private System.Windows.Forms.ComboBox cmbPage;
     }
 }
