@@ -28,17 +28,37 @@ namespace RusDictionary.Modules
         /// </summary>
         List<JSONArray> CardItems = new List<JSONArray>();
         /// <summary>
+        /// Список элементов всех карточек
+        /// </summary>
+        List<JSONArray> AllCardItems = new List<JSONArray>();
+        /// <summary>
+        /// Список элементов всех ящиков
+        /// </summary>
+        List<JSONArray> AllBoxItems = new List<JSONArray>();
+        /// <summary>
+        /// Список элементов всех букв
+        /// </summary>
+        List<JSONArray> AllLetterItems = new List<JSONArray>();
+        /// <summary>
+        /// Список элементов всех карточек-разделителей
+        /// </summary>
+        List<JSONArray> AllCardSeparatorItems = new List<JSONArray>();
+        /// <summary>
         /// Список ящиков
         /// </summary>
         List<JSONArray> BoxItems = new List<JSONArray>();
         /// <summary>
-        /// Список ящиков
+        /// Список букв
         /// </summary>
         List<JSONArray> LetterItems = new List<JSONArray>();
         /// <summary>
         /// Список карт разделителей для одного ящика
         /// </summary>
         List<JSONArray> CardSeparatorItems = new List<JSONArray>();
+        /// <summary>
+        /// Список карт разделителей для одного ящика
+        /// </summary>
+        List<JSONArray> WordItems = new List<JSONArray>();
         /// <summary>
         /// Отслеживание нажатия на кнопку "Маркер"
         /// </summary>
@@ -127,6 +147,10 @@ namespace RusDictionary.Modules
         /// Уточненная дата
         /// </summary>
         string CardSourceDateClarification;
+        /// <summary>
+        /// Использовался ли список второй раз
+        /// </summary>
+        bool UseSecondList = false;
 
         public CardIndexModule()
         {
@@ -423,6 +447,7 @@ namespace RusDictionary.Modules
             else
             {                
                 ActiveDown3button(false);
+                UseSecondList = false;
                 if (ListBoxPrev != true)
                 {
                     CardIndexMenuWord = false;
@@ -637,7 +662,7 @@ namespace RusDictionary.Modules
                                 for (int i = 0; i < CountList; i++)
                                 {
                                     lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Word);
-                                }                                
+                                }
                                 ActiveDown3button(false);
                                 break;
                             }
@@ -646,7 +671,7 @@ namespace RusDictionary.Modules
                                 for (int i = 0; i < CountList; i++)
                                 {
                                     lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Word);
-                                }                                
+                                }
                                 ActiveDown3button(false);
                                 break;
                             }
@@ -655,12 +680,12 @@ namespace RusDictionary.Modules
                                 for (int i = 0; i < CountList; i++)
                                 {
                                     lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Word);
-                                }                                
+                                }
                                 ActiveDown3button(false);
                                 break;
                             }
                     }
-
+                    UseSecondList = true;
                     lbCardIndexList.Update();
                     CardIndexMenuWord = true;
                     lbCardIndexList.Visible = true;
@@ -675,7 +700,31 @@ namespace RusDictionary.Modules
         {
             string query = "SELECT * FROM Box";
             JSON.Send(query, JSONFlags.Select);
-            BoxItems = JSON.Decode();
+            AllBoxItems = JSON.Decode();
+        }
+        /// <summary>
+        /// Выбрать все карточки разделители
+        /// </summary>
+        void SelectAllCardSeparator()
+        {
+            string query = "SELECT * FROM CardSeparator";
+            JSON.Send(query, JSONFlags.Select);
+            AllCardSeparatorItems = JSON.Decode();
+        }        
+        /// <summary>
+        /// Выбрать все буквы
+        /// </summary>        
+        void SelectAllLetter()
+        {
+            string query = "SELECT * FROM Letter";
+            JSON.Send(query, JSONFlags.Select);
+            AllLetterItems = JSON.Decode();
+        }
+        void SelectAllCardNumber()
+        {
+            string query = "SELECT Marker FROM cardindex";
+            JSON.Send(query, JSONFlags.Select);
+            AllCardItems = JSON.Decode();
         }
         /// <summary>
         /// Выбирает нужный ящик по ID ящика
@@ -698,20 +747,14 @@ namespace RusDictionary.Modules
             LetterItems = JSON.Decode();
         }
         /// <summary>
-        /// Выбрать все карточки разделители
+        /// Выбрать слово по его ID
         /// </summary>
-        void SelectAllCardSeparator()
+        /// <param name="WordID"></param>
+        void SelectWord(string WordID)
         {
-            string query = "SELECT * FROM CardSeparator";
+            string query = "SELECT * FROM flotation WHERE ID = " + WordID;
             JSON.Send(query, JSONFlags.Select);
-            CardSeparatorItems = JSON.Decode();
-        }
-
-        void SelectAllCardSeparator(int ForCardSeparatorID)
-        {
-            string query = "SELECT * FROM CardSeparator WHERE ID = " + ForCardSeparatorID;
-            JSON.Send(query, JSONFlags.Select);
-            CardSeparatorItems = JSON.Decode();
+            WordItems = JSON.Decode();
         }
         void ShowCards(object Number)
         {
@@ -722,7 +765,8 @@ namespace RusDictionary.Modules
             CardNumberBoxID = CardItems[0].NumberBox;
             query = "SELECT NumberBox FROM box WHERE ID = " + CardNumberBoxID;
             JSON.Send(query, JSONFlags.Select);
-            CardNumberBox = JSON.Decode()[0].NumberBox;            
+            CardItems[0].NumberBox = JSON.Decode()[0].NumberBox;
+            CardNumberBox = CardItems[0].NumberBox;
             CardImage = DecodeImageFromDB(CardItems[0].Img);
             CardWord = CardItems[0].Word;
             CardText = CardItems[0].ImgText;
@@ -735,7 +779,12 @@ namespace RusDictionary.Modules
             CardSourceDateClarification = CardItems[0].SourceDateClarification;
             CardNotes = CardItems[0].Notes;
         }
-
+        void SelectCardSeparator(string ForCardSeparatorID)
+        {
+            string query = "SELECT * FROM CardSeparator WHERE ID = " + ForCardSeparatorID;
+            JSON.Send(query, JSONFlags.Select);
+            CardSeparatorItems = JSON.Decode();
+        }
         void ShowWordWithCard(object ID)
         {              
             string query = "SELECT * FROM flotation WHERE ID = '" + ID + "'";
@@ -831,23 +880,37 @@ namespace RusDictionary.Modules
         }
         private void buCardIndexListChange_Click(object sender, EventArgs e)
         {
+
             EnableElement(false);
             ListBoxSelectedIndex = lbCardIndexList.SelectedIndex + 1;
             Program.f1.PictAndLableWait(true);
             TagButtonChange = (sender as Button).Tag.ToString();            
             switch (NameClickButtonInMenu)
             {
+                //Работает
                 case "buCardIndexMenuMarker":
                     {
+                        cbCardsInsertAndUpdateBox.Items.Clear();
                         List<Thread> MyThreads = new List<Thread>();
                         string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
                         MyThreads.Add(new Thread(() => ShowCards(SplitItem.Last()))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-                        MyThreads[0].Start(); // Запускаем поток
-                        MyThreads[1].Start(); // Запускаем поток
-                        MyThreads[2].Start(); // Запускаем поток
-                        while (MyThreads[0].IsAlive || MyThreads[1].IsAlive || MyThreads[2].IsAlive)
+
+                        MyThreads[0].Start();
+                        while (MyThreads[0].IsAlive)
+                        {
+                            Thread.Sleep(1);
+                            Application.DoEvents();
+                        }
+                        MyThreads[1].Start();
+                        while (MyThreads[1].IsAlive)
+                        {
+                            Thread.Sleep(1);
+                            Application.DoEvents();
+                        }
+                        MyThreads[2].Start();
+                        while (MyThreads[2].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
@@ -855,34 +918,15 @@ namespace RusDictionary.Modules
                         tbCardsInsertAndUpdateMarker.Text = CardMarker;
 
                         /* Изменить на выпадающий список*/
-                        for (int i = 0; i < BoxItems.Count; i++)
+                        for (int i = 0; i < AllBoxItems.Count; i++)
                         {
-                            cbCardsInsertAndUpdateBox.Items.Add(BoxItems[i].NumberBox);
-                            if (CardNumberBox.Equals(BoxItems[i].NumberBox))
+                            cbCardsInsertAndUpdateBox.Items.Add(AllBoxItems[i].NumberBox);
+                            if (CardNumberBox.Equals(AllBoxItems[i].NumberBox))
                             {
                                 cbCardsInsertAndUpdateBox.SelectedIndex = i;
                             }
-                        }
-                        cbCardsInsertAndUpdateBox.Update();
-                        /**/
-
-                        /*
-                        for (int i = 0; i < CardSeparatorItems.Count; i++)
-                        {
-                            if (CardSeparatorItems[i].NumberBox == CardNumberBoxID)
-                            {
-                                cbCardsInsertAndUpdateCardSeparator.Items.Add(CardSeparatorItems[i].CardSeparator);
-                                if ((i + 1) == Convert.ToInt32(CardSeparatorID))
-                                {
-                                    cbCardsInsertAndUpdateCardSeparator.SelectedIndex = i;
-                                }
-                            }
-                        }
-
-                        cbCardsInsertAndUpdateCardSeparator.Update();
-                        */
+                        }                   
                         
-                        cbCardsInsertAndUpdateBox.Update();
                         pbCardsInsertAndUpdateImage.BackgroundImage = CardImage;
                         tbCardsInsertAndUpdateTextCard.Text = CardText;
                         tbCardsInsertAndUpdateSourceCode.Text = CardSourceCode;
@@ -894,76 +938,429 @@ namespace RusDictionary.Modules
                         tcCards.SelectedTab = tpCardsInsertAndUpdateCard;
                         break;
                     }
+                    //Криво
                 case "buCardIndexMenuSeparator":
                     {
-                        List<Thread> MyThreads = new List<Thread>();
-                        string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
-                        MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-                        
-                        MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-                        MyThreads[0].Start(); // Запускаем поток
-                        MyThreads[1].Start(); // Запускаем поток
-                        while (MyThreads[0].IsAlive || MyThreads[1].IsAlive)
+                        if (UseSecondList == true)
                         {
-                            Thread.Sleep(1);
-                            Application.DoEvents();
-                        }
-                        int idSeparator = Convert.ToInt32(CardSeparatorItems[lbCardIndexList.SelectedIndex].ID);
-                        for (int i = 0; i < BoxItems.Count; i++)
-                        {
-                            cbCardsInsertAndUpdateCardSeparatorBox.Items.Add(BoxItems[i].NumberBox);
-                            if (CardSeparatorItems[0].NumberBox == BoxItems[i].ID)
+                            cbCardsInsertAndUpdateWordCard.Items.Clear();
+                            cbCardsInsertAndUpdateWordBox.Items.Clear();
+                            cbCardsInsertAndUpdateWordLetter.Items.Clear();
+                            cbCardsInsertAndUpdateWordCardSeparator.Items.Clear();
+                            List<Thread> MyThreads = new List<Thread>();
+                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            string idWord = (SecondListItems[lbCardIndexList.SelectedIndex].ID).ToString();
+
+                            MyThreads.Add(new Thread(() => ShowWordWithCard(idWord))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                                                                             
+                            MyThreads.Add(new Thread(() => SelectAllCardNumber())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+
+                            MyThreads[0].Start(); // Запускаем поток
+                            while (MyThreads[0].IsAlive)
                             {
-                                cbCardsInsertAndUpdateCardSeparatorBox.SelectedIndex = i;
+                                Thread.Sleep(1);
+                                Application.DoEvents();
                             }
-                        }
-                        for (int i = 0; i < CardSeparatorItems.Count; i++)
-                        {
-                            if (CardSeparatorItems[i].ID.Equals(idSeparator.ToString()))
+                            MyThreads[1].Start(); // Запускаем поток
+                            while (MyThreads[1].IsAlive)
                             {
-                                tbCardsInsertAndUpdateCardSeparatorLetter.Text = CardSeparatorItems[i].CardSeparator;
-                                break;
+                                Thread.Sleep(1);
+                                Application.DoEvents();
                             }
-                        }                        
-                        tcCards.SelectedTab = tpCardsInsertAndUpdateCardSeparator;
+                            MyThreads[2].Start(); // Запускаем поток
+                            while (MyThreads[2].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            MyThreads[3].Start(); // Запускаем поток
+                            while (MyThreads[3].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            MyThreads[4].Start(); // Запускаем поток
+                            while (MyThreads[4].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+
+                            for (int i = 0; i < AllCardItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordCard.Items.Add(AllCardItems[i].Marker);
+                                if (AllCardItems[i].Marker == CardMarker)
+                                {
+                                    cbCardsInsertAndUpdateWordCard.SelectedIndex = i;
+                                }
+                            }
+                            for (int i = 0; i < AllBoxItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordBox.Items.Add(AllBoxItems[i].NumberBox);
+                                if (AllBoxItems[i].NumberBox == CardNumberBox)
+                                {
+                                    cbCardsInsertAndUpdateWordBox.SelectedIndex = i;
+                                }
+                            }
+                            for (int i = 0; i < AllLetterItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordLetter.Items.Add(AllLetterItems[i].Symbol);
+                                if (AllLetterItems[i].Symbol == CardSymbol)
+                                {
+                                    cbCardsInsertAndUpdateWordLetter.SelectedIndex = i;
+                                }
+                            }
+                            for (int i = 0; i < AllCardSeparatorItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordCardSeparator.Items.Add(AllCardSeparatorItems[i].CardSeparator);
+                                if (AllCardSeparatorItems[i].CardSeparator == CardSeparator)
+                                {
+                                    cbCardsInsertAndUpdateWordCardSeparator.SelectedIndex = i;
+                                }
+                            }
+                            pbCardsInsertAndUpdateWordImage.BackgroundImage = CardImage;
+                            tbCardsInsertAndUpdateWordWord.Text = CardWord;
+                            tbCardsInsertAndUpdateWordRelatedCombinations.Text = CardRelatedCombinations;
+                            tbCardsInsertAndUpdateWordValue.Text = CardValue;
+                            tcCards.SelectedTab = tpCardsInsertAndUpdateWord;
+                        }
+                        else
+                        {
+                            cbCardsInsertAndUpdateCardSeparatorBox.Items.Clear();
+                            List<Thread> MyThreads = new List<Thread>();
+                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+
+                            MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads[0].Start(); // Запускаем поток
+                            while (MyThreads[0].IsAlive )
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            MyThreads[1].Start();
+                            while (MyThreads[1].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            int idSeparator = Convert.ToInt32(AllCardSeparatorItems[lbCardIndexList.SelectedIndex].ID);
+                            for (int i = 0; i < AllBoxItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateCardSeparatorBox.Items.Add(AllBoxItems[i].NumberBox);
+                                if (AllCardSeparatorItems[lbCardIndexList.SelectedIndex].NumberBox == AllBoxItems[i].ID)
+                                {
+                                    cbCardsInsertAndUpdateCardSeparatorBox.SelectedIndex = i;
+                                }
+                            }
+                            for (int i = 0; i < AllCardSeparatorItems.Count; i++)
+                            {
+                                if (AllCardSeparatorItems[i].ID.Equals(idSeparator.ToString()))
+                                {
+                                    tbCardsInsertAndUpdateCardSeparatorLetter.Text = AllCardSeparatorItems[i].CardSeparator;
+                                    break;
+                                }
+                            }
+                            tcCards.SelectedTab = tpCardsInsertAndUpdateCardSeparator;
+                        }
                         break;
                     }
+                    //Криво
                 case "buCardIndexMenuBox":
                     {
-                        List<Thread> MyThreads = new List<Thread>();
-                        string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
-                        string idbox = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
-                        MyThreads.Add(new Thread(() => SelectBoxID(idbox))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-                        MyThreads[0].Start(); // Запускаем поток
-                        while (MyThreads[0].IsAlive)
+                        if (UseSecondList == true)
                         {
-                            Thread.Sleep(1);
-                            Application.DoEvents();
+                            cbCardsInsertAndUpdateWordCard.Items.Clear();
+                            cbCardsInsertAndUpdateWordBox.Items.Clear();
+                            cbCardsInsertAndUpdateWordLetter.Items.Clear();
+                            cbCardsInsertAndUpdateWordCardSeparator.Items.Clear();
+                            List<Thread> MyThreads = new List<Thread>();
+                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            string idWord = (SecondListItems[lbCardIndexList.SelectedIndex].ID).ToString();
+
+                            MyThreads.Add(new Thread(() => ShowWordWithCard(idWord))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                                                                             
+                            MyThreads.Add(new Thread(() => SelectAllCardNumber())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+
+                            MyThreads[0].Start(); // Запускаем поток
+                            while (MyThreads[0].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            MyThreads[1].Start(); // Запускаем поток
+                            while (MyThreads[1].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            MyThreads[2].Start(); // Запускаем поток
+                            while (MyThreads[2].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            MyThreads[3].Start(); // Запускаем поток
+                            while (MyThreads[3].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            MyThreads[4].Start(); // Запускаем поток
+                            while (MyThreads[4].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+
+                            for (int i = 0; i < AllCardItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordCard.Items.Add(AllCardItems[i].Marker);
+                                if (AllCardItems[i].Marker == CardMarker)
+                                {
+                                    cbCardsInsertAndUpdateWordCard.SelectedIndex = i;
+                                }
+                            }
+                            for (int i = 0; i < AllBoxItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordBox.Items.Add(AllBoxItems[i].NumberBox);
+                                if (AllBoxItems[i].NumberBox == CardNumberBox)
+                                {
+                                    cbCardsInsertAndUpdateWordBox.SelectedIndex = i;
+                                }
+                            }
+                            for (int i = 0; i < AllLetterItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordLetter.Items.Add(AllLetterItems[i].Symbol);
+                                if (AllLetterItems[i].Symbol == CardSymbol)
+                                {
+                                    cbCardsInsertAndUpdateWordLetter.SelectedIndex = i;
+                                }
+                            }
+                            for (int i = 0; i < AllCardSeparatorItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordCardSeparator.Items.Add(AllCardSeparatorItems[i].CardSeparator);
+                                if (AllCardSeparatorItems[i].CardSeparator == CardSeparator)
+                                {
+                                    cbCardsInsertAndUpdateWordCardSeparator.SelectedIndex = i;
+                                }
+                            }
+                            pbCardsInsertAndUpdateWordImage.BackgroundImage = CardImage;
+                            tbCardsInsertAndUpdateWordWord.Text = CardWord;
+                            tbCardsInsertAndUpdateWordRelatedCombinations.Text = CardRelatedCombinations;
+                            tbCardsInsertAndUpdateWordValue.Text = CardValue;
+                            tcCards.SelectedTab = tpCardsInsertAndUpdateWord;
                         }
-                        tbCardsInsertAndUpdateBoxNumberBox.Text = BoxItems[0].NumberBox;
-                        tcCards.SelectedTab = tpCardsInsertAndUpdateBox;
+                        else
+                        {
+                            List<Thread> MyThreads = new List<Thread>();
+                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            string idbox = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
+                            MyThreads.Add(new Thread(() => SelectBoxID(idbox))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads[0].Start(); // Запускаем поток
+                            while (MyThreads[0].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            tbCardsInsertAndUpdateBoxNumberBox.Text = BoxItems[0].NumberBox;
+                            tcCards.SelectedTab = tpCardsInsertAndUpdateBox;
+                        }
                         break;
                     }
                 case "buCardIndexMenuLetter":
                     {
+                        if (UseSecondList == true)
+                        {
+                            cbCardsInsertAndUpdateWordCard.Items.Clear();
+                            cbCardsInsertAndUpdateWordBox.Items.Clear();
+                            cbCardsInsertAndUpdateWordLetter.Items.Clear();
+                            cbCardsInsertAndUpdateWordCardSeparator.Items.Clear();
+                            List<Thread> MyThreads = new List<Thread>();
+                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            string idWord = (SecondListItems[lbCardIndexList.SelectedIndex].ID).ToString();
+
+                            MyThreads.Add(new Thread(() => ShowWordWithCard(idWord))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                                                                             
+                            MyThreads.Add(new Thread(() => SelectAllCardNumber())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+
+                            MyThreads[0].Start(); // Запускаем поток
+                            while (MyThreads[0].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            MyThreads[1].Start(); // Запускаем поток
+                            while (MyThreads[1].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            MyThreads[2].Start(); // Запускаем поток
+                            while (MyThreads[2].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            MyThreads[3].Start(); // Запускаем поток
+                            while (MyThreads[3].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            MyThreads[4].Start(); // Запускаем поток
+                            while (MyThreads[4].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+
+                            for (int i = 0; i < AllCardItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordCard.Items.Add(AllCardItems[i].Marker);
+                                if (AllCardItems[i].Marker == CardMarker)
+                                {
+                                    cbCardsInsertAndUpdateWordCard.SelectedIndex = i;
+                                }
+                            }
+                            for (int i = 0; i < AllBoxItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordBox.Items.Add(AllBoxItems[i].NumberBox);
+                                if (AllBoxItems[i].NumberBox == CardNumberBox)
+                                {
+                                    cbCardsInsertAndUpdateWordBox.SelectedIndex = i;
+                                }
+                            }
+                            for (int i = 0; i < AllLetterItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordLetter.Items.Add(AllLetterItems[i].Symbol);
+                                if (AllLetterItems[i].Symbol == CardSymbol)
+                                {
+                                    cbCardsInsertAndUpdateWordLetter.SelectedIndex = i;
+                                }
+                            }
+                            for (int i = 0; i < AllCardSeparatorItems.Count; i++)
+                            {
+                                cbCardsInsertAndUpdateWordCardSeparator.Items.Add(AllCardSeparatorItems[i].CardSeparator);
+                                if (AllCardSeparatorItems[i].CardSeparator == CardSeparator)
+                                {
+                                    cbCardsInsertAndUpdateWordCardSeparator.SelectedIndex = i;
+                                }
+                            }
+                            pbCardsInsertAndUpdateWordImage.BackgroundImage = CardImage;
+                            tbCardsInsertAndUpdateWordWord.Text = CardWord;
+                            tbCardsInsertAndUpdateWordRelatedCombinations.Text = CardRelatedCombinations;
+                            tbCardsInsertAndUpdateWordValue.Text = CardValue;
+                            tcCards.SelectedTab = tpCardsInsertAndUpdateWord;
+                        }
+                        else
+                        {
+                            List<Thread> MyThreads = new List<Thread>();
+                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            string idLetter = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
+                            MyThreads.Add(new Thread(() => SelectLetter(idLetter))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                        
+                            MyThreads[0].Start(); // Запускаем поток
+                            while (MyThreads[0].IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            tbCardsInsertAndUpdateLetter.Text = LetterItems[0].Symbol;
+                            tcCards.SelectedTab = tpCardsInsertAndUpdateLetter;
+                        }
+                        
+                        break;
+                    }
+                case "buCardIndexMenuWord":
+                    {
+                        cbCardsInsertAndUpdateWordCard.Items.Clear();
+                        cbCardsInsertAndUpdateWordBox.Items.Clear();
+                        cbCardsInsertAndUpdateWordLetter.Items.Clear();
+                        cbCardsInsertAndUpdateWordCardSeparator.Items.Clear();
                         List<Thread> MyThreads = new List<Thread>();
                         string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
-                        string idLetter = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
-                        MyThreads.Add(new Thread(() => SelectLetter(idLetter))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                        
+                        string idWord = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
+
+                        MyThreads.Add(new Thread(() => ShowWordWithCard(idWord))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                                                                             
+                        MyThreads.Add(new Thread(() => SelectAllCardNumber())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+
                         MyThreads[0].Start(); // Запускаем поток
                         while (MyThreads[0].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
-                        tbCardsInsertAndUpdateLetter.Text = LetterItems[0].Symbol;
-                        tcCards.SelectedTab = tpCardsInsertAndUpdateLetter;
-                        break;
-                    }
-                case "buCardIndexMenuWord":
-                    {
+                        MyThreads[1].Start(); // Запускаем поток
+                        while (MyThreads[1].IsAlive)
+                        {
+                            Thread.Sleep(1);
+                            Application.DoEvents();
+                        }
+                        MyThreads[2].Start(); // Запускаем поток
+                        while (MyThreads[2].IsAlive)
+                        {
+                            Thread.Sleep(1);
+                            Application.DoEvents();
+                        }
+                        MyThreads[3].Start(); // Запускаем поток
+                        while (MyThreads[3].IsAlive)
+                        {
+                            Thread.Sleep(1);
+                            Application.DoEvents();
+                        }
+                        MyThreads[4].Start(); // Запускаем поток
+                        while (MyThreads[4].IsAlive)
+                        {
+                            Thread.Sleep(1);
+                            Application.DoEvents();
+                        }
 
-                        tcCards.SelectedTab = tpCardsInsertAndUpdateLetter;
+                        for (int i = 0; i < AllCardItems.Count; i++)
+                        {
+                            cbCardsInsertAndUpdateWordCard.Items.Add(AllCardItems[i].Marker);
+                            if (AllCardItems[i].Marker == CardMarker)
+                            {
+                                cbCardsInsertAndUpdateWordCard.SelectedIndex = i;
+                            }
+                        }
+                        for (int i = 0; i < AllBoxItems.Count; i++)
+                        {                            
+                            cbCardsInsertAndUpdateWordBox.Items.Add(AllBoxItems[i].NumberBox);
+                            if (AllBoxItems[i].NumberBox == CardNumberBox)
+                            {
+                                cbCardsInsertAndUpdateWordBox.SelectedIndex = i;
+                            }
+                        }
+                        for (int i = 0; i < AllLetterItems.Count; i++)
+                        {
+                            cbCardsInsertAndUpdateWordLetter.Items.Add(AllLetterItems[i].Symbol);
+                            if (AllLetterItems[i].Symbol == CardSymbol)
+                            {
+                                cbCardsInsertAndUpdateWordLetter.SelectedIndex = i;
+                            }
+                        }
+                        for (int i = 0; i < AllCardSeparatorItems.Count; i++)
+                        {
+                            cbCardsInsertAndUpdateWordCardSeparator.Items.Add(AllCardSeparatorItems[i].CardSeparator);
+                            if (AllCardSeparatorItems[i].CardSeparator == CardSeparator)
+                            {
+                                cbCardsInsertAndUpdateWordCardSeparator.SelectedIndex = i;
+                            }
+                        }
+                        pbCardsInsertAndUpdateWordImage.BackgroundImage = CardImage;
+                        tbCardsInsertAndUpdateWordWord.Text = CardWord;
+                        tbCardsInsertAndUpdateWordRelatedCombinations.Text = CardRelatedCombinations;
+                        tbCardsInsertAndUpdateWordValue.Text = CardValue;
+                        tcCards.SelectedTab = tpCardsInsertAndUpdateWord;
                         break;
                     }
             }
