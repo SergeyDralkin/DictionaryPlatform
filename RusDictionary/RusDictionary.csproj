@@ -225,7 +225,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\myrka\Desktop\IP-MaskedTextBox-master\IPMaskedTextBox\IPMaskedTextBox.csproj">
+    <ProjectReference Include="..\IP-MaskedTextBox\IPMaskedTextBox\IPMaskedTextBox.csproj">
       <Project>{E1B94377-D545-4B9D-A2D1-A2AE1AFF87DA}</Project>
       <Name>IPMaskedTextBox</Name>
     </ProjectReference>
