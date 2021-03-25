@@ -58,11 +58,8 @@
             this.buWordSearchModule = new System.Windows.Forms.Button();
             this.buCardIndexModule = new System.Windows.Forms.Button();
             this.tpCardIndex = new System.Windows.Forms.TabPage();
-            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
             this.tpPointer = new System.Windows.Forms.TabPage();
-            this.indexModule1 = new RusDictionary.Modules.IndexModule();
             this.tpWordSearch = new System.Windows.Forms.TabPage();
-            this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
             this.tpAuthors = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
@@ -133,7 +130,6 @@
             this.buSaveSettings = new System.Windows.Forms.Button();
             this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
             this.label19 = new System.Windows.Forms.Label();
-            this.tbIP = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel20 = new System.Windows.Forms.TableLayoutPanel();
             this.pbStatusConnect = new System.Windows.Forms.PictureBox();
             this.laStatus = new System.Windows.Forms.Label();
@@ -141,6 +137,11 @@
             this.pbWait = new System.Windows.Forms.PictureBox();
             this.laWait = new System.Windows.Forms.Label();
             this.cdChangeColor = new System.Windows.Forms.ColorDialog();
+            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
+            this.indexModule1 = new RusDictionary.Modules.IndexModule();
+            this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.tbIP = new IPmaskedtextbox.IPMaskedTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.MainTC.SuspendLayout();
             this.tpLogin.SuspendLayout();
@@ -566,15 +567,6 @@
             this.tpCardIndex.TabIndex = 1;
             this.tpCardIndex.Text = "Картотека";
             // 
-            // cardIndexModule
-            // 
-            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
-            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
-            this.cardIndexModule.Name = "cardIndexModule";
-            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
-            this.cardIndexModule.TabIndex = 0;
-            // 
             // tpPointer
             // 
             this.tpPointer.Controls.Add(this.indexModule1);
@@ -585,15 +577,6 @@
             this.tpPointer.Text = "Указатели";
             this.tpPointer.UseVisualStyleBackColor = true;
             // 
-            // indexModule1
-            // 
-            this.indexModule1.BackColor = System.Drawing.Color.Transparent;
-            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.indexModule1.Location = new System.Drawing.Point(0, 0);
-            this.indexModule1.Name = "indexModule1";
-            this.indexModule1.Size = new System.Drawing.Size(1054, 580);
-            this.indexModule1.TabIndex = 0;
-            // 
             // tpWordSearch
             // 
             this.tpWordSearch.Controls.Add(this.wordSearchModule1);
@@ -603,14 +586,6 @@
             this.tpWordSearch.TabIndex = 3;
             this.tpWordSearch.Text = "Поиск слов";
             this.tpWordSearch.UseVisualStyleBackColor = true;
-            // 
-            // wordSearchModule1
-            // 
-            this.wordSearchModule1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wordSearchModule1.Location = new System.Drawing.Point(0, 0);
-            this.wordSearchModule1.Name = "wordSearchModule1";
-            this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
-            this.wordSearchModule1.TabIndex = 0;
             // 
             // tpAuthors
             // 
@@ -1628,7 +1603,7 @@
             this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
             this.tableLayoutPanel24.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel24.Controls.Add(this.label19, 0, 0);
-            this.tableLayoutPanel24.Controls.Add(this.tbIP, 1, 0);
+            this.tableLayoutPanel24.Controls.Add(this.elementHost1, 1, 0);
             this.tableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel24.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.tableLayoutPanel24.Location = new System.Drawing.Point(3, 3);
@@ -1649,20 +1624,6 @@
             this.label19.TabIndex = 0;
             this.label19.Text = "IP-адрес:";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tbIP
-            // 
-            this.tbIP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbIP.Location = new System.Drawing.Point(191, 3);
-            this.tbIP.MaxLength = 15;
-            this.tbIP.Multiline = true;
-            this.tbIP.Name = "tbIP";
-            this.tbIP.Size = new System.Drawing.Size(224, 40);
-            this.tbIP.TabIndex = 1;
-            this.tbIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbIP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbIP_KeyPress);
-            this.tbIP.Leave += new System.EventHandler(this.tbIP_Leave);
             // 
             // tableLayoutPanel20
             // 
@@ -1744,6 +1705,42 @@
             this.laWait.TabIndex = 1;
             this.laWait.Text = "Выполняется задача, пожалуйства, подождите";
             this.laWait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cardIndexModule
+            // 
+            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
+            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
+            this.cardIndexModule.Name = "cardIndexModule";
+            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
+            this.cardIndexModule.TabIndex = 0;
+            // 
+            // indexModule1
+            // 
+            this.indexModule1.BackColor = System.Drawing.Color.Transparent;
+            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.indexModule1.Location = new System.Drawing.Point(0, 0);
+            this.indexModule1.Name = "indexModule1";
+            this.indexModule1.Size = new System.Drawing.Size(1054, 580);
+            this.indexModule1.TabIndex = 0;
+            // 
+            // wordSearchModule1
+            // 
+            this.wordSearchModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wordSearchModule1.Location = new System.Drawing.Point(0, 0);
+            this.wordSearchModule1.Name = "wordSearchModule1";
+            this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
+            this.wordSearchModule1.TabIndex = 0;
+            // 
+            // elementHost1
+            // 
+            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elementHost1.Location = new System.Drawing.Point(191, 3);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(224, 40);
+            this.elementHost1.TabIndex = 1;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = this.tbIP;
             // 
             // MainForm
             // 
@@ -1905,7 +1902,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel23;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel24;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox tbIP;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel27;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox tbPort;
@@ -1931,6 +1927,8 @@
         private System.Windows.Forms.Button buSettingLogin;
         private System.Windows.Forms.Button buVisiblePass;
         private System.Windows.Forms.Button buExitLogin;
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private IPmaskedtextbox.IPMaskedTextBox tbIP;
     }
 }
 

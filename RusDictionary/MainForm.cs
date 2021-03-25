@@ -194,8 +194,12 @@ namespace RusDictionary
             ColorBackground = Properties.Settings.Default.ColorBackground;
             ColorTextBox = Properties.Settings.Default.ColorTextBox;
             ColorButton = Properties.Settings.Default.ColorButton;
-                        
-            tbIP.Text = IP;
+
+            string[] massIP = IP.Split('.');
+            tbIP.FirstBox.Text = massIP[0];
+            tbIP.SecondBox.Text = massIP[1];
+            tbIP.ThirdBox.Text = massIP[2];
+            tbIP.FourthBox.Text = massIP[3];
             tbPort.Text = Port;
 
             foreach (Label label in GetAll(this, typeof(Label)))
@@ -421,7 +425,9 @@ namespace RusDictionary
         private void tbIP_Leave(object sender, EventArgs e)
         {
             string pattern = @"\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b";
-            string OldIP = tbIP.Text;
+
+
+            string OldIP = tbIP.FirstBox.Text + "." + tbIP.SecondBox.Text + "." + tbIP.ThirdBox.Text + "." + tbIP.FourthBox.Text;
             string NewIP = null;
             for (int i = 0; i < OldIP.Length; i++)
             {
@@ -437,82 +443,87 @@ namespace RusDictionary
                     }
                 }
             }
-            tbIP.Text = NewIP;
+
+            string[] massIP = NewIP.Split('.');
+            tbIP.FirstBox.Text = massIP[0];
+            tbIP.SecondBox.Text = massIP[1];
+            tbIP.ThirdBox.Text = massIP[2];
+            tbIP.FourthBox.Text = massIP[3];            
             if (Regex.IsMatch(NewIP, pattern) != true)
             {
                 MessageBox.Show("IP-адрес введен не корректно!", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void tbIP_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46)
-            {
-                e.Handled = true;
-            }
-            else
-            {
-                if (tbIP.Text.Length < 15)
-                {
-                    if (tbIP.Text.Length == 0 && e.KeyChar == 46)
-                    {
-                        e.Handled = true;
-                    }
-                    else
-                    {
-                        if (tbIP.Text.Length == 0 && e.KeyChar == 8)
-                        {
-                            e.Handled = true;
-                        }
-                        else
-                        {
-                            if (e.KeyChar != 8)
-                            {
-                                TMPMaxCountDot = 3;
-                                for (int i = 0; i < tbIP.Text.Length; i++)
-                                {
-                                    if (tbIP.Text[i] == '.')
-                                    {
-                                        TMPMaxCountDot--;
-                                    }
-                                }
-                                TMPDot = 0;
-                                for (int i = tbIP.Text.Length - 1; i >= 0; i--)
-                                {
-                                    if (tbIP.Text[i] != '.')
-                                    {
-                                        TMPDot++;
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-                                if (TMPDot > 2 && TMPMaxCountDot != 0)
-                                {
-                                    TMPDot = 0;
-                                    tbIP.Text += '.';
-                                    tbIP.SelectionStart = tbIP.Text.Length;
-                                    TMPMaxCountDot--;
-                                }
-                                if (e.KeyChar == 46 && TMPMaxCountDot <= 0)
-                                {
-                                    e.Handled = true;
-                                }
-                                else
-                                {
-                                    if (TMPDot > 2)
-                                    {
-                                        e.Handled = true;
-                                    }
-                                    TMPDot++;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        //private void tbIP_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46)
+        //    {
+        //        e.Handled = true;
+        //    }
+        //    else
+        //    {
+        //        if (tbIP.Text.Length < 15)
+        //        {
+        //            if (tbIP.Text.Length == 0 && e.KeyChar == 46)
+        //            {
+        //                e.Handled = true;
+        //            }
+        //            else
+        //            {
+        //                if (tbIP.Text.Length == 0 && e.KeyChar == 8)
+        //                {
+        //                    e.Handled = true;
+        //                }
+        //                else
+        //                {
+        //                    if (e.KeyChar != 8)
+        //                    {
+        //                        TMPMaxCountDot = 3;
+        //                        for (int i = 0; i < tbIP.Text.Length; i++)
+        //                        {
+        //                            if (tbIP.Text[i] == '.')
+        //                            {
+        //                                TMPMaxCountDot--;
+        //                            }
+        //                        }
+        //                        TMPDot = 0;
+        //                        for (int i = tbIP.Text.Length - 1; i >= 0; i--)
+        //                        {
+        //                            if (tbIP.Text[i] != '.')
+        //                            {
+        //                                TMPDot++;
+        //                            }
+        //                            else
+        //                            {
+        //                                break;
+        //                            }
+        //                        }
+        //                        if (TMPDot > 2 && TMPMaxCountDot != 0)
+        //                        {
+        //                            TMPDot = 0;
+        //                            tbIP.Text += '.';
+        //                            tbIP.SelectionStart = tbIP.Text.Length;
+        //                            TMPMaxCountDot--;
+        //                        }
+        //                        if (e.KeyChar == 46 && TMPMaxCountDot <= 0)
+        //                        {
+        //                            e.Handled = true;
+        //                        }
+        //                        else
+        //                        {
+        //                            if (TMPDot > 2)
+        //                            {
+        //                                e.Handled = true;
+        //                            }
+        //                            TMPDot++;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         private void tbPort_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -576,8 +587,9 @@ namespace RusDictionary
         }
 
         private void buPrevSettings_Click(object sender, EventArgs e)
-        {            
-            if (Properties.Settings.Default.IP == tbIP.Text && Properties.Settings.Default.Port == tbPort.Text && Properties.Settings.Default.ColorText == label1.ForeColor && Properties.Settings.Default.ColorBackground == tpMain.BackColor && Properties.Settings.Default.ColorTextBox == tbIP.BackColor && Properties.Settings.Default.ColorButton == buAuthors.BackColor)
+        {
+            string ipNew = tbIP.FirstBox.Text + "." + tbIP.SecondBox.Text + "." + tbIP.ThirdBox.Text + "." + tbIP.FourthBox.Text;
+            if (Properties.Settings.Default.IP == ipNew && Properties.Settings.Default.Port == tbPort.Text && Properties.Settings.Default.ColorText == label1.ForeColor && Properties.Settings.Default.ColorBackground == tpMain.BackColor && Properties.Settings.Default.ColorButton == buAuthors.BackColor)
             {
                 if (IfLogin == true)
                 {
@@ -598,7 +610,7 @@ namespace RusDictionary
                         URL = null;
                         StatusConnect = false;
                         ChangeStatus();
-                        IP = tbIP.Text;
+                        IP = tbIP.FirstBox.Text + "." + tbIP.SecondBox.Text + "." + tbIP.ThirdBox.Text + "." + tbIP.FourthBox.Text;
                         Port = tbPort.Text;
                         Properties.Settings.Default.IP = IP;
                         Properties.Settings.Default.Port = Port;
@@ -636,11 +648,10 @@ namespace RusDictionary
             URL = null;
             StatusConnect = false;
             ChangeStatus();
-            IP = tbIP.Text;
+            IP = tbIP.FirstBox.Text + "." + tbIP.SecondBox.Text + "." + tbIP.ThirdBox.Text + "." + tbIP.FourthBox.Text;
             Port = tbPort.Text;
             ColorText = label1.ForeColor;
-            ColorBackground = tpMain.BackColor;
-            ColorTextBox = tbIP.BackColor;
+            ColorBackground = tpMain.BackColor;            
             ColorButton = buAuthors.BackColor;
             Properties.Settings.Default.IP = IP;
             Properties.Settings.Default.Port = Port;

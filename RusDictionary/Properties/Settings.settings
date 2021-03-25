@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="IP" Type="System.String" Scope="User">
-      <Value Profile="(Default)">82.148.31.141</Value>
+      <Value Profile="(Default)">77.223.106.123</Value>
     </Setting>
     <Setting Name="Port" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
