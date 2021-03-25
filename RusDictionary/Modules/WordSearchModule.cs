@@ -1827,8 +1827,10 @@ namespace RusDictionary.Modules
             buWordSearch_Read.Enabled = true;
         }
         List<string[]> table;
+        List<string[]> idMainWord;
         void FindWords()
         {
+            List<string> ID = new List<string>();
             List<string> Names = new List<string>();
             List<string> Semantic = new List<string>();
             List<string> PartsOfSpeech = new List<string>();
@@ -1842,128 +1844,156 @@ namespace RusDictionary.Modules
             List<string> MainWord = new List<string>();
             List<JSONArray> jNames = new List<JSONArray>();
 
-
+            pageCount = 0;
             string query = "SELECT * FROM dictionaryentries";
             JSON.Send(query, JSONFlags.Select);
             jNames = JSON.Decode();
-            for (int i = 0; i < jNames.Count; i++)
+            if (jNames != null)
             {
-                Names.Add(jNames[i].Name);
-                Semantic.Add(jNames[i].Semantic);
-                PartsOfSpeech.Add(jNames[i].Partofspeech);
-                Rods.Add(jNames[i].Rod);
-                Nums.Add(jNames[i].Num);
-                Definitions.Add(jNames[i].Definition);
-                Examples.Add(jNames[i].Example);
-                SourceCode.Add(jNames[i].SourceCode);
-                SourceDate.Add(jNames[i].SourceDate);
-                Compare.Add(jNames[i].Compare);
+                for (int i = 0; i < jNames.Count; i++)
+                {
+                    ID.Add(jNames[i].ID);
+                    Names.Add(jNames[i].Name);
+                    Semantic.Add(jNames[i].Semantic);
+                    PartsOfSpeech.Add(jNames[i].Partofspeech);
+                    Rods.Add(jNames[i].Rod);
+                    Nums.Add(jNames[i].Num);
+                    Definitions.Add(jNames[i].Definition);
+                    Examples.Add(jNames[i].Example);
+                    SourceCode.Add(jNames[i].SourceCode);
+                    SourceDate.Add(jNames[i].SourceDate);
+                    Compare.Add(jNames[i].Compare);
+                }
             }
             query = "SELECT * FROM mainwords";
             JSON.Send(query, JSONFlags.Select);
             jNames = JSON.Decode();
-            for (int i = 0; i < jNames.Count; i++)
+            if (jNames != null)
             {
-                MainWord.Add(jNames[i].Mainword);
-            }
-
-            string tmpSearch = tbWordSearch_SearchingWord.Text;
-            string textSearch = null;
-            for (int i = 0; i < tmpSearch.Length; i++)
-            {
-                if(char.IsLetter(tmpSearch[i]))
+                for (int i = 0; i < jNames.Count; i++)
                 {
-                    textSearch += char.ToUpper(tmpSearch[i]);
-                }
-                else
-                {
-                    textSearch += tmpSearch[i];
+                    MainWord.Add(jNames[i].Mainword);
                 }
             }
-            string tmp = "";
-            bool newWord = false;
-            table = new List<string[]>();
-            string[] line;
-            for (int i = 0; i < Names.Count; i++)
+            if (Names != null)
             {
-                line = new string[10];
-                if (cbSearchType.Checked == true)
+                string tmpSearch = tbWordSearch_SearchingWord.Text;
+                string textSearch = null;
+                for (int i = 0; i < tmpSearch.Length; i++)
                 {
-                    if (MainWord[Convert.ToInt32(Names[i]) - 1]/*Names[i]*/ == textSearch)
+                    if (char.IsLetter(tmpSearch[i]))
                     {
-                        if (tmp != Names[i])
-                        {
-                            tmp = Names[i];
-                            newWord = true;
-                        }
-                        if (newWord /*|| Semantic[i] != ""*/)
-                        {
-                            line[0] = MainWord[Convert.ToInt32(Names[i]) - 1];
-                            line[1] = Semantic[i];
-                            line[2] = PartsOfSpeech[i];
-                            line[3] = Rods[i];
-                            line[4] = Nums[i];
-                            line[5] = Definitions[i];
-                            line[6] = Examples[i];
-                            line[7] = SourceCode[i];
-                            line[8] = SourceDate[i];
-                            line[9] = Compare[i];
-                            table.Add(line);
-                            newWord = false;
-                        }
-                        else
-                        {
-                            line[0] = "";
-                            line[1] = Semantic[i];
-                            line[2] = PartsOfSpeech[i];
-                            line[3] = Rods[i];
-                            line[4] = Nums[i];
-                            line[5] = Definitions[i];
-                            line[6] = Examples[i];
-                            line[7] = SourceCode[i];
-                            line[8] = SourceDate[i];
-                            line[9] = Compare[i];
-                            table.Add(line);
-                        }
+                        textSearch += char.ToUpper(tmpSearch[i]);
+                    }
+                    else
+                    {
+                        textSearch += tmpSearch[i];
                     }
                 }
-                else
+                string tmp = "";
+                bool newWord = false;
+                table = new List<string[]>();
+                idMainWord = new List<string[]>();
+                string[] line;
+                for (int i = 0; i < Names.Count; i++)
                 {
-                    if (/*Names[i]*/MainWord[Convert.ToInt32(Names[i]) - 1].Contains(textSearch))
+                    line = new string[12];
+                    if (cbSearchType.Checked == true)
                     {
-                        if (tmp != Names[i])
+                        if (MainWord[Convert.ToInt32(Names[i]) - 1]/*Names[i]*/ == textSearch)
                         {
-                            tmp = Names[i];
-                            newWord = true;
+                            if (tmp != Names[i])
+                            {
+                                tmp = Names[i];
+                                newWord = true;
+                            }
+                            if (newWord /*|| Semantic[i] != ""*/)
+                            {
+                                line[0] = MainWord[Convert.ToInt32(Names[i]) - 1];
+                                line[1] = Semantic[i];
+                                line[2] = PartsOfSpeech[i];
+                                line[3] = Rods[i];
+                                line[4] = Nums[i];
+                                line[5] = Definitions[i];
+                                line[6] = Examples[i];
+                                line[7] = SourceCode[i];
+                                line[8] = SourceDate[i];
+                                line[9] = Compare[i];
+                                line[10] = ID[i];
+                                line[11] = Names[i];
+                                table.Add(line);
+                                newWord = false;
+                                pageCount++;
+                                line = new string[2];
+                                line[0] = ID[i];
+                                line[1] = MainWord[Convert.ToInt32(Names[i]) - 1];
+                                idMainWord.Add(line);
+                            }
+                            else
+                            {
+                                line[0] = "";
+                                line[1] = Semantic[i];
+                                line[2] = PartsOfSpeech[i];
+                                line[3] = Rods[i];
+                                line[4] = Nums[i];
+                                line[5] = Definitions[i];
+                                line[6] = Examples[i];
+                                line[7] = SourceCode[i];
+                                line[8] = SourceDate[i];
+                                line[9] = Compare[i];
+                                line[10] = ID[i];
+                                line[11] = Names[i];
+                                table.Add(line);
+                            }
                         }
-                        if (newWord /*|| Semantic[i] != ""*/)
+                    }
+                    else
+                    {
+                        if (/*Names[i]*/MainWord[Convert.ToInt32(Names[i]) - 1].Contains(textSearch))
                         {
-                            line[0] = MainWord[Convert.ToInt32(Names[i]) - 1];
-                            line[1] = Semantic[i];
-                            line[2] = PartsOfSpeech[i];
-                            line[3] = Rods[i];
-                            line[4] = Nums[i];
-                            line[5] = Definitions[i];
-                            line[6] = Examples[i];
-                            line[7] = SourceCode[i];
-                            line[8] = SourceDate[i];
-                            line[9] = Compare[i];
-                            table.Add(line);
-                            newWord = false;
-                        }
-                        else
-                        {
-                            line[0] = "";
-                            line[1] = Semantic[i];
-                            line[2] = PartsOfSpeech[i];
-                            line[3] = Rods[i];
-                            line[4] = Nums[i];
-                            line[5] = Definitions[i];
-                            line[6] = Examples[i];
-                            line[7] = SourceCode[i];
-                            line[8] = SourceDate[i];
-                            line[9] = Compare[i];
-                            table.Add(line);
+                            if (tmp != Names[i])
+                            {
+                                tmp = Names[i];
+                                newWord = true;
+                            }
+                            if (newWord /*|| Semantic[i] != ""*/)
+                            {
+                                line[0] = MainWord[Convert.ToInt32(Names[i]) - 1];
+                                line[1] = Semantic[i];
+                                line[2] = PartsOfSpeech[i];
+                                line[3] = Rods[i];
+                                line[4] = Nums[i];
+                                line[5] = Definitions[i];
+                                line[6] = Examples[i];
+                                line[7] = SourceCode[i];
+                                line[8] = SourceDate[i];
+                                line[9] = Compare[i];
+                                line[10] = ID[i];
+                                line[11] = Names[i];
+                                table.Add(line);
+                                newWord = false;
+                                pageCount++;
+                                line = new string[2];
+                                line[0] = ID[i];
+                                line[1] = MainWord[Convert.ToInt32(Names[i]) - 1];
+                                idMainWord.Add(line);
+                            }
+                            else
+                            {
+                                line[0] = "";
+                                line[1] = Semantic[i];
+                                line[2] = PartsOfSpeech[i];
+                                line[3] = Rods[i];
+                                line[4] = Nums[i];
+                                line[5] = Definitions[i];
+                                line[6] = Examples[i];
+                                line[7] = SourceCode[i];
+                                line[8] = SourceDate[i];
+                                line[9] = Compare[i];
+                                line[10] = ID[i];
+                                line[11] = Names[i];
+                                table.Add(line);
+                            }
                         }
                     }
                 }
@@ -1977,24 +2007,27 @@ namespace RusDictionary.Modules
             dgvResults.Rows.Clear();
             dgvResults.Columns.Clear();
             dgvResults.Refresh();
-            dgvResults.Columns.Add("Column1", "Заголовочное слово");
-            dgvResults.Columns.Add("Column2", "Семантика");
-            dgvResults.Columns.Add("Column3", "Часть речи");
-            dgvResults.Columns.Add("Column4", "Род");
-            dgvResults.Columns.Add("Column5", "Число");
-            dgvResults.Columns.Add("Column6", "Определение");
-            dgvResults.Columns.Add("Column7", "Цитата");
-            dgvResults.Columns.Add("Column8", "Код цитаты");
-            dgvResults.Columns.Add("Column9", "Дата цитаты");
-            dgvResults.Columns.Add("Column10", "Сравнить");
-            dgvResults.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            buChangeEntry.Enabled = false;
+            buSaveEntry.Enabled = false;
+            buCancelChanges.Enabled = false;
+            //dgvResults.Columns.Add("Column1", "Заголовочное слово");
+            //dgvResults.Columns.Add("Column2", "Семантика");
+            //dgvResults.Columns.Add("Column3", "Часть речи");
+            //dgvResults.Columns.Add("Column4", "Род");
+            //dgvResults.Columns.Add("Column5", "Число");
+            //dgvResults.Columns.Add("Column6", "Определение");
+            //dgvResults.Columns.Add("Column7", "Цитата");
+            //dgvResults.Columns.Add("Column8", "Код цитаты");
+            //dgvResults.Columns.Add("Column9", "Дата цитаты");
+            //dgvResults.Columns.Add("Column10", "Сравнить");
+            //dgvResults.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             cmbPage.Items.Clear();
             buPageBack.Enabled = false;
             buPageNext.Enabled = false;
             cmbPage.Enabled = false;
             if(table.Count > 0)
             {
-                pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(table.Count) / 50.0));
+                pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(pageCount) / 50.0));
                 page = 1;
                 for (int i = 0; i < pageCount; i++)
                 {
@@ -2038,6 +2071,8 @@ namespace RusDictionary.Modules
         private void cmbPage_SelectedIndexChanged(object sender, EventArgs e)
         {
             page = Convert.ToInt32(cmbPage.SelectedItem);
+            buPageBack.Enabled = true;
+            buPageNext.Enabled = true;
             if (page == 1)
             {
                 buPageBack.Enabled = false;
@@ -2046,14 +2081,59 @@ namespace RusDictionary.Modules
             {
                 buPageNext.Enabled = false;
             }
-            dgvResults.Rows.Clear();
-            dgvResults.Refresh();
+            //dgvResults.Rows.Clear();
+            //dgvResults.Refresh();
+            lbMainWords.Items.Clear();
             int i = 0 + (page - 1) * 50;
-            while (i < 50 * page && i < table.Count)
+            while (i < 50 * page && i < idMainWord.Count)
             {
-                dgvResults.Rows.Add(table[i]);
+                lbMainWords.Items.Add(idMainWord[i][1]);
+                //dgvResults.Rows.Add(table[i]);
                 i++;
             }
+        }
+
+        private void lbMainWords_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dgvResults.Rows.Clear();
+            dgvResults.Columns.Clear();
+            dgvResults.Refresh();
+            dgvResults.Columns.Add("Column1", "Заголовочное слово");
+            dgvResults.Columns.Add("Column2", "Семантика");
+            dgvResults.Columns.Add("Column3", "Часть речи");
+            dgvResults.Columns.Add("Column4", "Род");
+            dgvResults.Columns.Add("Column5", "Число");
+            dgvResults.Columns.Add("Column6", "Определение");
+            dgvResults.Columns.Add("Column7", "Цитата");
+            dgvResults.Columns.Add("Column8", "Код цитаты");
+            dgvResults.Columns.Add("Column9", "Дата цитаты");
+            dgvResults.Columns.Add("Column10", "Сравнить");
+            dgvResults.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            buChangeEntry.Enabled = true;
+            for (int i = 0; i < table.Count; i++)
+            {
+                if(idMainWord[lbMainWords.SelectedIndex + (page - 1) * 50][0] == table[i][10])
+                {
+                    dgvResults.Rows.Add(table[i]);
+                }
+            }
+        }
+
+        private void buChangeEntry_Click(object sender, EventArgs e)
+        {
+            buChangeEntry.Enabled = false;
+            buCancelChanges.Enabled = true;
+            buSaveEntry.Enabled = true;
+            dgvResults.ReadOnly = false;
+        }
+
+        private void buCancelChanges_Click(object sender, EventArgs e)
+        {
+            buChangeEntry.Enabled = true;
+            buCancelChanges.Enabled = false;
+            buSaveEntry.Enabled = false;
+            dgvResults.ReadOnly = true;
+            lbMainWords.SelectedIndex = lbMainWords.SelectedIndex;
         }
     }
 }
