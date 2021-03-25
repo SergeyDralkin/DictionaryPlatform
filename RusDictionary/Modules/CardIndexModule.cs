@@ -1400,9 +1400,7 @@ namespace RusDictionary.Modules
                         switch (NameClickButtonInListPage)
                         {
                             case "buCardIndexListChange":
-                                {
-                                    //string sql = "UPDATE `cardindex` SET `Marker`= " + +" ,`NumberBox`= " + +" ,`img`= " + +" ,`imgText`= " + +" ,`SourceCode`= " + +" ,`SourceClarification`= " + +" ,`Pagination`= " + +" ,`SourceDate`= " + +" ,`SourceDateClarification`= " + +" ,`Notes`=  " + +" WHERE `ID` = " + ;
-                                    
+                                {                                   
                                     string sql = "SELECT ID FROM box WHERE NumberBox = '" + cbCardsInsertAndUpdateBox.SelectedItem.ToString() + "'";
                                     JSON.Send(sql, JSONFlags.Select);
                                     string BoxID = JSON.Decode()[0].ID;
@@ -1418,23 +1416,29 @@ namespace RusDictionary.Modules
                                     sql = "UPDATE `cardindex` SET `Marker` = '" + tbCardsInsertAndUpdateMarker.Text + "', `NumberBox` = '" + BoxID + "', `img` = '" + ImageBase64 + "', `imgText` = '" + tbCardsInsertAndUpdateTextCard.Text + "', `SourceCode` = '" + tbCardsInsertAndUpdateSourceCode.Text + "', `SourceClarification` = '" + tbCardsInsertAndUpdateSourceCodeClarification.Text + "', `Pagination` = '" + tbCardsInsertAndUpdatePagination.Text + "' ,`SourceDate` = '" + tbCardsInsertAndUpdateSourceDate.Text + "', `SourceDateClarification` = '" + tbCardsInsertAndUpdateSourceDateClarification.Text + "', `Notes` =  '" + tbCardsInsertAndUpdateNotes.Text + "' WHERE `ID` = " + CardID;
                                                                      
                                     JSON.Send(sql, JSONFlags.Update);
+                                    MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     break;
                                 }
                             case "buCardIndexListAdd":
                                 {
-                                    string sad = pbCardsInsertAndUpdateImage.ImageLocation;
-                                    //if (pbCardsInsertAndUpdateImage.ImageLocation)
-                                    string sql = "SELECT ID FROM box WHERE NumberBox = '" + cbCardsInsertAndUpdateBox.SelectedItem.ToString() + "'";
-                                    JSON.Send(sql, JSONFlags.Select);
-                                    string BoxID = JSON.Decode()[0].ID;
+                                    if (tbCardsInsertAndUpdateMarker.Text != null && tbCardsInsertAndUpdateMarker.Text != "")
+                                    {
+                                        string sql = "SELECT ID FROM box WHERE NumberBox = '" + cbCardsInsertAndUpdateBox.SelectedItem.ToString() + "'";
+                                        JSON.Send(sql, JSONFlags.Select);
+                                        string BoxID = JSON.Decode()[0].ID;
 
-                                    pbCardsInsertAndUpdateImage.Image.Save("tmpImage.jpg");
-                                    string ImageBase64 = CodeInBase64("tmpImage.jpg");
-                                    File.Delete("tmpImage.jpg");
+                                        pbCardsInsertAndUpdateImage.Image.Save("tmpImage.jpg");
+                                        string ImageBase64 = CodeInBase64("tmpImage.jpg");
+                                        File.Delete("tmpImage.jpg");
 
-                                    sql = "INSERT INTO `cardindex`(`Marker`, `NumberBox`, `img`, `imgText`, `SourceCode`, `SourceClarification`, `Pagination`, `SourceDate`, `SourceDateClarification`, `Notes`) VALUES ('" + tbCardsInsertAndUpdateMarker.Text + "', '" + BoxID + "', '" + ImageBase64 + "', '" + tbCardsInsertAndUpdateTextCard.Text + "', '" + tbCardsInsertAndUpdateSourceCode.Text + "', '" + tbCardsInsertAndUpdateSourceCodeClarification.Text + "', '" + tbCardsInsertAndUpdatePagination.Text + "','" + tbCardsInsertAndUpdateSourceDate.Text + "', '" + tbCardsInsertAndUpdateSourceDateClarification.Text + "', '" + tbCardsInsertAndUpdateNotes.Text + "')";
-
-                                    JSON.Send(sql, JSONFlags.Insert);
+                                        sql = "INSERT INTO `cardindex`(`Marker`, `NumberBox`, `img`, `imgText`, `SourceCode`, `SourceClarification`, `Pagination`, `SourceDate`, `SourceDateClarification`, `Notes`) VALUES ('" + tbCardsInsertAndUpdateMarker.Text + "', '" + BoxID + "', '" + ImageBase64 + "', '" + tbCardsInsertAndUpdateTextCard.Text + "', '" + tbCardsInsertAndUpdateSourceCode.Text + "', '" + tbCardsInsertAndUpdateSourceCodeClarification.Text + "', '" + tbCardsInsertAndUpdatePagination.Text + "','" + tbCardsInsertAndUpdateSourceDate.Text + "', '" + tbCardsInsertAndUpdateSourceDateClarification.Text + "', '" + tbCardsInsertAndUpdateNotes.Text + "')";
+                                        JSON.Send(sql, JSONFlags.Insert);
+                                        MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Не все поля заполнены!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
                                     break;
                                 }
                         }
@@ -1480,10 +1484,54 @@ namespace RusDictionary.Modules
                                         sql = "UPDATE `flotation` SET `Card`= '" + CardID + "',`NumberBox`= '" + BoxID + "',`Symbol`= '" + SymbolID + "',`CardSeparator`= '" + CardSeparatorID + "',`Word`= '" + tbCardsInsertAndUpdateWordWord.Text + "',`Value`= '" + tbCardsInsertAndUpdateWordValue.Text + "',`RelatedCombinations`= '" + tbCardsInsertAndUpdateWordRelatedCombinations.Text + "' WHERE `ID` = " + SecondListItems[lbCardIndexList.SelectedIndex].ID;
                                     }
                                     JSON.Send(sql, JSONFlags.Update);
+                                    MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     break;
                                 }
                             case "buCardIndexListAdd":
                                 {
+
+                                    if (tbCardsInsertAndUpdateWordWord.Text != null && tbCardsInsertAndUpdateWordWord.Text != "")
+                                    {
+                                        string sql;
+                                        if (NameClickButtonInMenu == "buCardIndexMenuWord")
+                                        {
+                                            sql = "SELECT ID FROM cardindex WHERE Marker = '" + cbCardsInsertAndUpdateWordCard.SelectedItem.ToString() + "'";
+                                            JSON.Send(sql, JSONFlags.Select);
+                                            string CardID = JSON.Decode()[0].ID;
+                                            sql = "SELECT ID FROM box WHERE NumberBox = '" + cbCardsInsertAndUpdateWordBox.SelectedItem.ToString() + "'";
+                                            JSON.Send(sql, JSONFlags.Select);
+                                            string BoxID = JSON.Decode()[0].ID;
+                                            sql = "SELECT ID FROM letter WHERE Symbol = '" + cbCardsInsertAndUpdateWordLetter.SelectedItem.ToString() + "'";
+                                            JSON.Send(sql, JSONFlags.Select);
+                                            string SymbolID = JSON.Decode()[0].ID;
+                                            sql = "SELECT ID FROM cardseparator WHERE CardSeparator = '" + cbCardsInsertAndUpdateWordCardSeparator.SelectedItem.ToString() + "'";
+                                            JSON.Send(sql, JSONFlags.Select);
+                                            string CardSeparatorID = JSON.Decode()[0].ID;
+                                            sql = "INSERT INTO `flotation`(`Card`, `NumberBox`, `Symbol`, `CardSeparator`, `Word`, `Value`, `RelatedCombinations`) VALUES ('" + CardID + "', '" + BoxID + "', '" + SymbolID + "', '" + CardSeparatorID + "', '" + tbCardsInsertAndUpdateWordWord.Text + "', '" + tbCardsInsertAndUpdateWordValue.Text + "', '" + tbCardsInsertAndUpdateWordRelatedCombinations.Text + "')";
+                                        }
+                                        else
+                                        {
+                                            sql = "SELECT ID FROM cardindex WHERE Marker = '" + cbCardsInsertAndUpdateWordCard.SelectedItem.ToString() + "'";
+                                            JSON.Send(sql, JSONFlags.Select);
+                                            string CardID = JSON.Decode()[0].ID;
+                                            sql = "SELECT ID FROM box WHERE NumberBox = '" + cbCardsInsertAndUpdateWordBox.SelectedItem.ToString() + "'";
+                                            JSON.Send(sql, JSONFlags.Select);
+                                            string BoxID = JSON.Decode()[0].ID;
+                                            sql = "SELECT ID FROM letter WHERE Symbol = '" + cbCardsInsertAndUpdateWordLetter.SelectedItem.ToString() + "'";
+                                            JSON.Send(sql, JSONFlags.Select);
+                                            string SymbolID = JSON.Decode()[0].ID;
+                                            sql = "SELECT ID FROM cardseparator WHERE CardSeparator = '" + cbCardsInsertAndUpdateWordCardSeparator.SelectedItem.ToString() + "'";
+                                            JSON.Send(sql, JSONFlags.Select);
+                                            string CardSeparatorID = JSON.Decode()[0].ID;
+                                            sql = "INSERT INTO `flotation`(`Card`, `NumberBox`, `Symbol`, `CardSeparator`, `Word`, `Value`, `RelatedCombinations`) VALUES ('" + CardID + "', '" + BoxID + "', '" + SymbolID + "', '" + CardSeparatorID + "', '" + tbCardsInsertAndUpdateWordWord.Text + "', '" + tbCardsInsertAndUpdateWordValue.Text + "', '" + tbCardsInsertAndUpdateWordRelatedCombinations.Text + "')";
+                                        }
+                                        JSON.Send(sql, JSONFlags.Insert);
+                                        MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Не все поля заполнены!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
                                     break;
                                 }
                         }
@@ -1497,10 +1545,21 @@ namespace RusDictionary.Modules
                                 {
                                     string sql = "UPDATE `letter` SET `Symbol`= '" + tbCardsInsertAndUpdateLetter.Text + "' WHERE `ID` = " + FirstListItems[lbCardIndexList.SelectedIndex].ID;
                                     JSON.Send(sql, JSONFlags.Update);
+                                    MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     break;
                                 }
                             case "buCardIndexListAdd":
                                 {
+                                    if (tbCardsInsertAndUpdateLetter.Text != null && tbCardsInsertAndUpdateLetter.Text != "")
+                                    {
+                                        string sql = "INSERT INTO `letter`(`Symbol`) VALUES ('" + tbCardsInsertAndUpdateLetter.Text + "')";
+                                        JSON.Send(sql, JSONFlags.Insert);
+                                        MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Не все поля заполнены!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
                                     break;
                                 }
                         }
@@ -1514,10 +1573,21 @@ namespace RusDictionary.Modules
                                 {
                                     string sql = "UPDATE `box` SET `NumberBox`= '" + tbCardsInsertAndUpdateBoxNumberBox.Text + "' WHERE `ID` = " + FirstListItems[lbCardIndexList.SelectedIndex].ID;
                                     JSON.Send(sql, JSONFlags.Update);
+                                    MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     break;
                                 }
                             case "buCardIndexListAdd":
                                 {
+                                    if (tbCardsInsertAndUpdateBoxNumberBox.Text != null && tbCardsInsertAndUpdateBoxNumberBox.Text != "")
+                                    {
+                                        string sql = "INSERT INTO `box`(`NumberBox`) VALUES ('" + tbCardsInsertAndUpdateBoxNumberBox.Text + "')";
+                                        JSON.Send(sql, JSONFlags.Insert);
+                                        MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Не все поля заполнены!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
                                     break;
                                 }
                         }
@@ -1534,17 +1604,32 @@ namespace RusDictionary.Modules
                                     string NumberBoxID = JSON.Decode()[0].ID;
                                     sql = "UPDATE `cardseparator` SET `CardSeparator`= '" + tbCardsInsertAndUpdateCardSeparatorLetter.Text + "',`NumberBox`= " + NumberBoxID + " WHERE `ID` = " + Convert.ToInt32(AllCardSeparatorItems[lbCardIndexList.SelectedIndex].ID);
                                     JSON.Send(sql, JSONFlags.Update);
+                                    MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     break;
                                 }
                             case "buCardIndexListAdd":
                                 {
+                                    if (tbCardsInsertAndUpdateCardSeparatorLetter.Text !=null && tbCardsInsertAndUpdateCardSeparatorLetter.Text != "")
+                                    {
+                                        string sql = "SELECT ID FROM box WHERE NumberBox = '" + cbCardsInsertAndUpdateCardSeparatorBox.SelectedItem.ToString() + "'";
+                                        JSON.Send(sql, JSONFlags.Select);
+                                        string NumberBoxID = JSON.Decode()[0].ID;
+                                        sql = "INSERT INTO `cardseparator`(`CardSeparator`, `NumberBox`) VALUES ('" + tbCardsInsertAndUpdateCardSeparatorLetter.Text + "', " + NumberBoxID + ")";
+                                        JSON.Send(sql, JSONFlags.Insert);
+                                        MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Не все поля заполнены!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+
                                     break;
                                 }
                         }
                         break;
                     }
             }                    
-            MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            
         }
 
         private void CardIndexModule_SizeChanged(object sender, EventArgs e)
@@ -1928,7 +2013,7 @@ namespace RusDictionary.Modules
         private void buCardsInsertAndUpdateOpenImage_Click(object sender, EventArgs e)
         {
             OpenFileDialog OPF = new OpenFileDialog();
-            OPF.Filter = "PNG|*.png|JPEG|*.jpeg|JPG|*.jpg|bmp|*.bmp";
+            OPF.Filter = "Файлы изображений (*.bmp, *.jpg, *.jpeg, *.png, *.gif, *.tiff)|*.bmp;*.jpg;*.jpeg;*.png;*.gif;*.tiff";
             if (OPF.ShowDialog() == DialogResult.OK)
             {
                 pbCardsInsertAndUpdateImage.Image = Image.FromFile(OPF.FileName);
