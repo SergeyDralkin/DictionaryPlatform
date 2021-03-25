@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Collections;
 using System.Windows.Forms;
@@ -7,6 +8,9 @@ using CsvHelper;
 using System.IO;
 using System.Globalization;
 using System.Data.OleDb;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System.Collections.Generic;
 
 namespace RusDictionary.Modules
 {
@@ -72,6 +76,76 @@ namespace RusDictionary.Modules
 
 
             tc_index.SelectedTab = tp_sign;
+
+        }
+
+        private void bu_open_doc_Click(object sender, EventArgs e)
+        {
+            string filepath = "Resources/IndexModule/Input.docx";
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filepath = openFileDialog.FileName;
+                }
+            }
+
+          
+            WordprocessingDocument doc = WordprocessingDocument.Open(filepath, false);
+
+            DataTable dt = new DataTable();
+
+            Body body = doc.MainDocumentPart.Document.Body;
+
+            Table table = body.Elements<Table>().First();
+
+            IEnumerable<TableRow> rows = table.Elements<TableRow>();
+
+            dt.Columns.Add("1");
+            dt.Columns.Add("2");
+
+            // To read data from rows and to add records to the temporary table  
+            foreach (TableRow row in rows)
+            {
+                 dt.Rows.Add();
+                 int i = 0;
+                 foreach (TableCell cell in row.Descendants<TableCell>())
+                 {
+                    dt.Rows[dt.Rows.Count - 1][i] = cell.InnerText;
+                    i++;
+                 }
+            }
+
+
+            string[] row1 = new string[] { "1", "см. = [синоним]." };
+            dgv_rule.Rows.Add(row1);
+
+            for (int i = 0; i < dgv_rule.Rows.Count; i++)
+            {
+                DataGridViewRow row = dgv_rule.Rows[i];
+
+                string lbl_name = row.Cells[1].Value.ToString();
+
+
+                string[] subs = lbl_name.Split('=');
+
+                subs[0] = subs[0].Remove(subs[0].Length - 1);
+                subs[1] = subs[1].Substring(1);
+
+
+
+                bool containsSearchResult = dt.Rows[0].ItemArray[1].ToString().Contains(subs[0]);
+
+                if (containsSearchResult)
+                {
+                    string res = dt.Rows[0].ItemArray[1].ToString().TrimStart(subs[0].ToCharArray());
+                }
+
+            }
+
+
 
         }
     }

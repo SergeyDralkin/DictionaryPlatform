@@ -72,19 +72,13 @@
             this.laIndex2 = new System.Windows.Forms.Label();
             this.tb_cipher = new System.Windows.Forms.TextBox();
             this.tb_description = new System.Windows.Forms.TextBox();
-            this.tp_list_author = new System.Windows.Forms.TabPage();
-            this.tp_author = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.laIndex17 = new System.Windows.Forms.Label();
-            this.laIndex20 = new System.Windows.Forms.Label();
-            this.laIndex18 = new System.Windows.Forms.Label();
-            this.laIndex19 = new System.Windows.Forms.Label();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.textBox18 = new System.Windows.Forms.TextBox();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.pbIndexScript = new System.Windows.Forms.PictureBox();
-            this.pbIndexAutor = new System.Windows.Forms.PictureBox();
+            this.tp_read_doc = new System.Windows.Forms.TabPage();
+            this.tp_result_doc = new System.Windows.Forms.TabPage();
+            this.bu_open_doc = new System.Windows.Forms.Button();
+            this.dgv_rule = new System.Windows.Forms.DataGridView();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rule = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tc_index.SuspendLayout();
             this.tp_menu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -92,10 +86,10 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tp_sign.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tp_author.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbIndexScript)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbIndexAutor)).BeginInit();
+            this.tp_read_doc.SuspendLayout();
+            this.tp_result_doc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_rule)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // tc_index
@@ -103,8 +97,8 @@
             this.tc_index.Controls.Add(this.tp_menu);
             this.tc_index.Controls.Add(this.tp_list_sign);
             this.tc_index.Controls.Add(this.tp_sign);
-            this.tc_index.Controls.Add(this.tp_list_author);
-            this.tc_index.Controls.Add(this.tp_author);
+            this.tc_index.Controls.Add(this.tp_read_doc);
+            this.tc_index.Controls.Add(this.tp_result_doc);
             this.tc_index.Location = new System.Drawing.Point(0, 0);
             this.tc_index.Name = "tc_index";
             this.tc_index.SelectedIndex = 0;
@@ -550,132 +544,69 @@
             this.tb_description.Size = new System.Drawing.Size(267, 20);
             this.tb_description.TabIndex = 32;
             // 
-            // tp_list_author
+            // tp_read_doc
             // 
-            this.tp_list_author.Location = new System.Drawing.Point(4, 22);
-            this.tp_list_author.Name = "tp_list_author";
-            this.tp_list_author.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_list_author.Size = new System.Drawing.Size(1016, 528);
-            this.tp_list_author.TabIndex = 4;
-            this.tp_list_author.Text = "Список авторов";
-            this.tp_list_author.UseVisualStyleBackColor = true;
+            this.tp_read_doc.BackColor = System.Drawing.Color.SandyBrown;
+            this.tp_read_doc.Controls.Add(this.dgv_rule);
+            this.tp_read_doc.Controls.Add(this.bu_open_doc);
+            this.tp_read_doc.Location = new System.Drawing.Point(4, 22);
+            this.tp_read_doc.Name = "tp_read_doc";
+            this.tp_read_doc.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_read_doc.Size = new System.Drawing.Size(1016, 528);
+            this.tp_read_doc.TabIndex = 4;
+            this.tp_read_doc.Text = "Распознание";
             // 
-            // tp_author
+            // tp_result_doc
             // 
-            this.tp_author.BackColor = System.Drawing.Color.SandyBrown;
-            this.tp_author.Controls.Add(this.tableLayoutPanel4);
-            this.tp_author.Controls.Add(this.pbIndexScript);
-            this.tp_author.Controls.Add(this.pbIndexAutor);
-            this.tp_author.Location = new System.Drawing.Point(4, 22);
-            this.tp_author.Name = "tp_author";
-            this.tp_author.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_author.Size = new System.Drawing.Size(1016, 528);
-            this.tp_author.TabIndex = 3;
-            this.tp_author.Text = "Автор";
+            this.tp_result_doc.BackColor = System.Drawing.Color.SandyBrown;
+            this.tp_result_doc.Controls.Add(this.dataGridView2);
+            this.tp_result_doc.Location = new System.Drawing.Point(4, 22);
+            this.tp_result_doc.Name = "tp_result_doc";
+            this.tp_result_doc.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_result_doc.Size = new System.Drawing.Size(1016, 528);
+            this.tp_result_doc.TabIndex = 3;
+            this.tp_result_doc.Text = "Вывод";
             // 
-            // tableLayoutPanel4
+            // bu_open_doc
             // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel4.Controls.Add(this.laIndex17, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.laIndex20, 0, 3);
-            this.tableLayoutPanel4.Controls.Add(this.laIndex18, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.laIndex19, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.textBox17, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.textBox18, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.textBox19, 1, 2);
-            this.tableLayoutPanel4.Controls.Add(this.richTextBox1, 1, 3);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(6, 25);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 4;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(614, 444);
-            this.tableLayoutPanel4.TabIndex = 6;
+            this.bu_open_doc.Location = new System.Drawing.Point(7, 7);
+            this.bu_open_doc.Name = "bu_open_doc";
+            this.bu_open_doc.Size = new System.Drawing.Size(75, 23);
+            this.bu_open_doc.TabIndex = 0;
+            this.bu_open_doc.Text = "Открыть документ";
+            this.bu_open_doc.UseVisualStyleBackColor = true;
+            this.bu_open_doc.Click += new System.EventHandler(this.bu_open_doc_Click);
             // 
-            // laIndex17
+            // dgv_rule
             // 
-            this.laIndex17.AutoSize = true;
-            this.laIndex17.Location = new System.Drawing.Point(3, 0);
-            this.laIndex17.Name = "laIndex17";
-            this.laIndex17.Size = new System.Drawing.Size(29, 13);
-            this.laIndex17.TabIndex = 2;
-            this.laIndex17.Text = "Имя";
+            this.dgv_rule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_rule.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.num,
+            this.Rule});
+            this.dgv_rule.Location = new System.Drawing.Point(182, 63);
+            this.dgv_rule.Name = "dgv_rule";
+            this.dgv_rule.Size = new System.Drawing.Size(812, 393);
+            this.dgv_rule.TabIndex = 1;
             // 
-            // laIndex20
+            // num
             // 
-            this.laIndex20.AutoSize = true;
-            this.laIndex20.Location = new System.Drawing.Point(3, 132);
-            this.laIndex20.Name = "laIndex20";
-            this.laIndex20.Size = new System.Drawing.Size(90, 13);
-            this.laIndex20.TabIndex = 5;
-            this.laIndex20.Text = "Жизнеописание";
+            this.num.Frozen = true;
+            this.num.HeaderText = "№";
+            this.num.Name = "num";
             // 
-            // laIndex18
+            // Rule
             // 
-            this.laIndex18.AutoSize = true;
-            this.laIndex18.Location = new System.Drawing.Point(3, 44);
-            this.laIndex18.Name = "laIndex18";
-            this.laIndex18.Size = new System.Drawing.Size(60, 13);
-            this.laIndex18.TabIndex = 3;
-            this.laIndex18.Text = "Год жизни";
+            this.Rule.HeaderText = "Правило";
+            this.Rule.Name = "Rule";
+            this.Rule.Width = 650;
             // 
-            // laIndex19
+            // dataGridView2
             // 
-            this.laIndex19.AutoSize = true;
-            this.laIndex19.Location = new System.Drawing.Point(3, 88);
-            this.laIndex19.Name = "laIndex19";
-            this.laIndex19.Size = new System.Drawing.Size(85, 13);
-            this.laIndex19.TabIndex = 4;
-            this.laIndex19.Text = "Специальность";
-            // 
-            // textBox17
-            // 
-            this.textBox17.Location = new System.Drawing.Point(187, 3);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(100, 20);
-            this.textBox17.TabIndex = 6;
-            // 
-            // textBox18
-            // 
-            this.textBox18.Location = new System.Drawing.Point(187, 47);
-            this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(100, 20);
-            this.textBox18.TabIndex = 7;
-            // 
-            // textBox19
-            // 
-            this.textBox19.Location = new System.Drawing.Point(187, 91);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(100, 20);
-            this.textBox19.TabIndex = 8;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(187, 135);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(403, 289);
-            this.richTextBox1.TabIndex = 9;
-            this.richTextBox1.Text = "";
-            // 
-            // pbIndexScript
-            // 
-            this.pbIndexScript.Location = new System.Drawing.Point(794, 348);
-            this.pbIndexScript.Name = "pbIndexScript";
-            this.pbIndexScript.Size = new System.Drawing.Size(216, 174);
-            this.pbIndexScript.TabIndex = 1;
-            this.pbIndexScript.TabStop = false;
-            // 
-            // pbIndexAutor
-            // 
-            this.pbIndexAutor.Location = new System.Drawing.Point(794, 6);
-            this.pbIndexAutor.Name = "pbIndexAutor";
-            this.pbIndexAutor.Size = new System.Drawing.Size(216, 232);
-            this.pbIndexAutor.TabIndex = 0;
-            this.pbIndexAutor.TabStop = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(255, 48);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(557, 362);
+            this.dataGridView2.TabIndex = 0;
             // 
             // IndexModule
             // 
@@ -693,11 +624,10 @@
             this.tp_sign.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.tp_author.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbIndexScript)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbIndexAutor)).EndInit();
+            this.tp_read_doc.ResumeLayout(false);
+            this.tp_result_doc.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_rule)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -715,8 +645,8 @@
         private System.Windows.Forms.Button buIndexBilble;
         private System.Windows.Forms.Button buIndexBack;
         private System.Windows.Forms.Button buIndexReturn;
-        private System.Windows.Forms.TabPage tp_author;
-        private System.Windows.Forms.TabPage tp_list_author;
+        private System.Windows.Forms.TabPage tp_result_doc;
+        private System.Windows.Forms.TabPage tp_read_doc;
         private System.Windows.Forms.TextBox tb_note;
         private System.Windows.Forms.TextBox tb_storage;
         private System.Windows.Forms.TextBox tb_reprint;
@@ -749,17 +679,11 @@
         private System.Windows.Forms.Label laIndex2;
         private System.Windows.Forms.TextBox tb_cipher;
         private System.Windows.Forms.TextBox tb_description;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.Label laIndex17;
-        private System.Windows.Forms.Label laIndex20;
-        private System.Windows.Forms.Label laIndex18;
-        private System.Windows.Forms.Label laIndex19;
-        private System.Windows.Forms.PictureBox pbIndexScript;
-        private System.Windows.Forms.PictureBox pbIndexAutor;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.TextBox textBox18;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ListBox lbName;
+        private System.Windows.Forms.DataGridView dgv_rule;
+        private System.Windows.Forms.DataGridViewTextBoxColumn num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rule;
+        private System.Windows.Forms.Button bu_open_doc;
+        private System.Windows.Forms.DataGridView dataGridView2;
     }
 }
