@@ -1924,9 +1924,10 @@ namespace RusDictionary.Modules
                                 table.Add(line);
                                 newWord = false;
                                 pageCount++;
-                                line = new string[2];
+                                line = new string[3];
                                 line[0] = ID[i];
                                 line[1] = MainWord[Convert.ToInt32(Names[i]) - 1];
+                                line[2] = Names[i];
                                 idMainWord.Add(line);
                             }
                             else
@@ -1973,9 +1974,10 @@ namespace RusDictionary.Modules
                                 table.Add(line);
                                 newWord = false;
                                 pageCount++;
-                                line = new string[2];
+                                line = new string[3];
                                 line[0] = ID[i];
                                 line[1] = MainWord[Convert.ToInt32(Names[i]) - 1];
+                                line[2] = Names[i];
                                 idMainWord.Add(line);
                             }
                             else
@@ -2003,28 +2005,18 @@ namespace RusDictionary.Modules
         int pageCount;
         private void buWordSearch_FindWord_Click(object sender, EventArgs e)
         {
-            FindWords();
-            dgvResults.Rows.Clear();
-            dgvResults.Columns.Clear();
-            dgvResults.Refresh();
+            buWordSearch_FindWord.Enabled = false;
             buChangeEntry.Enabled = false;
             buSaveEntry.Enabled = false;
             buCancelChanges.Enabled = false;
-            //dgvResults.Columns.Add("Column1", "Заголовочное слово");
-            //dgvResults.Columns.Add("Column2", "Семантика");
-            //dgvResults.Columns.Add("Column3", "Часть речи");
-            //dgvResults.Columns.Add("Column4", "Род");
-            //dgvResults.Columns.Add("Column5", "Число");
-            //dgvResults.Columns.Add("Column6", "Определение");
-            //dgvResults.Columns.Add("Column7", "Цитата");
-            //dgvResults.Columns.Add("Column8", "Код цитаты");
-            //dgvResults.Columns.Add("Column9", "Дата цитаты");
-            //dgvResults.Columns.Add("Column10", "Сравнить");
-            //dgvResults.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgvResults.Rows.Clear();
+            dgvResults.Columns.Clear();
+            dgvResults.Refresh();
             cmbPage.Items.Clear();
             buPageBack.Enabled = false;
             buPageNext.Enabled = false;
             cmbPage.Enabled = false;
+            FindWords();
             if(table.Count > 0)
             {
                 pageCount = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(pageCount) / 50.0));
@@ -2044,6 +2036,7 @@ namespace RusDictionary.Modules
             {
                 MessageBox.Show("Результатов не найдено", "Оповещение");
             }
+            buWordSearch_FindWord.Enabled = true;
         }
 
         private void buPageNext_Click(object sender, EventArgs e)
@@ -2095,9 +2088,7 @@ namespace RusDictionary.Modules
 
         private void lbMainWords_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dgvResults.Rows.Clear();
-            dgvResults.Columns.Clear();
-            dgvResults.Refresh();
+            Cancel();
             dgvResults.Columns.Add("Column1", "Заголовочное слово");
             dgvResults.Columns.Add("Column2", "Семантика");
             dgvResults.Columns.Add("Column3", "Часть речи");
@@ -2112,7 +2103,7 @@ namespace RusDictionary.Modules
             buChangeEntry.Enabled = true;
             for (int i = 0; i < table.Count; i++)
             {
-                if(idMainWord[lbMainWords.SelectedIndex + (page - 1) * 50][0] == table[i][10])
+                if(idMainWord[lbMainWords.SelectedIndex + (page - 1) * 50][2] == table[i][11])
                 {
                     dgvResults.Rows.Add(table[i]);
                 }
@@ -2126,14 +2117,59 @@ namespace RusDictionary.Modules
             buSaveEntry.Enabled = true;
             dgvResults.ReadOnly = false;
         }
-
-        private void buCancelChanges_Click(object sender, EventArgs e)
+        void Cancel()
         {
             buChangeEntry.Enabled = true;
             buCancelChanges.Enabled = false;
             buSaveEntry.Enabled = false;
             dgvResults.ReadOnly = true;
-            lbMainWords.SelectedIndex = lbMainWords.SelectedIndex;
+            dgvResults.Rows.Clear();
+            dgvResults.Columns.Clear();
+            dgvResults.Refresh();
+        }
+        private void buCancelChanges_Click(object sender, EventArgs e)
+        {
+            Cancel();
+        }
+
+        private void buSaveEntry_Click(object sender, EventArgs e)
+        {
+            buWordSearch_FindWord.Enabled = false;
+            buCancelChanges.Enabled = false;
+            buSaveEntry.Enabled = false;
+            dgvResults.ReadOnly = true;
+            string query;
+            int tmpID;
+            for (int i = 0; i < dgvResults.Rows.Count - 1; i++)
+            {
+                for (int j = 0; j < table.Count; j++)
+                {
+                    if (table[j][11] == idMainWord[lbMainWords.SelectedIndex + (page - 1) * 50][2])
+                    {
+                        for(int k = 0; k < dgvResults.Rows[i].Cells.Count; k++)
+                        {
+                            if (dgvResults.Rows[i].Cells[k].Value != null)
+                            {
+                                table[j][k] = dgvResults.Rows[i].Cells[k].Value.ToString();
+                            }
+                            else
+                            {
+                                table[j][k] = "";
+                            }
+                        }
+                        if(table[j][0] != "")
+                        {
+                            query = "UPDATE mainwords SET MAINWORD='" + table[j][0] + "' WHERE ID='" + table[j][11] + "'";
+                            JSON.Send(query, JSONFlags.Update);
+                        }
+                        tmpID = Convert.ToInt32(idMainWord[lbMainWords.SelectedIndex + (page - 1) * 50][0]) + i;
+                        query = "UPDATE dictionaryentries SET SEMANTIC='" + table[j][1] + "', PARTOFSPEECH='" + table[j][2] + "', ROD='" + table[j][3] + "', NUM='" + table[j][4] + "', DEFINITION='" + table[j][5] + "', EXAMPLE='" + table[j][6] + "', SOURCECODE='" + table[j][7] + "', SOURCEDATE='" + table[j][8] + "', COMPARE='" + table[j][9] + "' WHERE ID='" + tmpID.ToString() + "'";
+                        JSON.Send(query, JSONFlags.Update);
+                    }
+                }
+            }
+            buChangeEntry.Enabled = true;
+            buWordSearch_FindWord.Enabled = true;
         }
     }
 }
