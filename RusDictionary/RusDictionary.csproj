@@ -184,6 +184,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\IndexModule\Input.docx" />
+    <None Include="Resources\IndexModule\Электронный  указатель.xls" />
     <None Include="Resources\WordSearchModule\tom2.htm" />
     <None Include="Resources\CardIndexModule\noimage.png" />
     <Content Include="Resources\IndexModule\Source.mdb">
