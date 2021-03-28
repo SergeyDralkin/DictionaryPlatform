@@ -14,13 +14,39 @@ using System.Collections.Generic;
 
 namespace RusDictionary.Modules
 {
-    
+
     public partial class IndexModule : UserControl
     {
+        string[] base_name = {"Шифр_источника", "Полное_описание", "Синоним", "Название_источника", "Автор", "Исследователь",
+             "Дата_источника", "Уточненная_дата", "Язык_оригинала", "Оригинал_перевода", "Другие_списки",
+             "Издание_рукописи", "Датировка_состава", "Переиздание", "Место_хранения"};
+
+        string[] table_name = { "cipher", "description", "synonym", "name_source", "author", "researcher",
+            "date_source", "refind_date", "language", "translation", "other_list",
+            "publication", "date_structure", "reprint", "storage" };
+
         DataTable dt = new DataTable();
+
+        char[] sep = { '[', ']', '(', ')' };
+        //string single_sep = "//" ;
+
+        string[] row1 = new string[] { "1", "см. = [Синоним]END" };
+        string[] row2 = new string[] { "2", "*// = [Название_источника]" };
+        string[] row3 = new string[] { "3", "Хранится, Хранятся = [Место_хранения]" };
+        string[] row4 = new string[] { "4", "переизд. = [Переиздание]" };
+        string[] row5 = new string[] { "5", "ред. = [Датировка_состава]" };
+
+
+
         public IndexModule()
         {
+
             InitializeComponent();
+            dgv_rule.Rows.Add(row1);
+            dgv_rule.Rows.Add(row2);
+            dgv_rule.Rows.Add(row3);
+            dgv_rule.Rows.Add(row4);
+            dgv_rule.Rows.Add(row5);
         }
 
         private void buIndexSource_Click(object sender, EventArgs e)
@@ -40,7 +66,7 @@ namespace RusDictionary.Modules
             {
 
                 lbName.Items.Add(row[1].ToString());
-                
+
             }
             tc_index.SelectedTab = tp_list_sign;
 
@@ -51,7 +77,7 @@ namespace RusDictionary.Modules
         {
             string Item = lbName.SelectedItem.ToString();
 
-            string search = "Шифр_истоchника = \'"+ Item + "\'";
+            string search = "Шифр_истоchника = \'" + Item + "\'";
 
             DataRow[] foundRows = dt.Select(search);
 
@@ -70,7 +96,7 @@ namespace RusDictionary.Modules
             tb_date_structure.Text = foundRows[0][13].ToString();
             tb_reprint.Text = foundRows[0][14].ToString();
             tb_storage.Text = foundRows[0][15].ToString();
-            tb_note.Text = foundRows[0][16].ToString() +" ; "+ foundRows[0][17].ToString();
+            tb_note.Text = foundRows[0][16].ToString() + " ; " + foundRows[0][17].ToString();
 
 
 
@@ -92,7 +118,7 @@ namespace RusDictionary.Modules
                 }
             }
 
-          
+
             WordprocessingDocument doc = WordprocessingDocument.Open(filepath, false);
 
             DataTable dt = new DataTable();
@@ -109,44 +135,119 @@ namespace RusDictionary.Modules
             // To read data from rows and to add records to the temporary table  
             foreach (TableRow row in rows)
             {
-                 dt.Rows.Add();
-                 int i = 0;
-                 foreach (TableCell cell in row.Descendants<TableCell>())
-                 {
+                dt.Rows.Add();
+                int i = 0;
+                foreach (TableCell cell in row.Descendants<TableCell>())
+                {
                     dt.Rows[dt.Rows.Count - 1][i] = cell.InnerText;
                     i++;
-                 }
+                }
             }
 
-
-            string[] row1 = new string[] { "1", "см. = [синоним]." };
-            dgv_rule.Rows.Add(row1);
-
-            for (int i = 0; i < dgv_rule.Rows.Count; i++)
+            for (int count = 0; count < dt.Rows.Count; count++)
             {
-                DataGridViewRow row = dgv_rule.Rows[i];
+                var split_list = new List<string>();
+                var name_list = new List<string>();
 
-                string lbl_name = row.Cells[1].Value.ToString();
+                string cipher = dt.Rows[count].ItemArray[0].ToString();
 
-
-                string[] subs = lbl_name.Split('=');
-
-                subs[0] = subs[0].Remove(subs[0].Length - 1);
-                subs[1] = subs[1].Substring(1);
+                string text = dt.Rows[count].ItemArray[1].ToString();
 
 
+                var search_list = new List<string>(); ///слова для поиска в тексте
 
-                bool containsSearchResult = dt.Rows[0].ItemArray[1].ToString().Contains(subs[0]);
+                var param_list = new List<string>(); ///название полей в базе данных 
 
-                if (containsSearchResult)
+                var search_trim_list = new List<string>(); /// слова без спецсимволов
+
+                var pos_list = new List<int>(); ///позиция найденных слов и сепараторов
+
+
+
+                for (int i = 0; i < dgv_rule.Rows.Count - 1; i++)
                 {
-                    string res = dt.Rows[0].ItemArray[1].ToString().TrimStart(subs[0].ToCharArray());
+                    DataGridViewRow row = dgv_rule.Rows[i];
+
+                    string lbl_name = row.Cells[1].Value.ToString();
+
+
+                    foreach (string param in lbl_name.Split('=')[0].Split(','))
+                    {
+                        string string_trim = lbl_name.TrimEnd("END".ToCharArray());
+                        param_list.Add(string_trim.Split('=')[1].Substring(1).Trim(sep));
+                        search_list.Add(param.Trim());
+                        search_trim_list.Add(param.Trim('*'));
+
+                    }
+
+
+                }
+                foreach (string word in search_trim_list)
+                {
+                    pos_list.Add(text.IndexOf(word));
+                }
+                foreach (char sym in sep)
+                {
+                    pos_list.Add(text.IndexOf(sym));
                 }
 
+                List<int> text_pos = pos_list.ToList();///копия позиций для поиска в строке
+
+
+                text_pos.RemoveAll(item => item == -1);
+                text_pos.Sort();
+
+                string[] row_out = new string[15];
+
+                for (int i = 0; i < text_pos.Count; i++)
+                {
+                    int first_pos = 0;
+
+
+                    var a = pos_list.FindIndex(item => item == text_pos[i]);
+                    if (a + 1 <= search_list.Count)
+                    {
+                        if (search_list[a][0] == '*')
+                        {
+                            if (text_pos[i] != text_pos.First())
+                                row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(text_pos[i - 1], text_pos[i] - text_pos[i - 1]);
+                            else
+                                row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(first_pos, text_pos[i]);
+
+                        }
+                        else
+                        {
+                            if (text_pos[i] != text_pos.Last())
+                                row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(text_pos[i], text_pos[i + 1] - text_pos[i]);
+                            else
+                                row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(text_pos[i]);
+
+                            //Substring(2, 5);
+
+                        }
+                        if (a < dgv_rule.Rows.Count - 1)
+                            if (dgv_rule.Rows[a].Cells[1].Value.ToString().EndsWith("END"))
+                                break;
+                    }
+
+
+                }
+
+                if (row_out[0] == null)
+                    row_out[0] = cipher;
+
+                if (row_out[1] == null)
+                    row_out[1] = text;
+
+                dgv_output.Rows.Add(row_out);
             }
 
+            tc_index.SelectedTab = tp_result_doc;
+        }
 
-
+        private void buRecognition_Click(object sender, EventArgs e)
+        {
+            tc_index.SelectedTab = tp_read_doc;
         }
     }
 }

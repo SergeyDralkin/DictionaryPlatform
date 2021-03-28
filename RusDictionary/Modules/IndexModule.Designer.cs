@@ -32,7 +32,7 @@
             this.tp_menu = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buIndexSource = new System.Windows.Forms.Button();
-            this.buIndexBilble = new System.Windows.Forms.Button();
+            this.buRecognition = new System.Windows.Forms.Button();
             this.buIndexReturn = new System.Windows.Forms.Button();
             this.tp_list_sign = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -73,12 +73,27 @@
             this.tb_cipher = new System.Windows.Forms.TextBox();
             this.tb_description = new System.Windows.Forms.TextBox();
             this.tp_read_doc = new System.Windows.Forms.TabPage();
-            this.tp_result_doc = new System.Windows.Forms.TabPage();
-            this.bu_open_doc = new System.Windows.Forms.Button();
             this.dgv_rule = new System.Windows.Forms.DataGridView();
             this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rule = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.bu_open_doc = new System.Windows.Forms.Button();
+            this.tp_result_doc = new System.Windows.Forms.TabPage();
+            this.dgv_output = new System.Windows.Forms.DataGridView();
+            this.cipher = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.synonym = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name_source = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.author = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.researcher = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date_source = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.refind_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.language = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.translation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.other_list = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.publication = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date_structure = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reprint = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.storage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tc_index.SuspendLayout();
             this.tp_menu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -87,9 +102,9 @@
             this.tp_sign.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tp_read_doc.SuspendLayout();
-            this.tp_result_doc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_rule)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.tp_result_doc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_output)).BeginInit();
             this.SuspendLayout();
             // 
             // tc_index
@@ -126,7 +141,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Controls.Add(this.buIndexSource, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.buIndexBilble, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.buRecognition, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.buIndexReturn, 2, 9);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -154,14 +169,15 @@
             this.buIndexSource.UseVisualStyleBackColor = true;
             this.buIndexSource.Click += new System.EventHandler(this.buIndexSource_Click);
             // 
-            // buIndexBilble
+            // buRecognition
             // 
-            this.buIndexBilble.Location = new System.Drawing.Point(409, 211);
-            this.buIndexBilble.Name = "buIndexBilble";
-            this.buIndexBilble.Size = new System.Drawing.Size(197, 46);
-            this.buIndexBilble.TabIndex = 1;
-            this.buIndexBilble.Text = "Библиография";
-            this.buIndexBilble.UseVisualStyleBackColor = true;
+            this.buRecognition.Location = new System.Drawing.Point(409, 211);
+            this.buRecognition.Name = "buRecognition";
+            this.buRecognition.Size = new System.Drawing.Size(197, 46);
+            this.buRecognition.TabIndex = 1;
+            this.buRecognition.Text = "Распознание ";
+            this.buRecognition.UseVisualStyleBackColor = true;
+            this.buRecognition.Click += new System.EventHandler(this.buRecognition_Click);
             // 
             // buIndexReturn
             // 
@@ -556,36 +572,15 @@
             this.tp_read_doc.TabIndex = 4;
             this.tp_read_doc.Text = "Распознание";
             // 
-            // tp_result_doc
-            // 
-            this.tp_result_doc.BackColor = System.Drawing.Color.SandyBrown;
-            this.tp_result_doc.Controls.Add(this.dataGridView2);
-            this.tp_result_doc.Location = new System.Drawing.Point(4, 22);
-            this.tp_result_doc.Name = "tp_result_doc";
-            this.tp_result_doc.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_result_doc.Size = new System.Drawing.Size(1016, 528);
-            this.tp_result_doc.TabIndex = 3;
-            this.tp_result_doc.Text = "Вывод";
-            // 
-            // bu_open_doc
-            // 
-            this.bu_open_doc.Location = new System.Drawing.Point(7, 7);
-            this.bu_open_doc.Name = "bu_open_doc";
-            this.bu_open_doc.Size = new System.Drawing.Size(75, 23);
-            this.bu_open_doc.TabIndex = 0;
-            this.bu_open_doc.Text = "Открыть документ";
-            this.bu_open_doc.UseVisualStyleBackColor = true;
-            this.bu_open_doc.Click += new System.EventHandler(this.bu_open_doc_Click);
-            // 
             // dgv_rule
             // 
             this.dgv_rule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_rule.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.num,
             this.Rule});
-            this.dgv_rule.Location = new System.Drawing.Point(182, 63);
+            this.dgv_rule.Location = new System.Drawing.Point(135, 23);
             this.dgv_rule.Name = "dgv_rule";
-            this.dgv_rule.Size = new System.Drawing.Size(812, 393);
+            this.dgv_rule.Size = new System.Drawing.Size(859, 433);
             this.dgv_rule.TabIndex = 1;
             // 
             // num
@@ -600,13 +595,125 @@
             this.Rule.Name = "Rule";
             this.Rule.Width = 650;
             // 
-            // dataGridView2
+            // bu_open_doc
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(255, 48);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(557, 362);
-            this.dataGridView2.TabIndex = 0;
+            this.bu_open_doc.Location = new System.Drawing.Point(7, 7);
+            this.bu_open_doc.Name = "bu_open_doc";
+            this.bu_open_doc.Size = new System.Drawing.Size(75, 23);
+            this.bu_open_doc.TabIndex = 0;
+            this.bu_open_doc.Text = "Открыть документ";
+            this.bu_open_doc.UseVisualStyleBackColor = true;
+            this.bu_open_doc.Click += new System.EventHandler(this.bu_open_doc_Click);
+            // 
+            // tp_result_doc
+            // 
+            this.tp_result_doc.BackColor = System.Drawing.Color.SandyBrown;
+            this.tp_result_doc.Controls.Add(this.dgv_output);
+            this.tp_result_doc.Location = new System.Drawing.Point(4, 22);
+            this.tp_result_doc.Name = "tp_result_doc";
+            this.tp_result_doc.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_result_doc.Size = new System.Drawing.Size(1016, 528);
+            this.tp_result_doc.TabIndex = 3;
+            this.tp_result_doc.Text = "Вывод";
+            // 
+            // dgv_output
+            // 
+            this.dgv_output.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_output.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cipher,
+            this.description,
+            this.synonym,
+            this.name_source,
+            this.author,
+            this.researcher,
+            this.date_source,
+            this.refind_date,
+            this.language,
+            this.translation,
+            this.other_list,
+            this.publication,
+            this.date_structure,
+            this.reprint,
+            this.storage});
+            this.dgv_output.Location = new System.Drawing.Point(0, 0);
+            this.dgv_output.Name = "dgv_output";
+            this.dgv_output.Size = new System.Drawing.Size(1016, 484);
+            this.dgv_output.TabIndex = 0;
+            // 
+            // cipher
+            // 
+            this.cipher.HeaderText = "Шифр_источника";
+            this.cipher.Name = "cipher";
+            // 
+            // description
+            // 
+            this.description.HeaderText = "Полное_описание";
+            this.description.Name = "description";
+            // 
+            // synonym
+            // 
+            this.synonym.HeaderText = "Синоним";
+            this.synonym.Name = "synonym";
+            // 
+            // name_source
+            // 
+            this.name_source.HeaderText = "Название_источника";
+            this.name_source.Name = "name_source";
+            // 
+            // author
+            // 
+            this.author.HeaderText = "Автор";
+            this.author.Name = "author";
+            // 
+            // researcher
+            // 
+            this.researcher.HeaderText = "Исследователь";
+            this.researcher.Name = "researcher";
+            // 
+            // date_source
+            // 
+            this.date_source.HeaderText = "Дата_источника";
+            this.date_source.Name = "date_source";
+            // 
+            // refind_date
+            // 
+            this.refind_date.HeaderText = "Уточненная_дата";
+            this.refind_date.Name = "refind_date";
+            // 
+            // language
+            // 
+            this.language.HeaderText = "Язык_оригинала";
+            this.language.Name = "language";
+            // 
+            // translation
+            // 
+            this.translation.HeaderText = "Оригинал_перевода";
+            this.translation.Name = "translation";
+            // 
+            // other_list
+            // 
+            this.other_list.HeaderText = "Другие_списки";
+            this.other_list.Name = "other_list";
+            // 
+            // publication
+            // 
+            this.publication.HeaderText = "Издание_рукописи";
+            this.publication.Name = "publication";
+            // 
+            // date_structure
+            // 
+            this.date_structure.HeaderText = "Датировка_состава";
+            this.date_structure.Name = "date_structure";
+            // 
+            // reprint
+            // 
+            this.reprint.HeaderText = "Переиздание";
+            this.reprint.Name = "reprint";
+            // 
+            // storage
+            // 
+            this.storage.HeaderText = "Место_хранения";
+            this.storage.Name = "storage";
             // 
             // IndexModule
             // 
@@ -625,9 +732,9 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tp_read_doc.ResumeLayout(false);
-            this.tp_result_doc.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_rule)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.tp_result_doc.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_output)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -642,7 +749,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button buIndexSource;
-        private System.Windows.Forms.Button buIndexBilble;
+        private System.Windows.Forms.Button buRecognition;
         private System.Windows.Forms.Button buIndexBack;
         private System.Windows.Forms.Button buIndexReturn;
         private System.Windows.Forms.TabPage tp_result_doc;
@@ -684,6 +791,21 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn num;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rule;
         private System.Windows.Forms.Button bu_open_doc;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgv_output;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cipher;
+        private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn synonym;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name_source;
+        private System.Windows.Forms.DataGridViewTextBoxColumn author;
+        private System.Windows.Forms.DataGridViewTextBoxColumn researcher;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date_source;
+        private System.Windows.Forms.DataGridViewTextBoxColumn refind_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn language;
+        private System.Windows.Forms.DataGridViewTextBoxColumn translation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn other_list;
+        private System.Windows.Forms.DataGridViewTextBoxColumn publication;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date_structure;
+        private System.Windows.Forms.DataGridViewTextBoxColumn reprint;
+        private System.Windows.Forms.DataGridViewTextBoxColumn storage;
     }
 }
