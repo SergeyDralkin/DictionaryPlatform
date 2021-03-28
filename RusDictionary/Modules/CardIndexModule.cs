@@ -12,6 +12,7 @@ namespace RusDictionary.Modules
     public partial class CardIndexModule : UserControl
     {
         int ListBoxSelectedIndex;
+        int ListBoxSelectedIndexForUpdate;
         bool ListBoxPrev = true;
         string NameClickButtonInMenu;
         string NameClickButtonInListPage;
@@ -531,6 +532,7 @@ namespace RusDictionary.Modules
             {
                 EnableElement(false);
                 ListBoxSelectedIndex = lbCardIndexList.SelectedIndex + 1;
+                ListBoxSelectedIndexForUpdate = lbCardIndexList.SelectedIndex + 1;
                 ListBoxPrev = false;
                 if (CardIndexMenuMarker == true)
                 {
@@ -867,9 +869,210 @@ namespace RusDictionary.Modules
             }
             if (result == DialogResult.Yes)
             {
-                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
-                string query = "UPDATE `cardindex` SET `Marker` = is NULL,`CardSeparator` = is NULL,`NumberBox` = is NULL,`Symbol` = is NULL,`img` = is NULL, `imgText` = is NULL, `Notes` = is NULL, WHERE `Marker` = '" + NumberCardForDelete[2] + "'";                
-                JSON.Send(query, JSONFlags.Update);
+                NameClickButtonInListPage = (sender as Button).Name.ToString();
+                EnableElement(false);
+                ListBoxSelectedIndex = lbCardIndexList.SelectedIndex + 1;
+
+                Program.f1.PictAndLableWait(true);
+                TagButtonChange = (sender as Button).Tag.ToString();
+                switch (NameClickButtonInMenu)
+                {
+                    case "buCardIndexMenuMarker":
+                        {
+                            string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                            string sql = "DELETE FROM `cardindex` WHERE Marker = '" + NumberCardForDelete.Last() + "'";
+                            JSON.Send(sql, JSONFlags.Delete);
+                            ClearMainList();
+                            Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            myThread.Start("buCardIndexMenuMarker"); // Запускаем поток
+                            while (myThread.IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            for (int i = 0; i < FirstListItems.Count; i++)
+                            {
+                                lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Marker);
+                            }
+                            ActiveDown3button(false);
+                            lbCardIndexList.Update();
+
+                            MessageBox.Show("Операция выполнена успешно!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            break;
+                        }
+                    case "buCardIndexMenuSeparator":
+                        {
+                            if (UseSecondList == true)
+                            {
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string sql = "DELETE FROM `flotation` WHERE Word = '" + NumberCardForDelete.Last() + "'";
+                                JSON.Send(sql, JSONFlags.Delete);
+
+                                ClearMainList();
+                                Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                ListBoxSelectedIndex = ListBoxSelectedIndexForUpdate;                               
+                                myThread.Start("buCardIndexMenuSeparator"); // Запускаем поток
+                                while (myThread.IsAlive)
+                                {
+                                    Thread.Sleep(1);
+                                    Application.DoEvents();
+                                }
+                                for (int i = 0; i < SecondListItems.Count; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Word);
+                                }
+                                ActiveDown3button(false);
+                                lbCardIndexList.Update();
+
+                                MessageBox.Show("Операция выполнена успешно!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            else
+                            {
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string sql = "DELETE FROM `cardseparator` WHERE CardSeparator = '" + NumberCardForDelete.Last() + "'";
+                                JSON.Send(sql, JSONFlags.Delete);
+                                ClearMainList();
+                                Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                myThread.Start("buCardIndexMenuSeparator"); // Запускаем поток
+                                while (myThread.IsAlive)
+                                {
+                                    Thread.Sleep(1);
+                                    Application.DoEvents();
+                                }
+                                for (int i = 0; i < FirstListItems.Count; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].CardSeparator);
+                                }
+                                ActiveDown3button(false);
+                                lbCardIndexList.Update();
+                                MessageBox.Show("Операция выполнена успешно!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            break;
+                        }
+                    case "buCardIndexMenuBox":
+                        {
+                            if (UseSecondList == true)
+                            {
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string sql = "DELETE FROM `flotation` WHERE Word = '" + NumberCardForDelete.Last() + "'";
+                                JSON.Send(sql, JSONFlags.Delete);
+
+                                ClearMainList();
+                                Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                ListBoxSelectedIndex = ListBoxSelectedIndexForUpdate;                                
+                                myThread.Start("buCardIndexMenuBox");                                
+                                while (myThread.IsAlive)
+                                {
+                                    Thread.Sleep(1);
+                                    Application.DoEvents();
+                                }
+                                for (int i = 0; i < SecondListItems.Count; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Word);
+                                }
+                                ActiveDown3button(false);
+                                lbCardIndexList.Update();
+
+                                MessageBox.Show("Операция выполнена успешно!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            else
+                            {
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string sql = "DELETE FROM `box` WHERE NumberBox = '" + NumberCardForDelete.Last() + "'";
+                                JSON.Send(sql, JSONFlags.Delete);
+                                ClearMainList();
+                                Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                myThread.Start("buCardIndexMenuBox"); // Запускаем поток
+                                while (myThread.IsAlive)
+                                {
+                                    Thread.Sleep(1);
+                                    Application.DoEvents();
+                                }
+                                for (int i = 0; i < FirstListItems.Count; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].NumberBox);
+                                }
+                                ActiveDown3button(false);
+                                lbCardIndexList.Update();
+                                MessageBox.Show("Операция выполнена успешно!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            break;
+                        }
+                    case "buCardIndexMenuLetter":
+                        {
+                            if (UseSecondList == true)
+                            {
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string sql = "DELETE FROM `flotation` WHERE Word = '" + NumberCardForDelete.Last() + "'";
+                                JSON.Send(sql, JSONFlags.Delete);
+
+                                ClearMainList();
+                                Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                ListBoxSelectedIndex = ListBoxSelectedIndexForUpdate;
+                                myThread.Start("buCardIndexMenuLetter");                                
+                                while (myThread.IsAlive)
+                                {
+                                    Thread.Sleep(1);
+                                    Application.DoEvents();
+                                }
+                                for (int i = 0; i < SecondListItems.Count; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Word);
+                                }
+                                ActiveDown3button(false);
+                                lbCardIndexList.Update();
+
+                                MessageBox.Show("Операция выполнена успешно!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                            else
+                            {
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string sql = "DELETE FROM `letter` WHERE Symbol = '" + NumberCardForDelete.Last() + "'";
+                                JSON.Send(sql, JSONFlags.Delete);
+                                ClearMainList();
+                                Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                myThread.Start("buCardIndexMenuLetter"); // Запускаем поток
+                                while (myThread.IsAlive)
+                                {
+                                    Thread.Sleep(1);
+                                    Application.DoEvents();
+                                }
+                                for (int i = 0; i < FirstListItems.Count; i++)
+                                {
+                                    lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Symbol);
+                                }
+                                ActiveDown3button(false);
+                                lbCardIndexList.Update();
+                                MessageBox.Show("Операция выполнена успешно!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+
+                            break;
+                        }
+                    case "buCardIndexMenuWord":
+                        {
+                            string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                            string sql = "DELETE FROM `flotation` WHERE Word = '" + NumberCardForDelete.Last() + "'";
+                            JSON.Send(sql, JSONFlags.Delete);
+                            ClearMainList();
+                            Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            myThread.Start("buCardIndexMenuWord"); // Запускаем поток
+                            while (myThread.IsAlive)
+                            {
+                                Thread.Sleep(1);
+                                Application.DoEvents();
+                            }
+                            for (int i = 0; i < FirstListItems.Count; i++)
+                            {
+                                lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Word);
+                            }
+                            ActiveDown3button(false);
+                            lbCardIndexList.Update();
+                            MessageBox.Show("Операция выполнена успешно!", "Удаление", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            break;
+                        }
+                }
+                Program.f1.PictAndLableWait(false);
+                EnableElement(true);
             }
         }
         private void lbCardIndexList_SelectedIndexChanged(object sender, EventArgs e)
@@ -884,6 +1087,7 @@ namespace RusDictionary.Modules
             NameClickButtonInListPage = (sender as Button).Name.ToString();
             EnableElement(false);
             ListBoxSelectedIndex = lbCardIndexList.SelectedIndex + 1;
+
             Program.f1.PictAndLableWait(true);
             TagButtonChange = (sender as Button).Tag.ToString();            
             switch (NameClickButtonInMenu)
@@ -1416,7 +1620,24 @@ namespace RusDictionary.Modules
                                     sql = "UPDATE `cardindex` SET `Marker` = '" + tbCardsInsertAndUpdateMarker.Text + "', `NumberBox` = '" + BoxID + "', `img` = '" + ImageBase64 + "', `imgText` = '" + tbCardsInsertAndUpdateTextCard.Text + "', `SourceCode` = '" + tbCardsInsertAndUpdateSourceCode.Text + "', `SourceClarification` = '" + tbCardsInsertAndUpdateSourceCodeClarification.Text + "', `Pagination` = '" + tbCardsInsertAndUpdatePagination.Text + "' ,`SourceDate` = '" + tbCardsInsertAndUpdateSourceDate.Text + "', `SourceDateClarification` = '" + tbCardsInsertAndUpdateSourceDateClarification.Text + "', `Notes` =  '" + tbCardsInsertAndUpdateNotes.Text + "' WHERE `ID` = " + CardID;
                                                                      
                                     JSON.Send(sql, JSONFlags.Update);
+                                                                        
+                                    ClearMainList();
+                                    Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                    myThread.Start("buCardIndexMenuMarker"); // Запускаем поток
+                                    while (myThread.IsAlive)
+                                    {
+                                        Thread.Sleep(1);
+                                        Application.DoEvents();
+                                    }                                        
+                                    for (int i = 0; i < FirstListItems.Count; i++)
+                                    {
+                                        lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Marker);
+                                    }
+                                    ActiveDown3button(false);    
+                                    lbCardIndexList.Update();
+
                                     MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    tcCards.SelectedTab = tpList;
                                     break;
                                 }
                             case "buCardIndexListAdd":
@@ -1433,7 +1654,24 @@ namespace RusDictionary.Modules
 
                                         sql = "INSERT INTO `cardindex`(`Marker`, `NumberBox`, `img`, `imgText`, `SourceCode`, `SourceClarification`, `Pagination`, `SourceDate`, `SourceDateClarification`, `Notes`) VALUES ('" + tbCardsInsertAndUpdateMarker.Text + "', '" + BoxID + "', '" + ImageBase64 + "', '" + tbCardsInsertAndUpdateTextCard.Text + "', '" + tbCardsInsertAndUpdateSourceCode.Text + "', '" + tbCardsInsertAndUpdateSourceCodeClarification.Text + "', '" + tbCardsInsertAndUpdatePagination.Text + "','" + tbCardsInsertAndUpdateSourceDate.Text + "', '" + tbCardsInsertAndUpdateSourceDateClarification.Text + "', '" + tbCardsInsertAndUpdateNotes.Text + "')";
                                         JSON.Send(sql, JSONFlags.Insert);
+
+                                        ClearMainList();
+                                        Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                        myThread.Start("buCardIndexMenuMarker"); // Запускаем поток
+                                        while (myThread.IsAlive)
+                                        {
+                                            Thread.Sleep(1);
+                                            Application.DoEvents();
+                                        }
+                                        for (int i = 0; i < FirstListItems.Count; i++)
+                                        {
+                                            lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Marker);
+                                        }
+                                        ActiveDown3button(false);
+                                        lbCardIndexList.Update();
+
                                         MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        tcCards.SelectedTab = tpList;
                                     }
                                     else
                                     {
@@ -1484,12 +1722,27 @@ namespace RusDictionary.Modules
                                         sql = "UPDATE `flotation` SET `Card`= '" + CardID + "',`NumberBox`= '" + BoxID + "',`Symbol`= '" + SymbolID + "',`CardSeparator`= '" + CardSeparatorID + "',`Word`= '" + tbCardsInsertAndUpdateWordWord.Text + "',`Value`= '" + tbCardsInsertAndUpdateWordValue.Text + "',`RelatedCombinations`= '" + tbCardsInsertAndUpdateWordRelatedCombinations.Text + "' WHERE `ID` = " + SecondListItems[lbCardIndexList.SelectedIndex].ID;
                                     }
                                     JSON.Send(sql, JSONFlags.Update);
+                                    ClearMainList();
+                                    Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                    myThread.Start("buCardIndexMenuWord"); // Запускаем поток
+                                    while (myThread.IsAlive)
+                                    {
+                                        Thread.Sleep(1);
+                                        Application.DoEvents();
+                                    }
+                                    for (int i = 0; i < FirstListItems.Count; i++)
+                                    {
+                                        lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Word);
+                                    }
+                                    ActiveDown3button(false);
+                                    lbCardIndexList.Update();
+
                                     MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    tcCards.SelectedTab = tpList;
                                     break;
                                 }
                             case "buCardIndexListAdd":
                                 {
-
                                     if (tbCardsInsertAndUpdateWordWord.Text != null && tbCardsInsertAndUpdateWordWord.Text != "")
                                     {
                                         string sql;
@@ -1508,6 +1761,21 @@ namespace RusDictionary.Modules
                                             JSON.Send(sql, JSONFlags.Select);
                                             string CardSeparatorID = JSON.Decode()[0].ID;
                                             sql = "INSERT INTO `flotation`(`Card`, `NumberBox`, `Symbol`, `CardSeparator`, `Word`, `Value`, `RelatedCombinations`) VALUES ('" + CardID + "', '" + BoxID + "', '" + SymbolID + "', '" + CardSeparatorID + "', '" + tbCardsInsertAndUpdateWordWord.Text + "', '" + tbCardsInsertAndUpdateWordValue.Text + "', '" + tbCardsInsertAndUpdateWordRelatedCombinations.Text + "')";
+                                            JSON.Send(sql, JSONFlags.Insert);
+                                            ClearMainList();
+                                            Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                            myThread.Start("buCardIndexMenuWord"); // Запускаем поток
+                                            while (myThread.IsAlive)
+                                            {
+                                                Thread.Sleep(1);
+                                                Application.DoEvents();
+                                            }
+                                            for (int i = 0; i < FirstListItems.Count; i++)
+                                            {
+                                                lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Word);
+                                            }
+                                            ActiveDown3button(false);
+                                            lbCardIndexList.Update();
                                         }
                                         else
                                         {
@@ -1524,9 +1792,44 @@ namespace RusDictionary.Modules
                                             JSON.Send(sql, JSONFlags.Select);
                                             string CardSeparatorID = JSON.Decode()[0].ID;
                                             sql = "INSERT INTO `flotation`(`Card`, `NumberBox`, `Symbol`, `CardSeparator`, `Word`, `Value`, `RelatedCombinations`) VALUES ('" + CardID + "', '" + BoxID + "', '" + SymbolID + "', '" + CardSeparatorID + "', '" + tbCardsInsertAndUpdateWordWord.Text + "', '" + tbCardsInsertAndUpdateWordValue.Text + "', '" + tbCardsInsertAndUpdateWordRelatedCombinations.Text + "')";
+                                            JSON.Send(sql, JSONFlags.Insert);
+                                            ClearMainList();
+                                            Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                            ListBoxSelectedIndex = ListBoxSelectedIndexForUpdate;
+                                            switch (NameClickButtonInMenu)
+                                            {
+                                                case "buCardIndexMenuSeparator":
+                                                    {
+                                                        myThread.Start("buCardIndexMenuSeparator"); // Запускаем поток
+                                                        break;
+                                                    }
+
+                                                case "buCardIndexMenuBox":
+                                                    {
+                                                        myThread.Start("buCardIndexMenuBox");
+                                                        break;
+                                                    }
+                                                case "buCardIndexMenuLetter":
+                                                    {
+                                                        myThread.Start("buCardIndexMenuLetter");
+                                                        break;
+                                                    }
+                                            }
+                                            while (myThread.IsAlive)
+                                            {
+                                                Thread.Sleep(1);
+                                                Application.DoEvents();
+                                            }
+                                            for (int i = 0; i < SecondListItems.Count; i++)
+                                            {
+                                                lbCardIndexList.Items.Add((i + 1) + ") " + SecondListItems[i].Word);
+                                            }
+                                            ActiveDown3button(false);
+                                            lbCardIndexList.Update();
                                         }
-                                        JSON.Send(sql, JSONFlags.Insert);
+                                        
                                         MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        tcCards.SelectedTab = tpList;
                                     }
                                     else
                                     {
@@ -1545,7 +1848,22 @@ namespace RusDictionary.Modules
                                 {
                                     string sql = "UPDATE `letter` SET `Symbol`= '" + tbCardsInsertAndUpdateLetter.Text + "' WHERE `ID` = " + FirstListItems[lbCardIndexList.SelectedIndex].ID;
                                     JSON.Send(sql, JSONFlags.Update);
+                                    ClearMainList();
+                                    Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                    myThread.Start("buCardIndexMenuLetter"); // Запускаем поток
+                                    while (myThread.IsAlive)
+                                    {
+                                        Thread.Sleep(1);
+                                        Application.DoEvents();
+                                    }
+                                    for (int i = 0; i < FirstListItems.Count; i++)
+                                    {
+                                        lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Symbol);
+                                    }
+                                    ActiveDown3button(false);
+                                    lbCardIndexList.Update();
                                     MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    tcCards.SelectedTab = tpList;
                                     break;
                                 }
                             case "buCardIndexListAdd":
@@ -1554,7 +1872,22 @@ namespace RusDictionary.Modules
                                     {
                                         string sql = "INSERT INTO `letter`(`Symbol`) VALUES ('" + tbCardsInsertAndUpdateLetter.Text + "')";
                                         JSON.Send(sql, JSONFlags.Insert);
+                                        ClearMainList();
+                                        Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                        myThread.Start("buCardIndexMenuLetter"); // Запускаем поток
+                                        while (myThread.IsAlive)
+                                        {
+                                            Thread.Sleep(1);
+                                            Application.DoEvents();
+                                        }
+                                        for (int i = 0; i < FirstListItems.Count; i++)
+                                        {
+                                            lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].Symbol);
+                                        }
+                                        ActiveDown3button(false);
+                                        lbCardIndexList.Update();
                                         MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        tcCards.SelectedTab = tpList;
                                     }
                                     else
                                     {
@@ -1573,7 +1906,22 @@ namespace RusDictionary.Modules
                                 {
                                     string sql = "UPDATE `box` SET `NumberBox`= '" + tbCardsInsertAndUpdateBoxNumberBox.Text + "' WHERE `ID` = " + FirstListItems[lbCardIndexList.SelectedIndex].ID;
                                     JSON.Send(sql, JSONFlags.Update);
+                                    ClearMainList();
+                                    Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                    myThread.Start("buCardIndexMenuBox"); // Запускаем поток
+                                    while (myThread.IsAlive)
+                                    {
+                                        Thread.Sleep(1);
+                                        Application.DoEvents();
+                                    }
+                                    for (int i = 0; i < FirstListItems.Count; i++)
+                                    {
+                                        lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].NumberBox);
+                                    }
+                                    ActiveDown3button(false);
+                                    lbCardIndexList.Update();
                                     MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    tcCards.SelectedTab = tpList;
                                     break;
                                 }
                             case "buCardIndexListAdd":
@@ -1582,7 +1930,22 @@ namespace RusDictionary.Modules
                                     {
                                         string sql = "INSERT INTO `box`(`NumberBox`) VALUES ('" + tbCardsInsertAndUpdateBoxNumberBox.Text + "')";
                                         JSON.Send(sql, JSONFlags.Insert);
+                                        ClearMainList();
+                                        Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                        myThread.Start("buCardIndexMenuBox"); // Запускаем поток
+                                        while (myThread.IsAlive)
+                                        {
+                                            Thread.Sleep(1);
+                                            Application.DoEvents();
+                                        }
+                                        for (int i = 0; i < FirstListItems.Count; i++)
+                                        {
+                                            lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].NumberBox);
+                                        }
+                                        ActiveDown3button(false);
+                                        lbCardIndexList.Update();
                                         MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        tcCards.SelectedTab = tpList;
                                     }
                                     else
                                     {
@@ -1604,7 +1967,22 @@ namespace RusDictionary.Modules
                                     string NumberBoxID = JSON.Decode()[0].ID;
                                     sql = "UPDATE `cardseparator` SET `CardSeparator`= '" + tbCardsInsertAndUpdateCardSeparatorLetter.Text + "',`NumberBox`= " + NumberBoxID + " WHERE `ID` = " + Convert.ToInt32(AllCardSeparatorItems[lbCardIndexList.SelectedIndex].ID);
                                     JSON.Send(sql, JSONFlags.Update);
+                                    ClearMainList();
+                                    Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                    myThread.Start("buCardIndexMenuSeparator"); // Запускаем поток
+                                    while (myThread.IsAlive)
+                                    {
+                                        Thread.Sleep(1);
+                                        Application.DoEvents();
+                                    }
+                                    for (int i = 0; i < FirstListItems.Count; i++)
+                                    {
+                                        lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].CardSeparator);
+                                    }
+                                    ActiveDown3button(false);
+                                    lbCardIndexList.Update();
                                     MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    tcCards.SelectedTab = tpList;
                                     break;
                                 }
                             case "buCardIndexListAdd":
@@ -1616,20 +1994,33 @@ namespace RusDictionary.Modules
                                         string NumberBoxID = JSON.Decode()[0].ID;
                                         sql = "INSERT INTO `cardseparator`(`CardSeparator`, `NumberBox`) VALUES ('" + tbCardsInsertAndUpdateCardSeparatorLetter.Text + "', " + NumberBoxID + ")";
                                         JSON.Send(sql, JSONFlags.Insert);
+                                        ClearMainList();
+                                        Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                        myThread.Start("buCardIndexMenuSeparator"); // Запускаем поток
+                                        while (myThread.IsAlive)
+                                        {
+                                            Thread.Sleep(1);
+                                            Application.DoEvents();
+                                        }
+                                        for (int i = 0; i < FirstListItems.Count; i++)
+                                        {
+                                            lbCardIndexList.Items.Add((i + 1) + ") " + FirstListItems[i].CardSeparator);
+                                        }
+                                        ActiveDown3button(false);
+                                        lbCardIndexList.Update();
                                         MessageBox.Show("Операция выполнена успешно!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        tcCards.SelectedTab = tpList;
                                     }
                                     else
                                     {
                                         MessageBox.Show("Не все поля заполнены!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
-
                                     break;
                                 }
                         }
                         break;
                     }
-            }                    
-            
+            }            
         }
 
         private void CardIndexModule_SizeChanged(object sender, EventArgs e)
