@@ -133,6 +133,8 @@
             this.buSaveSettings = new System.Windows.Forms.Button();
             this.tableLayoutPanel24 = new System.Windows.Forms.TableLayoutPanel();
             this.label19 = new System.Windows.Forms.Label();
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.tbIP = new IPmaskedtextbox.IPMaskedTextBox();
             this.tableLayoutPanel20 = new System.Windows.Forms.TableLayoutPanel();
             this.pbStatusConnect = new System.Windows.Forms.PictureBox();
             this.laStatus = new System.Windows.Forms.Label();
@@ -140,8 +142,6 @@
             this.pbWait = new System.Windows.Forms.PictureBox();
             this.laWait = new System.Windows.Forms.Label();
             this.cdChangeColor = new System.Windows.Forms.ColorDialog();
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.tbIP = new IPmaskedtextbox.IPMaskedTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.MainTC.SuspendLayout();
             this.tpLogin.SuspendLayout();
@@ -525,7 +525,7 @@
             this.buIndexModule.Name = "buIndexModule";
             this.buIndexModule.Size = new System.Drawing.Size(639, 58);
             this.buIndexModule.TabIndex = 2;
-            this.buIndexModule.Text = "Библиография и указатели на источники";
+            this.buIndexModule.Text = "Указатели на источники";
             this.buIndexModule.UseVisualStyleBackColor = false;
             this.buIndexModule.Click += new System.EventHandler(this.buIndexModule_Click);
             // 
@@ -1651,6 +1651,16 @@
             this.label19.Text = "IP-адрес:";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // elementHost1
+            // 
+            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elementHost1.Location = new System.Drawing.Point(191, 3);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(224, 40);
+            this.elementHost1.TabIndex = 1;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = this.tbIP;
+            // 
             // tableLayoutPanel20
             // 
             this.tableLayoutPanel20.ColumnCount = 3;
@@ -1731,16 +1741,6 @@
             this.laWait.TabIndex = 1;
             this.laWait.Text = "Выполняется задача, пожалуйства, подождите";
             this.laWait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // elementHost1
-            // 
-            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elementHost1.Location = new System.Drawing.Point(191, 3);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(224, 40);
-            this.elementHost1.TabIndex = 1;
-            this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this.tbIP;
             // 
             // MainForm
             // 

@@ -102,8 +102,8 @@ namespace RusDictionary
             FillSetting();            
             ToolTip t = new ToolTip();
             t.SetToolTip(pbStatusConnect, "Принудительное подключение к базе данных");
-            StatusConnectionMethod();
-            ChangeStatus();
+            //StatusConnectionMethod();
+            //ChangeStatus();
             TimerStatusConnect.Start();
         }
         /// <summary>
@@ -298,7 +298,9 @@ namespace RusDictionary
         /// </summary>
         private void pbStatusConnect_Click(object sender, EventArgs e)
         {
-            StatusConnectionMethod();
+            Thread myThread = new Thread(StatusConnectionMethod); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+            myThread.IsBackground = true; // Делаем поток фоновым
+            myThread.Start(); // Запускаем поток
             ChangeStatus();
             if (ForcedConnect == true)
             {
@@ -653,6 +655,7 @@ namespace RusDictionary
             ColorText = label1.ForeColor;
             ColorBackground = tpMain.BackColor;            
             ColorButton = buAuthors.BackColor;
+            ColorTextBox = tbPort.BackColor;
             Properties.Settings.Default.IP = IP;
             Properties.Settings.Default.Port = Port;
             Properties.Settings.Default.ColorText = ColorText;

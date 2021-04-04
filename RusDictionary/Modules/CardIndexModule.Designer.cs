@@ -343,11 +343,11 @@
             this.CardstableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.CardstableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.CardstableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuWord, 2, 7);
-            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuMarker, 2, 3);
-            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuSeparator, 2, 4);
-            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuBox, 2, 5);
-            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuLetter, 2, 6);
+            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuWord, 2, 6);
+            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuMarker, 2, 7);
+            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuSeparator, 2, 5);
+            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuBox, 2, 3);
+            this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuLetter, 2, 4);
             this.CardstableLayoutPanel13.Controls.Add(this.buCardIndexMenuPrev, 4, 10);
             this.CardstableLayoutPanel13.Controls.Add(this.buTest, 3, 9);
             this.CardstableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -372,7 +372,7 @@
             // 
             this.buCardIndexMenuWord.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuWord.Location = new System.Drawing.Point(358, 337);
+            this.buCardIndexMenuWord.Location = new System.Drawing.Point(358, 285);
             this.buCardIndexMenuWord.Name = "buCardIndexMenuWord";
             this.buCardIndexMenuWord.Size = new System.Drawing.Size(298, 46);
             this.buCardIndexMenuWord.TabIndex = 6;
@@ -384,7 +384,7 @@
             // 
             this.buCardIndexMenuMarker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuMarker.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuMarker.Location = new System.Drawing.Point(358, 129);
+            this.buCardIndexMenuMarker.Location = new System.Drawing.Point(358, 337);
             this.buCardIndexMenuMarker.Name = "buCardIndexMenuMarker";
             this.buCardIndexMenuMarker.Size = new System.Drawing.Size(298, 46);
             this.buCardIndexMenuMarker.TabIndex = 0;
@@ -396,7 +396,7 @@
             // 
             this.buCardIndexMenuSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuSeparator.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuSeparator.Location = new System.Drawing.Point(358, 181);
+            this.buCardIndexMenuSeparator.Location = new System.Drawing.Point(358, 233);
             this.buCardIndexMenuSeparator.Name = "buCardIndexMenuSeparator";
             this.buCardIndexMenuSeparator.Size = new System.Drawing.Size(298, 46);
             this.buCardIndexMenuSeparator.TabIndex = 1;
@@ -408,7 +408,7 @@
             // 
             this.buCardIndexMenuBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuBox.Location = new System.Drawing.Point(358, 233);
+            this.buCardIndexMenuBox.Location = new System.Drawing.Point(358, 129);
             this.buCardIndexMenuBox.Name = "buCardIndexMenuBox";
             this.buCardIndexMenuBox.Size = new System.Drawing.Size(298, 46);
             this.buCardIndexMenuBox.TabIndex = 2;
@@ -420,7 +420,7 @@
             // 
             this.buCardIndexMenuLetter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardIndexMenuLetter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buCardIndexMenuLetter.Location = new System.Drawing.Point(358, 285);
+            this.buCardIndexMenuLetter.Location = new System.Drawing.Point(358, 181);
             this.buCardIndexMenuLetter.Name = "buCardIndexMenuLetter";
             this.buCardIndexMenuLetter.Size = new System.Drawing.Size(298, 46);
             this.buCardIndexMenuLetter.TabIndex = 3;
@@ -1522,7 +1522,7 @@
             this.tlpCard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tlpCard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 2.5F));
             this.tlpCard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tlpCard.Size = new System.Drawing.Size(817, 908);
+            this.tlpCard.Size = new System.Drawing.Size(800, 908);
             this.tlpCard.TabIndex = 0;
             // 
             // tableLayoutPanel23
@@ -1543,16 +1543,16 @@
             this.tableLayoutPanel23.Name = "tableLayoutPanel23";
             this.tableLayoutPanel23.RowCount = 1;
             this.tableLayoutPanel23.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel23.Size = new System.Drawing.Size(811, 16);
+            this.tableLayoutPanel23.Size = new System.Drawing.Size(794, 16);
             this.tableLayoutPanel23.TabIndex = 10;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
             this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label27.Location = new System.Drawing.Point(651, 0);
+            this.label27.Location = new System.Drawing.Point(635, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(157, 16);
+            this.label27.Size = new System.Drawing.Size(156, 16);
             this.label27.TabIndex = 4;
             this.label27.Text = "Уточненная дата:";
             this.label27.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1561,9 +1561,9 @@
             // 
             this.label26.AutoSize = true;
             this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label26.Location = new System.Drawing.Point(489, 0);
+            this.label26.Location = new System.Drawing.Point(477, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(156, 16);
+            this.label26.Size = new System.Drawing.Size(152, 16);
             this.label26.TabIndex = 3;
             this.label26.Text = "Дата источника:";
             this.label26.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1572,9 +1572,9 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label25.Location = new System.Drawing.Point(327, 0);
+            this.label25.Location = new System.Drawing.Point(319, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(156, 16);
+            this.label25.Size = new System.Drawing.Size(152, 16);
             this.label25.TabIndex = 2;
             this.label25.Text = "Пагинация:";
             this.label25.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1583,9 +1583,9 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label24.Location = new System.Drawing.Point(165, 0);
+            this.label24.Location = new System.Drawing.Point(161, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(156, 16);
+            this.label24.Size = new System.Drawing.Size(152, 16);
             this.label24.TabIndex = 1;
             this.label24.Text = "Уточнение к источнику:";
             this.label24.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1596,7 +1596,7 @@
             this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label23.Location = new System.Drawing.Point(3, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(156, 16);
+            this.label23.Size = new System.Drawing.Size(152, 16);
             this.label23.TabIndex = 0;
             this.label23.Text = "Шифр источника:";
             this.label23.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1613,7 +1613,7 @@
             this.tableLayoutPanel21.Name = "tableLayoutPanel21";
             this.tableLayoutPanel21.RowCount = 1;
             this.tableLayoutPanel21.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel21.Size = new System.Drawing.Size(811, 145);
+            this.tableLayoutPanel21.Size = new System.Drawing.Size(794, 145);
             this.tableLayoutPanel21.TabIndex = 8;
             // 
             // tbCardsInsertAndUpdateNotes
@@ -1622,7 +1622,7 @@
             this.tbCardsInsertAndUpdateNotes.Location = new System.Drawing.Point(3, 3);
             this.tbCardsInsertAndUpdateNotes.Multiline = true;
             this.tbCardsInsertAndUpdateNotes.Name = "tbCardsInsertAndUpdateNotes";
-            this.tbCardsInsertAndUpdateNotes.Size = new System.Drawing.Size(805, 139);
+            this.tbCardsInsertAndUpdateNotes.Size = new System.Drawing.Size(788, 139);
             this.tbCardsInsertAndUpdateNotes.TabIndex = 2;
             // 
             // tableLayoutPanel19
@@ -1638,7 +1638,7 @@
             this.tableLayoutPanel19.Name = "tableLayoutPanel19";
             this.tableLayoutPanel19.RowCount = 1;
             this.tableLayoutPanel19.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel19.Size = new System.Drawing.Size(811, 39);
+            this.tableLayoutPanel19.Size = new System.Drawing.Size(794, 39);
             this.tableLayoutPanel19.TabIndex = 4;
             // 
             // cbCardsInsertAndUpdateBox
@@ -1647,9 +1647,9 @@
             this.cbCardsInsertAndUpdateBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbCardsInsertAndUpdateBox.FormattingEnabled = true;
             this.cbCardsInsertAndUpdateBox.ItemHeight = 13;
-            this.cbCardsInsertAndUpdateBox.Location = new System.Drawing.Point(408, 3);
+            this.cbCardsInsertAndUpdateBox.Location = new System.Drawing.Point(400, 3);
             this.cbCardsInsertAndUpdateBox.Name = "cbCardsInsertAndUpdateBox";
-            this.cbCardsInsertAndUpdateBox.Size = new System.Drawing.Size(400, 21);
+            this.cbCardsInsertAndUpdateBox.Size = new System.Drawing.Size(391, 21);
             this.cbCardsInsertAndUpdateBox.TabIndex = 1;
             // 
             // tbCardsInsertAndUpdateMarker
@@ -1658,7 +1658,7 @@
             this.tbCardsInsertAndUpdateMarker.Location = new System.Drawing.Point(3, 3);
             this.tbCardsInsertAndUpdateMarker.Multiline = true;
             this.tbCardsInsertAndUpdateMarker.Name = "tbCardsInsertAndUpdateMarker";
-            this.tbCardsInsertAndUpdateMarker.Size = new System.Drawing.Size(399, 33);
+            this.tbCardsInsertAndUpdateMarker.Size = new System.Drawing.Size(391, 33);
             this.tbCardsInsertAndUpdateMarker.TabIndex = 3;
             // 
             // tableLayoutPanel18
@@ -1674,17 +1674,17 @@
             this.tableLayoutPanel18.Name = "tableLayoutPanel18";
             this.tableLayoutPanel18.RowCount = 1;
             this.tableLayoutPanel18.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel18.Size = new System.Drawing.Size(811, 16);
+            this.tableLayoutPanel18.Size = new System.Drawing.Size(794, 16);
             this.tableLayoutPanel18.TabIndex = 3;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label15.Location = new System.Drawing.Point(405, 0);
+            this.label15.Location = new System.Drawing.Point(397, 0);
             this.label15.Margin = new System.Windows.Forms.Padding(0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(406, 16);
+            this.label15.Size = new System.Drawing.Size(397, 16);
             this.label15.TabIndex = 1;
             this.label15.Text = "Ящик:";
             this.label15.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1696,7 +1696,7 @@
             this.label14.Location = new System.Drawing.Point(0, 0);
             this.label14.Margin = new System.Windows.Forms.Padding(0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(405, 16);
+            this.label14.Size = new System.Drawing.Size(397, 16);
             this.label14.TabIndex = 0;
             this.label14.Text = "Маркер:";
             this.label14.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1712,7 +1712,7 @@
             this.tableLayoutPanel17.Name = "tableLayoutPanel17";
             this.tableLayoutPanel17.RowCount = 1;
             this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel17.Size = new System.Drawing.Size(811, 39);
+            this.tableLayoutPanel17.Size = new System.Drawing.Size(794, 39);
             this.tableLayoutPanel17.TabIndex = 0;
             // 
             // buCardsInsertAndUpdateOpenImage
@@ -1720,7 +1720,7 @@
             this.buCardsInsertAndUpdateOpenImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buCardsInsertAndUpdateOpenImage.Location = new System.Drawing.Point(3, 3);
             this.buCardsInsertAndUpdateOpenImage.Name = "buCardsInsertAndUpdateOpenImage";
-            this.buCardsInsertAndUpdateOpenImage.Size = new System.Drawing.Size(156, 33);
+            this.buCardsInsertAndUpdateOpenImage.Size = new System.Drawing.Size(152, 33);
             this.buCardsInsertAndUpdateOpenImage.TabIndex = 0;
             this.buCardsInsertAndUpdateOpenImage.Text = "Добавить изображение";
             this.buCardsInsertAndUpdateOpenImage.UseVisualStyleBackColor = true;
@@ -1733,7 +1733,7 @@
             this.pbCardsInsertAndUpdateImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbCardsInsertAndUpdateImage.Location = new System.Drawing.Point(3, 3);
             this.pbCardsInsertAndUpdateImage.Name = "pbCardsInsertAndUpdateImage";
-            this.pbCardsInsertAndUpdateImage.Size = new System.Drawing.Size(811, 372);
+            this.pbCardsInsertAndUpdateImage.Size = new System.Drawing.Size(794, 372);
             this.pbCardsInsertAndUpdateImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbCardsInsertAndUpdateImage.TabIndex = 1;
             this.pbCardsInsertAndUpdateImage.TabStop = false;
@@ -1744,7 +1744,7 @@
             this.tbCardsInsertAndUpdateTextCard.Location = new System.Drawing.Point(3, 515);
             this.tbCardsInsertAndUpdateTextCard.Multiline = true;
             this.tbCardsInsertAndUpdateTextCard.Name = "tbCardsInsertAndUpdateTextCard";
-            this.tbCardsInsertAndUpdateTextCard.Size = new System.Drawing.Size(811, 145);
+            this.tbCardsInsertAndUpdateTextCard.Size = new System.Drawing.Size(794, 145);
             this.tbCardsInsertAndUpdateTextCard.TabIndex = 5;
             // 
             // label19
@@ -1753,7 +1753,7 @@
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label19.Location = new System.Drawing.Point(3, 490);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(811, 22);
+            this.label19.Size = new System.Drawing.Size(794, 22);
             this.label19.TabIndex = 6;
             this.label19.Text = "Текст карточки:";
             this.label19.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1770,7 +1770,7 @@
             this.tableLayoutPanel20.Name = "tableLayoutPanel20";
             this.tableLayoutPanel20.RowCount = 1;
             this.tableLayoutPanel20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel20.Size = new System.Drawing.Size(811, 16);
+            this.tableLayoutPanel20.Size = new System.Drawing.Size(794, 16);
             this.tableLayoutPanel20.TabIndex = 7;
             // 
             // label22
@@ -1779,7 +1779,7 @@
             this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label22.Location = new System.Drawing.Point(3, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(805, 16);
+            this.label22.Size = new System.Drawing.Size(788, 16);
             this.label22.TabIndex = 2;
             this.label22.Text = "Примечания:";
             this.label22.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1802,25 +1802,25 @@
             this.tableLayoutPanel22.Name = "tableLayoutPanel22";
             this.tableLayoutPanel22.RowCount = 1;
             this.tableLayoutPanel22.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel22.Size = new System.Drawing.Size(811, 44);
+            this.tableLayoutPanel22.Size = new System.Drawing.Size(794, 44);
             this.tableLayoutPanel22.TabIndex = 9;
             // 
             // tbCardsInsertAndUpdateSourceDateClarification
             // 
             this.tbCardsInsertAndUpdateSourceDateClarification.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbCardsInsertAndUpdateSourceDateClarification.Location = new System.Drawing.Point(651, 3);
+            this.tbCardsInsertAndUpdateSourceDateClarification.Location = new System.Drawing.Point(635, 3);
             this.tbCardsInsertAndUpdateSourceDateClarification.Multiline = true;
             this.tbCardsInsertAndUpdateSourceDateClarification.Name = "tbCardsInsertAndUpdateSourceDateClarification";
-            this.tbCardsInsertAndUpdateSourceDateClarification.Size = new System.Drawing.Size(157, 38);
+            this.tbCardsInsertAndUpdateSourceDateClarification.Size = new System.Drawing.Size(156, 38);
             this.tbCardsInsertAndUpdateSourceDateClarification.TabIndex = 4;
             // 
             // tbCardsInsertAndUpdateSourceDate
             // 
             this.tbCardsInsertAndUpdateSourceDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbCardsInsertAndUpdateSourceDate.Location = new System.Drawing.Point(489, 3);
+            this.tbCardsInsertAndUpdateSourceDate.Location = new System.Drawing.Point(477, 3);
             this.tbCardsInsertAndUpdateSourceDate.Multiline = true;
             this.tbCardsInsertAndUpdateSourceDate.Name = "tbCardsInsertAndUpdateSourceDate";
-            this.tbCardsInsertAndUpdateSourceDate.Size = new System.Drawing.Size(156, 38);
+            this.tbCardsInsertAndUpdateSourceDate.Size = new System.Drawing.Size(152, 38);
             this.tbCardsInsertAndUpdateSourceDate.TabIndex = 3;
             // 
             // tbCardsInsertAndUpdateSourceCode
@@ -1829,25 +1829,25 @@
             this.tbCardsInsertAndUpdateSourceCode.Location = new System.Drawing.Point(3, 3);
             this.tbCardsInsertAndUpdateSourceCode.Multiline = true;
             this.tbCardsInsertAndUpdateSourceCode.Name = "tbCardsInsertAndUpdateSourceCode";
-            this.tbCardsInsertAndUpdateSourceCode.Size = new System.Drawing.Size(156, 38);
+            this.tbCardsInsertAndUpdateSourceCode.Size = new System.Drawing.Size(152, 38);
             this.tbCardsInsertAndUpdateSourceCode.TabIndex = 0;
             // 
             // tbCardsInsertAndUpdateSourceCodeClarification
             // 
             this.tbCardsInsertAndUpdateSourceCodeClarification.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbCardsInsertAndUpdateSourceCodeClarification.Location = new System.Drawing.Point(165, 3);
+            this.tbCardsInsertAndUpdateSourceCodeClarification.Location = new System.Drawing.Point(161, 3);
             this.tbCardsInsertAndUpdateSourceCodeClarification.Multiline = true;
             this.tbCardsInsertAndUpdateSourceCodeClarification.Name = "tbCardsInsertAndUpdateSourceCodeClarification";
-            this.tbCardsInsertAndUpdateSourceCodeClarification.Size = new System.Drawing.Size(156, 38);
+            this.tbCardsInsertAndUpdateSourceCodeClarification.Size = new System.Drawing.Size(152, 38);
             this.tbCardsInsertAndUpdateSourceCodeClarification.TabIndex = 1;
             // 
             // tbCardsInsertAndUpdatePagination
             // 
             this.tbCardsInsertAndUpdatePagination.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbCardsInsertAndUpdatePagination.Location = new System.Drawing.Point(327, 3);
+            this.tbCardsInsertAndUpdatePagination.Location = new System.Drawing.Point(319, 3);
             this.tbCardsInsertAndUpdatePagination.Multiline = true;
             this.tbCardsInsertAndUpdatePagination.Name = "tbCardsInsertAndUpdatePagination";
-            this.tbCardsInsertAndUpdatePagination.Size = new System.Drawing.Size(156, 38);
+            this.tbCardsInsertAndUpdatePagination.Size = new System.Drawing.Size(152, 38);
             this.tbCardsInsertAndUpdatePagination.TabIndex = 2;
             // 
             // tpCardsInsertAndUpdateWord
@@ -1952,7 +1952,7 @@
             this.tlpWord.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpWord.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpWord.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpWord.Size = new System.Drawing.Size(817, 696);
+            this.tlpWord.Size = new System.Drawing.Size(800, 696);
             this.tlpWord.TabIndex = 0;
             // 
             // tableLayoutPanel40
@@ -1968,16 +1968,16 @@
             this.tableLayoutPanel40.Name = "tableLayoutPanel40";
             this.tableLayoutPanel40.RowCount = 1;
             this.tableLayoutPanel40.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel40.Size = new System.Drawing.Size(811, 166);
+            this.tableLayoutPanel40.Size = new System.Drawing.Size(794, 166);
             this.tableLayoutPanel40.TabIndex = 8;
             // 
             // tbCardsInsertAndUpdateWordValue
             // 
             this.tbCardsInsertAndUpdateWordValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbCardsInsertAndUpdateWordValue.Location = new System.Drawing.Point(408, 3);
+            this.tbCardsInsertAndUpdateWordValue.Location = new System.Drawing.Point(400, 3);
             this.tbCardsInsertAndUpdateWordValue.Multiline = true;
             this.tbCardsInsertAndUpdateWordValue.Name = "tbCardsInsertAndUpdateWordValue";
-            this.tbCardsInsertAndUpdateWordValue.Size = new System.Drawing.Size(400, 160);
+            this.tbCardsInsertAndUpdateWordValue.Size = new System.Drawing.Size(391, 160);
             this.tbCardsInsertAndUpdateWordValue.TabIndex = 1;
             // 
             // tbCardsInsertAndUpdateWordRelatedCombinations
@@ -1986,7 +1986,7 @@
             this.tbCardsInsertAndUpdateWordRelatedCombinations.Location = new System.Drawing.Point(3, 3);
             this.tbCardsInsertAndUpdateWordRelatedCombinations.Multiline = true;
             this.tbCardsInsertAndUpdateWordRelatedCombinations.Name = "tbCardsInsertAndUpdateWordRelatedCombinations";
-            this.tbCardsInsertAndUpdateWordRelatedCombinations.Size = new System.Drawing.Size(399, 160);
+            this.tbCardsInsertAndUpdateWordRelatedCombinations.Size = new System.Drawing.Size(391, 160);
             this.tbCardsInsertAndUpdateWordRelatedCombinations.TabIndex = 0;
             // 
             // tableLayoutPanel41
@@ -2007,7 +2007,7 @@
             this.tableLayoutPanel41.Name = "tableLayoutPanel41";
             this.tableLayoutPanel41.RowCount = 1;
             this.tableLayoutPanel41.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel41.Size = new System.Drawing.Size(811, 44);
+            this.tableLayoutPanel41.Size = new System.Drawing.Size(794, 44);
             this.tableLayoutPanel41.TabIndex = 4;
             // 
             // cbCardsInsertAndUpdateWordCard
@@ -2017,7 +2017,7 @@
             this.cbCardsInsertAndUpdateWordCard.ItemHeight = 13;
             this.cbCardsInsertAndUpdateWordCard.Location = new System.Drawing.Point(3, 3);
             this.cbCardsInsertAndUpdateWordCard.Name = "cbCardsInsertAndUpdateWordCard";
-            this.cbCardsInsertAndUpdateWordCard.Size = new System.Drawing.Size(156, 21);
+            this.cbCardsInsertAndUpdateWordCard.Size = new System.Drawing.Size(152, 21);
             this.cbCardsInsertAndUpdateWordCard.TabIndex = 5;
             this.cbCardsInsertAndUpdateWordCard.SelectedIndexChanged += new System.EventHandler(this.cbCardsInsertAndUpdateWordCard_SelectedIndexChanged);
             // 
@@ -2026,9 +2026,9 @@
             this.cbCardsInsertAndUpdateWordCardSeparator.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbCardsInsertAndUpdateWordCardSeparator.FormattingEnabled = true;
             this.cbCardsInsertAndUpdateWordCardSeparator.ItemHeight = 13;
-            this.cbCardsInsertAndUpdateWordCardSeparator.Location = new System.Drawing.Point(489, 3);
+            this.cbCardsInsertAndUpdateWordCardSeparator.Location = new System.Drawing.Point(477, 3);
             this.cbCardsInsertAndUpdateWordCardSeparator.Name = "cbCardsInsertAndUpdateWordCardSeparator";
-            this.cbCardsInsertAndUpdateWordCardSeparator.Size = new System.Drawing.Size(156, 21);
+            this.cbCardsInsertAndUpdateWordCardSeparator.Size = new System.Drawing.Size(152, 21);
             this.cbCardsInsertAndUpdateWordCardSeparator.TabIndex = 2;
             // 
             // cbCardsInsertAndUpdateWordBox
@@ -2036,9 +2036,9 @@
             this.cbCardsInsertAndUpdateWordBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbCardsInsertAndUpdateWordBox.FormattingEnabled = true;
             this.cbCardsInsertAndUpdateWordBox.ItemHeight = 13;
-            this.cbCardsInsertAndUpdateWordBox.Location = new System.Drawing.Point(165, 3);
+            this.cbCardsInsertAndUpdateWordBox.Location = new System.Drawing.Point(161, 3);
             this.cbCardsInsertAndUpdateWordBox.Name = "cbCardsInsertAndUpdateWordBox";
-            this.cbCardsInsertAndUpdateWordBox.Size = new System.Drawing.Size(156, 21);
+            this.cbCardsInsertAndUpdateWordBox.Size = new System.Drawing.Size(152, 21);
             this.cbCardsInsertAndUpdateWordBox.TabIndex = 1;
             // 
             // cbCardsInsertAndUpdateWordLetter
@@ -2046,18 +2046,18 @@
             this.cbCardsInsertAndUpdateWordLetter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbCardsInsertAndUpdateWordLetter.FormattingEnabled = true;
             this.cbCardsInsertAndUpdateWordLetter.ItemHeight = 13;
-            this.cbCardsInsertAndUpdateWordLetter.Location = new System.Drawing.Point(327, 3);
+            this.cbCardsInsertAndUpdateWordLetter.Location = new System.Drawing.Point(319, 3);
             this.cbCardsInsertAndUpdateWordLetter.Name = "cbCardsInsertAndUpdateWordLetter";
-            this.cbCardsInsertAndUpdateWordLetter.Size = new System.Drawing.Size(156, 21);
+            this.cbCardsInsertAndUpdateWordLetter.Size = new System.Drawing.Size(152, 21);
             this.cbCardsInsertAndUpdateWordLetter.TabIndex = 0;
             // 
             // tbCardsInsertAndUpdateWordWord
             // 
             this.tbCardsInsertAndUpdateWordWord.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbCardsInsertAndUpdateWordWord.Location = new System.Drawing.Point(651, 3);
+            this.tbCardsInsertAndUpdateWordWord.Location = new System.Drawing.Point(635, 3);
             this.tbCardsInsertAndUpdateWordWord.Multiline = true;
             this.tbCardsInsertAndUpdateWordWord.Name = "tbCardsInsertAndUpdateWordWord";
-            this.tbCardsInsertAndUpdateWordWord.Size = new System.Drawing.Size(157, 38);
+            this.tbCardsInsertAndUpdateWordWord.Size = new System.Drawing.Size(156, 38);
             this.tbCardsInsertAndUpdateWordWord.TabIndex = 4;
             // 
             // tableLayoutPanel42
@@ -2078,7 +2078,7 @@
             this.tableLayoutPanel42.Name = "tableLayoutPanel42";
             this.tableLayoutPanel42.RowCount = 1;
             this.tableLayoutPanel42.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel42.Size = new System.Drawing.Size(811, 19);
+            this.tableLayoutPanel42.Size = new System.Drawing.Size(794, 19);
             this.tableLayoutPanel42.TabIndex = 3;
             // 
             // label50
@@ -2088,7 +2088,7 @@
             this.label50.Location = new System.Drawing.Point(0, 0);
             this.label50.Margin = new System.Windows.Forms.Padding(0);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(162, 19);
+            this.label50.Size = new System.Drawing.Size(158, 19);
             this.label50.TabIndex = 5;
             this.label50.Text = "Карточка:";
             this.label50.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2097,10 +2097,10 @@
             // 
             this.label46.AutoSize = true;
             this.label46.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label46.Location = new System.Drawing.Point(648, 0);
+            this.label46.Location = new System.Drawing.Point(632, 0);
             this.label46.Margin = new System.Windows.Forms.Padding(0);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(163, 19);
+            this.label46.Size = new System.Drawing.Size(162, 19);
             this.label46.TabIndex = 4;
             this.label46.Text = "Слово:";
             this.label46.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2109,10 +2109,10 @@
             // 
             this.label47.AutoSize = true;
             this.label47.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label47.Location = new System.Drawing.Point(486, 0);
+            this.label47.Location = new System.Drawing.Point(474, 0);
             this.label47.Margin = new System.Windows.Forms.Padding(0);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(162, 19);
+            this.label47.Size = new System.Drawing.Size(158, 19);
             this.label47.TabIndex = 3;
             this.label47.Text = "Разделитель:";
             this.label47.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2121,10 +2121,10 @@
             // 
             this.label48.AutoSize = true;
             this.label48.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label48.Location = new System.Drawing.Point(324, 0);
+            this.label48.Location = new System.Drawing.Point(316, 0);
             this.label48.Margin = new System.Windows.Forms.Padding(0);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(162, 19);
+            this.label48.Size = new System.Drawing.Size(158, 19);
             this.label48.TabIndex = 2;
             this.label48.Text = "Буква:";
             this.label48.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2133,10 +2133,10 @@
             // 
             this.label49.AutoSize = true;
             this.label49.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label49.Location = new System.Drawing.Point(162, 0);
+            this.label49.Location = new System.Drawing.Point(158, 0);
             this.label49.Margin = new System.Windows.Forms.Padding(0);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(162, 19);
+            this.label49.Size = new System.Drawing.Size(158, 19);
             this.label49.TabIndex = 1;
             this.label49.Text = "Ящик:";
             this.label49.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2148,7 +2148,7 @@
             this.pbCardsInsertAndUpdateWordImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbCardsInsertAndUpdateWordImage.Location = new System.Drawing.Point(3, 3);
             this.pbCardsInsertAndUpdateWordImage.Name = "pbCardsInsertAndUpdateWordImage";
-            this.pbCardsInsertAndUpdateWordImage.Size = new System.Drawing.Size(811, 418);
+            this.pbCardsInsertAndUpdateWordImage.Size = new System.Drawing.Size(794, 418);
             this.pbCardsInsertAndUpdateWordImage.TabIndex = 1;
             this.pbCardsInsertAndUpdateWordImage.TabStop = false;
             // 
@@ -2165,16 +2165,16 @@
             this.tableLayoutPanel44.Name = "tableLayoutPanel44";
             this.tableLayoutPanel44.RowCount = 1;
             this.tableLayoutPanel44.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel44.Size = new System.Drawing.Size(811, 19);
+            this.tableLayoutPanel44.Size = new System.Drawing.Size(794, 19);
             this.tableLayoutPanel44.TabIndex = 7;
             // 
             // label53
             // 
             this.label53.AutoSize = true;
             this.label53.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label53.Location = new System.Drawing.Point(408, 0);
+            this.label53.Location = new System.Drawing.Point(400, 0);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(400, 19);
+            this.label53.Size = new System.Drawing.Size(391, 19);
             this.label53.TabIndex = 1;
             this.label53.Text = "Значение слова:";
             this.label53.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -2185,7 +2185,7 @@
             this.label54.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label54.Location = new System.Drawing.Point(3, 0);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(399, 19);
+            this.label54.Size = new System.Drawing.Size(391, 19);
             this.label54.TabIndex = 0;
             this.label54.Text = "Связ. сочетания:";
             this.label54.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
