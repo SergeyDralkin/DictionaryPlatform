@@ -1880,7 +1880,7 @@ namespace RusDictionary.Modules
             if (Names != null)
             {
                 string tmpSearch = tbWordSearch_SearchingWord.Text;
-                string textSearch = null;
+                string textSearch = "";
                 for (int i = 0; i < tmpSearch.Length; i++)
                 {
                     if (char.IsLetter(tmpSearch[i]))
@@ -1902,7 +1902,7 @@ namespace RusDictionary.Modules
                     for (int i = 0; i < Names.Count; i++)
                     {
                         line = new string[12];
-                        if (MainWord[Convert.ToInt32(Names[i]) - 1] == textSearch)
+                        if (MainWord[Convert.ToInt32(Names[i]) - 1] == textSearch || textSearch == "")
                         {
                             if (tmp /*!=*/< Convert.ToInt32(Names[i]))
                             {
@@ -1956,7 +1956,7 @@ namespace RusDictionary.Modules
                     for (int i = 0; i < Names.Count; i++)
                     {
                         line = new string[12];
-                        if (MainWord[Convert.ToInt32(Names[i]) - 1].Contains(textSearch))
+                        if (MainWord[Convert.ToInt32(Names[i]) - 1].Contains(textSearch) || textSearch == "")
                         {
                             if (tmp /*!=*/< Convert.ToInt32(Names[i]))
                             {
