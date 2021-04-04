@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buWordSearch_Read = new System.Windows.Forms.Button();
             this.tcWordSearch_Main = new System.Windows.Forms.TabControl();
             this.tpWordSearch_ReadFiles = new System.Windows.Forms.TabPage();
             this.tpWordSearch_Search = new System.Windows.Forms.TabPage();
+            this.buAddComplete = new System.Windows.Forms.Button();
+            this.buAddEntry = new System.Windows.Forms.Button();
+            this.buDeleteEntry = new System.Windows.Forms.Button();
             this.buDeleteRow = new System.Windows.Forms.Button();
             this.buAddRow = new System.Windows.Forms.Button();
             this.buCancelChanges = new System.Windows.Forms.Button();
@@ -47,9 +50,6 @@
             this.cbSearchType = new System.Windows.Forms.CheckBox();
             this.buWordSearch_FindWord = new System.Windows.Forms.Button();
             this.tbWordSearch_SearchingWord = new System.Windows.Forms.TextBox();
-            this.buDeleteEntry = new System.Windows.Forms.Button();
-            this.buAddEntry = new System.Windows.Forms.Button();
-            this.buAddComplete = new System.Windows.Forms.Button();
             this.tcWordSearch_Main.SuspendLayout();
             this.tpWordSearch_ReadFiles.SuspendLayout();
             this.tpWordSearch_Search.SuspendLayout();
@@ -84,7 +84,7 @@
             this.tpWordSearch_ReadFiles.Padding = new System.Windows.Forms.Padding(3);
             this.tpWordSearch_ReadFiles.Size = new System.Drawing.Size(1010, 522);
             this.tpWordSearch_ReadFiles.TabIndex = 0;
-            this.tpWordSearch_ReadFiles.Text = "Считывание файлов";
+            this.tpWordSearch_ReadFiles.Text = "Считывание файлов и заполнение БД";
             this.tpWordSearch_ReadFiles.UseVisualStyleBackColor = true;
             // 
             // tpWordSearch_Search
@@ -110,8 +110,41 @@
             this.tpWordSearch_Search.Padding = new System.Windows.Forms.Padding(3);
             this.tpWordSearch_Search.Size = new System.Drawing.Size(1010, 522);
             this.tpWordSearch_Search.TabIndex = 1;
-            this.tpWordSearch_Search.Text = "Поиск слов";
+            this.tpWordSearch_Search.Text = "Поиск слов по БД";
             this.tpWordSearch_Search.UseVisualStyleBackColor = true;
+            // 
+            // buAddComplete
+            // 
+            this.buAddComplete.Enabled = false;
+            this.buAddComplete.Location = new System.Drawing.Point(282, 478);
+            this.buAddComplete.Name = "buAddComplete";
+            this.buAddComplete.Size = new System.Drawing.Size(101, 35);
+            this.buAddComplete.TabIndex = 16;
+            this.buAddComplete.Text = "Добавить статью";
+            this.buAddComplete.UseVisualStyleBackColor = true;
+            this.buAddComplete.Click += new System.EventHandler(this.buAddComplete_Click);
+            // 
+            // buAddEntry
+            // 
+            this.buAddEntry.Enabled = false;
+            this.buAddEntry.Location = new System.Drawing.Point(282, 437);
+            this.buAddEntry.Name = "buAddEntry";
+            this.buAddEntry.Size = new System.Drawing.Size(101, 35);
+            this.buAddEntry.TabIndex = 15;
+            this.buAddEntry.Text = "Новая статья";
+            this.buAddEntry.UseVisualStyleBackColor = true;
+            this.buAddEntry.Click += new System.EventHandler(this.buAddEntry_Click);
+            // 
+            // buDeleteEntry
+            // 
+            this.buDeleteEntry.Enabled = false;
+            this.buDeleteEntry.Location = new System.Drawing.Point(929, 466);
+            this.buDeleteEntry.Name = "buDeleteEntry";
+            this.buDeleteEntry.Size = new System.Drawing.Size(75, 23);
+            this.buDeleteEntry.TabIndex = 14;
+            this.buDeleteEntry.Text = "Удалить";
+            this.buDeleteEntry.UseVisualStyleBackColor = true;
+            this.buDeleteEntry.Click += new System.EventHandler(this.buDeleteEntry_Click);
             // 
             // buDeleteRow
             // 
@@ -142,7 +175,7 @@
             this.buCancelChanges.Name = "buCancelChanges";
             this.buCancelChanges.Size = new System.Drawing.Size(75, 23);
             this.buCancelChanges.TabIndex = 11;
-            this.buCancelChanges.Text = "Отмена";
+            this.buCancelChanges.Text = "Отменить";
             this.buCancelChanges.UseVisualStyleBackColor = true;
             this.buCancelChanges.Click += new System.EventHandler(this.buCancelChanges_Click);
             // 
@@ -164,7 +197,7 @@
             this.buChangeEntry.Name = "buChangeEntry";
             this.buChangeEntry.Size = new System.Drawing.Size(105, 23);
             this.buChangeEntry.TabIndex = 9;
-            this.buChangeEntry.Text = "Редактирование";
+            this.buChangeEntry.Text = "Редактировать";
             this.buChangeEntry.UseVisualStyleBackColor = true;
             this.buChangeEntry.Click += new System.EventHandler(this.buChangeEntry_Click);
             // 
@@ -213,19 +246,19 @@
             // dgvResults
             // 
             this.dgvResults.AllowUserToAddRows = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvResults.Location = new System.Drawing.Point(282, 33);
             this.dgvResults.Name = "dgvResults";
             this.dgvResults.ReadOnly = true;
@@ -258,39 +291,6 @@
             this.tbWordSearch_SearchingWord.Name = "tbWordSearch_SearchingWord";
             this.tbWordSearch_SearchingWord.Size = new System.Drawing.Size(189, 20);
             this.tbWordSearch_SearchingWord.TabIndex = 0;
-            // 
-            // buDeleteEntry
-            // 
-            this.buDeleteEntry.Enabled = false;
-            this.buDeleteEntry.Location = new System.Drawing.Point(929, 466);
-            this.buDeleteEntry.Name = "buDeleteEntry";
-            this.buDeleteEntry.Size = new System.Drawing.Size(75, 23);
-            this.buDeleteEntry.TabIndex = 14;
-            this.buDeleteEntry.Text = "Удалить";
-            this.buDeleteEntry.UseVisualStyleBackColor = true;
-            this.buDeleteEntry.Click += new System.EventHandler(this.buDeleteEntry_Click);
-            // 
-            // buAddEntry
-            // 
-            this.buAddEntry.Enabled = false;
-            this.buAddEntry.Location = new System.Drawing.Point(282, 437);
-            this.buAddEntry.Name = "buAddEntry";
-            this.buAddEntry.Size = new System.Drawing.Size(101, 35);
-            this.buAddEntry.TabIndex = 15;
-            this.buAddEntry.Text = "Новая статья";
-            this.buAddEntry.UseVisualStyleBackColor = true;
-            this.buAddEntry.Click += new System.EventHandler(this.buAddEntry_Click);
-            // 
-            // buAddComplete
-            // 
-            this.buAddComplete.Enabled = false;
-            this.buAddComplete.Location = new System.Drawing.Point(282, 478);
-            this.buAddComplete.Name = "buAddComplete";
-            this.buAddComplete.Size = new System.Drawing.Size(101, 35);
-            this.buAddComplete.TabIndex = 16;
-            this.buAddComplete.Text = "Добавить статью";
-            this.buAddComplete.UseVisualStyleBackColor = true;
-            this.buAddComplete.Click += new System.EventHandler(this.buAddComplete_Click);
             // 
             // WordSearchModule
             // 
