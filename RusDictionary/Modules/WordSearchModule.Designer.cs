@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buWordSearch_Read = new System.Windows.Forms.Button();
             this.tcWordSearch_Main = new System.Windows.Forms.TabControl();
             this.tpWordSearch_ReadFiles = new System.Windows.Forms.TabPage();
             this.tpWordSearch_Search = new System.Windows.Forms.TabPage();
+            this.buDeleteRow = new System.Windows.Forms.Button();
+            this.buAddRow = new System.Windows.Forms.Button();
             this.buCancelChanges = new System.Windows.Forms.Button();
             this.buSaveEntry = new System.Windows.Forms.Button();
             this.buChangeEntry = new System.Windows.Forms.Button();
@@ -45,6 +47,9 @@
             this.cbSearchType = new System.Windows.Forms.CheckBox();
             this.buWordSearch_FindWord = new System.Windows.Forms.Button();
             this.tbWordSearch_SearchingWord = new System.Windows.Forms.TextBox();
+            this.buDeleteEntry = new System.Windows.Forms.Button();
+            this.buAddEntry = new System.Windows.Forms.Button();
+            this.buAddComplete = new System.Windows.Forms.Button();
             this.tcWordSearch_Main.SuspendLayout();
             this.tpWordSearch_ReadFiles.SuspendLayout();
             this.tpWordSearch_Search.SuspendLayout();
@@ -84,6 +89,11 @@
             // 
             // tpWordSearch_Search
             // 
+            this.tpWordSearch_Search.Controls.Add(this.buAddComplete);
+            this.tpWordSearch_Search.Controls.Add(this.buAddEntry);
+            this.tpWordSearch_Search.Controls.Add(this.buDeleteEntry);
+            this.tpWordSearch_Search.Controls.Add(this.buDeleteRow);
+            this.tpWordSearch_Search.Controls.Add(this.buAddRow);
             this.tpWordSearch_Search.Controls.Add(this.buCancelChanges);
             this.tpWordSearch_Search.Controls.Add(this.buSaveEntry);
             this.tpWordSearch_Search.Controls.Add(this.buChangeEntry);
@@ -102,6 +112,28 @@
             this.tpWordSearch_Search.TabIndex = 1;
             this.tpWordSearch_Search.Text = "Поиск слов";
             this.tpWordSearch_Search.UseVisualStyleBackColor = true;
+            // 
+            // buDeleteRow
+            // 
+            this.buDeleteRow.Enabled = false;
+            this.buDeleteRow.Location = new System.Drawing.Point(818, 466);
+            this.buDeleteRow.Name = "buDeleteRow";
+            this.buDeleteRow.Size = new System.Drawing.Size(105, 23);
+            this.buDeleteRow.TabIndex = 13;
+            this.buDeleteRow.Text = "Удалить строку";
+            this.buDeleteRow.UseVisualStyleBackColor = true;
+            this.buDeleteRow.Click += new System.EventHandler(this.buDeleteRow_Click);
+            // 
+            // buAddRow
+            // 
+            this.buAddRow.Enabled = false;
+            this.buAddRow.Location = new System.Drawing.Point(818, 437);
+            this.buAddRow.Name = "buAddRow";
+            this.buAddRow.Size = new System.Drawing.Size(105, 23);
+            this.buAddRow.TabIndex = 12;
+            this.buAddRow.Text = "Добавить строку";
+            this.buAddRow.UseVisualStyleBackColor = true;
+            this.buAddRow.Click += new System.EventHandler(this.buAddRow_Click);
             // 
             // buCancelChanges
             // 
@@ -180,23 +212,24 @@
             // 
             // dgvResults
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvResults.AllowUserToAddRows = false;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvResults.Location = new System.Drawing.Point(282, 33);
             this.dgvResults.Name = "dgvResults";
             this.dgvResults.ReadOnly = true;
-            this.dgvResults.Size = new System.Drawing.Size(722, 459);
+            this.dgvResults.Size = new System.Drawing.Size(722, 398);
             this.dgvResults.TabIndex = 4;
             // 
             // cbSearchType
@@ -225,6 +258,39 @@
             this.tbWordSearch_SearchingWord.Name = "tbWordSearch_SearchingWord";
             this.tbWordSearch_SearchingWord.Size = new System.Drawing.Size(189, 20);
             this.tbWordSearch_SearchingWord.TabIndex = 0;
+            // 
+            // buDeleteEntry
+            // 
+            this.buDeleteEntry.Enabled = false;
+            this.buDeleteEntry.Location = new System.Drawing.Point(929, 466);
+            this.buDeleteEntry.Name = "buDeleteEntry";
+            this.buDeleteEntry.Size = new System.Drawing.Size(75, 23);
+            this.buDeleteEntry.TabIndex = 14;
+            this.buDeleteEntry.Text = "Удалить";
+            this.buDeleteEntry.UseVisualStyleBackColor = true;
+            this.buDeleteEntry.Click += new System.EventHandler(this.buDeleteEntry_Click);
+            // 
+            // buAddEntry
+            // 
+            this.buAddEntry.Enabled = false;
+            this.buAddEntry.Location = new System.Drawing.Point(282, 437);
+            this.buAddEntry.Name = "buAddEntry";
+            this.buAddEntry.Size = new System.Drawing.Size(101, 35);
+            this.buAddEntry.TabIndex = 15;
+            this.buAddEntry.Text = "Новая статья";
+            this.buAddEntry.UseVisualStyleBackColor = true;
+            this.buAddEntry.Click += new System.EventHandler(this.buAddEntry_Click);
+            // 
+            // buAddComplete
+            // 
+            this.buAddComplete.Enabled = false;
+            this.buAddComplete.Location = new System.Drawing.Point(282, 478);
+            this.buAddComplete.Name = "buAddComplete";
+            this.buAddComplete.Size = new System.Drawing.Size(101, 35);
+            this.buAddComplete.TabIndex = 16;
+            this.buAddComplete.Text = "Добавить статью";
+            this.buAddComplete.UseVisualStyleBackColor = true;
+            this.buAddComplete.Click += new System.EventHandler(this.buAddComplete_Click);
             // 
             // WordSearchModule
             // 
@@ -259,5 +325,10 @@
         private System.Windows.Forms.Button buSaveEntry;
         private System.Windows.Forms.Button buChangeEntry;
         private System.Windows.Forms.Button buCancelChanges;
+        private System.Windows.Forms.Button buDeleteRow;
+        private System.Windows.Forms.Button buAddRow;
+        private System.Windows.Forms.Button buDeleteEntry;
+        private System.Windows.Forms.Button buAddEntry;
+        private System.Windows.Forms.Button buAddComplete;
     }
 }
