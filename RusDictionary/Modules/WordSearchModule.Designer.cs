@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buWordSearch_Read = new System.Windows.Forms.Button();
             this.tcWordSearch_Main = new System.Windows.Forms.TabControl();
             this.tpWordSearch_ReadFiles = new System.Windows.Forms.TabPage();
@@ -50,6 +50,7 @@
             this.cbSearchType = new System.Windows.Forms.CheckBox();
             this.buWordSearch_FindWord = new System.Windows.Forms.Button();
             this.tbWordSearch_SearchingWord = new System.Windows.Forms.TextBox();
+            this.buClearDETable = new System.Windows.Forms.Button();
             this.tcWordSearch_Main.SuspendLayout();
             this.tpWordSearch_ReadFiles.SuspendLayout();
             this.tpWordSearch_Search.SuspendLayout();
@@ -58,7 +59,7 @@
             // 
             // buWordSearch_Read
             // 
-            this.buWordSearch_Read.Location = new System.Drawing.Point(35, 31);
+            this.buWordSearch_Read.Location = new System.Drawing.Point(6, 6);
             this.buWordSearch_Read.Name = "buWordSearch_Read";
             this.buWordSearch_Read.Size = new System.Drawing.Size(128, 50);
             this.buWordSearch_Read.TabIndex = 0;
@@ -78,6 +79,7 @@
             // 
             // tpWordSearch_ReadFiles
             // 
+            this.tpWordSearch_ReadFiles.Controls.Add(this.buClearDETable);
             this.tpWordSearch_ReadFiles.Controls.Add(this.buWordSearch_Read);
             this.tpWordSearch_ReadFiles.Location = new System.Drawing.Point(4, 22);
             this.tpWordSearch_ReadFiles.Name = "tpWordSearch_ReadFiles";
@@ -246,19 +248,19 @@
             // dgvResults
             // 
             this.dgvResults.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvResults.Location = new System.Drawing.Point(282, 33);
             this.dgvResults.Name = "dgvResults";
             this.dgvResults.ReadOnly = true;
@@ -291,6 +293,16 @@
             this.tbWordSearch_SearchingWord.Name = "tbWordSearch_SearchingWord";
             this.tbWordSearch_SearchingWord.Size = new System.Drawing.Size(189, 20);
             this.tbWordSearch_SearchingWord.TabIndex = 0;
+            // 
+            // buClearDETable
+            // 
+            this.buClearDETable.Location = new System.Drawing.Point(6, 62);
+            this.buClearDETable.Name = "buClearDETable";
+            this.buClearDETable.Size = new System.Drawing.Size(128, 50);
+            this.buClearDETable.TabIndex = 1;
+            this.buClearDETable.Text = "Очистить таблицу";
+            this.buClearDETable.UseVisualStyleBackColor = true;
+            this.buClearDETable.Click += new System.EventHandler(this.buClearDETable_Click);
             // 
             // WordSearchModule
             // 
@@ -330,5 +342,6 @@
         private System.Windows.Forms.Button buDeleteEntry;
         private System.Windows.Forms.Button buAddEntry;
         private System.Windows.Forms.Button buAddComplete;
+        private System.Windows.Forms.Button buClearDETable;
     }
 }

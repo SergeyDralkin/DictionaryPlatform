@@ -23,10 +23,6 @@ namespace RusDictionary.Modules
         int mainWordNum;
         void ReadingHTM()
         {
-            string query = "TRUNCATE TABLE dictionaryentries";
-            JSON.Send(query, JSONFlags.Truncate);
-            query = "TRUNCATE TABLE mainwords";
-            JSON.Send(query, JSONFlags.Truncate);
             string line;
             //bool next = true; // Переключатель завершения считывания
             //int count = 0; // Количество строк для считывания
@@ -37,7 +33,21 @@ namespace RusDictionary.Modules
             bool newEntry = true;
             bool mainWord = false;
             bool table = false;
-            mainWordNum = 1;
+
+            List<JSONArray> jNames = new List<JSONArray>();
+            string query = "SELECT * FROM mainwords";
+            JSON.Send(query, JSONFlags.Select);
+            jNames = JSON.Decode();
+            if (jNames != null)
+            {
+                mainWordNum = jNames.Count + 1;
+                jNames.Clear();
+            }
+            else
+            {
+                mainWordNum = 1;
+            }
+
             while ((line = sr.ReadLine()) != null /*&& next*/)
             {
                 if (line.Contains("<table"))
@@ -1801,9 +1811,18 @@ namespace RusDictionary.Modules
             }
             mainWordNum++;
         }
+        void ClearTable()
+        {
+            string query = "TRUNCATE TABLE dictionaryentries";
+            JSON.Send(query, JSONFlags.Truncate);
+            query = "TRUNCATE TABLE mainwords";
+            JSON.Send(query, JSONFlags.Truncate);
+        }
         private void buWordSearch_Read_Click(object sender, EventArgs e)
         {
+            tcWordSearch_Main.Enabled = false;
             buWordSearch_Read.Enabled = false;
+            buClearDETable.Enabled = false;
             FileName.Clear();
             OpenFileDialog OPF = new OpenFileDialog(); // Инициализация диалогового окна
             OPF.Filter = "HTM|*.htm"; // Фильтр в диалоговом окне
@@ -1825,6 +1844,8 @@ namespace RusDictionary.Modules
                 MessageBox.Show("Готово", "Декомпозиция");
             }
             buWordSearch_Read.Enabled = true;
+            buClearDETable.Enabled = true;
+            tcWordSearch_Main.Enabled = true;
         }
         List<string[]> table;
         List<string[]> idMainWord;
@@ -2294,6 +2315,11 @@ namespace RusDictionary.Modules
             buAddEntry.Enabled = true;
             lbMainWords.Enabled = true;
             SearchClick();
+        }
+
+        private void buClearDETable_Click(object sender, EventArgs e)
+        {
+            ClearTable();
         }
     }
 }
