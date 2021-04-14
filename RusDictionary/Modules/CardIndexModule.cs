@@ -538,7 +538,8 @@ namespace RusDictionary.Modules
                 {
                     Program.f1.PictAndLableWait(true);
                     Thread myThread = new Thread(new ParameterizedThreadStart(ShowCards)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-                    string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                    string[] mass = { ") " };
+                    string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                     myThread.Start(SplitItem.Last()); // Запускаем поток
                     while (myThread.IsAlive)
                     {
@@ -879,7 +880,8 @@ namespace RusDictionary.Modules
                 {
                     case "buCardIndexMenuMarker":
                         {
-                            string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                            string[] mass = { ") " };
+                            string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                             string sql = "DELETE FROM `cardindex` WHERE Marker = '" + NumberCardForDelete.Last() + "'";
                             JSON.Send(sql, JSONFlags.Delete);
                             ClearMainList();
@@ -904,7 +906,8 @@ namespace RusDictionary.Modules
                         {
                             if (UseSecondList == true)
                             {
-                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string[] mass = { ") " };
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                                 string sql = "DELETE FROM `flotation` WHERE Word = '" + NumberCardForDelete.Last() + "'";
                                 JSON.Send(sql, JSONFlags.Delete);
 
@@ -928,7 +931,8 @@ namespace RusDictionary.Modules
                             }
                             else
                             {
-                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string[] mass = { ") " };
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                                 string sql = "DELETE FROM `cardseparator` WHERE CardSeparator = '" + NumberCardForDelete.Last() + "'";
                                 JSON.Send(sql, JSONFlags.Delete);
                                 ClearMainList();
@@ -953,7 +957,8 @@ namespace RusDictionary.Modules
                         {
                             if (UseSecondList == true)
                             {
-                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string[] mass = { ") " };
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                                 string sql = "DELETE FROM `flotation` WHERE Word = '" + NumberCardForDelete.Last() + "'";
                                 JSON.Send(sql, JSONFlags.Delete);
 
@@ -977,7 +982,8 @@ namespace RusDictionary.Modules
                             }
                             else
                             {
-                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string[] mass = { ") " };
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                                 string sql = "DELETE FROM `box` WHERE NumberBox = '" + NumberCardForDelete.Last() + "'";
                                 JSON.Send(sql, JSONFlags.Delete);
                                 ClearMainList();
@@ -1002,7 +1008,8 @@ namespace RusDictionary.Modules
                         {
                             if (UseSecondList == true)
                             {
-                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string[] mass = { ") " };
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                                 string sql = "DELETE FROM `flotation` WHERE Word = '" + NumberCardForDelete.Last() + "'";
                                 JSON.Send(sql, JSONFlags.Delete);
 
@@ -1026,7 +1033,8 @@ namespace RusDictionary.Modules
                             }
                             else
                             {
-                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                                string[] mass = { ") " };
+                                string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                                 string sql = "DELETE FROM `letter` WHERE Symbol = '" + NumberCardForDelete.Last() + "'";
                                 JSON.Send(sql, JSONFlags.Delete);
                                 ClearMainList();
@@ -1050,7 +1058,8 @@ namespace RusDictionary.Modules
                         }
                     case "buCardIndexMenuWord":
                         {
-                            string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(')', ' ');
+                            string[] mass = { ") " };
+                            string[] NumberCardForDelete = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                             string sql = "DELETE FROM `flotation` WHERE Word = '" + NumberCardForDelete.Last() + "'";
                             JSON.Send(sql, JSONFlags.Delete);
                             ClearMainList();
@@ -1097,7 +1106,8 @@ namespace RusDictionary.Modules
                     {
                         cbCardsInsertAndUpdateBox.Items.Clear();
                         List<Thread> MyThreads = new List<Thread>();
-                        string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                        string[] mass = { ") " };
+                        string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);                         
                         MyThreads.Add(new Thread(() => ShowCards(SplitItem.Last()))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
 
@@ -1144,7 +1154,8 @@ namespace RusDictionary.Modules
                             cbCardsInsertAndUpdateWordLetter.Items.Clear();
                             cbCardsInsertAndUpdateWordCardSeparator.Items.Clear();
                             List<Thread> MyThreads = new List<Thread>();
-                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            string[] mass = { ") " };
+                            string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                             string idWord = (SecondListItems[lbCardIndexList.SelectedIndex].ID).ToString();
 
                             MyThreads.Add(new Thread(() => ShowWordWithCard(idWord))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                                                                             
@@ -1226,7 +1237,8 @@ namespace RusDictionary.Modules
                         {
                             cbCardsInsertAndUpdateCardSeparatorBox.Items.Clear();
                             List<Thread> MyThreads = new List<Thread>();
-                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            string[] mass = { ") " };
+                            string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                             MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
 
                             MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
@@ -1273,7 +1285,8 @@ namespace RusDictionary.Modules
                             cbCardsInsertAndUpdateWordLetter.Items.Clear();
                             cbCardsInsertAndUpdateWordCardSeparator.Items.Clear();
                             List<Thread> MyThreads = new List<Thread>();
-                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            string[] mass = { ") " };
+                            string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                             string idWord = (SecondListItems[lbCardIndexList.SelectedIndex].ID).ToString();
 
                             MyThreads.Add(new Thread(() => ShowWordWithCard(idWord))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                                                                             
@@ -1354,7 +1367,8 @@ namespace RusDictionary.Modules
                         else
                         {
                             List<Thread> MyThreads = new List<Thread>();
-                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            string[] mass = { ") " };
+                            string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                             string idbox = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
                             MyThreads.Add(new Thread(() => SelectBoxID(idbox))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads[0].Start(); // Запускаем поток
@@ -1377,7 +1391,8 @@ namespace RusDictionary.Modules
                             cbCardsInsertAndUpdateWordLetter.Items.Clear();
                             cbCardsInsertAndUpdateWordCardSeparator.Items.Clear();
                             List<Thread> MyThreads = new List<Thread>();
-                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            string[] mass = { ") " };
+                            string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                             string idWord = (SecondListItems[lbCardIndexList.SelectedIndex].ID).ToString();
 
                             MyThreads.Add(new Thread(() => ShowWordWithCard(idWord))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                                                                             
@@ -1458,7 +1473,8 @@ namespace RusDictionary.Modules
                         else
                         {
                             List<Thread> MyThreads = new List<Thread>();
-                            string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                            string[] mass = { ") " };
+                            string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                             string idLetter = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
                             MyThreads.Add(new Thread(() => SelectLetter(idLetter))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                        
                             MyThreads[0].Start(); // Запускаем поток
@@ -1480,7 +1496,8 @@ namespace RusDictionary.Modules
                         cbCardsInsertAndUpdateWordLetter.Items.Clear();
                         cbCardsInsertAndUpdateWordCardSeparator.Items.Clear();
                         List<Thread> MyThreads = new List<Thread>();
-                        string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                        string[] mass = { ") " };
+                        string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                         string idWord = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
 
                         MyThreads.Add(new Thread(() => ShowWordWithCard(idWord))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                                                                             
@@ -1608,7 +1625,8 @@ namespace RusDictionary.Modules
                                     string sql = "SELECT ID FROM box WHERE NumberBox = '" + cbCardsInsertAndUpdateBox.SelectedItem.ToString() + "'";
                                     JSON.Send(sql, JSONFlags.Select);
                                     string BoxID = JSON.Decode()[0].ID;
-                                    string[] SplitItem = lbCardIndexList.SelectedItem.ToString().Split(')', ' ');
+                                    string[] mass = { ") " };
+                                    string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                                     sql = "SELECT ID FROM cardindex WHERE Marker = '" + SplitItem.Last() + "'";
                                     JSON.Send(sql, JSONFlags.Select);
                                     string CardID = JSON.Decode()[0].ID;
