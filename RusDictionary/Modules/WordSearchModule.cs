@@ -2320,6 +2320,7 @@ namespace RusDictionary.Modules
         private void buClearDETable_Click(object sender, EventArgs e)
         {
             ClearTable();
+            MessageBox.Show("Готово", "Очистка базы данных");
         }
     }
 }
