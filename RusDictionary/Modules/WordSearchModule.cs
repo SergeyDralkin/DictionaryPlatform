@@ -2322,5 +2322,30 @@ namespace RusDictionary.Modules
             ClearTable();
             MessageBox.Show("Готово", "Очистка базы данных");
         }
+
+        private void buWordSearchScanFiles_Click(object sender, EventArgs e)
+        {
+            tcWordSearch_Main.SelectedTab = tpWordSearch_ReadFiles;
+        }
+
+        private void buWordSearchFindWords_Click(object sender, EventArgs e)
+        {
+            tcWordSearch_Main.SelectedTab = tpWordSearch_Search;
+        }
+
+        private void buFindWordsBack_Click(object sender, EventArgs e)
+        {
+            tcWordSearch_Main.SelectedTab = tpWordSearchMenu;
+        }
+
+        private void buScanFilesBack_Click(object sender, EventArgs e)
+        {
+            tcWordSearch_Main.SelectedTab = tpWordSearchMenu;
+        }
+
+        private void buWordSearchModuleToMenu_Click(object sender, EventArgs e)
+        {
+            Program.f1.TCPrev();
+        }
     }
 }
