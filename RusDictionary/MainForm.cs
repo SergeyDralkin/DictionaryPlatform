@@ -93,7 +93,7 @@ namespace RusDictionary
         {
             InitializeComponent();
             //Для тестов закоментировать строчку снизу
-            //HideTabs();
+            HideTabs();
             //Для тестов закоментировать строчку сверху
             SetupFont();
             Program.f1 = this;            

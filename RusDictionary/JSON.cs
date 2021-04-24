@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Web;
+using System.Text;
 using System.Web.Script.Serialization;
 
 namespace RusDictionary
@@ -15,13 +18,25 @@ namespace RusDictionary
         /// <param name="query">Ссылка с запросом</param>
         public static void Send(string query, JSONFlags flag)
         {
-            ReturnJSON = null;
-            WebRequest req = WebRequest.Create(SendURL(flag) + WebUtility.UrlEncode(query));
-            WebResponse resp = req.GetResponse();
-            Stream stream = resp.GetResponseStream();
-            StreamReader sr = new StreamReader(stream);
+            SendURL(flag);
+            var request = (HttpWebRequest)WebRequest.Create(MainForm.URL);
+
+            var postData = "property=" + Uri.EscapeDataString(SendURL(flag));
+            postData += "&query=" + HttpUtility.UrlEncode(query);
+            var data = Encoding.ASCII.GetBytes(postData);
+
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = data.Length;
+
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(data, 0, data.Length);
+            }
+            var response = (HttpWebResponse)request.GetResponse();
+            Stream responseString = response.GetResponseStream();
+            StreamReader sr = new StreamReader(responseString);
             ReturnJSON = sr.ReadToEnd();
-            sr.Close();           
         }
         
         public static string SendURL(JSONFlags flag)
@@ -41,23 +56,23 @@ namespace RusDictionary
             {
                 case JSONFlags.Select:
                     {
-                        return MainForm.URL + "/?property=select&query=";
+                        return "select";
                     }
                 case JSONFlags.Update:
                     {
-                        return MainForm.URL + "/?property=update&query=";
+                        return "update";
                     }
                 case JSONFlags.Delete:
                     {
-                        return MainForm.URL + "/?property=delete&query=";
+                        return "delete";
                     }
                 case JSONFlags.Insert:
                     {
-                        return MainForm.URL + "/?property=insert&query=";
+                        return "insert";
                     }
                 case JSONFlags.Truncate:
                     {
-                        return MainForm.URL + "/?property=truncate&query=";
+                        return "truncate";
                     }
                 default:
                     {
