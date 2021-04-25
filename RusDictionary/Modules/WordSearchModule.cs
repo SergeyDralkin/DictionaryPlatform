@@ -2299,8 +2299,15 @@ namespace RusDictionary.Modules
             buAddRow.Enabled = false;
             buDeleteRow.Enabled = false;
             buCancelChanges.Enabled = false;
+
+            List<JSONArray> jNames = new List<JSONArray>();
+            string query = "SELECT * FROM mainwords";
+            JSON.Send(query, JSONFlags.Select);
+            jNames = JSON.Decode();
+            cntMainWord = jNames.Count;
+
             int tmp = cntMainWord + 1;
-            string query = "INSERT INTO mainwords (MAINWORD) VALUES ('" + dgvResults.Rows[0].Cells[0].Value + "')";
+            /*string*/ query = "INSERT INTO mainwords (MAINWORD) VALUES ('" + dgvResults.Rows[0].Cells[0].Value + "')";
             JSON.Send(query, JSONFlags.Insert);
             for (int i = 0; i < dgvResults.Rows.Count; i++)
             {
@@ -2311,10 +2318,13 @@ namespace RusDictionary.Modules
             dgvResults.Rows.Clear();
             dgvResults.Columns.Clear();
             dgvResults.Refresh();
-            buChangeEntry.Enabled = true;
+            //buChangeEntry.Enabled = true;
             buAddEntry.Enabled = true;
             lbMainWords.Enabled = true;
-            SearchClick();
+            if(tbWordSearch_SearchingWord.Text != "")
+            {
+                SearchClick();
+            }
         }
 
         private void buClearDETable_Click(object sender, EventArgs e)
