@@ -209,8 +209,13 @@
   <ItemGroup>
     <None Include="Resources\IndexModule\Input.docx" />
     <None Include="Resources\IndexModule\Электронный  указатель.xls" />
-    <None Include="Resources\WordSearchModule\tom2.htm" />
     <None Include="Resources\CardIndexModule\noimage.png" />
+    <Content Include="Resources\WordSearchModule\1-1.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WordSearchModule\2-1.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\IndexModule\Source.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
