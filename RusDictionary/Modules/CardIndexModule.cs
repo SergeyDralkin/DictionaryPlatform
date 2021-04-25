@@ -54,14 +54,6 @@ namespace RusDictionary.Modules
         /// </summary>
         List<JSONArray> LetterItems = new List<JSONArray>();
         /// <summary>
-        /// Список карт разделителей для одного ящика
-        /// </summary>
-        List<JSONArray> CardSeparatorItems = new List<JSONArray>();
-        /// <summary>
-        /// Список карт разделителей для одного ящика
-        /// </summary>
-        List<JSONArray> WordItems = new List<JSONArray>();
-        /// <summary>
         /// Отслеживание нажатия на кнопку "Маркер"
         /// </summary>
         public static bool CardIndexMenuMarker = false;
@@ -296,32 +288,27 @@ namespace RusDictionary.Modules
             switch (NameClickButtonInMenu)
             {
                 case "buCardIndexMenuMarker":
-                    {
-                        
+                    {                        
                         ActiveDown3button(false);
                         break;
                     }
                 case "buCardIndexMenuSeparator":
-                    {
-                        
+                    {                        
                         ActiveDown3button(false);
                         break;
                     }
                 case "buCardIndexMenuBox":
-                    {
-                        
+                    {                        
                         ActiveDown3button(false);
                         break;
                     }
                 case "buCardIndexMenuLetter":
-                    {
-                        
+                    {                        
                         ActiveDown3button(false);
                         break;
                     }
                 case "buCardIndexMenuWord":
-                    {
-                        
+                    {                        
                         ActiveDown3button(false);
                         break;
                     }
@@ -335,9 +322,6 @@ namespace RusDictionary.Modules
                 SecondListItems.Clear();
             }
             
-            /*
-             Тут нужно поменять с индекса элементана на самэлемент
-             */
             switch (NameClickButtonInMenu)
             {
                 case "buCardIndexMenuSeparator":
@@ -547,7 +531,6 @@ namespace RusDictionary.Modules
                         Application.DoEvents();
                     }
                     laCardsNumberCard.Text = "Текст карточки №" + CardMarker + ":";
-                    //laCardsFirstSeparator.Text = "Разделитель: " + CardSeparator;
                     laCardsNumberBox.Text = "Ящик: " + CardNumberBox;
                     pbPictCard.BackgroundImage = CardImage;
                     tbCardText.Text = CardText;
@@ -750,16 +733,7 @@ namespace RusDictionary.Modules
             JSON.Send(query, JSONFlags.Select);
             LetterItems = JSON.Decode();
         }
-        /// <summary>
-        /// Выбрать слово по его ID
-        /// </summary>
-        /// <param name="WordID"></param>
-        void SelectWord(string WordID)
-        {
-            string query = "SELECT * FROM flotation WHERE ID = " + WordID;
-            JSON.Send(query, JSONFlags.Select);
-            WordItems = JSON.Decode();
-        }
+        
         void ShowCards(object Number)
         {
             string query = "SELECT * FROM cardindex WHERE Marker = '" + Number + "'";
@@ -783,12 +757,7 @@ namespace RusDictionary.Modules
             CardSourceDateClarification = CardItems[0].SourceDateClarification;
             CardNotes = CardItems[0].Notes;
         }
-        void SelectCardSeparator(string ForCardSeparatorID)
-        {
-            string query = "SELECT * FROM cardseparator WHERE ID = " + ForCardSeparatorID;
-            JSON.Send(query, JSONFlags.Select);
-            CardSeparatorItems = JSON.Decode();
-        }
+        
         void ShowWordWithCard(object ID)
         {              
             string query = "SELECT * FROM flotation WHERE ID = '" + ID + "'";
@@ -831,8 +800,19 @@ namespace RusDictionary.Modules
         /// <param name="FilePath">Путь к изображению</param>
         /// <returns>Закодированное изображение</returns>
         string CodeInBase64(string FilePath)
-        { 
-            return Convert.ToBase64String(File.ReadAllBytes(FilePath));
+        {
+            MemoryStream stream = new MemoryStream();
+            Properties.Resources.noimage.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] bytes = stream.ToArray();
+            if (Convert.ToBase64String(File.ReadAllBytes(FilePath)).Equals(Convert.ToBase64String(bytes)))
+            {
+                return "";
+            }
+            else
+            {
+                return Convert.ToBase64String(File.ReadAllBytes(FilePath));
+            }
+            
         }
         /// <summary>
         /// Декодирование изображения
@@ -1141,6 +1121,7 @@ namespace RusDictionary.Modules
                         tbCardsInsertAndUpdateSourceDate.Text = CardSourceDate;
                         tbCardsInsertAndUpdateSourceDateClarification.Text = CardSourceDateClarification;
                         tbCardsInsertAndUpdateNotes.Text = CardNotes;
+                        EnableButtonDeleteImage();
                         tcCards.SelectedTab = tpCardsInsertAndUpdateCard;
                         break;
                     }
@@ -2426,6 +2407,33 @@ namespace RusDictionary.Modules
             if (OPF.ShowDialog() == DialogResult.OK)
             {
                 pbCardsInsertAndUpdateImage.Image = Image.FromFile(OPF.FileName);
+            }
+            EnableButtonDeleteImage();
+        }
+        void EnableButtonDeleteImage()
+        {
+            MemoryStream stream1 = new MemoryStream();
+            MemoryStream stream2 = new MemoryStream();
+            pbCardsInsertAndUpdateImage.Image.Save(stream1, System.Drawing.Imaging.ImageFormat.Png);
+            Properties.Resources.noimage.Save(stream2, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] bytes1 = stream1.ToArray();
+            byte[] bytes2 = stream2.ToArray();
+            if (Convert.ToBase64String(bytes1).Equals(Convert.ToBase64String(bytes2)))
+            {
+                buCardsInsertAndUpdateDeleteImage.Enabled = false;
+            }
+            else
+            {
+                buCardsInsertAndUpdateDeleteImage.Enabled = true;
+            }
+        }
+        private void buCardsInsertAndUpdateDeleteImage_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Вы уверены, что хотите удалить изображение? Отменить данное действие будет невозможно!", "Удаление изображения", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                pbCardsInsertAndUpdateImage.Image = Properties.Resources.noimage;
+                EnableButtonDeleteImage();
             }
         }
     }

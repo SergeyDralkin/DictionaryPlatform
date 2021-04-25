@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using Microsoft.Win32;
-using System.Net;
 using System.Text.RegularExpressions;
-using System.Windows.Input;
-using System.Windows.Media.TextFormatting;
-using System.Drawing.Text;
 using System.Runtime.InteropServices;
 
 namespace RusDictionary
@@ -43,15 +34,7 @@ namespace RusDictionary
         /// <summary>
         /// Статус подключения к БД
         /// </summary>
-        bool StatusConnect = false;
-        /// <summary>
-        /// Вспомогательная переменная для точки
-        /// </summary>
-        int TMPDot = 0;
-        /// <summary>
-        /// Вспомогательная переменная количества точек
-        /// </summary>
-        int TMPMaxCountDot = 3;        
+        bool StatusConnect = false;     
         /// <summary>
         /// Цвет текста
         /// </summary>
@@ -457,76 +440,6 @@ namespace RusDictionary
             }
         }
 
-        //private void tbIP_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46)
-        //    {
-        //        e.Handled = true;
-        //    }
-        //    else
-        //    {
-        //        if (tbIP.Text.Length < 15)
-        //        {
-        //            if (tbIP.Text.Length == 0 && e.KeyChar == 46)
-        //            {
-        //                e.Handled = true;
-        //            }
-        //            else
-        //            {
-        //                if (tbIP.Text.Length == 0 && e.KeyChar == 8)
-        //                {
-        //                    e.Handled = true;
-        //                }
-        //                else
-        //                {
-        //                    if (e.KeyChar != 8)
-        //                    {
-        //                        TMPMaxCountDot = 3;
-        //                        for (int i = 0; i < tbIP.Text.Length; i++)
-        //                        {
-        //                            if (tbIP.Text[i] == '.')
-        //                            {
-        //                                TMPMaxCountDot--;
-        //                            }
-        //                        }
-        //                        TMPDot = 0;
-        //                        for (int i = tbIP.Text.Length - 1; i >= 0; i--)
-        //                        {
-        //                            if (tbIP.Text[i] != '.')
-        //                            {
-        //                                TMPDot++;
-        //                            }
-        //                            else
-        //                            {
-        //                                break;
-        //                            }
-        //                        }
-        //                        if (TMPDot > 2 && TMPMaxCountDot != 0)
-        //                        {
-        //                            TMPDot = 0;
-        //                            tbIP.Text += '.';
-        //                            tbIP.SelectionStart = tbIP.Text.Length;
-        //                            TMPMaxCountDot--;
-        //                        }
-        //                        if (e.KeyChar == 46 && TMPMaxCountDot <= 0)
-        //                        {
-        //                            e.Handled = true;
-        //                        }
-        //                        else
-        //                        {
-        //                            if (TMPDot > 2)
-        //                            {
-        //                                e.Handled = true;
-        //                            }
-        //                            TMPDot++;
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-
         private void tbPort_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46)
@@ -546,7 +459,6 @@ namespace RusDictionary
                 ColorBackground = cdChangeColor.Color;
             }
         }
-
         private void buTextColor_Click(object sender, EventArgs e)
         {
             if (cdChangeColor.ShowDialog() == DialogResult.OK)
@@ -776,12 +688,10 @@ namespace RusDictionary
 
             
         }
-
         private void buSettingLogin_Click(object sender, EventArgs e)
         {
             MainTC.SelectedTab = tpSettings;
         }
-
         private void buVisiblePass_MouseLeave(object sender, EventArgs e)
         {
             switch (VisiblePass)
@@ -807,7 +717,6 @@ namespace RusDictionary
                     break;
             }
         }
-
         private void buVisiblePass_Click(object sender, EventArgs e)
         {
             switch (VisiblePass)
@@ -824,7 +733,6 @@ namespace RusDictionary
                     break;
             }
         }
-
         private void buExitLogin_Click(object sender, EventArgs e)
         {
             IfLogin = false;
