@@ -54,6 +54,14 @@ namespace RusDictionary.Modules
         /// </summary>
         List<JSONArray> LetterItems = new List<JSONArray>();
         /// <summary>
+        /// Список элементов всех указателей
+        /// </summary>
+        List<JSONArray> AllUkazItems = new List<JSONArray>();
+        /// <summary>
+        /// Список элементов всех указателей
+        /// </summary>
+        List<JSONArray> UkazItems = new List<JSONArray>();
+        /// <summary>
         /// Отслеживание нажатия на кнопку "Маркер"
         /// </summary>
         public static bool CardIndexMenuMarker = false;
@@ -733,7 +741,26 @@ namespace RusDictionary.Modules
             JSON.Send(query, JSONFlags.Select);
             LetterItems = JSON.Decode();
         }
-        
+        /// <summary>
+        /// Выбрать указатель по его ID
+        /// </summary>
+        /// <param name="LetterID"></param>
+        void SelectUkaz(string UkazID)
+        {
+            string query = "SELECT * FROM ukaz WHERE ID = " + UkazID;
+            JSON.Send(query, JSONFlags.Select);
+            UkazItems = JSON.Decode();
+        }
+        /// <summary>
+        /// Выбрать все указатели
+        /// </summary>
+        /// <param name="LetterID"></param>
+        void SelectAllUkaz()
+        {
+            string query = "SELECT * FROM ukaz";
+            JSON.Send(query, JSONFlags.Select);
+            AllUkazItems = JSON.Decode();
+        }
         void ShowCards(object Number)
         {
             string query = "SELECT * FROM cardindex WHERE Marker = '" + Number + "'";
@@ -751,7 +778,19 @@ namespace RusDictionary.Modules
             CardRelatedCombinations = CardItems[0].RelatedCombinations;
             CardValue = CardItems[0].Value;
             CardSourceCode = CardItems[0].SourceCode;
+            if (CardSourceCode != null)
+            {
+                query = "SELECT Name FROM ukaz WHERE ID = " + CardSourceCode;
+                JSON.Send(query, JSONFlags.Select);
+                CardSourceCode = JSON.Decode()[0].Name;
+            }    
             CardSourceClarification = CardItems[0].SourceClarification;
+            if (CardSourceClarification != null)
+            {
+                query = "SELECT Name FROM ukaz WHERE ID = " + CardSourceClarification;
+                JSON.Send(query, JSONFlags.Select);
+                CardSourceClarification = JSON.Decode()[0].Name;
+            }
             CardPagination = CardItems[0].Pagination;
             CardSourceDate = CardItems[0].SourceDate;
             CardSourceDateClarification = CardItems[0].SourceDateClarification;
@@ -1085,12 +1124,14 @@ namespace RusDictionary.Modules
                 case "buCardIndexMenuMarker":
                     {
                         cbCardsInsertAndUpdateBox.Items.Clear();
+                        cbCardsInsertAndUpdateSourceCode.Items.Clear();
+                        cbCardsInsertAndUpdateSourceCodeClarification.Items.Clear();
                         List<Thread> MyThreads = new List<Thread>();
                         string[] mass = { ") " };
                         string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);                         
                         MyThreads.Add(new Thread(() => ShowCards(SplitItem.Last()))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-
+                        MyThreads.Add(new Thread(() => SelectAllUkaz())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads[0].Start();
                         while (MyThreads[0].IsAlive)
                         {
@@ -1099,6 +1140,12 @@ namespace RusDictionary.Modules
                         }
                         MyThreads[1].Start();
                         while (MyThreads[1].IsAlive)
+                        {
+                            Thread.Sleep(1);
+                            Application.DoEvents();
+                        }
+                        MyThreads[2].Start();
+                        while (MyThreads[2].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
@@ -1113,10 +1160,37 @@ namespace RusDictionary.Modules
                                 cbCardsInsertAndUpdateBox.SelectedIndex = i;
                             }
                         }
+                        cbCardsInsertAndUpdateSourceCode.Items.Add("");
+                        cbCardsInsertAndUpdateSourceCodeClarification.Items.Add("");
+                        for (int i = 0; i < AllUkazItems.Count; i++)
+                        {
+                            cbCardsInsertAndUpdateSourceCode.Items.Add(AllUkazItems[i].Name);
+                            cbCardsInsertAndUpdateSourceCodeClarification.Items.Add(AllUkazItems[i].Name);
+                            if (CardSourceCode != null)
+                            {
+                                if (CardSourceCode.Equals(AllUkazItems[i].Name))
+                                {
+                                    cbCardsInsertAndUpdateSourceCode.SelectedIndex = i + 1;
+                                }
+                            }
+                            else
+                            {
+                                cbCardsInsertAndUpdateSourceCode.SelectedIndex = 0;
+                            }
+                            if (CardSourceClarification != null)
+                            {
+                                if (CardSourceClarification.Equals(AllUkazItems[i].Name))
+                                {
+                                    cbCardsInsertAndUpdateSourceCodeClarification.SelectedIndex = i + 1;
+                                }
+                            }
+                            else
+                            {
+                                cbCardsInsertAndUpdateSourceCodeClarification.SelectedIndex = 0;
+                            }
+                        }
                         pbCardsInsertAndUpdateImage.Image = CardImage;
                         tbCardsInsertAndUpdateTextCard.Text = CardText;
-                        tbCardsInsertAndUpdateSourceCode.Text = CardSourceCode;
-                        tbCardsInsertAndUpdateSourceCodeClarification.Text = CardSourceClarification;
                         tbCardsInsertAndUpdatePagination.Text = CardPagination;
                         tbCardsInsertAndUpdateSourceDate.Text = CardSourceDate;
                         tbCardsInsertAndUpdateSourceDateClarification.Text = CardSourceDateClarification;
@@ -1612,11 +1686,34 @@ namespace RusDictionary.Modules
                                     JSON.Send(sql, JSONFlags.Select);
                                     string CardID = JSON.Decode()[0].ID;
 
+                                    string SourceCodeID;
+                                    if (cbCardsInsertAndUpdateSourceCode.SelectedItem.ToString() != "")
+                                    {
+                                        sql = "SELECT ID FROM ukaz WHERE Name = '" + cbCardsInsertAndUpdateSourceCode.SelectedItem.ToString() + "'";
+                                        JSON.Send(sql, JSONFlags.Select);
+                                        SourceCodeID = JSON.Decode()[0].ID;
+                                    }
+                                    else
+                                    {
+                                        SourceCodeID = "NULL";
+                                    }
+                                    string SourceCodeClarification;
+                                    if (cbCardsInsertAndUpdateSourceCodeClarification.SelectedItem.ToString() != "")
+                                    {
+                                        sql = "SELECT ID FROM ukaz WHERE Name = '" + cbCardsInsertAndUpdateSourceCodeClarification.SelectedItem.ToString() + "'";
+                                        JSON.Send(sql, JSONFlags.Select);
+                                        SourceCodeClarification = JSON.Decode()[0].ID;
+                                    }
+                                    else
+                                    {
+                                        SourceCodeClarification = "NULL";
+                                    }                                   
+
                                     pbCardsInsertAndUpdateImage.Image.Save("tmpImage.jpg");
                                     string ImageBase64 = CodeInBase64("tmpImage.jpg");
                                     File.Delete("tmpImage.jpg");
 
-                                    sql = "UPDATE `cardindex` SET `Marker` = '" + tbCardsInsertAndUpdateMarker.Text + "', `NumberBox` = '" + BoxID + "', `img` = '" + ImageBase64 + "', `imgText` = '" + tbCardsInsertAndUpdateTextCard.Text + "', `SourceCode` = '" + tbCardsInsertAndUpdateSourceCode.Text + "', `SourceClarification` = '" + tbCardsInsertAndUpdateSourceCodeClarification.Text + "', `Pagination` = '" + tbCardsInsertAndUpdatePagination.Text + "' ,`SourceDate` = '" + tbCardsInsertAndUpdateSourceDate.Text + "', `SourceDateClarification` = '" + tbCardsInsertAndUpdateSourceDateClarification.Text + "', `Notes` =  '" + tbCardsInsertAndUpdateNotes.Text + "' WHERE `ID` = " + CardID;
+                                    sql = "UPDATE `cardindex` SET `Marker` = '" + tbCardsInsertAndUpdateMarker.Text + "', `NumberBox` = '" + BoxID + "', `img` = '" + ImageBase64 + "', `imgText` = '" + tbCardsInsertAndUpdateTextCard.Text + "', `SourceCode` = " + SourceCodeID + ", `SourceClarification` = " + SourceCodeClarification + ", `Pagination` = '" + tbCardsInsertAndUpdatePagination.Text + "' ,`SourceDate` = '" + tbCardsInsertAndUpdateSourceDate.Text + "', `SourceDateClarification` = '" + tbCardsInsertAndUpdateSourceDateClarification.Text + "', `Notes` =  '" + tbCardsInsertAndUpdateNotes.Text + "' WHERE `ID` = " + CardID;
                                                                      
                                     JSON.Send(sql, JSONFlags.Update);
                                                                         
@@ -1647,11 +1744,27 @@ namespace RusDictionary.Modules
                                         JSON.Send(sql, JSONFlags.Select);
                                         string BoxID = JSON.Decode()[0].ID;
 
+                                        sql = "SELECT ID FROM ukaz WHERE Name = '" + cbCardsInsertAndUpdateSourceCode.SelectedItem.ToString() + "'";
+                                        JSON.Send(sql, JSONFlags.Select);
+                                        string SourceCodeID = JSON.Decode()[0].ID;
+
+                                        string SourceCodeClarification;
+                                        if (cbCardsInsertAndUpdateSourceCodeClarification.SelectedItem.ToString() != "" || cbCardsInsertAndUpdateSourceCodeClarification.SelectedItem.ToString() != "")
+                                        {
+                                            sql = "SELECT ID FROM ukaz WHERE Name = '" + cbCardsInsertAndUpdateSourceCodeClarification.SelectedItem.ToString() + "'";
+                                            JSON.Send(sql, JSONFlags.Select);
+                                            SourceCodeClarification = JSON.Decode()[0].ID;
+                                        }
+                                        else
+                                        {
+                                            SourceCodeClarification = null;
+                                        }
+
                                         pbCardsInsertAndUpdateImage.Image.Save("tmpImage.jpg");
                                         string ImageBase64 = CodeInBase64("tmpImage.jpg");
                                         File.Delete("tmpImage.jpg");
 
-                                        sql = "INSERT INTO `cardindex`(`Marker`, `NumberBox`, `img`, `imgText`, `SourceCode`, `SourceClarification`, `Pagination`, `SourceDate`, `SourceDateClarification`, `Notes`) VALUES ('" + tbCardsInsertAndUpdateMarker.Text + "', '" + BoxID + "', '" + ImageBase64 + "', '" + tbCardsInsertAndUpdateTextCard.Text + "', '" + tbCardsInsertAndUpdateSourceCode.Text + "', '" + tbCardsInsertAndUpdateSourceCodeClarification.Text + "', '" + tbCardsInsertAndUpdatePagination.Text + "','" + tbCardsInsertAndUpdateSourceDate.Text + "', '" + tbCardsInsertAndUpdateSourceDateClarification.Text + "', '" + tbCardsInsertAndUpdateNotes.Text + "')";
+                                        sql = "INSERT INTO `cardindex`(`Marker`, `NumberBox`, `img`, `imgText`, `SourceCode`, `SourceClarification`, `Pagination`, `SourceDate`, `SourceDateClarification`, `Notes`) VALUES ('" + tbCardsInsertAndUpdateMarker.Text + "', '" + BoxID + "', '" + ImageBase64 + "', '" + tbCardsInsertAndUpdateTextCard.Text + "', " + SourceCodeID + ", " + SourceCodeClarification + ", '" + tbCardsInsertAndUpdatePagination.Text + "','" + tbCardsInsertAndUpdateSourceDate.Text + "', '" + tbCardsInsertAndUpdateSourceDateClarification.Text + "', '" + tbCardsInsertAndUpdateNotes.Text + "')";
                                         JSON.Send(sql, JSONFlags.Insert);
 
                                         ClearMainList();
@@ -2055,26 +2168,43 @@ namespace RusDictionary.Modules
                 case "buCardIndexMenuMarker":
                     {
                         cbCardsInsertAndUpdateBox.Items.Clear();
+                        cbCardsInsertAndUpdateSourceCode.Items.Clear();
+                        cbCardsInsertAndUpdateSourceCodeClarification.Items.Clear();
                         List<Thread> MyThreads = new List<Thread>();                        
                         MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-
+                        MyThreads.Add(new Thread(() => SelectAllUkaz())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads[0].Start();
                         while (MyThreads[0].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
-                        } 
-                        
+                        }
+                        MyThreads[1].Start();
+                        while (MyThreads[1].IsAlive)
+                        {
+                            Thread.Sleep(1);
+                            Application.DoEvents();
+                        }
+
                         for (int i = 0; i < AllBoxItems.Count; i++)
                         {
                             cbCardsInsertAndUpdateBox.Items.Add(AllBoxItems[i].NumberBox);
                         }
+                        for (int i = 0; i < AllUkazItems.Count; i++)
+                        {
+                            cbCardsInsertAndUpdateSourceCode.Items.Add(AllUkazItems[i].Name);
+                        }
+                        cbCardsInsertAndUpdateSourceCodeClarification.Items.Add("");
+                        for (int i = 0; i < AllUkazItems.Count; i++)
+                        {
+                            cbCardsInsertAndUpdateSourceCodeClarification.Items.Add(AllUkazItems[i].Name);
+                        }
                         cbCardsInsertAndUpdateBox.SelectedIndex = 0;
+                        cbCardsInsertAndUpdateSourceCode.SelectedIndex = 0;
+                        cbCardsInsertAndUpdateSourceCode.SelectedIndex = 0;
                         tbCardsInsertAndUpdateMarker.Text = "";
                         pbCardsInsertAndUpdateImage.Image = Properties.Resources.noimage;
                         tbCardsInsertAndUpdateTextCard.Text = "";
-                        tbCardsInsertAndUpdateSourceCode.Text = "";
-                        tbCardsInsertAndUpdateSourceCodeClarification.Text = "";
                         tbCardsInsertAndUpdatePagination.Text = "";
                         tbCardsInsertAndUpdateSourceDate.Text = "";
                         tbCardsInsertAndUpdateSourceDateClarification.Text = "";
