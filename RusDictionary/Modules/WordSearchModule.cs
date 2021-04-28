@@ -1697,7 +1697,10 @@ namespace RusDictionary.Modules
                         splitUkaz = EXMP[i].Split(sprtU, StringSplitOptions.RemoveEmptyEntries);
                         EXMP[i] = splitUkaz[0];
                         sourceCode[i] = Ukaz[uId];
-                        sourceDate[i] = splitUkaz[1];
+                        if (splitUkaz.Length > 1)
+                        {
+                            sourceDate[i] = splitUkaz[1];
+                        }
                     }
                     else // внутренний алгоритм
                     {
