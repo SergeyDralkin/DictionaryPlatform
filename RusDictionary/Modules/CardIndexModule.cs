@@ -231,6 +231,7 @@ namespace RusDictionary.Modules
             NameClickButtonInMenu = (sender as Button).Name.ToString();
             ClearMainList();
             Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+            myThread.IsBackground = true;
             myThread.Start(NameClickButtonInMenu); // Запускаем поток
             while (myThread.IsAlive)
             {
@@ -532,6 +533,7 @@ namespace RusDictionary.Modules
                     Thread myThread = new Thread(new ParameterizedThreadStart(ShowCards)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                     string[] mass = { ") " };
                     string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
+                    myThread.IsBackground = true;
                     myThread.Start(SplitItem.Last()); // Запускаем поток
                     while (myThread.IsAlive)
                     {
@@ -563,6 +565,7 @@ namespace RusDictionary.Modules
 
                         int ID = lbCardIndexList.SelectedIndex;
                         Thread myThread = new Thread(() => ShowWordWithCard(FirstListItems[ID].ID)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        myThread.IsBackground = true;
                         myThread.Start(); // Запускаем поток
                         while (myThread.IsAlive)
                         {
@@ -597,6 +600,7 @@ namespace RusDictionary.Modules
 
                         int ID = lbCardIndexList.SelectedIndex;
                         Thread myThread = new Thread(() => ShowWordWithCard(SecondListItems[ID].ID)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        myThread.IsBackground = true;
                         myThread.Start(); // Запускаем поток
                         while (myThread.IsAlive)
                         {
@@ -632,6 +636,7 @@ namespace RusDictionary.Modules
                     EnableElement(false);
                     Program.f1.PictAndLableWait(true);
                     Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                    myThread.IsBackground = true;
                     myThread.Start(NameClickButtonInMenu); // Запускаем поток
                     while (myThread.IsAlive)
                     {
@@ -905,6 +910,7 @@ namespace RusDictionary.Modules
                             JSON.Send(sql, JSONFlags.Delete);
                             ClearMainList();
                             Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            myThread.IsBackground = true;
                             myThread.Start("buCardIndexMenuMarker"); // Запускаем поток
                             while (myThread.IsAlive)
                             {
@@ -932,7 +938,8 @@ namespace RusDictionary.Modules
 
                                 ClearMainList();
                                 Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-                                ListBoxSelectedIndex = ListBoxSelectedIndexForUpdate;                               
+                                ListBoxSelectedIndex = ListBoxSelectedIndexForUpdate;
+                                myThread.IsBackground = true;
                                 myThread.Start("buCardIndexMenuSeparator"); // Запускаем поток
                                 while (myThread.IsAlive)
                                 {
@@ -956,6 +963,7 @@ namespace RusDictionary.Modules
                                 JSON.Send(sql, JSONFlags.Delete);
                                 ClearMainList();
                                 Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                myThread.IsBackground = true;
                                 myThread.Start("buCardIndexMenuSeparator"); // Запускаем поток
                                 while (myThread.IsAlive)
                                 {
@@ -983,7 +991,8 @@ namespace RusDictionary.Modules
 
                                 ClearMainList();
                                 Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-                                ListBoxSelectedIndex = ListBoxSelectedIndexForUpdate;                                
+                                ListBoxSelectedIndex = ListBoxSelectedIndexForUpdate;
+                                myThread.IsBackground = true;
                                 myThread.Start("buCardIndexMenuBox");                                
                                 while (myThread.IsAlive)
                                 {
@@ -1007,6 +1016,7 @@ namespace RusDictionary.Modules
                                 JSON.Send(sql, JSONFlags.Delete);
                                 ClearMainList();
                                 Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                myThread.IsBackground = true;
                                 myThread.Start("buCardIndexMenuBox"); // Запускаем поток
                                 while (myThread.IsAlive)
                                 {
@@ -1035,6 +1045,7 @@ namespace RusDictionary.Modules
                                 ClearMainList();
                                 Thread myThread = new Thread(new ParameterizedThreadStart(CreateSecondListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                                 ListBoxSelectedIndex = ListBoxSelectedIndexForUpdate;
+                                myThread.IsBackground = true;
                                 myThread.Start("buCardIndexMenuLetter");                                
                                 while (myThread.IsAlive)
                                 {
@@ -1058,6 +1069,7 @@ namespace RusDictionary.Modules
                                 JSON.Send(sql, JSONFlags.Delete);
                                 ClearMainList();
                                 Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                myThread.IsBackground = true;
                                 myThread.Start("buCardIndexMenuLetter"); // Запускаем поток
                                 while (myThread.IsAlive)
                                 {
@@ -1083,6 +1095,7 @@ namespace RusDictionary.Modules
                             JSON.Send(sql, JSONFlags.Delete);
                             ClearMainList();
                             Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            myThread.IsBackground = true;
                             myThread.Start("buCardIndexMenuWord"); // Запускаем поток
                             while (myThread.IsAlive)
                             {
@@ -1132,18 +1145,21 @@ namespace RusDictionary.Modules
                         MyThreads.Add(new Thread(() => ShowCards(SplitItem.Last()))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads.Add(new Thread(() => SelectAllUkaz())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        MyThreads[0].IsBackground = true;
                         MyThreads[0].Start();
                         while (MyThreads[0].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
+                        MyThreads[1].IsBackground = true;
                         MyThreads[1].Start();
                         while (MyThreads[1].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
+                        MyThreads[2].IsBackground = true;
                         MyThreads[2].Start();
                         while (MyThreads[2].IsAlive)
                         {
@@ -1218,31 +1234,35 @@ namespace RusDictionary.Modules
                             MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-
+                            MyThreads[0].IsBackground = true;
                             MyThreads[0].Start(); // Запускаем поток
                             while (MyThreads[0].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[1].IsBackground = true;
                             MyThreads[1].Start(); // Запускаем поток
                             while (MyThreads[1].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[2].IsBackground = true;
                             MyThreads[2].Start(); // Запускаем поток
                             while (MyThreads[2].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[3].IsBackground = true;
                             MyThreads[3].Start(); // Запускаем поток
                             while (MyThreads[3].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[4].IsBackground = true;
                             MyThreads[4].Start(); // Запускаем поток
                             while (MyThreads[4].IsAlive)
                             {
@@ -1297,12 +1317,14 @@ namespace RusDictionary.Modules
                             MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
 
                             MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads[0].IsBackground = true;
                             MyThreads[0].Start(); // Запускаем поток
                             while (MyThreads[0].IsAlive )
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[1].IsBackground = true;
                             MyThreads[1].Start();
                             while (MyThreads[1].IsAlive)
                             {
@@ -1349,31 +1371,35 @@ namespace RusDictionary.Modules
                             MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-
+                            MyThreads[0].IsBackground = true;
                             MyThreads[0].Start(); // Запускаем поток
                             while (MyThreads[0].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[1].IsBackground = true;
                             MyThreads[1].Start(); // Запускаем поток
                             while (MyThreads[1].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[2].IsBackground = true;
                             MyThreads[2].Start(); // Запускаем поток
                             while (MyThreads[2].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[3].IsBackground = true;
                             MyThreads[3].Start(); // Запускаем поток
                             while (MyThreads[3].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[4].IsBackground = true;
                             MyThreads[4].Start(); // Запускаем поток
                             while (MyThreads[4].IsAlive)
                             {
@@ -1426,6 +1452,7 @@ namespace RusDictionary.Modules
                             string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                             string idbox = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
                             MyThreads.Add(new Thread(() => SelectBoxID(idbox))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads[0].IsBackground = true;
                             MyThreads[0].Start(); // Запускаем поток
                             while (MyThreads[0].IsAlive)
                             {
@@ -1455,31 +1482,35 @@ namespace RusDictionary.Modules
                             MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-
+                            MyThreads[0].IsBackground = true;
                             MyThreads[0].Start(); // Запускаем поток
                             while (MyThreads[0].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[1].IsBackground = true;
                             MyThreads[1].Start(); // Запускаем поток
                             while (MyThreads[1].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[2].IsBackground = true;
                             MyThreads[2].Start(); // Запускаем поток
                             while (MyThreads[2].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[3].IsBackground = true;
                             MyThreads[3].Start(); // Запускаем поток
                             while (MyThreads[3].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[4].IsBackground = true;
                             MyThreads[4].Start(); // Запускаем поток
                             while (MyThreads[4].IsAlive)
                             {
@@ -1532,6 +1563,7 @@ namespace RusDictionary.Modules
                             string[] SplitItem = (lbCardIndexList.SelectedItem.ToString()).Split(mass, StringSplitOptions.RemoveEmptyEntries);
                             string idLetter = (FirstListItems[lbCardIndexList.SelectedIndex].ID).ToString();
                             MyThreads.Add(new Thread(() => SelectLetter(idLetter))); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)                        
+                            MyThreads[0].IsBackground = true;
                             MyThreads[0].Start(); // Запускаем поток
                             while (MyThreads[0].IsAlive)
                             {
@@ -1560,31 +1592,35 @@ namespace RusDictionary.Modules
                         MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-
+                        MyThreads[0].IsBackground = true;
                         MyThreads[0].Start(); // Запускаем поток
                         while (MyThreads[0].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
+                        MyThreads[1].IsBackground = true;
                         MyThreads[1].Start(); // Запускаем поток
                         while (MyThreads[1].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
+                        MyThreads[2].IsBackground = true;
                         MyThreads[2].Start(); // Запускаем поток
                         while (MyThreads[2].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
+                        MyThreads[3].IsBackground = true;
                         MyThreads[3].Start(); // Запускаем поток
                         while (MyThreads[3].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
+                        MyThreads[4].IsBackground = true;
                         MyThreads[4].Start(); // Запускаем поток
                         while (MyThreads[4].IsAlive)
                         {
@@ -1719,6 +1755,7 @@ namespace RusDictionary.Modules
                                                                         
                                     ClearMainList();
                                     Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                    myThread.IsBackground = true;
                                     myThread.Start("buCardIndexMenuMarker"); // Запускаем поток
                                     while (myThread.IsAlive)
                                     {
@@ -1769,6 +1806,7 @@ namespace RusDictionary.Modules
 
                                         ClearMainList();
                                         Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                        myThread.IsBackground = true;
                                         myThread.Start("buCardIndexMenuMarker"); // Запускаем поток
                                         while (myThread.IsAlive)
                                         {
@@ -1836,6 +1874,7 @@ namespace RusDictionary.Modules
                                     JSON.Send(sql, JSONFlags.Update);
                                     ClearMainList();
                                     Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                    myThread.IsBackground = true;
                                     myThread.Start("buCardIndexMenuWord"); // Запускаем поток
                                     while (myThread.IsAlive)
                                     {
@@ -1876,6 +1915,7 @@ namespace RusDictionary.Modules
                                             JSON.Send(sql, JSONFlags.Insert);
                                             ClearMainList();
                                             Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                            myThread.IsBackground = true;
                                             myThread.Start("buCardIndexMenuWord"); // Запускаем поток
                                             while (myThread.IsAlive)
                                             {
@@ -1912,17 +1952,20 @@ namespace RusDictionary.Modules
                                             {
                                                 case "buCardIndexMenuSeparator":
                                                     {
+                                                        myThread.IsBackground = true;
                                                         myThread.Start("buCardIndexMenuSeparator"); // Запускаем поток
                                                         break;
                                                     }
 
                                                 case "buCardIndexMenuBox":
                                                     {
+                                                        myThread.IsBackground = true;
                                                         myThread.Start("buCardIndexMenuBox");
                                                         break;
                                                     }
                                                 case "buCardIndexMenuLetter":
                                                     {
+                                                        myThread.IsBackground = true;
                                                         myThread.Start("buCardIndexMenuLetter");
                                                         break;
                                                     }
@@ -1962,6 +2005,7 @@ namespace RusDictionary.Modules
                                     JSON.Send(sql, JSONFlags.Update);
                                     ClearMainList();
                                     Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                    myThread.IsBackground = true;
                                     myThread.Start("buCardIndexMenuLetter"); // Запускаем поток
                                     while (myThread.IsAlive)
                                     {
@@ -1986,6 +2030,7 @@ namespace RusDictionary.Modules
                                         JSON.Send(sql, JSONFlags.Insert);
                                         ClearMainList();
                                         Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                        myThread.IsBackground = true;
                                         myThread.Start("buCardIndexMenuLetter"); // Запускаем поток
                                         while (myThread.IsAlive)
                                         {
@@ -2020,6 +2065,7 @@ namespace RusDictionary.Modules
                                     JSON.Send(sql, JSONFlags.Update);
                                     ClearMainList();
                                     Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                    myThread.IsBackground = true;
                                     myThread.Start("buCardIndexMenuBox"); // Запускаем поток
                                     while (myThread.IsAlive)
                                     {
@@ -2044,6 +2090,7 @@ namespace RusDictionary.Modules
                                         JSON.Send(sql, JSONFlags.Insert);
                                         ClearMainList();
                                         Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                        myThread.IsBackground = true;
                                         myThread.Start("buCardIndexMenuBox"); // Запускаем поток
                                         while (myThread.IsAlive)
                                         {
@@ -2081,6 +2128,7 @@ namespace RusDictionary.Modules
                                     JSON.Send(sql, JSONFlags.Update);
                                     ClearMainList();
                                     Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                    myThread.IsBackground = true;
                                     myThread.Start("buCardIndexMenuSeparator"); // Запускаем поток
                                     while (myThread.IsAlive)
                                     {
@@ -2108,6 +2156,7 @@ namespace RusDictionary.Modules
                                         JSON.Send(sql, JSONFlags.Insert);
                                         ClearMainList();
                                         Thread myThread = new Thread(new ParameterizedThreadStart(CreateFirstListItems)); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                                        myThread.IsBackground = true;
                                         myThread.Start("buCardIndexMenuSeparator"); // Запускаем поток
                                         while (myThread.IsAlive)
                                         {
@@ -2173,12 +2222,14 @@ namespace RusDictionary.Modules
                         List<Thread> MyThreads = new List<Thread>();                        
                         MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads.Add(new Thread(() => SelectAllUkaz())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                        MyThreads[0].IsBackground = true;
                         MyThreads[0].Start();
                         while (MyThreads[0].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
+                        MyThreads[1].IsBackground = true;
                         MyThreads[1].Start();
                         while (MyThreads[1].IsAlive)
                         {
@@ -2227,25 +2278,28 @@ namespace RusDictionary.Modules
                             MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-
+                            MyThreads[0].IsBackground = true;
                             MyThreads[0].Start(); // Запускаем поток
                             while (MyThreads[0].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[1].IsBackground = true;
                             MyThreads[1].Start(); // Запускаем поток
                             while (MyThreads[1].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[2].IsBackground = true;
                             MyThreads[2].Start(); // Запускаем поток
                             while (MyThreads[2].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[3].IsBackground = true;
                             MyThreads[3].Start(); // Запускаем поток
                             while (MyThreads[3].IsAlive)
                             {
@@ -2285,12 +2339,14 @@ namespace RusDictionary.Modules
 
                             MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
+                            MyThreads[0].IsBackground = true;
                             MyThreads[0].Start(); // Запускаем поток
                             while (MyThreads[0].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[1].IsBackground = true;
                             MyThreads[1].Start();
                             while (MyThreads[1].IsAlive)
                             {
@@ -2323,25 +2379,28 @@ namespace RusDictionary.Modules
                             MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-
+                            MyThreads[0].IsBackground = true;
                             MyThreads[0].Start(); // Запускаем поток
                             while (MyThreads[0].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[1].IsBackground = true;
                             MyThreads[1].Start(); // Запускаем поток
                             while (MyThreads[1].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[2].IsBackground = true;
                             MyThreads[2].Start(); // Запускаем поток
                             while (MyThreads[2].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[3].IsBackground = true;
                             MyThreads[3].Start(); // Запускаем поток
                             while (MyThreads[3].IsAlive)
                             {
@@ -2395,25 +2454,28 @@ namespace RusDictionary.Modules
                             MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                             MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-
+                            MyThreads[0].IsBackground = true;
                             MyThreads[0].Start(); // Запускаем поток
                             while (MyThreads[0].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[1].IsBackground = true;
                             MyThreads[1].Start(); // Запускаем поток
                             while (MyThreads[1].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[2].IsBackground = true;
                             MyThreads[2].Start(); // Запускаем поток
                             while (MyThreads[2].IsAlive)
                             {
                                 Thread.Sleep(1);
                                 Application.DoEvents();
                             }
+                            MyThreads[3].IsBackground = true;
                             MyThreads[3].Start(); // Запускаем поток
                             while (MyThreads[3].IsAlive)
                             {
@@ -2465,32 +2527,34 @@ namespace RusDictionary.Modules
                         MyThreads.Add(new Thread(() => SelectAllBox())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads.Add(new Thread(() => SelectAllLetter())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
                         MyThreads.Add(new Thread(() => SelectAllCardSeparator())); //Создаем новый объект потока (функция, которая должна выпонится в фоновом режиме)
-
+                        MyThreads[0].IsBackground = true;
                         MyThreads[0].Start(); // Запускаем поток
                         while (MyThreads[0].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
+                        MyThreads[1].IsBackground = true;
                         MyThreads[1].Start(); // Запускаем поток
                         while (MyThreads[1].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
+                        MyThreads[2].IsBackground = true;
                         MyThreads[2].Start(); // Запускаем поток
                         while (MyThreads[2].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
                         }
+                        MyThreads[3].IsBackground = true;
                         MyThreads[3].Start(); // Запускаем поток
                         while (MyThreads[3].IsAlive)
                         {
                             Thread.Sleep(1);
                             Application.DoEvents();
-                        }
-                        
+                        }                        
 
                         for (int i = 0; i < AllCardItems.Count; i++)
                         {
