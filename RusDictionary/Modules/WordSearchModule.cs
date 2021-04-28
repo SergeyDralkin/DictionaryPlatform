@@ -21,6 +21,7 @@ namespace RusDictionary.Modules
         List<string> FileName = new List<string>();
         StreamReader sr;
         int mainWordNum;
+        List<string> Ukaz;
         void ReadingHTM()
         {
             string line;
@@ -34,7 +35,7 @@ namespace RusDictionary.Modules
             bool mainWord = false;
             bool table = false;
 
-            List<JSONArray> jNames = new List<JSONArray>();
+            List<JSONArray> jNames = new List<JSONArray>(); // подсчет кол-ва статей в БД
             string query = "SELECT * FROM mainwords";
             JSON.Send(query, JSONFlags.Select);
             jNames = JSON.Decode();
@@ -46,6 +47,19 @@ namespace RusDictionary.Modules
             else
             {
                 mainWordNum = 1;
+            }
+
+            Ukaz = new List<string>();
+            jNames = new List<JSONArray>();
+            query = "SELECT * FROM ukaz";
+            JSON.Send(query, JSONFlags.Select);
+            jNames = JSON.Decode();
+            if (jNames != null)
+            {
+                for (int i = 0; i < jNames.Count; i++)
+                {
+                    Ukaz.Add(jNames[i].Name);
+                }
             }
 
             while ((line = sr.ReadLine()) != null /*&& next*/)
@@ -159,6 +173,7 @@ namespace RusDictionary.Modules
                 //    next = false;
                 //}
             }
+            Ukaz.Clear();
         }
         /// <summary>
         /// Разбиение словарной статьи
@@ -1661,88 +1676,112 @@ namespace RusDictionary.Modules
                 // здесь текст цитаты источник и дата
                 string[] sourceCode = new string[EXMP.Count];
                 string[] sourceDate = new string[EXMP.Count];
-                //string splitEXMP;
                 string[] sprt = { "///" };
+                bool findUkaz;
+                int uId = 0;
+                string[] splitUkaz;
                 for (i = 0; i < EXMP.Count; i++)
                 {
-                    //splitEXMP = EXMP[i];
-                    EXMP[i] = EXMP[i].Replace(". ", ". ///");
-                    string[] splitEXMP = EXMP[i].Split(sprt, StringSplitOptions.RemoveEmptyEntries);
-                    EXMP[i] = "";
-                    int textBorder = -1;
-                    int dateBorder = -1;
-                    bool firstDate = true;
-                    for (int j = 0; j < splitEXMP.Length; j++)
+                    findUkaz = false;
+                    for(int j = 0; j < Ukaz.Count; j++)
                     {
-                        if (splitEXMP[j].Contains("#"))
+                        if(EXMP[i].Contains(Ukaz[j]))
                         {
-                            textBorder = j;
-                        }
-                        if (firstDate && (splitEXMP[j].Contains(" в.") || splitEXMP[j].Contains(" вв.") || splitEXMP[j].Contains(" г.")))
-                        {
-                            dateBorder = j;
-                            firstDate = false;
+                            findUkaz = true;
+                            uId = j;
                         }
                     }
-                    if (textBorder != -1 || dateBorder != -1)
+                    if(findUkaz) // поиск по источникам в бд
                     {
-                        if (dateBorder != -1)
+                        string[] sprtU = { Ukaz[uId] };
+                        splitUkaz = EXMP[i].Split(sprtU, StringSplitOptions.RemoveEmptyEntries);
+                        EXMP[i] = splitUkaz[0];
+                        sourceCode[i] = Ukaz[uId];
+                        if (splitUkaz.Length > 1)
                         {
-                            for (int j = 0; j < splitEXMP.Length; j++)
-                            {
-                                if (j >= dateBorder)
-                                {
-                                    sourceDate[i] += splitEXMP[j];
-                                }
-                            }
-                        }
-                        else
-                        {
-                            for (int j = 0; j < splitEXMP.Length; j++)
-                            {
-                                if (j > textBorder)
-                                {
-                                    sourceCode[i] += splitEXMP[j];
-                                }
-                            }
-                        }
-                        if (textBorder != -1)
-                        {
-                            for (int j = 0; j < splitEXMP.Length; j++)
-                            {
-                                if (j <= textBorder)
-                                {
-                                    EXMP[i] += splitEXMP[j];
-                                }
-                            }
-                        }
-                        else
-                        {
-                            for (int j = 0; j < splitEXMP.Length; j++)
-                            {
-                                if (j < dateBorder)
-                                {
-                                    EXMP[i] += splitEXMP[j];
-                                }
-                            }
-                        }
-                        if (dateBorder != -1 && textBorder != -1)
-                        {
-                            for (int j = 0; j < splitEXMP.Length; j++)
-                            {
-                                if (j < dateBorder && j > textBorder)
-                                {
-                                    sourceCode[i] += splitEXMP[j];
-                                }
-                            }
+                            sourceDate[i] = splitUkaz[1];
                         }
                     }
-                    else
+                    else // внутренний алгоритм
                     {
-                        // перенести все в EXMP обратно
+                        EXMP[i] = EXMP[i].Replace(". ", ". ///");
+                        string[] splitEXMP = EXMP[i].Split(sprt, StringSplitOptions.RemoveEmptyEntries);
+                        EXMP[i] = "";
+                        int textBorder = -1;
+                        int dateBorder = -1;
+                        bool firstDate = true;
                         for (int j = 0; j < splitEXMP.Length; j++)
                         {
-                            EXMP[i] += splitEXMP[j];
+                            if (splitEXMP[j].Contains("#"))
+                            {
+                                textBorder = j;
+                            }
+                            if (firstDate && (splitEXMP[j].Contains(" в.") || splitEXMP[j].Contains(" вв.") || splitEXMP[j].Contains(" г.")))
+                            {
+                                dateBorder = j;
+                                firstDate = false;
+                            }
+                        }
+                        if (textBorder != -1 || dateBorder != -1)
+                        {
+                            if (dateBorder != -1)
+                            {
+                                for (int j = 0; j < splitEXMP.Length; j++)
+                                {
+                                    if (j >= dateBorder)
+                                    {
+                                        sourceDate[i] += splitEXMP[j];
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j < splitEXMP.Length; j++)
+                                {
+                                    if (j > textBorder)
+                                    {
+                                        sourceCode[i] += splitEXMP[j];
+                                    }
+                                }
+                            }
+                            if (textBorder != -1)
+                            {
+                                for (int j = 0; j < splitEXMP.Length; j++)
+                                {
+                                    if (j <= textBorder)
+                                    {
+                                        EXMP[i] += splitEXMP[j];
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                for (int j = 0; j < splitEXMP.Length; j++)
+                                {
+                                    if (j < dateBorder)
+                                    {
+                                        EXMP[i] += splitEXMP[j];
+                                    }
+                                }
+                            }
+                            if (dateBorder != -1 && textBorder != -1)
+                            {
+                                for (int j = 0; j < splitEXMP.Length; j++)
+                                {
+                                    if (j < dateBorder && j > textBorder)
+                                    {
+                                        sourceCode[i] += splitEXMP[j];
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // перенести все в EXMP обратно
+                            for (int j = 0; j < splitEXMP.Length; j++)
+                            {
+                                EXMP[i] += splitEXMP[j];
+                            }
                         }
                     }
                 }

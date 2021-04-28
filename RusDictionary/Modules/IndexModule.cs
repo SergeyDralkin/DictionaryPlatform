@@ -8,8 +8,10 @@ using CsvHelper;
 using System.IO;
 using System.Globalization;
 using System.Data.OleDb;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using DocumentFormat.OpenXml.Spreadsheet;
 using System.Collections.Generic;
 
 namespace RusDictionary.Modules
@@ -24,6 +26,10 @@ namespace RusDictionary.Modules
         string[] table_name = { "cipher", "description", "synonym", "name_source", "author", "researcher",
             "date_source", "refind_date", "language", "translation", "other_list",
             "publication", "date_structure", "reprint", "storage" };
+
+        char[] letters = Enumerable.Range('a', 'z' - 'a' + 1).Select(c => (char)c).ToArray();
+
+        int index_db = 0;
 
         DataTable dt = new DataTable();
 
@@ -77,7 +83,9 @@ namespace RusDictionary.Modules
         {
             string Item = lbName.SelectedItem.ToString();
 
-            string search = "Шифр_истоchника = \'" + Item + "\'";
+            index_db = lbName.SelectedIndex;
+
+            string search = "Шифр_источника = \'" + Item + "\'";
 
             DataRow[] foundRows = dt.Select(search);
 
@@ -99,7 +107,10 @@ namespace RusDictionary.Modules
             tb_note.Text = foundRows[0][16].ToString() + " ; " + foundRows[0][17].ToString();
 
 
-
+            buSaveToDB.Visible = true;
+            buSaveToDB.Enabled = true;
+            bu_Insert.Visible = false;
+            bu_Insert.Enabled = false;
 
             tc_index.SelectedTab = tp_sign;
 
@@ -107,7 +118,7 @@ namespace RusDictionary.Modules
 
         private void bu_open_doc_Click(object sender, EventArgs e)
         {
-            string filepath = "Resources/IndexModule/Input.docx";
+            string filepath = "";
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
 
@@ -125,7 +136,7 @@ namespace RusDictionary.Modules
 
             Body body = doc.MainDocumentPart.Document.Body;
 
-            Table table = body.Elements<Table>().First();
+            DocumentFormat.OpenXml.Wordprocessing.Table table = body.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>().First();
 
             IEnumerable<TableRow> rows = table.Elements<TableRow>();
 
@@ -143,11 +154,17 @@ namespace RusDictionary.Modules
                     i++;
                 }
             }
+            dgv_output.Rows.Clear();
+            dgv_output.Refresh();
+
 
             for (int count = 0; count < dt.Rows.Count; count++)
             {
                 var split_list = new List<string>();
                 var name_list = new List<string>();
+
+
+
 
                 string cipher = dt.Rows[count].ItemArray[0].ToString();
 
@@ -246,6 +263,338 @@ namespace RusDictionary.Modules
         }
 
         private void buRecognition_Click(object sender, EventArgs e)
+        {
+            tc_index.SelectedTab = tp_read_doc;
+        }
+
+        private void bu_RulesLoad_Click(object sender, EventArgs e)
+        {
+            dgv_rule.Rows.Clear();
+            dgv_rule.Columns.Clear();
+            dgv_rule.Refresh();
+            string filepath = "";
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    filepath = openFileDialog.FileName;
+
+            }
+            StreamReader file = new StreamReader(filepath);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("№");
+            dt.Columns.Add("Правило");
+            string newline;
+            int count = 1;
+            while ((newline = file.ReadLine()) != null)
+            {
+                DataRow dr = dt.NewRow();
+                dr[0] = count;
+                dr[1] = newline;
+                count++;
+                dt.Rows.Add(dr);
+            }
+            file.Close();
+            dgv_rule.DataSource = dt;
+            dgv_rule.Columns[0].Width = 100;
+            dgv_rule.Columns[1].Width = 650;
+
+
+        }
+
+        private void buSave_Click(object sender, EventArgs e)
+        {
+            /*
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel Document|*.xlsx";
+            sfd.Title = "Save an Image File";
+            sfd.ShowDialog();
+
+            
+            // Create a spreadsheet document by supplying the filepath.
+            // By default, AutoSave = true, Editable = true, and Type = xlsx.
+            SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(sfd.FileName, SpreadsheetDocumentType.Workbook);
+
+            // Add a WorkbookPart to the document.
+            WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
+            workbookpart.Workbook = new Workbook();
+
+            // Add a WorksheetPart to the WorkbookPart.
+            WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
+            worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+            // Add Sheets to the Workbook.
+            Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
+
+            // Append a new worksheet and associate it with the workbook.
+            Sheet sheet = new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "mySheet" };
+            sheets.Append(sheet);
+
+            // Get the sheetData cell table.
+            SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
+
+            // Add a row to the cell table.
+            Row row;
+            row = new Row() { RowIndex = 1 };
+            sheetData.Append(row);
+
+            // In the new row, find the column location to insert a cell in A1.  
+            Cell refCell = null;
+            foreach (Cell cell in row.Elements<Cell>())
+            {
+                if (string.Compare(cell.CellReference.Value, "B1", true) > 0)
+                {
+                    refCell = cell;
+                    break;
+                }
+            }
+
+            // Add the cell to the cell table at A1.
+            Cell newCell = new Cell() { CellReference = "B1" };
+            row.InsertAfter(newCell, refCell);
+
+            // Set the cell value to be a numeric value of 100.
+            newCell.CellValue = new CellValue("100");
+            newCell.DataType = new EnumValue<CellValues>(CellValues.Number);
+
+            foreach (Cell cell in row.Elements<Cell>())
+            {
+                if (string.Compare(cell.CellReference.Value, "B1", true) > 0)
+                {
+                    refCell = cell;
+                    break;
+                }
+            }
+
+            Cell newCell1 = new Cell() { CellReference = "B2" };
+            row.InsertAfter(newCell1, refCell);
+
+            // Set the cell value to be a numeric value of 100.
+            newCell1.CellValue = new CellValue("100");
+            newCell1.DataType = new EnumValue<CellValues>(CellValues.Number);
+
+            // Close the document.
+            spreadsheetDocument.Close();
+
+            
+            SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.
+            Create(sfd.FileName, SpreadsheetDocumentType.Workbook);
+
+            // Add a WorkbookPart to the document.
+            WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
+            workbookpart.Workbook = new Workbook();
+
+            // Add a WorksheetPart to the WorkbookPart.
+            WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
+            worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+            // Add Sheets to the Workbook.
+            Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.
+                AppendChild<Sheets>(new Sheets());
+
+
+            // Append a new worksheet and associate it with the workbook.
+            Sheet sheet = new Sheet()
+            {
+                Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart),
+                SheetId = 1,
+                Name = "Вывод"
+            };
+            sheets.Append(sheet);
+
+            workbookpart.Workbook.Save();
+
+            Worksheet worksheet = new Worksheet();
+            SheetData sheetData = new SheetData();
+
+            for (int i = 0; i < dgv_output.Rows.Count; i++)
+            {
+                Row row = new Row();
+                for (int j = 0; j < dgv_output.Columns.Count; j++)
+                {
+                    if (dgv_output.Rows[i].Cells[j].Value != null)
+                    {
+                        Cell cell = new Cell()
+                        {
+                            CellReference = letters[j].ToString() + i.ToString(),
+                            DataType = CellValues.String,
+                            CellValue = new CellValue(dgv_output.Rows[i].Cells[j].Value.ToString())
+                        };
+                        row.Append(cell);
+                    }
+                    else
+                    { 
+                    }
+                }
+                sheetData.Append(row);
+
+
+            }
+
+            worksheet.Append(sheetData);
+            worksheetPart.Worksheet = worksheet;
+
+            workbookpart.Workbook.Save();
+
+
+            // Close the document.
+            spreadsheetDocument.Close();
+            */
+
+
+        }
+
+        private void buSaveToDB_Click(object sender, EventArgs e)
+        {
+            foreach (DataRow dr in dt.Rows) // search whole table
+            {
+                if (dr[base_name[0]].ToString() == tb_cipher.Text) // if id==2
+                {
+                    dr[base_name[1]] = tb_description.Text;
+
+                    dr[base_name[2]] = tb_synonym.Text;
+                    dr[base_name[3]] = tb_name_source.Text;
+                    dr[base_name[4]] = tb_author.Text;
+                    dr[base_name[5]] = tb_researcher.Text;
+                    dr[base_name[6]] = tb_date_source.Text;
+                    dr[base_name[7]] = tb_refind_date.Text;
+                    dr[base_name[8]] = tb_language.Text;
+                    dr[base_name[9]] = tb_translation.Text;
+                    dr[base_name[10]] = tb_publication.Text;
+                    dr[base_name[11]] = tb_other_list.Text;
+                    dr[base_name[12]] = tb_date_structure.Text;
+                    dr[base_name[12]] = tb_reprint.Text;
+                    dr[base_name[12]] = tb_storage.Text;
+
+                }
+            }
+
+        }
+
+        private void bu_to_bd_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow data in dgv_output.Rows)
+            {
+                if (lbName.Items.IndexOf(data.Cells[0]) > 0)
+                {
+                    ///
+                }
+
+            }
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bu_Insert_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(tb_cipher.Text))
+            {
+                DataRow dr = dt.NewRow();
+                dr[base_name[0]] = tb_cipher.Text;
+                dr[base_name[1]] = tb_description.Text;
+                dr[base_name[2]] = tb_synonym.Text;
+                dr[base_name[3]] = tb_name_source.Text;
+                dr[base_name[4]] = tb_author.Text;
+                dr[base_name[5]] = tb_researcher.Text;
+                dr[base_name[6]] = tb_date_source.Text;
+                dr[base_name[7]] = tb_refind_date.Text;
+                dr[base_name[8]] = tb_language.Text;
+                dr[base_name[9]] = tb_translation.Text;
+                dr[base_name[10]] = tb_publication.Text;
+                dr[base_name[11]] = tb_other_list.Text;
+                dr[base_name[12]] = tb_date_structure.Text;
+                dr[base_name[12]] = tb_reprint.Text;
+                dr[base_name[12]] = tb_storage.Text;
+
+
+                dt.Rows.Add(dr);
+
+                /*
+                foreach (object item in lbName.Items)
+                {
+                    var it = item.ToString();
+                    if ((tb_cipher.Text[0] - it[0]) != 0)
+                    {
+                        int curIndex = lbName.Items.IndexOf(it);
+
+                        dt.Rows.InsertAt(dr, curIndex);
+                        break;
+                    }
+                    if ((tb_cipher.Text[1] - it[1]) == 0)
+                    {
+
+                    }
+
+                }
+                */
+            }
+            else
+                MessageBox.Show("заполните поле шифр");
+
+
+        }
+
+        private void bu_Create_Click(object sender, EventArgs e)
+        {
+            tc_index.SelectedTab = tp_sign;
+            tb_cipher.Text = "";
+            tb_description.Text = "";
+            tb_synonym.Text = "";
+            tb_name_source.Text = "";
+            tb_author.Text = "";
+            tb_researcher.Text = "";
+            tb_date_source.Text = "";
+            tb_refind_date.Text = "";
+            tb_language.Text = "";
+            tb_translation.Text = "";
+            tb_publication.Text = "";
+            tb_other_list.Text = "";
+            tb_date_structure.Text = "";
+            tb_reprint.Text = "";
+            tb_storage.Text = "";
+            tb_note.Text = "";
+            buSaveToDB.Visible = false;
+            buSaveToDB.Enabled = false;
+            bu_Insert.Visible = true;
+            bu_Insert.Enabled = true;
+        }
+
+        private void bu_delete_Click(object sender, EventArgs e)
+        {
+            if (lbName.SelectedIndex != -1)
+            {
+                lbName.Items.Remove(lbName.SelectedItem);
+            }
+            else
+            {
+                MessageBox.Show("заполните поле шифр");
+            }
+        }
+
+        private void buIndexBack_Click(object sender, EventArgs e)
+        {
+            tc_index.SelectedTab = tp_menu;
+        }
+
+        private void bu_back_list_Click(object sender, EventArgs e)
+        {
+            tc_index.SelectedTab = tp_list_sign;
+        }
+
+        private void bu_back_desc_Click(object sender, EventArgs e)
+        {
+            tc_index.SelectedTab = tp_menu;
+        }
+
+        private void bu_back_rule_Click(object sender, EventArgs e)
         {
             tc_index.SelectedTab = tp_read_doc;
         }
