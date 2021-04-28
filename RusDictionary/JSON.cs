@@ -78,8 +78,7 @@ namespace RusDictionary
                     {
                         return string.Empty;
                     }
-            }
-            
+            }            
         }
         /// <summary>
         /// Метод декодирования JSON-запроса 
@@ -128,7 +127,7 @@ namespace RusDictionary
         public string SourceDateClarification { get; set; }
         public string Notes { get; set; }
         #endregion
-        #region IndexModule 
+        #region IndexModule         
         #endregion
         #region WordSearchModule
         public string Name { get; set; }
