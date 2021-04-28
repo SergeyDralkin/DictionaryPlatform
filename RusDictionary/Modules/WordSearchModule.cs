@@ -1799,7 +1799,7 @@ namespace RusDictionary.Modules
                         }
                     }
                 }
-                //AddBD(name, semant, partOfSpeech, rod, num, defs, EXMP, sourceCode, sourceDate, sr);
+                AddBD(name, semant, partOfSpeech, rod, num, defs, EXMP, sourceCode, sourceDate, sr);
             }
         }
         string ClearTags(string s) // Очищение тагов
