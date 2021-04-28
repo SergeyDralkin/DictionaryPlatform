@@ -738,5 +738,13 @@ namespace RusDictionary
             IfLogin = false;
             MainTC.SelectedTab = tpLogin;
         }
+        public static System.Threading.Thread MyGlobalVar1;
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(MyGlobalVar1 != null)
+            {
+                MyGlobalVar1.Abort();
+            }
+        }
     }
 }

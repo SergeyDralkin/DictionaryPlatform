@@ -1683,15 +1683,15 @@ namespace RusDictionary.Modules
                 for (i = 0; i < EXMP.Count; i++)
                 {
                     findUkaz = false;
-                    for(int j = 0; j < Ukaz.Count; j++)
+                    for (int j = 0; j < Ukaz.Count; j++)
                     {
-                        if(EXMP[i].Contains(Ukaz[j]))
+                        if (EXMP[i].Contains(Ukaz[j]))
                         {
                             findUkaz = true;
                             uId = j;
                         }
                     }
-                    if(findUkaz) // поиск по источникам в бд
+                    if (findUkaz) // поиск по источникам в бд
                     {
                         string[] sprtU = { Ukaz[uId] };
                         splitUkaz = EXMP[i].Split(sprtU, StringSplitOptions.RemoveEmptyEntries);
@@ -1700,6 +1700,20 @@ namespace RusDictionary.Modules
                         if (splitUkaz.Length > 1)
                         {
                             sourceDate[i] = splitUkaz[1];
+                            sourceDate[i] = sourceDate[i].Replace(". ", ". ///");
+                            string[] splitDate = sourceDate[i].Split(sprt, StringSplitOptions.RemoveEmptyEntries);
+                            sourceDate[i] = "";
+                            for (int j = 0; j < splitDate.Length; j++)
+                            {
+                                if (splitDate[j].Contains(" в.") || splitDate[j].Contains(" вв.") || splitDate[j].Contains(" г."))
+                                {
+                                    sourceDate[i] += splitDate[j];
+                                }
+                                else
+                                {
+                                    sourceCode[i] += splitDate[j];
+                                }
+                            }
                         }
                     }
                     else // внутренний алгоритм
@@ -1785,7 +1799,7 @@ namespace RusDictionary.Modules
                         }
                     }
                 }
-                AddBD(name, semant, partOfSpeech, rod, num, defs, EXMP, sourceCode, sourceDate, sr);
+                //AddBD(name, semant, partOfSpeech, rod, num, defs, EXMP, sourceCode, sourceDate, sr);
             }
         }
         string ClearTags(string s) // Очищение тагов
@@ -1857,12 +1871,18 @@ namespace RusDictionary.Modules
             query = "TRUNCATE TABLE mainwords";
             JSON.Send(query, JSONFlags.Truncate);
         }
+        bool Decomposition = true;
         private void buWordSearch_Read_Click(object sender, EventArgs e)
         {
-            tcWordSearch_Main.Enabled = false;
+            //tcWordSearch_Main.Enabled = false;
             buWordSearch_Read.Enabled = false;
             buClearDETable.Enabled = false;
+            buScanFilesBack.Enabled = false;
             FileName.Clear();
+
+            buStopDecomposition.Visible = true;
+            buStopDecomposition.Enabled = true;
+
             OpenFileDialog OPF = new OpenFileDialog(); // Инициализация диалогового окна
             OPF.Filter = "HTM|*.htm"; // Фильтр в диалоговом окне
             if (OPF.ShowDialog() == DialogResult.OK)
@@ -1870,21 +1890,38 @@ namespace RusDictionary.Modules
                 FileName.Add(OPF.FileName); // Добавление в массив пути картинки
                 sr = new StreamReader(FileName[0], Encoding.Default);
                 Program.f1.PictAndLableWait(true);
-                List<Thread> massThread = new List<Thread>();
-                massThread.Add(new Thread(() => ReadingHTM()));
-                massThread[0].Start();
-                while (massThread[0].IsAlive)
+                //List<Thread> massThread = new List<Thread>();
+                MainForm.MyGlobalVar1 = new Thread(() => ReadingHTM());
+                //massThread.Add(new Thread(() => ReadingHTM()));
+                //massThread[0].IsBackground = true;
+                MainForm.MyGlobalVar1.IsBackground = true;
+                //massThread[0].Start();
+                MainForm.MyGlobalVar1.Start();
+
+                while (MainForm.MyGlobalVar1.IsAlive/*massThread[0].IsAlive*/ && Decomposition)
                 {
                     Thread.Sleep(1);
                     Application.DoEvents();
                 }
-                massThread.Clear();
+                //massThread.Clear();
+                MainForm.MyGlobalVar1.Abort();
                 Program.f1.PictAndLableWait(false);
-                MessageBox.Show("Готово", "Декомпозиция");
+                if(Decomposition)
+                {
+                    MessageBox.Show("Готово", "Декомпозиция");
+                }
+                else
+                {
+                    MessageBox.Show("Остановлена", "Декомпозиция");
+                }
             }
+            Decomposition = true;
+            buStopDecomposition.Visible = false;
+            buStopDecomposition.Enabled = false;
             buWordSearch_Read.Enabled = true;
             buClearDETable.Enabled = true;
-            tcWordSearch_Main.Enabled = true;
+            buScanFilesBack.Enabled = true;
+            //tcWordSearch_Main.Enabled = true;
         }
         List<string[]> table;
         List<string[]> idMainWord;
@@ -2395,6 +2432,11 @@ namespace RusDictionary.Modules
         private void buWordSearchModuleToMenu_Click(object sender, EventArgs e)
         {
             Program.f1.TCPrev();
+        }
+
+        private void buStopDecomposition_Click(object sender, EventArgs e)
+        {
+            Decomposition = false;
         }
     }
 }

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buWordSearch_Read = new System.Windows.Forms.Button();
             this.tcWordSearch_Main = new System.Windows.Forms.TabControl();
             this.tpWordSearchMenu = new System.Windows.Forms.TabPage();
@@ -66,6 +66,7 @@
             this.buWordSearch_FindWord = new System.Windows.Forms.Button();
             this.cbSearchType = new System.Windows.Forms.CheckBox();
             this.buFindWordsBack = new System.Windows.Forms.Button();
+            this.buStopDecomposition = new System.Windows.Forms.Button();
             this.tcWordSearch_Main.SuspendLayout();
             this.tpWordSearchMenu.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
@@ -114,7 +115,7 @@
             this.tpWordSearchMenu.Location = new System.Drawing.Point(4, 22);
             this.tpWordSearchMenu.Name = "tpWordSearchMenu";
             this.tpWordSearchMenu.Padding = new System.Windows.Forms.Padding(3);
-            this.tpWordSearchMenu.Size = new System.Drawing.Size(1010, 522);
+            this.tpWordSearchMenu.Size = new System.Drawing.Size(1010, 483);
             this.tpWordSearchMenu.TabIndex = 2;
             this.tpWordSearchMenu.Text = "Меню";
             this.tpWordSearchMenu.UseVisualStyleBackColor = true;
@@ -137,16 +138,16 @@
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(1004, 516);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(1004, 477);
             this.tableLayoutPanel8.TabIndex = 3;
             // 
             // buWordSearchScanFiles
             // 
             this.buWordSearchScanFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buWordSearchScanFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buWordSearchScanFiles.Location = new System.Drawing.Point(334, 106);
+            this.buWordSearchScanFiles.Location = new System.Drawing.Point(334, 98);
             this.buWordSearchScanFiles.Name = "buWordSearchScanFiles";
-            this.buWordSearchScanFiles.Size = new System.Drawing.Size(335, 97);
+            this.buWordSearchScanFiles.Size = new System.Drawing.Size(335, 89);
             this.buWordSearchScanFiles.TabIndex = 0;
             this.buWordSearchScanFiles.Text = "Считывание файлов словаря и занесение в БД";
             this.buWordSearchScanFiles.UseVisualStyleBackColor = true;
@@ -156,9 +157,9 @@
             // 
             this.buWordSearchModuleToMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buWordSearchModuleToMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buWordSearchModuleToMenu.Location = new System.Drawing.Point(334, 312);
+            this.buWordSearchModuleToMenu.Location = new System.Drawing.Point(334, 288);
             this.buWordSearchModuleToMenu.Name = "buWordSearchModuleToMenu";
-            this.buWordSearchModuleToMenu.Size = new System.Drawing.Size(335, 97);
+            this.buWordSearchModuleToMenu.Size = new System.Drawing.Size(335, 89);
             this.buWordSearchModuleToMenu.TabIndex = 2;
             this.buWordSearchModuleToMenu.Text = "Назад в меню";
             this.buWordSearchModuleToMenu.UseVisualStyleBackColor = true;
@@ -168,9 +169,9 @@
             // 
             this.buWordSearchFindWords.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buWordSearchFindWords.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buWordSearchFindWords.Location = new System.Drawing.Point(334, 209);
+            this.buWordSearchFindWords.Location = new System.Drawing.Point(334, 193);
             this.buWordSearchFindWords.Name = "buWordSearchFindWords";
-            this.buWordSearchFindWords.Size = new System.Drawing.Size(335, 97);
+            this.buWordSearchFindWords.Size = new System.Drawing.Size(335, 89);
             this.buWordSearchFindWords.TabIndex = 1;
             this.buWordSearchFindWords.Text = "Поиск словарных статей";
             this.buWordSearchFindWords.UseVisualStyleBackColor = true;
@@ -194,6 +195,7 @@
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
             this.tableLayoutPanel9.Controls.Add(this.buWordSearch_Read, 1, 1);
+            this.tableLayoutPanel9.Controls.Add(this.buStopDecomposition, 2, 1);
             this.tableLayoutPanel9.Controls.Add(this.buClearDETable, 1, 2);
             this.tableLayoutPanel9.Controls.Add(this.buScanFilesBack, 1, 3);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -419,19 +421,19 @@
             // dgvResults
             // 
             this.dgvResults.AllowUserToAddRows = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResults.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResults.Location = new System.Drawing.Point(3, 3);
             this.dgvResults.Name = "dgvResults";
@@ -583,6 +585,21 @@
             this.buFindWordsBack.UseVisualStyleBackColor = true;
             this.buFindWordsBack.Click += new System.EventHandler(this.buFindWordsBack_Click);
             // 
+            // buStopDecomposition
+            // 
+            this.buStopDecomposition.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buStopDecomposition.Enabled = false;
+            this.buStopDecomposition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buStopDecomposition.Location = new System.Drawing.Point(687, 118);
+            this.buStopDecomposition.Margin = new System.Windows.Forms.Padding(15);
+            this.buStopDecomposition.Name = "buStopDecomposition";
+            this.buStopDecomposition.Size = new System.Drawing.Size(302, 73);
+            this.buStopDecomposition.TabIndex = 3;
+            this.buStopDecomposition.Text = "Остановить";
+            this.buStopDecomposition.UseVisualStyleBackColor = true;
+            this.buStopDecomposition.Visible = false;
+            this.buStopDecomposition.Click += new System.EventHandler(this.buStopDecomposition_Click);
+            // 
             // WordSearchModule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -647,5 +664,6 @@
         private System.Windows.Forms.Button buWordSearchModuleToMenu;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.Button buStopDecomposition;
     }
 }
