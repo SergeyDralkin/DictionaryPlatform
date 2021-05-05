@@ -127,8 +127,25 @@ namespace RusDictionary
         public string SourceDateClarification { get; set; }
         public string Notes { get; set; }
         #endregion
-        #region IndexModule         
+        #region IndexModule  
+
+        public string cipher { get; set; }
+        public string description { get; set; }
+        public string synonym { get; set; }
+        public string name_source { get; set; }
+        public string author { get; set; }
+        public string researcher { get; set; }
+        public string date_source { get; set; }
+        public string refind_date { get; set; }
+        public string language { get; set; }
+        public string translation { get; set; }
+        public string publication { get; set; }
+        public string other_list { get; set; }
+        public string date_structure { get; set; }
+        public string reprint { get; set; }
+        public string storage { get; set; }
         #endregion
+
         #region WordSearchModule
         public string Name { get; set; }
         public string Semantic { get; set; }

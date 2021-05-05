@@ -76,13 +76,16 @@
             this.tb_description = new System.Windows.Forms.TextBox();
             this.buSaveToDB = new System.Windows.Forms.Button();
             this.bu_Insert = new System.Windows.Forms.Button();
+            this.bu_back_list = new System.Windows.Forms.Button();
             this.tp_read_doc = new System.Windows.Forms.TabPage();
+            this.bu_back_desc = new System.Windows.Forms.Button();
             this.bu_RulesLoad = new System.Windows.Forms.Button();
             this.dgv_rule = new System.Windows.Forms.DataGridView();
             this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rule = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bu_open_doc = new System.Windows.Forms.Button();
             this.tp_result_doc = new System.Windows.Forms.TabPage();
+            this.bu_back_rule = new System.Windows.Forms.Button();
             this.bu_to_bd = new System.Windows.Forms.Button();
             this.buSave = new System.Windows.Forms.Button();
             this.dgv_output = new System.Windows.Forms.DataGridView();
@@ -154,9 +157,6 @@
             this.tb_note_mod = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.bu_back_list = new System.Windows.Forms.Button();
-            this.bu_back_desc = new System.Windows.Forms.Button();
-            this.bu_back_rule = new System.Windows.Forms.Button();
             this.tc_index.SuspendLayout();
             this.tp_menu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -183,7 +183,7 @@
             this.tc_index.Location = new System.Drawing.Point(0, 0);
             this.tc_index.Name = "tc_index";
             this.tc_index.SelectedIndex = 0;
-            this.tc_index.Size = new System.Drawing.Size(1024, 554);
+            this.tc_index.Size = new System.Drawing.Size(1084, 691);
             this.tc_index.TabIndex = 1;
             // 
             // tp_menu
@@ -192,7 +192,7 @@
             this.tp_menu.Location = new System.Drawing.Point(4, 22);
             this.tp_menu.Name = "tp_menu";
             this.tp_menu.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_menu.Size = new System.Drawing.Size(1016, 528);
+            this.tp_menu.Size = new System.Drawing.Size(1076, 665);
             this.tp_menu.TabIndex = 0;
             this.tp_menu.Text = "Меню";
             this.tp_menu.UseVisualStyleBackColor = true;
@@ -222,14 +222,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1016, 528);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1054, 580);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // buIndexSource
             // 
-            this.buIndexSource.Location = new System.Drawing.Point(409, 159);
+            this.buIndexSource.Location = new System.Drawing.Point(423, 177);
             this.buIndexSource.Name = "buIndexSource";
-            this.buIndexSource.Size = new System.Drawing.Size(197, 46);
+            this.buIndexSource.Size = new System.Drawing.Size(204, 46);
             this.buIndexSource.TabIndex = 0;
             this.buIndexSource.Text = "Указатель источников";
             this.buIndexSource.UseVisualStyleBackColor = true;
@@ -237,19 +237,22 @@
             // 
             // buRecognition
             // 
-            this.buRecognition.Location = new System.Drawing.Point(409, 211);
+            this.buRecognition.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buRecognition.Location = new System.Drawing.Point(423, 235);
             this.buRecognition.Name = "buRecognition";
-            this.buRecognition.Size = new System.Drawing.Size(197, 46);
+            this.buRecognition.Size = new System.Drawing.Size(204, 52);
             this.buRecognition.TabIndex = 1;
-            this.buRecognition.Text = "Распознание ";
+            this.buRecognition.Text = "Распознание источников";
             this.buRecognition.UseVisualStyleBackColor = true;
             this.buRecognition.Click += new System.EventHandler(this.buRecognition_Click);
             // 
             // buIndexReturn
             // 
-            this.buIndexReturn.Location = new System.Drawing.Point(409, 471);
+            this.buIndexReturn.Location = new System.Drawing.Point(423, 525);
             this.buIndexReturn.Name = "buIndexReturn";
-            this.buIndexReturn.Size = new System.Drawing.Size(197, 54);
+            this.buIndexReturn.Size = new System.Drawing.Size(197, 52);
             this.buIndexReturn.TabIndex = 2;
             this.buIndexReturn.Text = "Назад";
             this.buIndexReturn.UseVisualStyleBackColor = true;
@@ -260,7 +263,7 @@
             this.tp_list_sign.Location = new System.Drawing.Point(4, 22);
             this.tp_list_sign.Name = "tp_list_sign";
             this.tp_list_sign.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_list_sign.Size = new System.Drawing.Size(1016, 528);
+            this.tp_list_sign.Size = new System.Drawing.Size(1076, 665);
             this.tp_list_sign.TabIndex = 1;
             this.tp_list_sign.Text = "Список источников";
             this.tp_list_sign.UseVisualStyleBackColor = true;
@@ -282,7 +285,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.90926F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1017, 529);
             this.tableLayoutPanel2.TabIndex = 0;
-            this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
             // 
             // buIndexBack
             // 
@@ -329,7 +331,7 @@
             this.tp_sign.Location = new System.Drawing.Point(4, 22);
             this.tp_sign.Name = "tp_sign";
             this.tp_sign.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_sign.Size = new System.Drawing.Size(1016, 528);
+            this.tp_sign.Size = new System.Drawing.Size(1076, 665);
             this.tp_sign.TabIndex = 2;
             this.tp_sign.Text = "Источник";
             this.tp_sign.UseVisualStyleBackColor = true;
@@ -674,6 +676,16 @@
             this.bu_Insert.UseVisualStyleBackColor = true;
             this.bu_Insert.Click += new System.EventHandler(this.bu_Insert_Click);
             // 
+            // bu_back_list
+            // 
+            this.bu_back_list.Location = new System.Drawing.Point(893, 498);
+            this.bu_back_list.Name = "bu_back_list";
+            this.bu_back_list.Size = new System.Drawing.Size(117, 23);
+            this.bu_back_list.TabIndex = 49;
+            this.bu_back_list.Text = "Назад";
+            this.bu_back_list.UseVisualStyleBackColor = true;
+            this.bu_back_list.Click += new System.EventHandler(this.bu_back_list_Click);
+            // 
             // tp_read_doc
             // 
             this.tp_read_doc.BackColor = System.Drawing.Color.SandyBrown;
@@ -687,6 +699,16 @@
             this.tp_read_doc.Size = new System.Drawing.Size(1016, 528);
             this.tp_read_doc.TabIndex = 4;
             this.tp_read_doc.Text = "Распознание";
+            // 
+            // bu_back_desc
+            // 
+            this.bu_back_desc.Location = new System.Drawing.Point(7, 131);
+            this.bu_back_desc.Name = "bu_back_desc";
+            this.bu_back_desc.Size = new System.Drawing.Size(122, 43);
+            this.bu_back_desc.TabIndex = 3;
+            this.bu_back_desc.Text = "Назад";
+            this.bu_back_desc.UseVisualStyleBackColor = true;
+            this.bu_back_desc.Click += new System.EventHandler(this.bu_back_desc_Click);
             // 
             // bu_RulesLoad
             // 
@@ -744,6 +766,16 @@
             this.tp_result_doc.Size = new System.Drawing.Size(1016, 528);
             this.tp_result_doc.TabIndex = 3;
             this.tp_result_doc.Text = "Вывод";
+            // 
+            // bu_back_rule
+            // 
+            this.bu_back_rule.Location = new System.Drawing.Point(870, 490);
+            this.bu_back_rule.Name = "bu_back_rule";
+            this.bu_back_rule.Size = new System.Drawing.Size(140, 29);
+            this.bu_back_rule.TabIndex = 3;
+            this.bu_back_rule.Text = "Назад";
+            this.bu_back_rule.UseVisualStyleBackColor = true;
+            this.bu_back_rule.Click += new System.EventHandler(this.bu_back_rule_Click);
             // 
             // bu_to_bd
             // 
@@ -1355,36 +1387,6 @@
             this.label18.Size = new System.Drawing.Size(107, 13);
             this.label18.TabIndex = 65;
             this.label18.Text = "Распознаный текст";
-            // 
-            // bu_back_list
-            // 
-            this.bu_back_list.Location = new System.Drawing.Point(893, 498);
-            this.bu_back_list.Name = "bu_back_list";
-            this.bu_back_list.Size = new System.Drawing.Size(117, 23);
-            this.bu_back_list.TabIndex = 49;
-            this.bu_back_list.Text = "Назад";
-            this.bu_back_list.UseVisualStyleBackColor = true;
-            this.bu_back_list.Click += new System.EventHandler(this.bu_back_list_Click);
-            // 
-            // bu_back_desc
-            // 
-            this.bu_back_desc.Location = new System.Drawing.Point(7, 131);
-            this.bu_back_desc.Name = "bu_back_desc";
-            this.bu_back_desc.Size = new System.Drawing.Size(122, 43);
-            this.bu_back_desc.TabIndex = 3;
-            this.bu_back_desc.Text = "Назад";
-            this.bu_back_desc.UseVisualStyleBackColor = true;
-            this.bu_back_desc.Click += new System.EventHandler(this.bu_back_desc_Click);
-            // 
-            // bu_back_rule
-            // 
-            this.bu_back_rule.Location = new System.Drawing.Point(870, 490);
-            this.bu_back_rule.Name = "bu_back_rule";
-            this.bu_back_rule.Size = new System.Drawing.Size(140, 29);
-            this.bu_back_rule.TabIndex = 3;
-            this.bu_back_rule.Text = "Назад";
-            this.bu_back_rule.UseVisualStyleBackColor = true;
-            this.bu_back_rule.Click += new System.EventHandler(this.bu_back_rule_Click);
             // 
             // IndexModule
             // 

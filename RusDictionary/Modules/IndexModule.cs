@@ -36,7 +36,7 @@ namespace RusDictionary.Modules
         char[] sep = { '[', ']', '(', ')' };
         //string single_sep = "//" ;
 
-        string[] row1 = new string[] { "1", "см. = [Синоним]END" };
+        string[] row1 = new string[] { "1", "см. = [Синоним]" };
         string[] row2 = new string[] { "2", "*// = [Название_источника]" };
         string[] row3 = new string[] { "3", "Хранится, Хранятся = [Место_хранения]" };
         string[] row4 = new string[] { "4", "переизд. = [Переиздание]" };
@@ -164,8 +164,6 @@ namespace RusDictionary.Modules
                 var name_list = new List<string>();
 
 
-
-
                 string cipher = dt.Rows[count].ItemArray[0].ToString();
 
                 string text = dt.Rows[count].ItemArray[1].ToString();
@@ -202,10 +200,28 @@ namespace RusDictionary.Modules
                 foreach (string word in search_trim_list)
                 {
                     pos_list.Add(text.IndexOf(word));
+
                 }
                 foreach (char sym in sep)
                 {
-                    pos_list.Add(text.IndexOf(sym));
+                    //pos_list.Add(text.IndexOf(sym));
+
+                    for (int index = 0; ; index += 1)
+                    {
+                        int add_count = 0;
+                        index = text.IndexOf(sym, index);
+                        if (index == -1)
+                        {
+                            if (add_count == 0)
+                            {
+                                pos_list.Add(index);
+                            }
+
+                            break;
+                        }
+                        pos_list.Add(index);
+                    }
+
                 }
 
                 List<int> text_pos = pos_list.ToList();///копия позиций для поиска в строке
@@ -446,28 +462,34 @@ namespace RusDictionary.Modules
 
         private void buSaveToDB_Click(object sender, EventArgs e)
         {
-            foreach (DataRow dr in dt.Rows) // search whole table
+            if (!String.IsNullOrEmpty(tb_cipher.Text))
             {
-                if (dr[base_name[0]].ToString() == tb_cipher.Text) // if id==2
+                foreach (DataRow dr in dt.Rows) // search whole table
                 {
-                    dr[base_name[1]] = tb_description.Text;
+                    if (dr[base_name[0]].ToString() == tb_cipher.Text) // if id==2
+                    {
+                        dr[base_name[1]] = tb_description.Text;
 
-                    dr[base_name[2]] = tb_synonym.Text;
-                    dr[base_name[3]] = tb_name_source.Text;
-                    dr[base_name[4]] = tb_author.Text;
-                    dr[base_name[5]] = tb_researcher.Text;
-                    dr[base_name[6]] = tb_date_source.Text;
-                    dr[base_name[7]] = tb_refind_date.Text;
-                    dr[base_name[8]] = tb_language.Text;
-                    dr[base_name[9]] = tb_translation.Text;
-                    dr[base_name[10]] = tb_publication.Text;
-                    dr[base_name[11]] = tb_other_list.Text;
-                    dr[base_name[12]] = tb_date_structure.Text;
-                    dr[base_name[12]] = tb_reprint.Text;
-                    dr[base_name[12]] = tb_storage.Text;
+                        dr[base_name[2]] = tb_synonym.Text;
+                        dr[base_name[3]] = tb_name_source.Text;
+                        dr[base_name[4]] = tb_author.Text;
+                        dr[base_name[5]] = tb_researcher.Text;
+                        dr[base_name[6]] = tb_date_source.Text;
+                        dr[base_name[7]] = tb_refind_date.Text;
+                        dr[base_name[8]] = tb_language.Text;
+                        dr[base_name[9]] = tb_translation.Text;
+                        dr[base_name[10]] = tb_publication.Text;
+                        dr[base_name[11]] = tb_other_list.Text;
+                        dr[base_name[12]] = tb_date_structure.Text;
+                        dr[base_name[12]] = tb_reprint.Text;
+                        dr[base_name[12]] = tb_storage.Text;
 
+                    }
                 }
             }
+            else
+                MessageBox.Show("Заполните поле Шифр Источника");
+
 
         }
 
@@ -483,15 +505,7 @@ namespace RusDictionary.Modules
             }
         }
 
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void bu_Insert_Click(object sender, EventArgs e)
         {
@@ -537,7 +551,7 @@ namespace RusDictionary.Modules
                 */
             }
             else
-                MessageBox.Show("заполните поле шифр");
+                MessageBox.Show("Заполните поле Шифр Источника");
 
 
         }
@@ -569,14 +583,17 @@ namespace RusDictionary.Modules
 
         private void bu_delete_Click(object sender, EventArgs e)
         {
-            if (lbName.SelectedIndex != -1)
-            {
+
+            DialogResult result = MessageBox.Show(
+            "Если вы покинете данную страницу, данные не будут сохранены, продолжить?",
+            "Внимание",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Information,
+            MessageBoxDefaultButton.Button1);
+
+            if (result == DialogResult.Yes)
                 lbName.Items.Remove(lbName.SelectedItem);
-            }
-            else
-            {
-                MessageBox.Show("заполните поле шифр");
-            }
+
         }
 
         private void buIndexBack_Click(object sender, EventArgs e)
@@ -586,7 +603,23 @@ namespace RusDictionary.Modules
 
         private void bu_back_list_Click(object sender, EventArgs e)
         {
-            tc_index.SelectedTab = tp_list_sign;
+            if (bu_Insert.Visible)
+            {
+                DialogResult result = MessageBox.Show(
+                "Если вы покинете данную страницу, данные не будут сохранены, продолжить?",
+                 "Внимание",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.Yes)
+                    tc_index.SelectedTab = tp_list_sign;
+            }
+            else
+                tc_index.SelectedTab = tp_list_sign;
+
+
+
         }
 
         private void bu_back_desc_Click(object sender, EventArgs e)
