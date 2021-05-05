@@ -16,6 +16,7 @@ using System.Collections.Generic;
 
 namespace RusDictionary.Modules
 {
+    // TODO: Сохранение изменений, добавление новых записей(в основном и в распознавании), удаление, сохранение в файл
 
     public partial class IndexModule : UserControl
     {
@@ -26,6 +27,8 @@ namespace RusDictionary.Modules
         string[] table_name = { "cipher", "description", "synonym", "name_source", "author", "researcher",
             "date_source", "refind_date", "language", "translation", "other_list",
             "publication", "date_structure", "reprint", "storage" };
+
+        List<JSONArray> Ukaz_item = new List<JSONArray>();
 
         char[] letters = Enumerable.Range('a', 'z' - 'a' + 1).Select(c => (char)c).ToArray();
 
@@ -57,54 +60,46 @@ namespace RusDictionary.Modules
 
         private void buIndexSource_Click(object sender, EventArgs e)
         {
-            string strDSN = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Resources/IndexModule/Source.mdb";
-            string strSQL = "SELECT * FROM UKAZ";
-            OleDbConnection myConn = new OleDbConnection(strDSN);
-            OleDbDataAdapter myCmd = new OleDbDataAdapter(strSQL, myConn);
-            myConn.Open();
-            DataSet dtSet = new DataSet();
-            myCmd.Fill(dtSet, "UKAZ");
-            dt = dtSet.Tables[0];
 
-            myConn.Close();
+            // ORDER BY
+            // индекс тоже возвращается
 
-            foreach (DataRow row in dt.Rows)
+            string query = "SELECT * FROM ukaz_tab ORDER BY cipher";
+            JSON.Send(query, JSONFlags.Select);
+            Ukaz_item = JSON.Decode();
+
+            foreach (var r in Ukaz_item)
             {
 
-                lbName.Items.Add(row[1].ToString());
+                lbName.Items.Add(r.cipher);
 
             }
             tc_index.SelectedTab = tp_list_sign;
-
 
         }
 
         private void lbName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string Item = lbName.SelectedItem.ToString();
+            // переписать на поиск в листе
 
-            index_db = lbName.SelectedIndex;
-
-            string search = "Шифр_источника = \'" + Item + "\'";
-
-            DataRow[] foundRows = dt.Select(search);
-
-            tb_cipher.Text = foundRows[0][1].ToString();
-            tb_description.Text = foundRows[0][2].ToString();
-            tb_synonym.Text = foundRows[0][3].ToString();
-            tb_name_source.Text = foundRows[0][4].ToString();
-            tb_author.Text = foundRows[0][5].ToString();
-            tb_researcher.Text = foundRows[0][6].ToString();
-            tb_date_source.Text = foundRows[0][7].ToString();
-            tb_refind_date.Text = foundRows[0][8].ToString();
-            tb_language.Text = foundRows[0][9].ToString();
-            tb_translation.Text = foundRows[0][10].ToString();
-            tb_publication.Text = foundRows[0][11].ToString();
-            tb_other_list.Text = foundRows[0][12].ToString();
-            tb_date_structure.Text = foundRows[0][13].ToString();
-            tb_reprint.Text = foundRows[0][14].ToString();
-            tb_storage.Text = foundRows[0][15].ToString();
-            tb_note.Text = foundRows[0][16].ToString() + " ; " + foundRows[0][17].ToString();
+            var item_find = Ukaz_item.Find(x => x.cipher.Contains(lbName.SelectedItem.ToString()));
+            
+            tb_cipher.Text = item_find.cipher;
+            tb_description.Text = item_find.description;
+            tb_synonym.Text = item_find.synonym;
+            tb_name_source.Text = item_find.name_source;
+            tb_author.Text = item_find.author;
+            tb_researcher.Text = item_find.researcher;
+            tb_date_source.Text = item_find.date_source;
+            tb_refind_date.Text = item_find.refind_date;
+            tb_language.Text = item_find.language;
+            tb_translation.Text = item_find.translation;
+            tb_publication.Text = item_find.publication;
+            tb_other_list.Text = item_find.other_list;
+            tb_date_structure.Text = item_find.date_structure;
+            tb_reprint.Text = item_find.refind_date;
+            tb_storage.Text = item_find.storage;
+            
 
 
             buSaveToDB.Visible = true;
@@ -574,7 +569,6 @@ namespace RusDictionary.Modules
             tb_date_structure.Text = "";
             tb_reprint.Text = "";
             tb_storage.Text = "";
-            tb_note.Text = "";
             buSaveToDB.Visible = false;
             buSaveToDB.Enabled = false;
             bu_Insert.Visible = true;
