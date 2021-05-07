@@ -773,7 +773,6 @@
             // 
             // bu_to_bd
             // 
-            this.bu_to_bd.Enabled = false;
             this.bu_to_bd.Location = new System.Drawing.Point(199, 490);
             this.bu_to_bd.Name = "bu_to_bd";
             this.bu_to_bd.Size = new System.Drawing.Size(175, 30);
