@@ -16,6 +16,7 @@ using System.Collections.Generic;
 
 namespace RusDictionary.Modules
 {
+    // TODO:  добавление новых записей в распознавании, сохранение в файл
 
     public partial class IndexModule : UserControl
     {
@@ -27,16 +28,20 @@ namespace RusDictionary.Modules
             "date_source", "refind_date", "language", "translation", "other_list",
             "publication", "date_structure", "reprint", "storage" };
 
-        char[] letters = Enumerable.Range('a', 'z' - 'a' + 1).Select(c => (char)c).ToArray();
+        List<JSONArray> Ukaz_item = new List<JSONArray>();
 
-        int index_db = 0;
+        List<JSONArray> check_q = new List<JSONArray>();
+
+
+        bool modify = false;
+        string query;
 
         DataTable dt = new DataTable();
 
         char[] sep = { '[', ']', '(', ')' };
         //string single_sep = "//" ;
 
-        string[] row1 = new string[] { "1", "см. = [Синоним]END" };
+        string[] row1 = new string[] { "1", "см. = [Синоним]" };
         string[] row2 = new string[] { "2", "*// = [Название_источника]" };
         string[] row3 = new string[] { "3", "Хранится, Хранятся = [Место_хранения]" };
         string[] row4 = new string[] { "4", "переизд. = [Переиздание]" };
@@ -55,62 +60,63 @@ namespace RusDictionary.Modules
             dgv_rule.Rows.Add(row5);
         }
 
-        private void buIndexSource_Click(object sender, EventArgs e)
+        private void reload_table()
         {
-            string strDSN = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=Resources/IndexModule/Source.mdb";
-            string strSQL = "SELECT * FROM UKAZ";
-            OleDbConnection myConn = new OleDbConnection(strDSN);
-            OleDbDataAdapter myCmd = new OleDbDataAdapter(strSQL, myConn);
-            myConn.Open();
-            DataSet dtSet = new DataSet();
-            myCmd.Fill(dtSet, "UKAZ");
-            dt = dtSet.Tables[0];
+            lbName.Items.Clear();
+            query = "SELECT * FROM ukaz_tab ORDER BY cipher";
+            JSON.Send(query, JSONFlags.Select);
+            Ukaz_item = JSON.Decode();
 
-            myConn.Close();
-
-            foreach (DataRow row in dt.Rows)
+            foreach (var r in Ukaz_item)
             {
 
-                lbName.Items.Add(row[1].ToString());
+                lbName.Items.Add(r.cipher);
 
             }
-            tc_index.SelectedTab = tp_list_sign;
 
+        }
+
+        private void buIndexSource_Click(object sender, EventArgs e)
+        {
+
+            // ORDER BY
+            // индекс тоже возвращается
+
+            reload_table();
+            tc_index.SelectedTab = tp_list_sign;
 
         }
 
         private void lbName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string Item = lbName.SelectedItem.ToString();
+            // переписать на поиск в листе
 
-            index_db = lbName.SelectedIndex;
+            var item_find = Ukaz_item.Find(x => x.cipher.Contains(lbName.SelectedItem.ToString()));
 
-            string search = "Шифр_источника = \'" + Item + "\'";
-
-            DataRow[] foundRows = dt.Select(search);
-
-            tb_cipher.Text = foundRows[0][1].ToString();
-            tb_description.Text = foundRows[0][2].ToString();
-            tb_synonym.Text = foundRows[0][3].ToString();
-            tb_name_source.Text = foundRows[0][4].ToString();
-            tb_author.Text = foundRows[0][5].ToString();
-            tb_researcher.Text = foundRows[0][6].ToString();
-            tb_date_source.Text = foundRows[0][7].ToString();
-            tb_refind_date.Text = foundRows[0][8].ToString();
-            tb_language.Text = foundRows[0][9].ToString();
-            tb_translation.Text = foundRows[0][10].ToString();
-            tb_publication.Text = foundRows[0][11].ToString();
-            tb_other_list.Text = foundRows[0][12].ToString();
-            tb_date_structure.Text = foundRows[0][13].ToString();
-            tb_reprint.Text = foundRows[0][14].ToString();
-            tb_storage.Text = foundRows[0][15].ToString();
-            tb_note.Text = foundRows[0][16].ToString() + " ; " + foundRows[0][17].ToString();
+            tb_cipher.Text = item_find.cipher;
+            tb_description.Text = item_find.description;
+            tb_synonym.Text = item_find.synonym;
+            tb_name_source.Text = item_find.name_source;
+            tb_author.Text = item_find.author;
+            tb_researcher.Text = item_find.researcher;
+            tb_date_source.Text = item_find.date_source;
+            tb_refind_date.Text = item_find.refind_date;
+            tb_language.Text = item_find.language;
+            tb_translation.Text = item_find.translation;
+            tb_publication.Text = item_find.publication;
+            tb_other_list.Text = item_find.other_list;
+            tb_date_structure.Text = item_find.date_structure;
+            tb_reprint.Text = item_find.refind_date;
+            tb_storage.Text = item_find.storage;
 
 
+            tb_cipher.Enabled = false;
             buSaveToDB.Visible = true;
             buSaveToDB.Enabled = true;
             bu_Insert.Visible = false;
             bu_Insert.Enabled = false;
+
+            modify = false;
 
             tc_index.SelectedTab = tp_sign;
 
@@ -121,145 +127,173 @@ namespace RusDictionary.Modules
             string filepath = "";
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-
+                openFileDialog.Filter = "docx files (*.docx)|*.docx|All files (*.*)|*.*";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    //Get the path of specified file
+                    
+                    //openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                     filepath = openFileDialog.FileName;
-                }
-            }
 
+                    WordprocessingDocument doc = WordprocessingDocument.Open(filepath, true);
 
-            WordprocessingDocument doc = WordprocessingDocument.Open(filepath, false);
+                    DataTable dt = new DataTable();
 
-            DataTable dt = new DataTable();
+                    Body body = doc.MainDocumentPart.Document.Body;
 
-            Body body = doc.MainDocumentPart.Document.Body;
-
-            DocumentFormat.OpenXml.Wordprocessing.Table table = body.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>().First();
-
-            IEnumerable<TableRow> rows = table.Elements<TableRow>();
-
-            dt.Columns.Add("1");
-            dt.Columns.Add("2");
-
-            // To read data from rows and to add records to the temporary table  
-            foreach (TableRow row in rows)
-            {
-                dt.Rows.Add();
-                int i = 0;
-                foreach (TableCell cell in row.Descendants<TableCell>())
-                {
-                    dt.Rows[dt.Rows.Count - 1][i] = cell.InnerText;
-                    i++;
-                }
-            }
-            dgv_output.Rows.Clear();
-            dgv_output.Refresh();
-
-
-            for (int count = 0; count < dt.Rows.Count; count++)
-            {
-                var split_list = new List<string>();
-                var name_list = new List<string>();
-
-
-
-
-                string cipher = dt.Rows[count].ItemArray[0].ToString();
-
-                string text = dt.Rows[count].ItemArray[1].ToString();
-
-
-                var search_list = new List<string>(); ///слова для поиска в тексте
-
-                var param_list = new List<string>(); ///название полей в базе данных 
-
-                var search_trim_list = new List<string>(); /// слова без спецсимволов
-
-                var pos_list = new List<int>(); ///позиция найденных слов и сепараторов
-
-
-
-                for (int i = 0; i < dgv_rule.Rows.Count - 1; i++)
-                {
-                    DataGridViewRow row = dgv_rule.Rows[i];
-
-                    string lbl_name = row.Cells[1].Value.ToString();
-
-
-                    foreach (string param in lbl_name.Split('=')[0].Split(','))
+                    
+                    if (body.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>() is null)
                     {
-                        string string_trim = lbl_name.TrimEnd("END".ToCharArray());
-                        param_list.Add(string_trim.Split('=')[1].Substring(1).Trim(sep));
-                        search_list.Add(param.Trim());
-                        search_trim_list.Add(param.Trim('*'));
+                        MessageBox.Show("Данный документ не содержит каких-либо таблиц");
+                    }
+                    else
+                    {
+                        DocumentFormat.OpenXml.Wordprocessing.Table table = body.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>().First();
+                        IEnumerable<TableRow> rows = table.Elements<TableRow>();
 
+                        dt.Columns.Add("1");
+                        dt.Columns.Add("2");
+
+                        // To read data from rows and to add records to the temporary table  
+                        foreach (TableRow row in rows)
+                        {
+                            dt.Rows.Add();
+                            int i = 0;
+                            foreach (TableCell cell in row.Descendants<TableCell>())
+                            {
+                                dt.Rows[dt.Rows.Count - 1][i] = cell.InnerText;
+                                i++;
+                            }
+                        }
+                        dgv_output.Rows.Clear();
+                        dgv_output.Refresh();
+
+
+                        for (int count = 0; count < dt.Rows.Count; count++)
+                        {
+                            var split_list = new List<string>();
+                            var name_list = new List<string>();
+
+
+                            string cipher = dt.Rows[count].ItemArray[0].ToString();
+
+                            string text = dt.Rows[count].ItemArray[1].ToString();
+
+
+                            var search_list = new List<string>(); ///слова для поиска в тексте
+
+                            var param_list = new List<string>(); ///название полей в базе данных 
+
+                            var search_trim_list = new List<string>(); /// слова без спецсимволов
+
+                            var pos_list = new List<int>(); ///позиция найденных слов и сепараторов
+
+
+
+                            for (int i = 0; i < dgv_rule.Rows.Count - 1; i++)
+                            {
+                                DataGridViewRow row = dgv_rule.Rows[i];
+
+                                string lbl_name = row.Cells[1].Value.ToString();
+
+
+                                foreach (string param in lbl_name.Split('=')[0].Split(','))
+                                {
+                                    string string_trim = lbl_name.TrimEnd("END".ToCharArray());
+                                    param_list.Add(string_trim.Split('=')[1].Substring(1).Trim(sep));
+                                    search_list.Add(param.Trim());
+                                    search_trim_list.Add(param.Trim('*'));
+
+                                }
+
+
+                            }
+                            foreach (string word in search_trim_list)
+                            {
+                                pos_list.Add(text.IndexOf(word));
+
+                            }
+                            foreach (char sym in sep)
+                            {
+                                //pos_list.Add(text.IndexOf(sym));
+
+                                for (int index = 0; ; index += 1)
+                                {
+                                    int add_count = 0;
+                                    index = text.IndexOf(sym, index);
+                                    if (index == -1)
+                                    {
+                                        if (add_count == 0)
+                                        {
+                                            pos_list.Add(index);
+                                        }
+
+                                        break;
+                                    }
+                                    pos_list.Add(index);
+                                }
+
+                            }
+
+                            List<int> text_pos = pos_list.ToList();///копия позиций для поиска в строке
+
+
+                            text_pos.RemoveAll(item => item == -1);
+                            text_pos.Sort();
+
+                            string[] row_out = new string[15];
+
+                            for (int i = 0; i < text_pos.Count; i++)
+                            {
+                                int first_pos = 0;
+
+
+                                var a = pos_list.FindIndex(item => item == text_pos[i]);
+                                if (a + 1 <= search_list.Count)
+                                {
+                                    if (search_list[a][0] == '*')
+                                    {
+                                        if (text_pos[i] != text_pos.First())
+                                            row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(text_pos[i - 1], text_pos[i] - text_pos[i - 1]);
+                                        else
+                                            row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(first_pos, text_pos[i]);
+
+                                    }
+                                    else
+                                    {
+                                        if (text_pos[i] != text_pos.Last())
+                                            row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(text_pos[i], text_pos[i + 1] - text_pos[i]);
+                                        else
+                                            row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(text_pos[i]);
+
+                                        //Substring(2, 5);
+
+                                    }
+                                    if (a < dgv_rule.Rows.Count - 1)
+                                        if (dgv_rule.Rows[a].Cells[1].Value.ToString().EndsWith("END"))
+                                            break;
+                                }
+
+
+                            }
+
+                            if (row_out[0] == null)
+                                row_out[0] = cipher;
+
+                            if (row_out[1] == null)
+                                row_out[1] = text;
+
+                            dgv_output.Rows.Add(row_out);
+                        }
+
+                        tc_index.SelectedTab = tp_result_doc;
                     }
 
-
+                    
                 }
-                foreach (string word in search_trim_list)
-                {
-                    pos_list.Add(text.IndexOf(word));
-                }
-                foreach (char sym in sep)
-                {
-                    pos_list.Add(text.IndexOf(sym));
-                }
-
-                List<int> text_pos = pos_list.ToList();///копия позиций для поиска в строке
-
-
-                text_pos.RemoveAll(item => item == -1);
-                text_pos.Sort();
-
-                string[] row_out = new string[15];
-
-                for (int i = 0; i < text_pos.Count; i++)
-                {
-                    int first_pos = 0;
-
-
-                    var a = pos_list.FindIndex(item => item == text_pos[i]);
-                    if (a + 1 <= search_list.Count)
-                    {
-                        if (search_list[a][0] == '*')
-                        {
-                            if (text_pos[i] != text_pos.First())
-                                row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(text_pos[i - 1], text_pos[i] - text_pos[i - 1]);
-                            else
-                                row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(first_pos, text_pos[i]);
-
-                        }
-                        else
-                        {
-                            if (text_pos[i] != text_pos.Last())
-                                row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(text_pos[i], text_pos[i + 1] - text_pos[i]);
-                            else
-                                row_out[Array.IndexOf(base_name, param_list[a])] = text.Substring(text_pos[i]);
-
-                            //Substring(2, 5);
-
-                        }
-                        if (a < dgv_rule.Rows.Count - 1)
-                            if (dgv_rule.Rows[a].Cells[1].Value.ToString().EndsWith("END"))
-                                break;
-                    }
-
-
-                }
-
-                if (row_out[0] == null)
-                    row_out[0] = cipher;
-
-                if (row_out[1] == null)
-                    row_out[1] = text;
-
-                dgv_output.Rows.Add(row_out);
             }
 
-            tc_index.SelectedTab = tp_result_doc;
+
+            
         }
 
         private void buRecognition_Click(object sender, EventArgs e)
@@ -269,35 +303,49 @@ namespace RusDictionary.Modules
 
         private void bu_RulesLoad_Click(object sender, EventArgs e)
         {
-            dgv_rule.Rows.Clear();
-            dgv_rule.Columns.Clear();
-            dgv_rule.Refresh();
+
             string filepath = "";
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-
+                openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+
                     filepath = openFileDialog.FileName;
+                    StreamReader file = new StreamReader(filepath);
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("№");
+                    dt.Columns.Add("Правило");
+                    string newline;
+                    int count = 1;
+                    while ((newline = file.ReadLine()) != null)
+                    {
+                        DataRow dr = dt.NewRow();
+                        dr[0] = count;
+                        dr[1] = newline;
+                        count++;
+                        dt.Rows.Add(dr);
+                    }
+                    file.Close();
+                    if (count >= 2)
+                    {
+                        dgv_rule.Rows.Clear();
+                        dgv_rule.Columns.Clear();
+                        dgv_rule.Refresh();
+                        dgv_rule.DataSource = dt;
+                        dgv_rule.Columns[0].Width = 100;
+                        dgv_rule.Columns[1].Width = 650;
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Данный файл пуст");
+                    }
+
+                }
+                
 
             }
-            StreamReader file = new StreamReader(filepath);
-            DataTable dt = new DataTable();
-            dt.Columns.Add("№");
-            dt.Columns.Add("Правило");
-            string newline;
-            int count = 1;
-            while ((newline = file.ReadLine()) != null)
-            {
-                DataRow dr = dt.NewRow();
-                dr[0] = count;
-                dr[1] = newline;
-                count++;
-                dt.Rows.Add(dr);
-            }
-            file.Close();
-            dgv_rule.DataSource = dt;
-            dgv_rule.Columns[0].Width = 100;
-            dgv_rule.Columns[1].Width = 650;
 
 
         }
@@ -446,28 +494,32 @@ namespace RusDictionary.Modules
 
         private void buSaveToDB_Click(object sender, EventArgs e)
         {
-            foreach (DataRow dr in dt.Rows) // search whole table
+            if (!String.IsNullOrEmpty(tb_description.Text))
             {
-                if (dr[base_name[0]].ToString() == tb_cipher.Text) // if id==2
-                {
-                    dr[base_name[1]] = tb_description.Text;
+                query = "UPDATE ukaz_tab SET `description`= '" + tb_description.Text + "', " +
+                "`synonym`= '" + tb_synonym.Text + "'," +
+                "`name_source`= '" + tb_name_source.Text + "'," +
+                "`author`= '" + tb_author.Text + "'," +
+                "`researcher`= '" + tb_researcher.Text + "'," +
+                "`date_source`= '" + tb_date_source.Text + "'," +
+                "`refind_date`= '" + tb_refind_date.Text + "'," +
+                "`language`= '" + tb_language.Text + "'," +
+                "`translation`= '" + tb_translation.Text + "'," +
+                "`publication`= '" + tb_publication.Text + "'," +
+                "`other_list`= '" + tb_other_list.Text + "'," +
+                "`date_structure`= '" + tb_date_structure.Text + "'," +
+                "`refind_date`= '" + tb_refind_date.Text + "'," +
+                "`storage`= '" + tb_storage.Text + "'" +
+                "WHERE `ID` = " + Ukaz_item[lbName.SelectedIndex].ID;
+                JSON.Send(query, JSONFlags.Update);
 
-                    dr[base_name[2]] = tb_synonym.Text;
-                    dr[base_name[3]] = tb_name_source.Text;
-                    dr[base_name[4]] = tb_author.Text;
-                    dr[base_name[5]] = tb_researcher.Text;
-                    dr[base_name[6]] = tb_date_source.Text;
-                    dr[base_name[7]] = tb_refind_date.Text;
-                    dr[base_name[8]] = tb_language.Text;
-                    dr[base_name[9]] = tb_translation.Text;
-                    dr[base_name[10]] = tb_publication.Text;
-                    dr[base_name[11]] = tb_other_list.Text;
-                    dr[base_name[12]] = tb_date_structure.Text;
-                    dr[base_name[12]] = tb_reprint.Text;
-                    dr[base_name[12]] = tb_storage.Text;
+                reload_table();
+                tc_index.SelectedTab = tp_list_sign;
+                tb_cipher.Enabled = true;
 
-                }
             }
+            else
+                MessageBox.Show("Заполните поле Описание источника");
 
         }
 
@@ -475,71 +527,70 @@ namespace RusDictionary.Modules
         {
             foreach (DataGridViewRow data in dgv_output.Rows)
             {
-                if (lbName.Items.IndexOf(data.Cells[0]) > 0)
+                if (!String.IsNullOrEmpty(data.Cells[0].Value.ToString()) && !String.IsNullOrEmpty(data.Cells[1].Value.ToString()))
                 {
-                    ///
+                    query = "SELECT cipher FROM ukaz_tab WHERE cipher = '" + data.Cells[0].Value.ToString() + "'";
+                    JSON.Send(query, JSONFlags.Select);
+                    check_q = JSON.Decode();
+
+                    if (check_q is null)
+                    {
+                        query = "INSERT INTO ukaz_tab (cipher, description, synonym, name_source, author," +
+                            "researcher, date_source, refind_date, language, translation, other_list, publication," +
+                            "date_structure, reprint, storage) " +
+                            "VALUES('" + data.Cells[0].Value.ToString() + "','" + data.Cells[1].Value.ToString() + "','" + data.Cells[2].Value.ToString() + "'," +
+                           "'" + data.Cells[3].Value.ToString() + "','" + data.Cells[4].Value.ToString() + "','" + data.Cells[5].Value.ToString() + "'," +
+                           "'" + data.Cells[6].Value.ToString() + "','" + data.Cells[7].Value.ToString() + "','" + data.Cells[8].Value.ToString() + "'," +
+                           "'" + data.Cells[9].Value.ToString() + "','" + data.Cells[10].Value.ToString() + "','" + data.Cells[11].Value.ToString() + "'," +
+                           "'" + data.Cells[12].Value.ToString() + "','" + data.Cells[14].Value.ToString() + "','" + data.Cells[15].Value.ToString() + "')";
+
+                        JSON.Send(query, JSONFlags.Insert);
+
+
+                    }
+                    else
+                        MessageBox.Show("Данный источник уже находится в базе данных");
                 }
+                else
+                    MessageBox.Show("Заполните основные поля: Шифр источника и Описание источника");
 
             }
-        }
-
-        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
+            reload_table();
+            tc_index.SelectedTab = tp_list_sign;
         }
 
         private void bu_Insert_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(tb_cipher.Text))
+
+            if (!String.IsNullOrEmpty(tb_cipher.Text) && !String.IsNullOrEmpty(tb_description.Text))
             {
-                DataRow dr = dt.NewRow();
-                dr[base_name[0]] = tb_cipher.Text;
-                dr[base_name[1]] = tb_description.Text;
-                dr[base_name[2]] = tb_synonym.Text;
-                dr[base_name[3]] = tb_name_source.Text;
-                dr[base_name[4]] = tb_author.Text;
-                dr[base_name[5]] = tb_researcher.Text;
-                dr[base_name[6]] = tb_date_source.Text;
-                dr[base_name[7]] = tb_refind_date.Text;
-                dr[base_name[8]] = tb_language.Text;
-                dr[base_name[9]] = tb_translation.Text;
-                dr[base_name[10]] = tb_publication.Text;
-                dr[base_name[11]] = tb_other_list.Text;
-                dr[base_name[12]] = tb_date_structure.Text;
-                dr[base_name[12]] = tb_reprint.Text;
-                dr[base_name[12]] = tb_storage.Text;
+                query = "SELECT cipher FROM ukaz_tab WHERE cipher = '"+ tb_cipher.Text+"'";
+                JSON.Send(query, JSONFlags.Select);
+                check_q = JSON.Decode();
 
-
-                dt.Rows.Add(dr);
-
-                /*
-                foreach (object item in lbName.Items)
+                if (check_q is null)
                 {
-                    var it = item.ToString();
-                    if ((tb_cipher.Text[0] - it[0]) != 0)
-                    {
-                        int curIndex = lbName.Items.IndexOf(it);
+                    query = "INSERT INTO ukaz_tab (cipher, description, synonym, name_source, author," +
+                        "researcher, date_source, refind_date, language, translation, other_list, publication," +
+                        "date_structure, reprint, storage) " +
+                        "VALUES('" + tb_cipher.Text + "','" + tb_description.Text + "','" + tb_synonym.Text + "'," +
+                       "'" + tb_name_source.Text + "','" + tb_author.Text + "','" + tb_researcher.Text + "'," +
+                       "'" + tb_date_source.Text + "','" + tb_refind_date.Text + "','" + tb_language.Text + "'," +
+                       "'" + tb_translation.Text + "','" + tb_publication.Text + "','" + tb_other_list.Text + "'," +
+                       "'" + tb_date_structure.Text + "','" + tb_reprint.Text + "','" + tb_storage.Text + "')";
 
-                        dt.Rows.InsertAt(dr, curIndex);
-                        break;
-                    }
-                    if ((tb_cipher.Text[1] - it[1]) == 0)
-                    {
 
-                    }
 
+                    JSON.Send(query, JSONFlags.Insert);
+
+                    reload_table();
+                    tc_index.SelectedTab = tp_list_sign;
                 }
-                */
+                else
+                    MessageBox.Show("Данный источник уже находится в базе данных");
             }
             else
-                MessageBox.Show("заполните поле шифр");
-
-
+                MessageBox.Show("Заполните основные поля: Шифр источника и Описание источника");
         }
 
         private void bu_Create_Click(object sender, EventArgs e)
@@ -560,7 +611,6 @@ namespace RusDictionary.Modules
             tb_date_structure.Text = "";
             tb_reprint.Text = "";
             tb_storage.Text = "";
-            tb_note.Text = "";
             buSaveToDB.Visible = false;
             buSaveToDB.Enabled = false;
             bu_Insert.Visible = true;
@@ -569,14 +619,24 @@ namespace RusDictionary.Modules
 
         private void bu_delete_Click(object sender, EventArgs e)
         {
-            if (lbName.SelectedIndex != -1)
-            {
-                lbName.Items.Remove(lbName.SelectedItem);
+            if(lbName.SelectedIndex !=-1) 
+                {
+                DialogResult result = MessageBox.Show(
+                "Если вы удалите запись, вы не сможете восстановить данные. Продолжить?",
+                "Внимание",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.Yes)
+                {
+                    query = "DELETE FROM ukaz_tab WHERE ID = '" + Ukaz_item[lbName.SelectedIndex].ID + "'";
+                    JSON.Send(query, JSONFlags.Delete);
+                    reload_table();
+                    tc_index.SelectedTab = tp_list_sign;
+                }
             }
-            else
-            {
-                MessageBox.Show("заполните поле шифр");
-            }
+               
         }
 
         private void buIndexBack_Click(object sender, EventArgs e)
@@ -586,7 +646,28 @@ namespace RusDictionary.Modules
 
         private void bu_back_list_Click(object sender, EventArgs e)
         {
-            tc_index.SelectedTab = tp_list_sign;
+            if (bu_Insert.Visible || modify)
+            {
+                DialogResult result = MessageBox.Show(
+                "Если вы покинете данную страницу, данные не будут сохранены. Продолжить?",
+                 "Внимание",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.Yes)
+                {
+                    tb_cipher.Enabled = true;
+                    tc_index.SelectedTab = tp_list_sign;
+                }
+                    
+            }
+            else
+            {
+                tb_cipher.Enabled = true;
+                tc_index.SelectedTab = tp_list_sign;
+            }
+
         }
 
         private void bu_back_desc_Click(object sender, EventArgs e)
@@ -597,6 +678,12 @@ namespace RusDictionary.Modules
         private void bu_back_rule_Click(object sender, EventArgs e)
         {
             tc_index.SelectedTab = tp_read_doc;
+        }
+
+        private void tb_TextChanged(object sender, EventArgs e)
+        {
+            modify = true;
+
         }
     }
 }

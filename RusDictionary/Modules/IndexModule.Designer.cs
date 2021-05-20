@@ -42,7 +42,6 @@
             this.bu_Create = new System.Windows.Forms.Button();
             this.tp_sign = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_note = new System.Windows.Forms.TextBox();
             this.tb_storage = new System.Windows.Forms.TextBox();
             this.tb_reprint = new System.Windows.Forms.TextBox();
             this.tb_date_structure = new System.Windows.Forms.TextBox();
@@ -56,7 +55,6 @@
             this.tb_author = new System.Windows.Forms.TextBox();
             this.tb_name_source = new System.Windows.Forms.TextBox();
             this.tb_synonym = new System.Windows.Forms.TextBox();
-            this.laIndex16 = new System.Windows.Forms.Label();
             this.laIndex15 = new System.Windows.Forms.Label();
             this.laIndex14 = new System.Windows.Forms.Label();
             this.laIndex13 = new System.Windows.Forms.Label();
@@ -76,13 +74,16 @@
             this.tb_description = new System.Windows.Forms.TextBox();
             this.buSaveToDB = new System.Windows.Forms.Button();
             this.bu_Insert = new System.Windows.Forms.Button();
+            this.bu_back_list = new System.Windows.Forms.Button();
             this.tp_read_doc = new System.Windows.Forms.TabPage();
+            this.bu_back_desc = new System.Windows.Forms.Button();
             this.bu_RulesLoad = new System.Windows.Forms.Button();
             this.dgv_rule = new System.Windows.Forms.DataGridView();
             this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rule = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bu_open_doc = new System.Windows.Forms.Button();
             this.tp_result_doc = new System.Windows.Forms.TabPage();
+            this.bu_back_rule = new System.Windows.Forms.Button();
             this.bu_to_bd = new System.Windows.Forms.Button();
             this.buSave = new System.Windows.Forms.Button();
             this.dgv_output = new System.Windows.Forms.DataGridView();
@@ -154,9 +155,6 @@
             this.tb_note_mod = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.bu_back_list = new System.Windows.Forms.Button();
-            this.bu_back_desc = new System.Windows.Forms.Button();
-            this.bu_back_rule = new System.Windows.Forms.Button();
             this.tc_index.SuspendLayout();
             this.tp_menu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -183,7 +181,7 @@
             this.tc_index.Location = new System.Drawing.Point(0, 0);
             this.tc_index.Name = "tc_index";
             this.tc_index.SelectedIndex = 0;
-            this.tc_index.Size = new System.Drawing.Size(1024, 554);
+            this.tc_index.Size = new System.Drawing.Size(1084, 691);
             this.tc_index.TabIndex = 1;
             // 
             // tp_menu
@@ -192,7 +190,7 @@
             this.tp_menu.Location = new System.Drawing.Point(4, 22);
             this.tp_menu.Name = "tp_menu";
             this.tp_menu.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_menu.Size = new System.Drawing.Size(1016, 528);
+            this.tp_menu.Size = new System.Drawing.Size(1076, 665);
             this.tp_menu.TabIndex = 0;
             this.tp_menu.Text = "Меню";
             this.tp_menu.UseVisualStyleBackColor = true;
@@ -222,14 +220,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1016, 528);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1054, 580);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // buIndexSource
             // 
-            this.buIndexSource.Location = new System.Drawing.Point(409, 159);
+            this.buIndexSource.Location = new System.Drawing.Point(423, 177);
             this.buIndexSource.Name = "buIndexSource";
-            this.buIndexSource.Size = new System.Drawing.Size(197, 46);
+            this.buIndexSource.Size = new System.Drawing.Size(204, 46);
             this.buIndexSource.TabIndex = 0;
             this.buIndexSource.Text = "Указатель источников";
             this.buIndexSource.UseVisualStyleBackColor = true;
@@ -237,19 +235,22 @@
             // 
             // buRecognition
             // 
-            this.buRecognition.Location = new System.Drawing.Point(409, 211);
+            this.buRecognition.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buRecognition.Location = new System.Drawing.Point(423, 235);
             this.buRecognition.Name = "buRecognition";
-            this.buRecognition.Size = new System.Drawing.Size(197, 46);
+            this.buRecognition.Size = new System.Drawing.Size(204, 52);
             this.buRecognition.TabIndex = 1;
-            this.buRecognition.Text = "Распознание ";
+            this.buRecognition.Text = "Распознание источников";
             this.buRecognition.UseVisualStyleBackColor = true;
             this.buRecognition.Click += new System.EventHandler(this.buRecognition_Click);
             // 
             // buIndexReturn
             // 
-            this.buIndexReturn.Location = new System.Drawing.Point(409, 471);
+            this.buIndexReturn.Location = new System.Drawing.Point(423, 525);
             this.buIndexReturn.Name = "buIndexReturn";
-            this.buIndexReturn.Size = new System.Drawing.Size(197, 54);
+            this.buIndexReturn.Size = new System.Drawing.Size(197, 52);
             this.buIndexReturn.TabIndex = 2;
             this.buIndexReturn.Text = "Назад";
             this.buIndexReturn.UseVisualStyleBackColor = true;
@@ -260,7 +261,7 @@
             this.tp_list_sign.Location = new System.Drawing.Point(4, 22);
             this.tp_list_sign.Name = "tp_list_sign";
             this.tp_list_sign.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_list_sign.Size = new System.Drawing.Size(1016, 528);
+            this.tp_list_sign.Size = new System.Drawing.Size(1076, 665);
             this.tp_list_sign.TabIndex = 1;
             this.tp_list_sign.Text = "Список источников";
             this.tp_list_sign.UseVisualStyleBackColor = true;
@@ -282,7 +283,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.90926F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1017, 529);
             this.tableLayoutPanel2.TabIndex = 0;
-            this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
             // 
             // buIndexBack
             // 
@@ -329,7 +329,7 @@
             this.tp_sign.Location = new System.Drawing.Point(4, 22);
             this.tp_sign.Name = "tp_sign";
             this.tp_sign.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_sign.Size = new System.Drawing.Size(1016, 528);
+            this.tp_sign.Size = new System.Drawing.Size(1076, 665);
             this.tp_sign.TabIndex = 2;
             this.tp_sign.Text = "Источник";
             this.tp_sign.UseVisualStyleBackColor = true;
@@ -341,7 +341,6 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
-            this.tableLayoutPanel3.Controls.Add(this.tb_note, 1, 15);
             this.tableLayoutPanel3.Controls.Add(this.tb_storage, 1, 14);
             this.tableLayoutPanel3.Controls.Add(this.tb_reprint, 1, 13);
             this.tableLayoutPanel3.Controls.Add(this.tb_date_structure, 1, 12);
@@ -355,7 +354,6 @@
             this.tableLayoutPanel3.Controls.Add(this.tb_author, 1, 4);
             this.tableLayoutPanel3.Controls.Add(this.tb_name_source, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.tb_synonym, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.laIndex16, 0, 15);
             this.tableLayoutPanel3.Controls.Add(this.laIndex15, 0, 14);
             this.tableLayoutPanel3.Controls.Add(this.laIndex14, 0, 13);
             this.tableLayoutPanel3.Controls.Add(this.laIndex13, 0, 12);
@@ -375,140 +373,137 @@
             this.tableLayoutPanel3.Controls.Add(this.tb_description, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.buSaveToDB, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.bu_Insert, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.bu_back_list, 2, 15);
+            this.tableLayoutPanel3.Controls.Add(this.bu_back_list, 2, 14);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 16;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25F));
+            this.tableLayoutPanel3.RowCount = 15;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1020, 529);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
-            // tb_note
-            // 
-            this.tb_note.Location = new System.Drawing.Point(181, 498);
-            this.tb_note.Name = "tb_note";
-            this.tb_note.Size = new System.Drawing.Size(267, 20);
-            this.tb_note.TabIndex = 46;
-            // 
             // tb_storage
             // 
-            this.tb_storage.Location = new System.Drawing.Point(181, 465);
+            this.tb_storage.Location = new System.Drawing.Point(181, 493);
             this.tb_storage.Name = "tb_storage";
             this.tb_storage.Size = new System.Drawing.Size(267, 20);
             this.tb_storage.TabIndex = 45;
+            this.tb_storage.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_reprint
             // 
-            this.tb_reprint.Location = new System.Drawing.Point(181, 432);
+            this.tb_reprint.Location = new System.Drawing.Point(181, 458);
             this.tb_reprint.Name = "tb_reprint";
             this.tb_reprint.Size = new System.Drawing.Size(267, 20);
             this.tb_reprint.TabIndex = 44;
+            this.tb_reprint.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_date_structure
             // 
-            this.tb_date_structure.Location = new System.Drawing.Point(181, 399);
+            this.tb_date_structure.Location = new System.Drawing.Point(181, 423);
             this.tb_date_structure.Name = "tb_date_structure";
             this.tb_date_structure.Size = new System.Drawing.Size(267, 20);
             this.tb_date_structure.TabIndex = 43;
+            this.tb_date_structure.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_publication
             // 
-            this.tb_publication.Location = new System.Drawing.Point(181, 366);
+            this.tb_publication.Location = new System.Drawing.Point(181, 388);
             this.tb_publication.Name = "tb_publication";
             this.tb_publication.Size = new System.Drawing.Size(267, 20);
             this.tb_publication.TabIndex = 42;
+            this.tb_publication.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_other_list
             // 
-            this.tb_other_list.Location = new System.Drawing.Point(181, 333);
+            this.tb_other_list.Location = new System.Drawing.Point(181, 353);
             this.tb_other_list.Name = "tb_other_list";
             this.tb_other_list.Size = new System.Drawing.Size(267, 20);
             this.tb_other_list.TabIndex = 41;
+            this.tb_other_list.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_translation
             // 
-            this.tb_translation.Location = new System.Drawing.Point(181, 300);
+            this.tb_translation.Location = new System.Drawing.Point(181, 318);
             this.tb_translation.Name = "tb_translation";
             this.tb_translation.Size = new System.Drawing.Size(267, 20);
             this.tb_translation.TabIndex = 40;
+            this.tb_translation.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_language
             // 
-            this.tb_language.Location = new System.Drawing.Point(181, 267);
+            this.tb_language.Location = new System.Drawing.Point(181, 283);
             this.tb_language.Name = "tb_language";
             this.tb_language.Size = new System.Drawing.Size(267, 20);
             this.tb_language.TabIndex = 39;
+            this.tb_language.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_refind_date
             // 
-            this.tb_refind_date.Location = new System.Drawing.Point(181, 234);
+            this.tb_refind_date.Location = new System.Drawing.Point(181, 248);
             this.tb_refind_date.Name = "tb_refind_date";
             this.tb_refind_date.Size = new System.Drawing.Size(267, 20);
             this.tb_refind_date.TabIndex = 38;
+            this.tb_refind_date.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_date_source
             // 
-            this.tb_date_source.Location = new System.Drawing.Point(181, 201);
+            this.tb_date_source.Location = new System.Drawing.Point(181, 213);
             this.tb_date_source.Name = "tb_date_source";
             this.tb_date_source.Size = new System.Drawing.Size(267, 20);
             this.tb_date_source.TabIndex = 37;
+            this.tb_date_source.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_researcher
             // 
-            this.tb_researcher.Location = new System.Drawing.Point(181, 168);
+            this.tb_researcher.Location = new System.Drawing.Point(181, 178);
             this.tb_researcher.Name = "tb_researcher";
             this.tb_researcher.Size = new System.Drawing.Size(267, 20);
             this.tb_researcher.TabIndex = 36;
+            this.tb_researcher.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_author
             // 
-            this.tb_author.Location = new System.Drawing.Point(181, 135);
+            this.tb_author.Location = new System.Drawing.Point(181, 143);
             this.tb_author.Name = "tb_author";
             this.tb_author.Size = new System.Drawing.Size(267, 20);
             this.tb_author.TabIndex = 35;
+            this.tb_author.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_name_source
             // 
-            this.tb_name_source.Location = new System.Drawing.Point(181, 102);
+            this.tb_name_source.Location = new System.Drawing.Point(181, 108);
             this.tb_name_source.Name = "tb_name_source";
             this.tb_name_source.Size = new System.Drawing.Size(267, 20);
             this.tb_name_source.TabIndex = 34;
+            this.tb_name_source.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // tb_synonym
             // 
-            this.tb_synonym.Location = new System.Drawing.Point(181, 69);
+            this.tb_synonym.Location = new System.Drawing.Point(181, 73);
             this.tb_synonym.Name = "tb_synonym";
             this.tb_synonym.Size = new System.Drawing.Size(267, 20);
             this.tb_synonym.TabIndex = 33;
-            // 
-            // laIndex16
-            // 
-            this.laIndex16.AutoSize = true;
-            this.laIndex16.Location = new System.Drawing.Point(3, 495);
-            this.laIndex16.Name = "laIndex16";
-            this.laIndex16.Size = new System.Drawing.Size(70, 13);
-            this.laIndex16.TabIndex = 30;
-            this.laIndex16.Text = "Примечания";
+            this.tb_synonym.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // laIndex15
             // 
             this.laIndex15.AutoSize = true;
-            this.laIndex15.Location = new System.Drawing.Point(3, 462);
+            this.laIndex15.Location = new System.Drawing.Point(3, 490);
             this.laIndex15.Name = "laIndex15";
             this.laIndex15.Size = new System.Drawing.Size(89, 13);
             this.laIndex15.TabIndex = 28;
@@ -517,7 +512,7 @@
             // laIndex14
             // 
             this.laIndex14.AutoSize = true;
-            this.laIndex14.Location = new System.Drawing.Point(3, 429);
+            this.laIndex14.Location = new System.Drawing.Point(3, 455);
             this.laIndex14.Name = "laIndex14";
             this.laIndex14.Size = new System.Drawing.Size(75, 13);
             this.laIndex14.TabIndex = 26;
@@ -526,7 +521,7 @@
             // laIndex13
             // 
             this.laIndex13.AutoSize = true;
-            this.laIndex13.Location = new System.Drawing.Point(3, 396);
+            this.laIndex13.Location = new System.Drawing.Point(3, 420);
             this.laIndex13.Name = "laIndex13";
             this.laIndex13.Size = new System.Drawing.Size(107, 13);
             this.laIndex13.TabIndex = 24;
@@ -535,7 +530,7 @@
             // laIndex12
             // 
             this.laIndex12.AutoSize = true;
-            this.laIndex12.Location = new System.Drawing.Point(3, 363);
+            this.laIndex12.Location = new System.Drawing.Point(3, 385);
             this.laIndex12.Name = "laIndex12";
             this.laIndex12.Size = new System.Drawing.Size(101, 13);
             this.laIndex12.TabIndex = 22;
@@ -544,7 +539,7 @@
             // laIndex11
             // 
             this.laIndex11.AutoSize = true;
-            this.laIndex11.Location = new System.Drawing.Point(3, 330);
+            this.laIndex11.Location = new System.Drawing.Point(3, 350);
             this.laIndex11.Name = "laIndex11";
             this.laIndex11.Size = new System.Drawing.Size(83, 13);
             this.laIndex11.TabIndex = 20;
@@ -553,7 +548,7 @@
             // laIndex10
             // 
             this.laIndex10.AutoSize = true;
-            this.laIndex10.Location = new System.Drawing.Point(3, 297);
+            this.laIndex10.Location = new System.Drawing.Point(3, 315);
             this.laIndex10.Name = "laIndex10";
             this.laIndex10.Size = new System.Drawing.Size(107, 13);
             this.laIndex10.TabIndex = 18;
@@ -562,7 +557,7 @@
             // laIndex9
             // 
             this.laIndex9.AutoSize = true;
-            this.laIndex9.Location = new System.Drawing.Point(3, 264);
+            this.laIndex9.Location = new System.Drawing.Point(3, 280);
             this.laIndex9.Name = "laIndex9";
             this.laIndex9.Size = new System.Drawing.Size(91, 13);
             this.laIndex9.TabIndex = 16;
@@ -571,7 +566,7 @@
             // laIndex8
             // 
             this.laIndex8.AutoSize = true;
-            this.laIndex8.Location = new System.Drawing.Point(3, 231);
+            this.laIndex8.Location = new System.Drawing.Point(3, 245);
             this.laIndex8.Name = "laIndex8";
             this.laIndex8.Size = new System.Drawing.Size(93, 13);
             this.laIndex8.TabIndex = 14;
@@ -580,7 +575,7 @@
             // laIndex7
             // 
             this.laIndex7.AutoSize = true;
-            this.laIndex7.Location = new System.Drawing.Point(3, 198);
+            this.laIndex7.Location = new System.Drawing.Point(3, 210);
             this.laIndex7.Name = "laIndex7";
             this.laIndex7.Size = new System.Drawing.Size(88, 13);
             this.laIndex7.TabIndex = 12;
@@ -589,7 +584,7 @@
             // laIndex6
             // 
             this.laIndex6.AutoSize = true;
-            this.laIndex6.Location = new System.Drawing.Point(3, 165);
+            this.laIndex6.Location = new System.Drawing.Point(3, 175);
             this.laIndex6.Name = "laIndex6";
             this.laIndex6.Size = new System.Drawing.Size(113, 13);
             this.laIndex6.TabIndex = 10;
@@ -598,7 +593,7 @@
             // laIndex5
             // 
             this.laIndex5.AutoSize = true;
-            this.laIndex5.Location = new System.Drawing.Point(3, 132);
+            this.laIndex5.Location = new System.Drawing.Point(3, 140);
             this.laIndex5.Name = "laIndex5";
             this.laIndex5.Size = new System.Drawing.Size(37, 13);
             this.laIndex5.TabIndex = 8;
@@ -616,7 +611,7 @@
             // laIndex3
             // 
             this.laIndex3.AutoSize = true;
-            this.laIndex3.Location = new System.Drawing.Point(3, 66);
+            this.laIndex3.Location = new System.Drawing.Point(3, 70);
             this.laIndex3.Name = "laIndex3";
             this.laIndex3.Size = new System.Drawing.Size(52, 13);
             this.laIndex3.TabIndex = 2;
@@ -625,7 +620,7 @@
             // laIndex4
             // 
             this.laIndex4.AutoSize = true;
-            this.laIndex4.Location = new System.Drawing.Point(3, 99);
+            this.laIndex4.Location = new System.Drawing.Point(3, 105);
             this.laIndex4.Name = "laIndex4";
             this.laIndex4.Size = new System.Drawing.Size(112, 13);
             this.laIndex4.TabIndex = 3;
@@ -634,7 +629,7 @@
             // laIndex2
             // 
             this.laIndex2.AutoSize = true;
-            this.laIndex2.Location = new System.Drawing.Point(3, 33);
+            this.laIndex2.Location = new System.Drawing.Point(3, 35);
             this.laIndex2.Name = "laIndex2";
             this.laIndex2.Size = new System.Drawing.Size(96, 13);
             this.laIndex2.TabIndex = 1;
@@ -649,10 +644,11 @@
             // 
             // tb_description
             // 
-            this.tb_description.Location = new System.Drawing.Point(181, 36);
+            this.tb_description.Location = new System.Drawing.Point(181, 38);
             this.tb_description.Name = "tb_description";
             this.tb_description.Size = new System.Drawing.Size(267, 20);
             this.tb_description.TabIndex = 32;
+            this.tb_description.TextChanged += new System.EventHandler(this.tb_TextChanged);
             // 
             // buSaveToDB
             // 
@@ -666,13 +662,23 @@
             // 
             // bu_Insert
             // 
-            this.bu_Insert.Location = new System.Drawing.Point(893, 36);
+            this.bu_Insert.Location = new System.Drawing.Point(893, 38);
             this.bu_Insert.Name = "bu_Insert";
             this.bu_Insert.Size = new System.Drawing.Size(124, 23);
             this.bu_Insert.TabIndex = 48;
             this.bu_Insert.Text = "Добавить запись";
             this.bu_Insert.UseVisualStyleBackColor = true;
             this.bu_Insert.Click += new System.EventHandler(this.bu_Insert_Click);
+            // 
+            // bu_back_list
+            // 
+            this.bu_back_list.Location = new System.Drawing.Point(893, 493);
+            this.bu_back_list.Name = "bu_back_list";
+            this.bu_back_list.Size = new System.Drawing.Size(117, 23);
+            this.bu_back_list.TabIndex = 49;
+            this.bu_back_list.Text = "Назад";
+            this.bu_back_list.UseVisualStyleBackColor = true;
+            this.bu_back_list.Click += new System.EventHandler(this.bu_back_list_Click);
             // 
             // tp_read_doc
             // 
@@ -684,9 +690,19 @@
             this.tp_read_doc.Location = new System.Drawing.Point(4, 22);
             this.tp_read_doc.Name = "tp_read_doc";
             this.tp_read_doc.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_read_doc.Size = new System.Drawing.Size(1016, 528);
+            this.tp_read_doc.Size = new System.Drawing.Size(1076, 665);
             this.tp_read_doc.TabIndex = 4;
             this.tp_read_doc.Text = "Распознание";
+            // 
+            // bu_back_desc
+            // 
+            this.bu_back_desc.Location = new System.Drawing.Point(7, 131);
+            this.bu_back_desc.Name = "bu_back_desc";
+            this.bu_back_desc.Size = new System.Drawing.Size(122, 43);
+            this.bu_back_desc.TabIndex = 3;
+            this.bu_back_desc.Text = "Назад";
+            this.bu_back_desc.UseVisualStyleBackColor = true;
+            this.bu_back_desc.Click += new System.EventHandler(this.bu_back_desc_Click);
             // 
             // bu_RulesLoad
             // 
@@ -741,13 +757,22 @@
             this.tp_result_doc.Location = new System.Drawing.Point(4, 22);
             this.tp_result_doc.Name = "tp_result_doc";
             this.tp_result_doc.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_result_doc.Size = new System.Drawing.Size(1016, 528);
+            this.tp_result_doc.Size = new System.Drawing.Size(1076, 665);
             this.tp_result_doc.TabIndex = 3;
             this.tp_result_doc.Text = "Вывод";
             // 
+            // bu_back_rule
+            // 
+            this.bu_back_rule.Location = new System.Drawing.Point(870, 490);
+            this.bu_back_rule.Name = "bu_back_rule";
+            this.bu_back_rule.Size = new System.Drawing.Size(140, 29);
+            this.bu_back_rule.TabIndex = 3;
+            this.bu_back_rule.Text = "Назад";
+            this.bu_back_rule.UseVisualStyleBackColor = true;
+            this.bu_back_rule.Click += new System.EventHandler(this.bu_back_rule_Click);
+            // 
             // bu_to_bd
             // 
-            this.bu_to_bd.Enabled = false;
             this.bu_to_bd.Location = new System.Drawing.Point(199, 490);
             this.bu_to_bd.Name = "bu_to_bd";
             this.bu_to_bd.Size = new System.Drawing.Size(175, 30);
@@ -872,7 +897,7 @@
             this.tp_comparison.Location = new System.Drawing.Point(4, 22);
             this.tp_comparison.Name = "tp_comparison";
             this.tp_comparison.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_comparison.Size = new System.Drawing.Size(1016, 528);
+            this.tp_comparison.Size = new System.Drawing.Size(1076, 665);
             this.tp_comparison.TabIndex = 5;
             this.tp_comparison.Text = "tabPage1";
             this.tp_comparison.UseVisualStyleBackColor = true;
@@ -1356,36 +1381,6 @@
             this.label18.TabIndex = 65;
             this.label18.Text = "Распознаный текст";
             // 
-            // bu_back_list
-            // 
-            this.bu_back_list.Location = new System.Drawing.Point(893, 498);
-            this.bu_back_list.Name = "bu_back_list";
-            this.bu_back_list.Size = new System.Drawing.Size(117, 23);
-            this.bu_back_list.TabIndex = 49;
-            this.bu_back_list.Text = "Назад";
-            this.bu_back_list.UseVisualStyleBackColor = true;
-            this.bu_back_list.Click += new System.EventHandler(this.bu_back_list_Click);
-            // 
-            // bu_back_desc
-            // 
-            this.bu_back_desc.Location = new System.Drawing.Point(7, 131);
-            this.bu_back_desc.Name = "bu_back_desc";
-            this.bu_back_desc.Size = new System.Drawing.Size(122, 43);
-            this.bu_back_desc.TabIndex = 3;
-            this.bu_back_desc.Text = "Назад";
-            this.bu_back_desc.UseVisualStyleBackColor = true;
-            this.bu_back_desc.Click += new System.EventHandler(this.bu_back_desc_Click);
-            // 
-            // bu_back_rule
-            // 
-            this.bu_back_rule.Location = new System.Drawing.Point(870, 490);
-            this.bu_back_rule.Name = "bu_back_rule";
-            this.bu_back_rule.Size = new System.Drawing.Size(140, 29);
-            this.bu_back_rule.TabIndex = 3;
-            this.bu_back_rule.Text = "Назад";
-            this.bu_back_rule.UseVisualStyleBackColor = true;
-            this.bu_back_rule.Click += new System.EventHandler(this.bu_back_rule_Click);
-            // 
             // IndexModule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1428,7 +1423,6 @@
         private System.Windows.Forms.Button buIndexReturn;
         private System.Windows.Forms.TabPage tp_result_doc;
         private System.Windows.Forms.TabPage tp_read_doc;
-        private System.Windows.Forms.TextBox tb_note;
         private System.Windows.Forms.TextBox tb_storage;
         private System.Windows.Forms.TextBox tb_reprint;
         private System.Windows.Forms.TextBox tb_date_structure;
@@ -1442,7 +1436,6 @@
         private System.Windows.Forms.TextBox tb_author;
         private System.Windows.Forms.TextBox tb_name_source;
         private System.Windows.Forms.TextBox tb_synonym;
-        private System.Windows.Forms.Label laIndex16;
         private System.Windows.Forms.Label laIndex15;
         private System.Windows.Forms.Label laIndex14;
         private System.Windows.Forms.Label laIndex13;

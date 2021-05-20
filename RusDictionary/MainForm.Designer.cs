@@ -1727,9 +1727,11 @@
             // 
             // indexModule1
             // 
+            this.indexModule1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.indexModule1.BackColor = System.Drawing.Color.Transparent;
-            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.indexModule1.Location = new System.Drawing.Point(0, 0);
+            this.indexModule1.Location = new System.Drawing.Point(1, 0);
             this.indexModule1.Name = "indexModule1";
             this.indexModule1.Size = new System.Drawing.Size(1054, 580);
             this.indexModule1.TabIndex = 0;
@@ -1751,14 +1753,12 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(1084, 691);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Словарь русского языка XI - XVII вв.";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.MainTC.ResumeLayout(false);
             this.tpLogin.ResumeLayout(false);
