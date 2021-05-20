@@ -207,6 +207,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Help.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\IndexModule\Input.docx" />
     <None Include="Resources\IndexModule\Электронный  указатель.xls" />
     <None Include="Resources\CardIndexModule\noimage.png" />

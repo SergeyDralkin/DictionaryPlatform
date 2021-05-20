@@ -58,11 +58,8 @@
             this.buWordSearchModule = new System.Windows.Forms.Button();
             this.buCardIndexModule = new System.Windows.Forms.Button();
             this.tpCardIndex = new System.Windows.Forms.TabPage();
-            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
             this.tpPointer = new System.Windows.Forms.TabPage();
-            this.indexModule1 = new RusDictionary.Modules.IndexModule();
             this.tpWordSearch = new System.Windows.Forms.TabPage();
-            this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
             this.tpAuthors = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
@@ -142,6 +139,9 @@
             this.pbWait = new System.Windows.Forms.PictureBox();
             this.laWait = new System.Windows.Forms.Label();
             this.cdChangeColor = new System.Windows.Forms.ColorDialog();
+            this.cardIndexModule = new RusDictionary.Modules.CardIndexModule();
+            this.indexModule1 = new RusDictionary.Modules.IndexModule();
+            this.wordSearchModule1 = new RusDictionary.Modules.WordSearchModule();
             this.tableLayoutPanel1.SuspendLayout();
             this.MainTC.SuspendLayout();
             this.tpLogin.SuspendLayout();
@@ -567,15 +567,6 @@
             this.tpCardIndex.TabIndex = 1;
             this.tpCardIndex.Text = "Картотека";
             // 
-            // cardIndexModule
-            // 
-            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
-            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
-            this.cardIndexModule.Name = "cardIndexModule";
-            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
-            this.cardIndexModule.TabIndex = 0;
-            // 
             // tpPointer
             // 
             this.tpPointer.Controls.Add(this.indexModule1);
@@ -586,15 +577,6 @@
             this.tpPointer.Text = "Указатели";
             this.tpPointer.UseVisualStyleBackColor = true;
             // 
-            // indexModule1
-            // 
-            this.indexModule1.BackColor = System.Drawing.Color.Transparent;
-            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.indexModule1.Location = new System.Drawing.Point(0, 0);
-            this.indexModule1.Name = "indexModule1";
-            this.indexModule1.Size = new System.Drawing.Size(1054, 580);
-            this.indexModule1.TabIndex = 0;
-            // 
             // tpWordSearch
             // 
             this.tpWordSearch.Controls.Add(this.wordSearchModule1);
@@ -604,14 +586,6 @@
             this.tpWordSearch.TabIndex = 3;
             this.tpWordSearch.Text = "Поиск слов";
             this.tpWordSearch.UseVisualStyleBackColor = true;
-            // 
-            // wordSearchModule1
-            // 
-            this.wordSearchModule1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wordSearchModule1.Location = new System.Drawing.Point(0, 0);
-            this.wordSearchModule1.Name = "wordSearchModule1";
-            this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
-            this.wordSearchModule1.TabIndex = 0;
             // 
             // tpAuthors
             // 
@@ -1742,6 +1716,32 @@
             this.laWait.Text = "Выполняется задача, пожалуйства, подождите";
             this.laWait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // cardIndexModule
+            // 
+            this.cardIndexModule.BackColor = System.Drawing.Color.Transparent;
+            this.cardIndexModule.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cardIndexModule.Location = new System.Drawing.Point(3, 3);
+            this.cardIndexModule.Name = "cardIndexModule";
+            this.cardIndexModule.Size = new System.Drawing.Size(1048, 574);
+            this.cardIndexModule.TabIndex = 0;
+            // 
+            // indexModule1
+            // 
+            this.indexModule1.BackColor = System.Drawing.Color.Transparent;
+            this.indexModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.indexModule1.Location = new System.Drawing.Point(0, 0);
+            this.indexModule1.Name = "indexModule1";
+            this.indexModule1.Size = new System.Drawing.Size(1054, 580);
+            this.indexModule1.TabIndex = 0;
+            // 
+            // wordSearchModule1
+            // 
+            this.wordSearchModule1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wordSearchModule1.Location = new System.Drawing.Point(0, 0);
+            this.wordSearchModule1.Name = "wordSearchModule1";
+            this.wordSearchModule1.Size = new System.Drawing.Size(1054, 580);
+            this.wordSearchModule1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1751,12 +1751,14 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(1084, 691);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Словарь русского языка XI - XVII вв.";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.MainTC.ResumeLayout(false);
             this.tpLogin.ResumeLayout(false);

@@ -640,7 +640,7 @@ namespace RusDictionary
 
         private void buLogin_Click(object sender, EventArgs e)
         {
-            IfLogin = false;
+            IfLogin = false;            
             List<JSONArray> PasswordList = new List<JSONArray>();            
             string Login = tbLogin.Text.ToString();
             string Password = tbPassword.Text.ToString();
@@ -744,6 +744,14 @@ namespace RusDictionary
             if(MyGlobalVar1 != null)
             {
                 MyGlobalVar1.Abort();
+            }
+        }
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                HelpNavigator navigator = HelpNavigator.TableOfContents;
+                Help.ShowHelp(this, "Resources/Help.chm", navigator);
             }
         }
     }
