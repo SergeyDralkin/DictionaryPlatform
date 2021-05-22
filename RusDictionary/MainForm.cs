@@ -640,53 +640,53 @@ namespace RusDictionary
 
         private void buLogin_Click(object sender, EventArgs e)
         {
-            IfLogin = false;            
-            List<JSONArray> PasswordList = new List<JSONArray>();            
-            string Login = tbLogin.Text.ToString();
-            string Password = tbPassword.Text.ToString();
-            if (Login != null && Login != "" && Password != null && Password != "")
+            StatusConnectionMethod();
+            if (StatusConnect == true)
             {
-                string query = "SELECT * FROM users WHERE Login = '" + Login + "'";
-                if (StatusConnect == true)
+                IfLogin = false;
+                List<JSONArray> PasswordList = new List<JSONArray>();
+                string Login = tbLogin.Text.ToString();
+                string Password = tbPassword.Text.ToString();
+                if (Login != null && Login != "" && Password != null && Password != "")
                 {
-                    JSON.Send(query, JSONFlags.Select);
-                    PasswordList = JSON.Decode();
-                    try
+                    string query = "SELECT * FROM users WHERE Login = '" + Login + "'";
+                    if (StatusConnect == true)
                     {
-                        if (PasswordList != null)
+                        JSON.Send(query, JSONFlags.Select);
+                        PasswordList = JSON.Decode();
+                        try
                         {
-                            if (PasswordList[0].Password.Equals(Password))
+                            if (PasswordList != null)
                             {
-                                query = "SELECT * FROM roles WHERE ID = '" + PasswordList[0].Role + "'";
-                                JSON.Send(query, JSONFlags.Select);
-                                CanDoItList = JSON.Decode();
-                                IfLogin = true;
-                                MainTC.SelectedTab = tpMain;
+                                if (PasswordList[0].Password.Equals(Password))
+                                {
+                                    query = "SELECT * FROM roles WHERE ID = '" + PasswordList[0].Role + "'";
+                                    JSON.Send(query, JSONFlags.Select);
+                                    CanDoItList = JSON.Decode();
+                                    IfLogin = true;
+                                    MainTC.SelectedTab = tpMain;
+                                }
+                            }
+                            else
+                            {
+                                IfLogin = false;
                             }
                         }
-                        else
+                        catch
                         {
                             IfLogin = false;
                         }
-                    }
-                    catch
-                    {
-                        IfLogin = false;
-                    }
-
-                    if (IfLogin == false)
-                    {
-                        MessageBox.Show("Не правильно введён логин или пароль. Повторите попытку");
+                        if (IfLogin == false)
+                        {
+                            MessageBox.Show("Не правильно введён логин или пароль. Повторите попытку");
+                        }
                     }
                 }
-                
             }
-            if (StatusConnect == false)
+            else
             {
                 MessageBox.Show("Отсутствует подключение к серверу!");
             }
-
-            
         }
         private void buSettingLogin_Click(object sender, EventArgs e)
         {
