@@ -6,6 +6,7 @@ using System.Collections;
 using System.Windows.Forms;
 using CsvHelper;
 using System.IO;
+using System.Web.UI.WebControls;
 using System.Globalization;
 using System.Data.OleDb;
 using DocumentFormat.OpenXml;
@@ -29,6 +30,10 @@ namespace RusDictionary.Modules
             "publication", "date_structure", "reprint", "storage" };
 
         List<JSONArray> Ukaz_item = new List<JSONArray>();
+
+        List<JSONArray> In_item = new List<JSONArray>();
+
+        List<JSONArray> Out_item = new List<JSONArray>();
 
         List<JSONArray> check_q = new List<JSONArray>();
 
@@ -110,7 +115,6 @@ namespace RusDictionary.Modules
             tb_storage.Text = item_find.storage;
 
 
-            tb_cipher.Enabled = false;
             buSaveToDB.Visible = true;
             buSaveToDB.Enabled = true;
             bu_Insert.Visible = false;
@@ -130,7 +134,7 @@ namespace RusDictionary.Modules
                 openFileDialog.Filter = "docx files (*.docx)|*.docx|All files (*.*)|*.*";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    
+
                     //openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                     filepath = openFileDialog.FileName;
 
@@ -140,7 +144,7 @@ namespace RusDictionary.Modules
 
                     Body body = doc.MainDocumentPart.Document.Body;
 
-                    
+
                     if (body.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>() is null)
                     {
                         MessageBox.Show("Данный документ не содержит каких-либо таблиц");
@@ -148,17 +152,17 @@ namespace RusDictionary.Modules
                     else
                     {
                         DocumentFormat.OpenXml.Wordprocessing.Table table = body.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>().First();
-                        IEnumerable<TableRow> rows = table.Elements<TableRow>();
+                        IEnumerable<DocumentFormat.OpenXml.Wordprocessing.TableRow> rows = table.Elements<DocumentFormat.OpenXml.Wordprocessing.TableRow>();
 
                         dt.Columns.Add("1");
                         dt.Columns.Add("2");
 
                         // To read data from rows and to add records to the temporary table  
-                        foreach (TableRow row in rows)
+                        foreach (DocumentFormat.OpenXml.Wordprocessing.TableRow row in rows)
                         {
                             dt.Rows.Add();
                             int i = 0;
-                            foreach (TableCell cell in row.Descendants<TableCell>())
+                            foreach (DocumentFormat.OpenXml.Wordprocessing.TableCell cell in row.Descendants<DocumentFormat.OpenXml.Wordprocessing.TableCell>())
                             {
                                 dt.Rows[dt.Rows.Count - 1][i] = cell.InnerText;
                                 i++;
@@ -288,12 +292,10 @@ namespace RusDictionary.Modules
                         tc_index.SelectedTab = tp_result_doc;
                     }
 
-                    
+
                 }
             }
 
-
-            
         }
 
         private void buRecognition_Click(object sender, EventArgs e)
@@ -343,7 +345,7 @@ namespace RusDictionary.Modules
                     }
 
                 }
-                
+
 
             }
 
@@ -352,151 +354,71 @@ namespace RusDictionary.Modules
 
         private void buSave_Click(object sender, EventArgs e)
         {
-            /*
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Excel Document|*.xlsx";
-            sfd.Title = "Save an Image File";
+            char separator = ';';
+            sfd.Title = "Сохранить в...";
             sfd.ShowDialog();
-
-            
-            // Create a spreadsheet document by supplying the filepath.
-            // By default, AutoSave = true, Editable = true, and Type = xlsx.
-            SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(sfd.FileName, SpreadsheetDocumentType.Workbook);
-
-            // Add a WorkbookPart to the document.
-            WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
-            workbookpart.Workbook = new Workbook();
-
-            // Add a WorksheetPart to the WorkbookPart.
-            WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
-            worksheetPart.Worksheet = new Worksheet(new SheetData());
-
-            // Add Sheets to the Workbook.
-            Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
-
-            // Append a new worksheet and associate it with the workbook.
-            Sheet sheet = new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "mySheet" };
-            sheets.Append(sheet);
-
-            // Get the sheetData cell table.
-            SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
-
-            // Add a row to the cell table.
-            Row row;
-            row = new Row() { RowIndex = 1 };
-            sheetData.Append(row);
-
-            // In the new row, find the column location to insert a cell in A1.  
-            Cell refCell = null;
-            foreach (Cell cell in row.Elements<Cell>())
+            string fileName = sfd.FileName;
+            DataTable dot = new DataTable();
+            foreach (DataGridViewColumn col in dgv_output.Columns)
             {
-                if (string.Compare(cell.CellReference.Value, "B1", true) > 0)
-                {
-                    refCell = cell;
-                    break;
-                }
+                dot.Columns.Add(col.Name);
             }
 
-            // Add the cell to the cell table at A1.
-            Cell newCell = new Cell() { CellReference = "B1" };
-            row.InsertAfter(newCell, refCell);
-
-            // Set the cell value to be a numeric value of 100.
-            newCell.CellValue = new CellValue("100");
-            newCell.DataType = new EnumValue<CellValues>(CellValues.Number);
-
-            foreach (Cell cell in row.Elements<Cell>())
+            foreach (DataGridViewRow row in dgv_output.Rows)
             {
-                if (string.Compare(cell.CellReference.Value, "B1", true) > 0)
+                DataRow dRow = dot.NewRow();
+                foreach (DataGridViewCell cell in row.Cells)
                 {
-                    refCell = cell;
-                    break;
+                    dRow[cell.ColumnIndex] = cell.Value;
                 }
+                dot.Rows.Add(dRow);
             }
-
-            Cell newCell1 = new Cell() { CellReference = "B2" };
-            row.InsertAfter(newCell1, refCell);
-
-            // Set the cell value to be a numeric value of 100.
-            newCell1.CellValue = new CellValue("100");
-            newCell1.DataType = new EnumValue<CellValues>(CellValues.Number);
-
-            // Close the document.
-            spreadsheetDocument.Close();
-
-            
-            SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.
-            Create(sfd.FileName, SpreadsheetDocumentType.Workbook);
-
-            // Add a WorkbookPart to the document.
-            WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
-            workbookpart.Workbook = new Workbook();
-
-            // Add a WorksheetPart to the WorkbookPart.
-            WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
-            worksheetPart.Worksheet = new Worksheet(new SheetData());
-
-            // Add Sheets to the Workbook.
-            Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.
-                AppendChild<Sheets>(new Sheets());
-
-
-            // Append a new worksheet and associate it with the workbook.
-            Sheet sheet = new Sheet()
+            if (dot != null)
             {
-                Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart),
-                SheetId = 1,
-                Name = "Вывод"
-            };
-            sheets.Append(sheet);
-
-            workbookpart.Workbook.Save();
-
-            Worksheet worksheet = new Worksheet();
-            SheetData sheetData = new SheetData();
-
-            for (int i = 0; i < dgv_output.Rows.Count; i++)
-            {
-                Row row = new Row();
-                for (int j = 0; j < dgv_output.Columns.Count; j++)
+                FileStream fs = null;
+                try
                 {
-                    if (dgv_output.Rows[i].Cells[j].Value != null)
+                    fs = File.OpenWrite(fileName);
+                }
+                catch
+                {
+
+                }
+                using (TextWriter tw = new StreamWriter(fs, Encoding.GetEncoding(1251)))
+                {
+                    String line = "";
+                    //Выводим имя таблицы
+                    if (!String.IsNullOrEmpty(dot.TableName))
+                        tw.WriteLine(dot.TableName);
+                    //Вывод названий столбцов
+                    foreach (DataColumn colName in dot.Columns)
                     {
-                        Cell cell = new Cell()
-                        {
-                            CellReference = letters[j].ToString() + i.ToString(),
-                            DataType = CellValues.String,
-                            CellValue = new CellValue(dgv_output.Rows[i].Cells[j].Value.ToString())
-                        };
-                        row.Append(cell);
+                        line += String.Format("\"{0}\"{1}", colName.ColumnName, separator);
                     }
-                    else
-                    { 
+                    tw.WriteLine(line.TrimEnd(separator));
+                    //Вывод данных
+                    foreach (DataRow dr in dot.Rows)
+                    {
+                        line = "";
+                        Array.ForEach(dr.ItemArray, obj => line += String.Format("\"{0}\"{1}", obj, separator));
+                        tw.WriteLine(line.TrimEnd(separator));
                     }
                 }
-                sheetData.Append(row);
-
+                fs.Close();
+                fs.Dispose();
 
             }
-
-            worksheet.Append(sheetData);
-            worksheetPart.Worksheet = worksheet;
-
-            workbookpart.Workbook.Save();
-
-
-            // Close the document.
-            spreadsheetDocument.Close();
-            */
 
 
         }
 
         private void buSaveToDB_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(tb_description.Text))
+            if (!String.IsNullOrEmpty(tb_cipher.Text) && !String.IsNullOrEmpty(tb_description.Text))
             {
-                query = "UPDATE ukaz_tab SET `description`= '" + tb_description.Text + "', " +
+                query = "UPDATE ukaz_tab SET `cipher`='" + tb_cipher.Text + "'," +
+                "`description`= '" + tb_description.Text + "', " +
                 "`synonym`= '" + tb_synonym.Text + "'," +
                 "`name_source`= '" + tb_name_source.Text + "'," +
                 "`author`= '" + tb_author.Text + "'," +
@@ -564,7 +486,7 @@ namespace RusDictionary.Modules
 
             if (!String.IsNullOrEmpty(tb_cipher.Text) && !String.IsNullOrEmpty(tb_description.Text))
             {
-                query = "SELECT cipher FROM ukaz_tab WHERE cipher = '"+ tb_cipher.Text+"'";
+                query = "SELECT cipher FROM ukaz_tab WHERE cipher = '" + tb_cipher.Text + "'";
                 JSON.Send(query, JSONFlags.Select);
                 check_q = JSON.Decode();
 
@@ -619,8 +541,8 @@ namespace RusDictionary.Modules
 
         private void bu_delete_Click(object sender, EventArgs e)
         {
-            if(lbName.SelectedIndex !=-1) 
-                {
+            if (lbName.SelectedIndex != -1)
+            {
                 DialogResult result = MessageBox.Show(
                 "Если вы удалите запись, вы не сможете восстановить данные. Продолжить?",
                 "Внимание",
@@ -636,7 +558,7 @@ namespace RusDictionary.Modules
                     tc_index.SelectedTab = tp_list_sign;
                 }
             }
-               
+
         }
 
         private void buIndexBack_Click(object sender, EventArgs e)
@@ -660,7 +582,7 @@ namespace RusDictionary.Modules
                     tb_cipher.Enabled = true;
                     tc_index.SelectedTab = tp_list_sign;
                 }
-                    
+
             }
             else
             {
@@ -684,6 +606,205 @@ namespace RusDictionary.Modules
         {
             modify = true;
 
+        }
+
+        private void bu_comp_Click(object sender, EventArgs e)
+        {
+            rb_showAll.Checked = true;
+
+            tc_index.SelectedTab = tp_comparison;
+
+        }
+
+        void Clear_reload()
+        {
+            lb_table_in.Items.Clear();
+            lb_table_out.Items.Clear();
+
+            query = "SELECT * FROM ukaz ORDER BY Name";
+            JSON.Send(query, JSONFlags.Select);
+            Out_item = JSON.Decode();
+
+            foreach (var r in Out_item)
+            {
+
+                lb_table_out.Items.Add(r.Name);
+
+            }
+
+
+            query = "SELECT * FROM ukaz_tab ORDER BY cipher";
+            JSON.Send(query, JSONFlags.Select);
+            In_item = JSON.Decode();
+
+            foreach (var r in In_item)
+            {
+
+                lb_table_in.Items.Add(r.cipher);
+
+            }
+
+
+            if (rb_notExist.Checked)
+            {
+
+                foreach (var r in In_item)
+                {
+                    if (lb_table_out.Items.IndexOf(r.cipher) != -1)
+                    {
+                        lb_table_in.Items.Remove(r.cipher);
+                    }
+                }
+            }
+
+        }
+
+        private void rb_showAll_CheckedChanged(object sender, EventArgs e)
+        {
+            rb_notExist.Checked = !rb_showAll.Checked;
+            bu_addIndex.Enabled = rb_notExist.Checked;
+
+            Clear_reload();
+        }
+
+        private void bu_addIndex_Click(object sender, EventArgs e)
+        {
+            if (lb_table_in.SelectedIndex != -1)
+            {
+                query = "INSERT INTO ukaz (Name) " +
+                   "VALUES('" + lb_table_in.SelectedItem.ToString() + "')";
+                JSON.Send(query, JSONFlags.Insert);
+
+                Clear_reload();
+
+            }
+        }
+
+        private void bu_deleteOut_Click(object sender, EventArgs e)
+        {
+            if (lb_table_out.SelectedIndex != -1)
+            {
+                DialogResult result = MessageBox.Show(
+                               "Если вы удалите запись, вы не сможете восстановить данные. Продолжить?",
+                               "Внимание",
+                               MessageBoxButtons.YesNo,
+                               MessageBoxIcon.Warning,
+                               MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.Yes)
+                {
+                    query = "DELETE FROM ukaz WHERE ID = '" + Out_item[lb_table_out.SelectedIndex].ID + "'";
+                    JSON.Send(query, JSONFlags.Delete);
+                    Clear_reload();
+                }
+
+            }
+        }
+
+        private void bu_BackComp_Click(object sender, EventArgs e)
+        {
+            tc_index.SelectedTab = tp_menu;
+            rb_showAll.Checked = false;
+        }
+
+        private void buIndexReturn_Click(object sender, EventArgs e)
+        {
+            Program.f1.TCPrev();
+        }
+        void SaveCSV()
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Title = "Сохранить в...";
+            sfd.ShowDialog();
+            string fileName = sfd.FileName;
+
+
+            DataTable table = new DataTable("Указатель");
+            DataColumn cipherColumn = new DataColumn("cipher", Type.GetType("System.String"));
+            DataColumn descriptionColumn = new DataColumn("description", Type.GetType("System.String"));
+            DataColumn synonymColumn = new DataColumn("synonym", Type.GetType("System.String"));
+            DataColumn name_sourceColumn = new DataColumn("name_source", Type.GetType("System.String"));
+            DataColumn authorColumn = new DataColumn("author", Type.GetType("System.String"));
+            DataColumn researcherColumn = new DataColumn("researcher", Type.GetType("System.String"));
+            DataColumn date_sourceColumn = new DataColumn("date_source", Type.GetType("System.String"));
+            DataColumn refind_dateColumn = new DataColumn("refind_date", Type.GetType("System.String"));
+            DataColumn languageColumn = new DataColumn("language", Type.GetType("System.String"));
+            DataColumn translationColumn = new DataColumn("translation", Type.GetType("System.String"));
+            DataColumn other_listColumn = new DataColumn("other_list", Type.GetType("System.String"));
+            DataColumn publicationColumn = new DataColumn("publication", Type.GetType("System.String"));
+            DataColumn date_structureColumn = new DataColumn("date_structure", Type.GetType("System.String"));
+            DataColumn reprintColumn = new DataColumn("reprint", Type.GetType("System.String"));
+            DataColumn storageColumn = new DataColumn("storage", Type.GetType("System.String"));
+
+            table.Columns.Add(cipherColumn);
+            table.Columns.Add(descriptionColumn);
+            table.Columns.Add(synonymColumn);
+            table.Columns.Add(name_sourceColumn);
+            table.Columns.Add(authorColumn);
+            table.Columns.Add(researcherColumn);
+            table.Columns.Add(date_sourceColumn);
+            table.Columns.Add(refind_dateColumn);
+            table.Columns.Add(languageColumn);
+            table.Columns.Add(translationColumn);
+            table.Columns.Add(other_listColumn);
+            table.Columns.Add(publicationColumn);
+            table.Columns.Add(date_structureColumn);
+            table.Columns.Add(reprintColumn);
+            table.Columns.Add(storageColumn);
+
+
+
+
+            foreach (var it in Ukaz_item)
+            {
+                table.Rows.Add(new object[] { it.cipher, it.description,it.synonym,it.name_source,it.author,it.researcher,it.date_source,it.refind_date,it.language,it.translation, it.publication,it.other_list,it.date_structure,it.reprint,it.storage });
+            }
+
+
+            char separator = ';';
+
+            if (table != null)
+            {
+                FileStream fs = null;
+                try
+                {
+                    fs = File.OpenWrite(fileName);
+                }
+                catch
+                {
+
+                }
+                using (TextWriter tw = new StreamWriter(fs, Encoding.GetEncoding(1251)))
+                {
+                    String line = "";
+                    //Выводим имя таблицы
+                    if (!String.IsNullOrEmpty(table.TableName))
+                        tw.WriteLine(table.TableName);
+                    //Вывод названий столбцов
+                    foreach (DataColumn colName in table.Columns)
+                    {
+                        line += String.Format("\"{0}\"{1}", colName.ColumnName, separator);
+                    }
+                    tw.WriteLine(line.TrimEnd(separator));
+                    //Вывод данных
+                    foreach (DataRow dr in table.Rows)
+                    {
+                        line = "";
+                        Array.ForEach(dr.ItemArray, obj => line += String.Format("\"{0}\"{1}", obj, separator));
+                        tw.WriteLine(line.TrimEnd(separator));
+                    }
+                }
+                fs.Close();
+                fs.Dispose();
+
+            }
+
+
+        }
+
+        private void bu_saveTofile_Click(object sender, EventArgs e)
+        {
+            SaveCSV();
         }
     }
 }
