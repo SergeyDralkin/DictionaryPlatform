@@ -1757,7 +1757,7 @@
             this.MinimumSize = new System.Drawing.Size(1084, 691);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Словарь русского языка XI - XVII вв.";
+            this.Text = "Прикладная цифровая платформа Словаря русского языка XI - XVII вв.";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);

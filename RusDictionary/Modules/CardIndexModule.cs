@@ -221,8 +221,7 @@ namespace RusDictionary.Modules
                 buCardIndexListAdd.Enabled = parameter;
                 buCardIndexListChange.Enabled = parameter;
                 buCardIndexListDelete.Enabled = parameter;
-            }
-                          
+            }                          
         }
         private void buCardIndexInMenuButton_Click(object sender, EventArgs e)
         {
