@@ -27,6 +27,9 @@ namespace RusDictionary.Modules
             string line;
             //bool next = true; // Переключатель завершения считывания
             //int count = 0; // Количество строк для считывания
+            //StreamWriter sw = new StreamWriter("time.txt");
+            //sw.WriteLine("0/0");
+            //DateTime currentDate = DateTime.Now;
             //int globCount = 0; // Номера словарных статей
             bool read = false; // Переключатель считывания статей
             string dictionaryEntry = "";
@@ -168,11 +171,16 @@ namespace RusDictionary.Modules
                     table = false;
                 }
                 //count++;
+                //if(count % 1000 == 0)
+                //{
+                //    sw.WriteLine(count.ToString() + "/" + (DateTime.Now.Ticks - currentDate.Ticks).ToString());
+                //}
                 //if (count > 7000)
                 //{
                 //    next = false;
                 //}
             }
+            //sw.Close();
             Ukaz.Clear();
         }
         /// <summary>
@@ -2444,6 +2452,8 @@ namespace RusDictionary.Modules
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "Сохранить в...";
+            //sfd.DefaultExt = "";
+            sfd.Filter = "CSV files(*.csv)|*.csv|All files(*.*)|*.*";
             sfd.ShowDialog();
             string fileName = sfd.FileName;
 
