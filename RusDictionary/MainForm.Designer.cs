@@ -525,7 +525,7 @@
             this.buIndexModule.Name = "buIndexModule";
             this.buIndexModule.Size = new System.Drawing.Size(639, 58);
             this.buIndexModule.TabIndex = 2;
-            this.buIndexModule.Text = "Указатели на источники";
+            this.buIndexModule.Text = "Указатель источников";
             this.buIndexModule.UseVisualStyleBackColor = false;
             this.buIndexModule.Click += new System.EventHandler(this.buIndexModule_Click);
             // 
@@ -538,7 +538,7 @@
             this.buWordSearchModule.Name = "buWordSearchModule";
             this.buWordSearchModule.Size = new System.Drawing.Size(639, 58);
             this.buWordSearchModule.TabIndex = 1;
-            this.buWordSearchModule.Text = "Поиск слов по словарю";
+            this.buWordSearchModule.Text = "Электронный словарь";
             this.buWordSearchModule.UseVisualStyleBackColor = false;
             this.buWordSearchModule.Click += new System.EventHandler(this.buWordSearchModule_Click);
             // 
@@ -552,7 +552,7 @@
             this.buCardIndexModule.Name = "buCardIndexModule";
             this.buCardIndexModule.Size = new System.Drawing.Size(639, 58);
             this.buCardIndexModule.TabIndex = 0;
-            this.buCardIndexModule.Text = "Электронная картотека русского языка XI - XVII вв.";
+            this.buCardIndexModule.Text = "Электронная рукописная картотека";
             this.buCardIndexModule.UseVisualStyleBackColor = false;
             this.buCardIndexModule.Click += new System.EventHandler(this.buCardIndexModule_Click);
             // 
