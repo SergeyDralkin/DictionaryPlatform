@@ -2454,98 +2454,102 @@ namespace RusDictionary.Modules
             sfd.Title = "Сохранить в...";
             //sfd.DefaultExt = "";
             sfd.Filter = "CSV files(*.csv)|*.csv|All files(*.*)|*.*";
-            sfd.ShowDialog();
-            string fileName = sfd.FileName;
-
-            List<string> MainWord = new List<string>();
-            List<JSONArray> jNames = new List<JSONArray>();
-
-            DataTable table = new DataTable("Словарь");
-            DataColumn idColumn = new DataColumn("Id", Type.GetType("System.Int32"));
-            DataColumn nameColumn = new DataColumn("Name", Type.GetType("System.String"));
-            DataColumn mainWordColumn = new DataColumn("MainWord", Type.GetType("System.String"));
-            DataColumn semanticColumn = new DataColumn("Semantic", Type.GetType("System.String"));
-            DataColumn partOfSpeechColumn = new DataColumn("PartOfSpeech", Type.GetType("System.String"));
-            DataColumn rodColumn = new DataColumn("Rod", Type.GetType("System.String"));
-            DataColumn numColumn = new DataColumn("Num", Type.GetType("System.String"));
-            DataColumn definitionColumn = new DataColumn("Definition", Type.GetType("System.String"));
-            DataColumn exampleColumn = new DataColumn("Example", Type.GetType("System.String"));
-            DataColumn sourceCodeColumn = new DataColumn("SourceCode", Type.GetType("System.String"));
-            DataColumn sourceDateColumn = new DataColumn("SourceDate", Type.GetType("System.String"));
-            DataColumn compareColumn = new DataColumn("Compare", Type.GetType("System.String"));
-
-            table.Columns.Add(idColumn);
-            table.Columns.Add(nameColumn);
-            table.Columns.Add(mainWordColumn);
-            table.Columns.Add(semanticColumn);
-            table.Columns.Add(partOfSpeechColumn);
-            table.Columns.Add(rodColumn);
-            table.Columns.Add(numColumn);
-            table.Columns.Add(definitionColumn);
-            table.Columns.Add(exampleColumn);
-            table.Columns.Add(sourceCodeColumn);
-            table.Columns.Add(sourceDateColumn);
-            table.Columns.Add(compareColumn);
-
-            table.PrimaryKey = new DataColumn[] { table.Columns["Id"] };
-
-            string query = "SELECT * FROM mainwords";
-            JSON.Send(query, JSONFlags.Select);
-            jNames = JSON.Decode();
-            if (jNames != null)
+            //sfd.ShowDialog();
+            if (sfd.ShowDialog() == DialogResult.OK)
             {
-                for (int i = 0; i < jNames.Count; i++)
-                {
-                    MainWord.Add(jNames[i].Mainword);
-                }
-            }
-            query = "SELECT * FROM dictionaryentries";
-            JSON.Send(query, JSONFlags.Select);
-            jNames = JSON.Decode();
-            if (jNames != null)
-            {
-                for (int i = 0; i < jNames.Count; i++)
-                {
-                    table.Rows.Add(new object[] { Convert.ToInt32(jNames[i].ID), jNames[i].Name, MainWord[Convert.ToInt32(jNames[i].Name) - 1], jNames[i].Semantic, jNames[i].Partofspeech, jNames[i].Rod, jNames[i].Num, jNames[i].Definition, jNames[i].Example, jNames[i].SourceCode, jNames[i].SourceDate, jNames[i].Compare });
-                }
-            }
+                string fileName = sfd.FileName;
 
-            char separator = ';';
+                List<string> MainWord = new List<string>();
+                List<JSONArray> jNames = new List<JSONArray>();
 
-            if (table != null)
-            {
-                FileStream fs = null;
-                try
+                DataTable table = new DataTable("Словарь");
+                DataColumn idColumn = new DataColumn("Id", Type.GetType("System.Int32"));
+                DataColumn nameColumn = new DataColumn("Name", Type.GetType("System.String"));
+                DataColumn mainWordColumn = new DataColumn("MainWord", Type.GetType("System.String"));
+                DataColumn semanticColumn = new DataColumn("Semantic", Type.GetType("System.String"));
+                DataColumn partOfSpeechColumn = new DataColumn("PartOfSpeech", Type.GetType("System.String"));
+                DataColumn rodColumn = new DataColumn("Rod", Type.GetType("System.String"));
+                DataColumn numColumn = new DataColumn("Num", Type.GetType("System.String"));
+                DataColumn definitionColumn = new DataColumn("Definition", Type.GetType("System.String"));
+                DataColumn exampleColumn = new DataColumn("Example", Type.GetType("System.String"));
+                DataColumn sourceCodeColumn = new DataColumn("SourceCode", Type.GetType("System.String"));
+                DataColumn sourceDateColumn = new DataColumn("SourceDate", Type.GetType("System.String"));
+                DataColumn compareColumn = new DataColumn("Compare", Type.GetType("System.String"));
+
+                table.Columns.Add(idColumn);
+                table.Columns.Add(nameColumn);
+                table.Columns.Add(mainWordColumn);
+                table.Columns.Add(semanticColumn);
+                table.Columns.Add(partOfSpeechColumn);
+                table.Columns.Add(rodColumn);
+                table.Columns.Add(numColumn);
+                table.Columns.Add(definitionColumn);
+                table.Columns.Add(exampleColumn);
+                table.Columns.Add(sourceCodeColumn);
+                table.Columns.Add(sourceDateColumn);
+                table.Columns.Add(compareColumn);
+
+                table.PrimaryKey = new DataColumn[] { table.Columns["Id"] };
+
+                string query = "SELECT * FROM mainwords";
+                JSON.Send(query, JSONFlags.Select);
+                jNames = JSON.Decode();
+                if (jNames != null)
                 {
-                    fs = File.OpenWrite(fileName);
-                }
-                catch
-                {
-                    return false;
-                }
-                using (TextWriter tw = new StreamWriter(fs, Encoding.GetEncoding(1251)))
-                {
-                    String line = "";
-                    //Выводим имя таблицы
-                    if (!String.IsNullOrEmpty(table.TableName))
-                        tw.WriteLine(table.TableName);
-                    //Вывод названий столбцов
-                    foreach (DataColumn colName in table.Columns)
+                    for (int i = 0; i < jNames.Count; i++)
                     {
-                        line += String.Format("\"{0}\"{1}", colName.ColumnName, separator);
+                        MainWord.Add(jNames[i].Mainword);
                     }
-                    tw.WriteLine(line.TrimEnd(separator));
-                    //Вывод данных
-                    foreach (DataRow dr in table.Rows)
+                }
+                query = "SELECT * FROM dictionaryentries";
+                JSON.Send(query, JSONFlags.Select);
+                jNames = JSON.Decode();
+                if (jNames != null)
+                {
+                    for (int i = 0; i < jNames.Count; i++)
                     {
-                        line = "";
-                        Array.ForEach(dr.ItemArray, obj => line += String.Format("\"{0}\"{1}", obj, separator));
+                        table.Rows.Add(new object[] { Convert.ToInt32(jNames[i].ID), jNames[i].Name, MainWord[Convert.ToInt32(jNames[i].Name) - 1], jNames[i].Semantic, jNames[i].Partofspeech, jNames[i].Rod, jNames[i].Num, jNames[i].Definition, jNames[i].Example, jNames[i].SourceCode, jNames[i].SourceDate, jNames[i].Compare });
+                    }
+                }
+
+                char separator = ';';
+
+                if (table != null)
+                {
+                    FileStream fs = null;
+                    try
+                    {
+                        fs = File.OpenWrite(fileName);
+                    }
+                    catch
+                    {
+                        return false;
+                    }
+                    using (TextWriter tw = new StreamWriter(fs, Encoding.GetEncoding(1251)))
+                    {
+                        String line = "";
+                        //Выводим имя таблицы
+                        if (!String.IsNullOrEmpty(table.TableName))
+                            tw.WriteLine(table.TableName);
+                        //Вывод названий столбцов
+                        foreach (DataColumn colName in table.Columns)
+                        {
+                            line += String.Format("\"{0}\"{1}", colName.ColumnName, separator);
+                        }
                         tw.WriteLine(line.TrimEnd(separator));
+                        //Вывод данных
+                        foreach (DataRow dr in table.Rows)
+                        {
+                            line = "";
+                            Array.ForEach(dr.ItemArray, obj => line += String.Format("\"{0}\"{1}", obj, separator));
+                            tw.WriteLine(line.TrimEnd(separator));
+                        }
                     }
+                    fs.Close();
+                    fs.Dispose();
+                    return true;
                 }
-                fs.Close();
-                fs.Dispose();
-                return true;
+                return false;
             }
             return false;
         }
