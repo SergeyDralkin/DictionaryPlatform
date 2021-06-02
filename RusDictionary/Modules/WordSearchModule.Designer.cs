@@ -451,6 +451,7 @@
             // dgvResults
             // 
             this.dgvResults.AllowUserToAddRows = false;
+            this.dgvResults.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             this.dgvResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
