@@ -744,17 +744,7 @@ namespace RusDictionary.Modules
             string query = "SELECT * FROM letter WHERE ID = " + LetterID;
             JSON.Send(query, JSONFlags.Select);
             LetterItems = JSON.Decode();
-        }
-        /// <summary>
-        /// Выбрать указатель по его ID
-        /// </summary>
-        /// <param name="LetterID"></param>
-        void SelectUkaz(string UkazID)
-        {
-            string query = "SELECT * FROM ukaz WHERE ID = " + UkazID;
-            JSON.Send(query, JSONFlags.Select);
-            UkazItems = JSON.Decode();
-        }
+        }        
         /// <summary>
         /// Выбрать все указатели
         /// </summary>
@@ -2183,9 +2173,9 @@ namespace RusDictionary.Modules
             }            
         }
 
-        private void CardIndexModule_SizeChanged(object sender, EventArgs e)
+        /*private void CardIndexModule_SizeChanged(object sender, EventArgs e)
         {
-            /*foreach (ComboBox comboBox in MainForm.GetAll(tpCardsInsertAndUpdateCard, typeof(ComboBox)))
+            foreach (ComboBox comboBox in MainForm.GetAll(tpCardsInsertAndUpdateCard, typeof(ComboBox)))
             {
                 comboBox.Size = new Size(comboBox.Size.Width, tbCardsInsertAndUpdateMarker.Height);
                 //SetComboBoxHeight(comboBox.Handle, tbCardsInsertAndUpdateMarker.Height);
@@ -2200,8 +2190,8 @@ namespace RusDictionary.Modules
             {
                 SetComboBoxHeight(comboBox.Handle, tbCardsInsertAndUpdateCardSeparatorLetter.Height);
                 comboBox.Refresh();
-            }*/
-        }
+            }
+        }*/
 
         private void buCardIndexListAdd_Click(object sender, EventArgs e)
         {
@@ -2211,8 +2201,7 @@ namespace RusDictionary.Modules
             Program.f1.PictAndLableWait(true);
             TagButtonChange = (sender as Button).Tag.ToString();
             switch (NameClickButtonInMenu)
-            {
-                //Работает
+            {                
                 case "buCardIndexMenuMarker":
                     {
                         cbCardsInsertAndUpdateBox.Items.Clear();
@@ -2262,7 +2251,6 @@ namespace RusDictionary.Modules
                         tcCards.SelectedTab = tpCardsInsertAndUpdateCard;
                         break;
                     }
-                //Криво
                 case "buCardIndexMenuSeparator":
                     {
                         if (UseSecondList == true)
@@ -2363,7 +2351,6 @@ namespace RusDictionary.Modules
                         }
                         break;
                     }
-                //Криво
                 case "buCardIndexMenuBox":
                     {
                         if (UseSecondList == true)
